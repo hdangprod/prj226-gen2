@@ -1,11 +1,23 @@
 # Foundation Decision Register
 
-**Artifact class:** CANONICAL  
-**Lifecycle status:** PROPOSED — awaiting G1 human approval  
-**Decision owner:** `hdangprod`  
-**Normative dependencies:** None.  
-**Reference sources:** `FOUNDATION_SEED.md`, [documentation control plane](../README.md), and [Foundation Program](FOUNDATION_PROGRAM.md).  
-**Approval provenance:** Pending `GOV-002`
+**Artifact class:** CANONICAL
+
+**Lifecycle status:** APPROVED
+
+**Revision:** 1
+
+**Decision owner:** `hdangprod`
+
+**Approval decision:** `GOV-002`
+
+**Approved by:** `hdangprod`
+
+**Approved on:** `2026-08-08`
+
+**Normative dependencies:** None.
+
+**Reference sources:** `FOUNDATION_SEED.md`, [documentation control plane](../README.md), and [Foundation Program](FOUNDATION_PROGRAM.md).
+**Approval provenance:** `GOV-002` below
 
 This register is the durable record of decision state, rationale, approval evidence, and supersession. It does not replace the canonical document that owns the current requirement after approval.
 
@@ -64,14 +76,19 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 ### GOV-002 — G1 documentation-governance baseline
 
 - **Question:** Approve the C1 documentation-governance baseline for G1.
-- **Status:** PROPOSED
+- **Status:** APPROVED
 - **Decision owner:** `hdangprod`
-- **Rationale:** G1 must be explicitly human-approved before C2 product-definition work begins.
+- **Rationale:** G1 requires explicit human approval of the C1 documentation-governance baseline before C2 product-definition work can be considered; G1 approval does not itself authorize C2.
 - **Alternatives:** Approve the C1 baseline; return it for revision; reject it.
-- **Normative dependencies:** `GOV-001`; C1 verification evidence satisfying the G1 exit criteria in [FOUNDATION_PROGRAM.md](FOUNDATION_PROGRAM.md#G1-exit-criteria-and-required-verification-evidence).
+- **Normative dependencies:** `GOV-001`; C1 verification evidence satisfying the G1 exit criteria in [FOUNDATION_PROGRAM.md](FOUNDATION_PROGRAM.md#g1-exit-criteria-and-required-verification-evidence).
 - **Affected artifacts:** `docs/foundation/FOUNDATION_PROGRAM.md`, `docs/README.md`, `docs/foundation/DECISIONS.md`, `docs/development/CURRENT.md`, `README.md`, `AGENTS.md`, `FOUNDATION_SEED.md`.
-- **Approval evidence:** Pending human G1 review. Codex must not convert this decision to `APPROVED`.
-- **G1 exit criteria:** Defined solely by [FOUNDATION_PROGRAM.md](FOUNDATION_PROGRAM.md#G1-exit-criteria-and-required-verification-evidence).
+- **Approved artifacts:** `docs/README.md`, revision 1; `docs/foundation/DECISIONS.md`, revision 1.
+- **Approved on:** 2026-08-08.
+- **Approved by:** `hdangprod`.
+- **Approval evidence:** The human owner explicitly approved G1 and the C1 documentation-governance baseline, including `docs/README.md` revision 1 and `docs/foundation/DECISIONS.md` revision 1.
+- **GOV-003 reconciliation:** The human owner explicitly accepted the already-approved `GOV-003` as a narrow bootstrap exception to the original G1 criterion that expected only `GOV-001` to be approved. The exception applies only to `AGENTS.md` revision 1 as binding bootstrap agent-execution authority.
+- **Does not authorize:** C2; product definition; runtime architecture; technology selection; runtime implementation.
+- **G1 exit criteria:** Defined solely by [FOUNDATION_PROGRAM.md](FOUNDATION_PROGRAM.md#g1-exit-criteria-and-required-verification-evidence).
 - **Verification evidence:**
   - Only authorized C1 paths are modified: PASS — repository status and changed-path review, including the authorized repository-local `.gitignore` hygiene addition.
   - No runtime or C2 artifacts exist: PASS — repository file inventory contains no runtime source tree or C2 product artifacts.
@@ -80,15 +97,15 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
   - Authority ownership is non-circular: PASS — ownership and dependency/provenance semantics are defined in `docs/README.md`.
   - Decision states and record fields are valid: PASS — manual record-format and state review; all records contain the required fields and use defined states.
   - `GOV-001` and `GOV-003` are approved: PASS — decision-register review; `GOV-003` approves only `AGENTS.md` revision 1 bootstrap authority.
-  - `GOV-002` remains proposed: PASS — this record remains `PROPOSED`.
+  - Pre-disposition status: PASS — `GOV-002` remained `PROPOSED` until this human disposition.
   - Product decisions remain open or deferred: PASS — product decision-register review.
   - `AGENTS.md` revision 1 bootstrap authority is approved through `GOV-003`: PASS — it contains stable AI execution constraints only and does not approve G1, C2, runtime architecture, or runtime implementation.
-  - G1 exit-criterion reconciliation: BLOCKED — Foundation Program revision 1 says `GOV-001` is the only approved decision and that semantically changed C1 canonical artifacts other than the Foundation Program remain `PROPOSED`; it must be revised or a human exception recorded before G1 can be approved.
+  - G1 exit-criterion reconciliation: RESOLVED — the human owner accepted `GOV-003` as the narrow bootstrap exception recorded above; it does not broaden later-stage authorization.
   - `CURRENT.md` contains runtime prohibitions: PASS — explicit prohibitions recorded.
   - C2 is not authorized: PASS — `CURRENT.md` records `NOT AUTHORIZED` and its two preconditions.
   - `FOUNDATION_SEED.md` is non-normative provenance: PASS — classification and adoption rule recorded in the seed and control plane.
   - Foundation Program and G1 criteria are reconstructible from repository only: PASS — `FOUNDATION_PROGRAM.md` is the sole program authority and this record references its G1 criteria.
-  - Required human action before G1 approval: reconcile the Foundation Program revision 1 G1 criteria with `GOV-003`, then record human disposition of `GOV-002`; neither `GOV-001` nor `GOV-003` approves G1.
+  - Human disposition: APPROVED — the human owner approved G1 through this `GOV-002` record; neither `GOV-001` nor `GOV-003` independently approved G1.
 - **Supersedes:** None.
 - **Superseded by:** None.
 

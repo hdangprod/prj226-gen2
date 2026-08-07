@@ -12,22 +12,22 @@
 
 - **Generation:** 2
 - **Current program:** Generation 2 Foundation
-- **Current stage:** C1 — Documentation Governance
-- **Current gate:** G1 — Documentation Governance
-- **Runtime architecture design:** PROHIBITED
-- **Runtime implementation:** PROHIBITED
+- **C1 — Documentation Governance:** COMPLETE
+- **G1 — Documentation Governance:** APPROVED BY HUMAN
+- **Runtime architecture design:** NOT AUTHORIZED (PROHIBITED)
+- **Runtime implementation:** NOT AUTHORIZED (PROHIBITED)
 
 ## Baseline and review state
 
 - **Approved working plan:** [Generation 2 Foundation Program, revision 1](../foundation/FOUNDATION_PROGRAM.md) (`GOV-001` in [DECISIONS.md](../foundation/DECISIONS.md)); this is not G1 approval or authority for a later stage.
 - **Bootstrap agent authority:** [AGENTS.md revision 1](../../AGENTS.md) is approved through `GOV-003`; this does not approve G1, C2, runtime architecture, or runtime implementation.
-- **G1 status:** NOT APPROVED. `GOV-002` remains PROPOSED and requires human disposition.
-- **C1 review material:** [Foundation Program](../foundation/FOUNDATION_PROGRAM.md), [documentation control plane](../README.md), [decision register](../foundation/DECISIONS.md), [AGENTS.md](../../AGENTS.md), [README.md](../../README.md), and [FOUNDATION_SEED.md](../../FOUNDATION_SEED.md).
-- **Open G1 blocker:** Human reconciliation is required because Foundation Program revision 1 permits only `GOV-001` as an approved decision while C1R3 requires the separately approved `GOV-003`; `GOV-002` also requires human disposition. Later product and engineering decisions are not G1 blockers.
+- **G1 approval:** `GOV-002` is APPROVED by the human owner. It records the C1 baseline approval and the narrow `GOV-003` bootstrap exception; neither authorizes C2 or runtime work.
+- **C1 baseline:** [Foundation Program](../foundation/FOUNDATION_PROGRAM.md), [documentation control plane](../README.md), [decision register](../foundation/DECISIONS.md), [AGENTS.md](../../AGENTS.md), [README.md](../../README.md), and [FOUNDATION_SEED.md](../../FOUNDATION_SEED.md).
+- **G1 blockers:** None.
 
 ## Authorized work
 
-Only C1 preparation, verification, and preparation of evidence for G1 human review are authorized.
+No subsequent Foundation stage is authorized. C1 is complete; G1 approval does not authorize C2.
 
 This snapshot reflects authorization recorded in approved governance artifacts; it does not create, extend, or approve authorization.
 
@@ -36,10 +36,12 @@ This snapshot reflects authorization recorded in approved governance artifacts; 
 **Authorization:** NOT AUTHORIZED
 **Preconditions:**
 
-- G1 approved;
-- explicit human authorization for C2 recorded.
+- G1 approved through `GOV-002` — satisfied.
+- Explicit human authorization for C2 recorded — not satisfied.
 
 The Foundation Program defines C2 as the next sequence stage but does not authorize its execution.
+
+**C3–C7:** NOT AUTHORIZED.
 
 ## Explicit prohibitions
 

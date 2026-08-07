@@ -2,13 +2,21 @@
 
 **Artifact class:** CANONICAL
 
-**Lifecycle status:** PROPOSED — awaiting G1 human approval
+**Lifecycle status:** APPROVED
+
+**Revision:** 1
 
 **Decision owner:** `hdangprod`
 
+**Approval decision:** `GOV-002`
+
+**Approved by:** `hdangprod`
+
+**Approved on:** `2026-08-08`
+
 **Normative dependencies:** None.
 
-**Approval provenance:** Pending `GOV-002` in [foundation/DECISIONS.md](foundation/DECISIONS.md)
+**Approval provenance:** `GOV-002` in [foundation/DECISIONS.md](foundation/DECISIONS.md)
 
 **Reference sources:** `README.md`, `AGENTS.md`, `FOUNDATION_SEED.md`, and [the Foundation Program](foundation/FOUNDATION_PROGRAM.md). Reference sources inform navigation or provenance; they are not normative approval dependencies.
 
@@ -52,8 +60,8 @@ Valid lifecycle states are class-specific: `CANONICAL` uses `DRAFT`, `PROPOSED`,
 | [`README.md`](../README.md) | OPERATIONAL / ACTIVE | Repository entry point and reading path | Must not define detailed scope, current status, or architecture. |
 | [`AGENTS.md`](../AGENTS.md) | CANONICAL / APPROVED, revision 1 | Stable AI execution constraints | Approved through `GOV-003`; contains no live project-state or gate-status content. |
 | [`FOUNDATION_SEED.md`](../FOUNDATION_SEED.md) | HISTORICAL / ACTIVE | Founding provenance, discovery input, examples, and Generation 1 lessons | Non-normative provenance; not a current product specification or product-requirement source. |
-| `docs/README.md` | CANONICAL / PROPOSED | Document governance, ownership, dependencies, and precedence | Requires G1 approval. |
-| [`foundation/DECISIONS.md`](foundation/DECISIONS.md) | CANONICAL / PROPOSED | Decision state, rationale, approval evidence, and supersession | Requires G1 approval; individual decisions can still have their own recorded state. |
+| `docs/README.md` | CANONICAL / APPROVED, revision 1 | Document governance, ownership, dependencies, and precedence | Approved through `GOV-002`. |
+| [`foundation/DECISIONS.md`](foundation/DECISIONS.md) | CANONICAL / APPROVED, revision 1 | Decision state, rationale, approval evidence, and supersession | Approved through `GOV-002`; individual decisions retain their own recorded state. |
 | [`foundation/FOUNDATION_PROGRAM.md`](foundation/FOUNDATION_PROGRAM.md) | CANONICAL / APPROVED, revision 1 | Foundation stages, gates, sequencing, eligibility, and gate exit criteria | Approved through `GOV-001`; it defines sequence and eligibility only and does not approve G1 or authorize any stage. |
 | [`development/CURRENT.md`](development/CURRENT.md) | OPERATIONAL / ACTIVE | Live operational snapshot | Reflects authorization recorded in governing artifacts; it does not create, extend, or approve authorization. |
 | `product/PRODUCT_REQUIREMENTS.md` | NOT_CREATED | Future product scope, outcomes, non-goals, capability map, and technology-neutral constraints | Reserved for C2; creation requires both human G1 approval and separate explicit human authorization to begin C2. |
