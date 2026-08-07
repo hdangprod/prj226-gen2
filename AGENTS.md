@@ -1,20 +1,40 @@
 # PRJ226 Generation 2 Agent Instructions
 
-Read `FOUNDATION_SEED.md` before performing project-level work.
+**Artifact class:** CANONICAL
 
-Current state:
-Generation 2 foundation design.
+**Lifecycle status:** APPROVED
 
-Runtime implementation is not authorized yet.
+**Revision:** 1
 
-Do not create `src/` unless an approved engineering phase explicitly allows it.
+**Decision owner:** `github:hdangprod`
 
-Architecture proposals require human approval before becoming canonical.
+**Approval decision:** `GOV-003`
 
-Do not treat Generation 1 architecture as a template.
+**Approved by:** `github:hdangprod`
 
-When information is missing:
-- identify the missing decision;
-- do not silently invent it.
+**Approved on:** `2026-08-08`
 
-Important context must be written into repository artifacts, not left only in conversation.
+**Normative dependencies:** None.
+
+This is the binding, stable bootstrap agent-execution authority for the Generation 2 Foundation Program. It does not approve a gate, later-stage work, runtime architecture, or runtime implementation.
+
+For project-level work, read in order:
+
+1. `README.md`
+2. `AGENTS.md`
+3. `docs/README.md`
+4. `docs/development/CURRENT.md`
+
+Then read the canonical documents relevant to the authorized work.
+
+## Stable agent execution constraints
+
+- Obey only explicit authorization recorded in repository governance.
+- AI may not approve human gates, product decisions, or architecture decisions.
+- Do not create runtime source code without explicit human engineering authorization.
+- Do not treat Generation 1 architecture as a template.
+- When information is missing, identify the missing decision; do not invent it or silently expand scope.
+- If authority or scope cannot be resolved from the governing artifacts, stop and request human resolution.
+- Record durable project context in repository artifacts, not only in conversation.
+
+For documentation approval, conflict, dependency, and topic-authority semantics, use `docs/README.md` together with the relevant approved decision record.

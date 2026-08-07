@@ -1,5 +1,24 @@
 # PRJ226 Generation 2 — Foundation Seed
 
+> **Classification:** FOUNDING PROVENANCE / DISCOVERY INPUT
+>
+> This document preserves founding intent, discovery input, examples, and Generation 1 lessons. It is non-normative provenance, not an approved product specification. Current project state and work authorization are owned by [`docs/development/CURRENT.md`](docs/development/CURRENT.md); decision state and approval evidence are owned by [`docs/foundation/DECISIONS.md`](docs/foundation/DECISIONS.md). Founding premises and founding governance principles record the human-provided direction that initiated Generation 2, but they are not normative product requirements unless adopted through an approved canonical specification or decision.
+
+## Interpretation classification
+
+| Seed sections | Classification |
+| --- | --- |
+| 1 | Founding Premise |
+| 2–8 | Product Hypothesis |
+| 9 | Example |
+| 10 | Product Hypothesis |
+| 11 | Generation 1 Lesson |
+| 12 | Founding Governance Principle |
+| 13 | Deferred Engineering Question |
+| 14 | Founding Governance Principle |
+| 15 | Historical status snapshot; live authority moved to `CURRENT.md` |
+| 16 | Open Questions and Deferred Engineering Questions, tracked by stable decision IDs |
+
 ## 1. Why this repository exists
 
 PRJ226 Generation 2 is a greenfield rebuild of Liam.
