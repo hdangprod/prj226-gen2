@@ -6,11 +6,11 @@
 
 **Revision:** 1
 
-**Decision owner:** `hdangprod`
+**Decision owner:** `github:hdangprod`
 
 **Approval decision:** `GOV-002`
 
-**Approved by:** `hdangprod`
+**Approved by:** `github:hdangprod`
 
 **Approved on:** `2026-08-08`
 

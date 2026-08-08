@@ -6,11 +6,11 @@
 
 **Revision:** 1
 
-**Decision owner:** `hdangprod`
+**Decision owner:** `github:hdangprod`
 
 **Approval decision:** `GOV-002`
 
-**Approved by:** `hdangprod`
+**Approved by:** `github:hdangprod`
 
 **Approved on:** `2026-08-08`
 
@@ -77,14 +77,14 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 
 - **Question:** Approve the C1 documentation-governance baseline for G1.
 - **Status:** APPROVED
-- **Decision owner:** `hdangprod`
+- **Decision owner:** `github:hdangprod`
 - **Rationale:** G1 requires explicit human approval of the C1 documentation-governance baseline before C2 product-definition work can be considered; G1 approval does not itself authorize C2.
 - **Alternatives:** Approve the C1 baseline; return it for revision; reject it.
 - **Normative dependencies:** `GOV-001`; C1 verification evidence satisfying the G1 exit criteria in [FOUNDATION_PROGRAM.md](FOUNDATION_PROGRAM.md#g1-exit-criteria-and-required-verification-evidence).
 - **Affected artifacts:** `docs/foundation/FOUNDATION_PROGRAM.md`, `docs/README.md`, `docs/foundation/DECISIONS.md`, `docs/development/CURRENT.md`, `README.md`, `AGENTS.md`, `FOUNDATION_SEED.md`.
 - **Approved artifacts:** `docs/README.md`, revision 1; `docs/foundation/DECISIONS.md`, revision 1.
 - **Approved on:** 2026-08-08.
-- **Approved by:** `hdangprod`.
+- **Approved by:** `github:hdangprod`.
 - **Approval evidence:** The human owner explicitly approved G1 and the C1 documentation-governance baseline, including `docs/README.md` revision 1 and `docs/foundation/DECISIONS.md` revision 1.
 - **GOV-003 reconciliation:** The human owner explicitly accepted the already-approved `GOV-003` as a narrow bootstrap exception to the original G1 criterion that expected only `GOV-001` to be approved. The exception applies only to `AGENTS.md` revision 1 as binding bootstrap agent-execution authority.
 - **Does not authorize:** C2; product definition; runtime architecture; technology selection; runtime implementation.
