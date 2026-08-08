@@ -18,6 +18,8 @@
 - **G2 — Product Intent:** APPROVED BY HUMAN
 - **C3 — Scenario and Acceptance Evidence:** COMPLETE
 - **G3 — Scenario and Acceptance Evidence:** APPROVED BY HUMAN
+- **C4 — Domain and Lifecycle Semantics:** COMPLETE
+- **G4 — Domain Model:** APPROVED BY HUMAN
 - **Runtime architecture design:** NOT AUTHORIZED (PROHIBITED)
 - **Runtime implementation:** NOT AUTHORIZED (PROHIBITED)
 
@@ -34,32 +36,32 @@
 - **C3 approved baseline:** [Liam v1 Scenario and Semantic Acceptance Corpus, revision 1](../../product/SCENARIOS.md) is `CANONICAL / APPROVED`; `VAL-001` is APPROVED through `GOV-007`.
 - **G3 disposition:** `GOV-007` is APPROVED by the human owner on 2026-08-09, with independent evidence recorded as `G3 REVIEW: PASS`. It approves G3, `VAL-001` revision 1, and `product/SCENARIOS.md` revision 1 only.
 - **C3 verification:** PASS — 12 scenario families have complete semantic schemas; all 37 approved Product Intent statements are traceable; 11 corpus-wide invariants derive from approved authority; open decisions are explicit; required relative links resolve; changed-file whitespace checks pass; and no runtime source or later-stage artifact was introduced.
-- **Explicitly unresolved behavior and domain decisions:** `BEH-001`, `BEH-002`, `BEH-004`, and `MOD-001` through `MOD-004` remain `OPEN`; the C3 baseline exposes rather than resolves their semantics.
+- **C4 authorization:** `GOV-008` is APPROVED by the human owner. It authorizes only C4 domain and lifecycle semantics derived from Product Intent revision 1, Scenario Corpus revision 1, approved C2 decisions, and approved `VAL-001`; it does not approve G4 or authorize C5 or runtime work.
+- **C4 approved decisions:** `MOD-001` through `MOD-004`, `BEH-001`, `BEH-002`, and `BEH-004` are APPROVED at decision revision 1 by the human owner.
+- **C4 approved baseline:** [Liam v1 Domain and Lifecycle Semantics, revision 1](../../product/DOMAIN_MODEL.md) is `CANONICAL / APPROVED` through human G4 disposition `GOV-009`.
+- **Explicitly unresolved C4 decisions:** None. Intentional abandonment, additional planning hierarchy, non-project knowledge, knowledge taxonomy, permanent recommendation precedence, deletion undo, and implementation mechanisms are explicitly unmodeled rather than silently decided.
+- **C4 verification:** PASS — all required C4 decisions are human-approved; the minimum domain model traces to approved Product Intent and all 12 scenarios; required files, sections, links, decision fields, and whitespace validate; change scope is C4-only; and no runtime or later-stage artifact was introduced.
 - **C1 baseline:** [Foundation Program](../foundation/FOUNDATION_PROGRAM.md), [documentation control plane](../README.md), [decision register](../foundation/DECISIONS.md), [AGENTS.md](../../AGENTS.md), [README.md](../../README.md), and [FOUNDATION_SEED.md](../../FOUNDATION_SEED.md).
-- **G3 blockers:** None.
+- **G4 disposition:** `GOV-009` is APPROVED by the human owner on 2026-08-09. The original independent review returned `G4 REVIEW: NEEDS FIX` with `G4-F001` and `G4-F002`; both were corrected, and the same reviewer returned `G4 TARGETED RECHECK: PASS`. No G4 blockers remain.
 
 ## Authorized work
 
-C3 — Scenario and Acceptance Evidence was authorized under `GOV-006` and completed with human G3 approval through `GOV-007`. C4 is the next planned stage but remains separately unauthorized. Further work is limited to governance-state maintenance unless the human records additional authorization.
+C4 — Domain and Lifecycle Semantics is complete. `GOV-009` records the human G4 approval of `product/DOMAIN_MODEL.md` revision 1 after the independent review and targeted recheck. C5 remains separately unauthorized.
 
 This snapshot reflects authorization recorded in approved governance artifacts; it does not create, extend, or approve authorization.
 
-**Current stage state:** C3 — Scenario and Acceptance Evidence — COMPLETE / G3 APPROVED
+**Current stage state:** C4 — Domain and Lifecycle Semantics — COMPLETE / G4 APPROVED BY HUMAN
 
-**Next planned stage:** C4 — Domain and Lifecycle Semantics
+**Next planned stage:** C5 — Product Foundation Baseline
 **Authorization:** NOT AUTHORIZED
 **Preconditions:**
 
-- G1 approved through `GOV-002` — satisfied.
-- C2 authorization recorded through `GOV-004` — satisfied.
-- G2 approved through `GOV-005` — satisfied.
-- C3 authorization recorded through `GOV-006` — satisfied.
-- C3 evidence approved through `GOV-007` — satisfied.
-- Explicit human authorization for C4 — not recorded.
+- G4 approved through `GOV-009` — satisfied.
+- Explicit human authorization for C5 — not recorded.
 
-**Corresponding gate:** G4 — Domain and Lifecycle Semantics — not eligible until C4 is separately authorized and its evidence is complete.
+**Corresponding gate:** G4 — Domain Model — APPROVED BY HUMAN through `GOV-009`.
 
-**C4–C7:** NOT AUTHORIZED.
+**C5–C7:** NOT AUTHORIZED.
 
 ## Explicit prohibitions
 
@@ -68,6 +70,6 @@ This snapshot reflects authorization recorded in approved governance artifacts; 
 - Do not choose databases, persistence technologies, Cloudflare services, frameworks, MCP providers, or LLM providers.
 - Do not create schemas, ADRs, implementation tasks, or speculative placeholder documents.
 - Do not resolve product, architecture, technology, or G1-approval decisions without the human owner.
-- Do not begin C4 domain-model work or any later Foundation stage.
+- Do not begin C5 or any later Foundation stage.
 
 For document authority and reading order, use [docs/README.md](../README.md). For stages, gates, and eligibility, use the [Foundation Program](../foundation/FOUNDATION_PROGRAM.md). For all open and deferred decisions, use [DECISIONS.md](../foundation/DECISIONS.md).

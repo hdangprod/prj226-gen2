@@ -202,6 +202,54 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 - **Supersedes:** None.
 - **Superseded by:** None.
 
+### GOV-008 — C4 Domain and Lifecycle Semantics authorization
+
+- **Question:** Authorize C4 Domain and Lifecycle Semantics under the approved Generation 2 Foundation Program while preserving G4, C5, later-stage, and runtime boundaries.
+- **Status:** APPROVED
+- **Decision owner:** `github:hdangprod`
+- **Rationale:** G3, `VAL-001` revision 1, and the Scenario Corpus revision 1 are approved, and the human owner has explicitly authorized C4 so that the smallest coherent domain model can be derived from approved Product Intent and scenario evidence without entering architecture or implementation.
+- **Alternatives:** Keep C4 unauthorized; authorize C4 within the approved program boundary; authorize a broader stage or runtime scope.
+- **Normative dependencies:** `GOV-007`; `product/PRODUCT_REQUIREMENTS.md` revision 1; `VAL-001` revision 1; `product/SCENARIOS.md` revision 1.
+- **Affected artifacts:** `docs/foundation/DECISIONS.md`, `docs/development/CURRENT.md`, `docs/README.md`, and C4-authorized domain-semantics materials.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human project owner explicitly authorized “C4 — Domain and Lifecycle Semantics” under the scope, dependencies, exit criteria, and prohibitions of the approved Foundation Program; directed that the authorization be recorded durably before C4 work begins; and limited its derivation inputs to Product Intent revision 1, Scenario Corpus revision 1, approved C2 decisions, and approved `VAL-001`.
+- **Authorized scope:** Evidence extraction from the 12 approved scenarios; dependency-aware facilitation of `MOD-001` through `MOD-004` and only those behavior decisions required by C4 evidence; preparation of the minimum domain vocabulary, conceptual relationships, product-level optionality and cardinality, lifecycle semantics, invariants, provenance or supersession semantics, traceability, deterministic documentation verification, and a G4 review candidate.
+- **Does not authorize:** G4 approval or independent gate disposition; C5 or any later Foundation stage; runtime architecture; persistence or database design; schemas; APIs; technology or provider selection; delivery or orchestration architecture; implementation planning; runtime source code; or deployment.
+- **Editorial-only change attestation:** The `docs/README.md` ownership-map update records the authorized creation and proposed lifecycle status of the previously reserved domain-model artifact. It changes no documentation-control semantics, topic ownership, authorization rule, normative dependency rule, or approved C1 meaning and therefore does not reopen G1.
+- **Supersedes:** None.
+- **Superseded by:** None.
+
+### GOV-009 — G4 domain and lifecycle semantics baseline
+
+- **Question:** Approve `product/DOMAIN_MODEL.md` revision 1 and the C4 domain and behavior decisions as the completed C4 baseline for G4.
+- **Status:** APPROVED
+- **Decision owner:** `github:hdangprod`
+- **Rationale:** C4 requires an independently reviewable domain vocabulary, conceptual relationships, lifecycles, invariants, traceability, unresolved-choice record, and excluded-work boundary before a human may dispose G4.
+- **Alternatives:** Approve the proposed C4 baseline; return it for revision; reject it.
+- **Normative dependencies:** `GOV-008`; `PRD-001` revision 1; `PRD-002` revision 1; `BEH-003` revision 1; `DATA-001` revision 1; `QLT-001` revision 1; `VAL-001` revision 1; `MOD-001` revision 1; `MOD-002` revision 1; `MOD-003` revision 1; `MOD-004` revision 1; `BEH-001` revision 1; `BEH-002` revision 1; `BEH-004` revision 1; `product/PRODUCT_REQUIREMENTS.md` revision 1; `product/SCENARIOS.md` revision 1; `product/DOMAIN_MODEL.md` revision 1; C4 verification evidence satisfying the C4 and G4 criteria in [FOUNDATION_PROGRAM.md](FOUNDATION_PROGRAM.md).
+- **Affected artifacts:** `product/DOMAIN_MODEL.md`, `docs/foundation/DECISIONS.md`, `docs/development/CURRENT.md`, and the artifact-status row in `docs/README.md`.
+- **Approved C4 decision inputs:** `MOD-001` revision 1; `MOD-002` revision 1; `MOD-003` revision 1; `MOD-004` revision 1; `BEH-001` revision 1; `BEH-002` revision 1; `BEH-004` revision 1.
+- **Approved artifact:** `product/DOMAIN_MODEL.md`.
+- **Approved revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The original independent review returned `G4 REVIEW: NEEDS FIX` with `G4-F001` and `G4-F002`. Both findings were corrected without material unrelated semantic change, and the same independent reviewer returned `G4 TARGETED RECHECK: PASS`. The human owner then explicitly approved G4 and `product/DOMAIN_MODEL.md` revision 1 on 2026-08-09.
+- **C4 verification evidence:**
+  - C4 authorization: PASS — `GOV-008` is human-approved and preserves G4, C5, later-stage, architecture, and implementation boundaries.
+  - Required C4 decisions: PASS — `MOD-001` through `MOD-004`, `BEH-001`, `BEH-002`, and `BEH-004` are human-approved at decision revision 1.
+  - Approved domain baseline: PASS — `product/DOMAIN_MODEL.md` revision 1 is `CANONICAL / APPROVED` and defines the minimum vocabulary, relationships, lifecycles, context authority, knowledge provenance, recommendation semantics, human-control boundary, invariants, exclusions, and traceability.
+  - Scenario and Product Intent traceability: PASS — every semantic area traces to approved decisions, Product Intent, and Scenario Corpus evidence; all 12 approved scenario identifiers appear in the domain traceability matrix.
+  - Unresolved choices: PASS — no genuine C4 semantic choice remains open; unsupported abandonment, hierarchy, taxonomy, preference, deletion-undo, and implementation semantics are explicitly unmodeled.
+  - Documentation structure: PASS — required files and sections exist, relative links resolve, C4 decision records contain required fields and approved states, and changed-file whitespace validation succeeds.
+  - Change scope: PASS — changes are limited to the C4 artifact, decision and G4 approval records, operational state, and the documentation ownership row.
+  - Excluded later work: PASS — no runtime source tree, C5 artifact, schema, API, architecture, provider selection, delivery design, implementation plan, source code, or deployment artifact was introduced.
+- **Editorial-only change attestation:** The `docs/README.md` ownership-map update records the authorized creation and approved lifecycle status of `product/DOMAIN_MODEL.md` revision 1. It changes no documentation-control semantics, topic ownership, authorization rule, normative dependency rule, or approved C1 meaning and therefore does not reopen G1.
+- **Does not authorize:** C5 or any later Foundation stage; runtime architecture; persistence or database design; schemas; APIs; technology or provider selection; delivery or orchestration architecture; implementation planning; runtime source code; deployment; or any later gate review.
+- **Supersedes:** None.
+- **Superseded by:** None.
+
 ## Product definition
 
 ### PRD-001 — Initial user and collaboration boundary
@@ -274,55 +322,76 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 
 ## Product model
 
-### MOD-001 — Project hierarchy semantics
+### MOD-001 — Project and Action vocabulary
 
-- **Question:** Are Area, Project, Milestone/Phase, Task, and Step mandatory or optional, and are Milestone and Phase one concept or two?
-- **Status:** OPEN
+- **Question:** Which work concepts are canonical in v1, and must Task and Step be semantically distinct?
+- **Status:** APPROVED
 - **Decision owner:** `hdangprod`
-- **Rationale:** The seed explicitly requires validation of the initial conceptual hierarchy.
-- **Alternatives:** Mandatory hierarchy; optional levels; separate Milestone and Phase concepts; one shared Milestone/Phase concept.
-- **Dependencies:** PRD-002; VAL-001.
-- **Affected artifacts:** Future `product/DOMAIN_MODEL.md`; future `product/SCENARIOS.md`; `product/PRODUCT_REQUIREMENTS.md`.
-- **Approval evidence:** None — unresolved.
+- **Rationale:** The approved scenarios require a bounded Project with an intended outcome and concrete accepted work, while explicitly demonstrating that useful behavior does not require a Milestone/Task/Step hierarchy or Task-versus-Step classification.
+- **Alternatives:** Project plus Action; Project plus recursively nested Work Item; optional named Area, Milestone/Phase, Task, and Step hierarchy.
+- **Normative dependencies:** `GOV-008`; `PRD-002` revision 1; `VAL-001` revision 1.
+- **Affected artifacts:** Future `product/DOMAIN_MODEL.md`; `product/SCENARIOS.md`; `product/PRODUCT_REQUIREMENTS.md`.
+- **Decision:** V1 uses `Project` and `Action` as its minimum canonical work vocabulary. A Project is a bounded effort with an intended outcome. An Action is concrete accepted work that is sufficiently clear to begin and has a recognizable stopping or completion point. A Project may have zero or more Actions, and an Action belongs to exactly one Project in v1. `Area`, `Milestone`, `Phase`, `Task`, and `Step` are not canonical v1 domain concepts. Those terms may be used conversationally where natural but do not create separate domain types or lifecycle semantics.
+- **Boundary:** V1 has no recursive Work Item or parent/child Action hierarchy. This decision does not prevent a later approved revision from introducing additional planning or decomposition concepts when approved scenario evidence demonstrates a real need.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly approved alternative A1 with the vocabulary, cardinality, conversational-language, non-recursion, and later-revision qualifications recorded in this decision.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
-### MOD-002 — Project, Task, and Step lifecycles
+### MOD-002 — Project and Action lifecycles
 
-- **Question:** What lifecycle states, Task-versus-Step boundary, and user-Task completion criteria apply?
-- **Status:** OPEN
+- **Question:** What lifecycle states, transitions, and completion criteria apply to Project and Action?
+- **Status:** APPROVED
 - **Decision owner:** `hdangprod`
-- **Rationale:** The seed defines concepts but not create, pause, resume, reopen, abandon, archive, or completion semantics.
-- **Alternatives:** Separate entity lifecycles; shared minimal lifecycle; explicit promotion from Step to Task; flexible user-defined boundaries.
-- **Dependencies:** PRD-002; MOD-001; VAL-001.
+- **Rationale:** `MOD-001` establishes Project and Action as the canonical work concepts, but the approved evidence does not yet decide their create, active, pause or interruption, completion, abandonment, reopening, or archival semantics.
+- **Alternatives:** D1 — separate evidence-minimal Project and Action lifecycles; D2 — add explicit stopped or withdrawn outcomes; D3 — add richer paused, blocked, abandoned, cancelled, or archived states.
+- **Normative dependencies:** `GOV-008`; `PRD-002` revision 1; `MOD-001` revision 1; `VAL-001` revision 1.
 - **Affected artifacts:** Future `product/DOMAIN_MODEL.md`; future `product/SCENARIOS.md`.
-- **Approval evidence:** None — unresolved.
+- **Scenario evidence:** `SCN-001` establishes an active Project; `SCN-002` requires an Action with a recognizable stopping or completion point; `SCN-003` proves interruption and resumption but not a Paused lifecycle state; `SCN-004` distinguishes completed work from accepted progress; and `SCN-006` proves that multiple Projects may be active simultaneously.
+- **Decision:** Project has canonical states `Active` and `Completed`; a newly accepted Project is `Active`, completion means the user authoritatively accepts that its intended outcome was achieved, and explicit reopening returns it to `Active`. Action has canonical states `Open` and `Completed`; a newly accepted Action is `Open`, completion means the user authoritatively accepts that its recognizable stopping or completion point was satisfied, and explicit reopening or correction returns it to `Open`. Interruption, inactivity, lack of conversational focus, unresolved matters, dependencies, or blockers do not change lifecycle state. Accepted progress need not complete an Action. Project completion does not delete, archive, invalidate, or change the lifecycle of its Actions, context, or related Knowledge Items.
+- **Boundary:** `Active` is not conversational focus, and `Open` is not recommendation status. V1 has no canonical `Paused`, `Blocked`, `Abandoned`, `Cancelled`, `Withdrawn`, `Archived`, or equivalent lifecycle states. Intentional abandonment remains unmodeled until approved evidence requires it. This decision defines no implementation status fields, timestamps, persistence representation, or technical transition mechanism.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly approved alternative D1 with the Project and Action states, user-authoritative completion, reopening, non-transition conditions, non-cascading Project completion, excluded states, and implementation-neutral qualifications recorded in this decision.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
-### MOD-003 — Knowledge taxonomy and lifecycle
+### MOD-003 — Knowledge vocabulary and correction lifecycle
 
-- **Question:** How do Resource, Working Note, Finding, Decision, Reflection, and Artifact relate, promote, preserve provenance, and become superseded?
-- **Status:** OPEN
+- **Question:** What is captured knowledge in v1, and how does an accepted correction affect it?
+- **Status:** APPROVED
 - **Decision owner:** `hdangprod`
-- **Rationale:** The seed taxonomy is explicitly provisional and its type boundaries overlap.
-- **Alternatives:** Mutually exclusive types; composable types; staged promotion model.
-- **Dependencies:** PRD-002; VAL-001.
-- **Affected artifacts:** Future `product/DOMAIN_MODEL.md`; future `product/SCENARIOS.md`.
-- **Approval evidence:** None — unresolved.
+- **Rationale:** The approved scenarios require intentional, low-friction capture, later retrieval, correction, provenance, supersession, and deletion without requiring taxonomy selection or distinct type behavior.
+- **Alternatives:** One Knowledge Item with no canonical subtypes; one Knowledge Item with composable semantic roles; staged Resource, Working Note, Finding, Decision, Reflection, and Artifact taxonomy.
+- **Normative dependencies:** `GOV-008`; `PRD-002` revision 1; `VAL-001` revision 1.
+- **Affected artifacts:** Future `product/DOMAIN_MODEL.md`; `product/SCENARIOS.md`.
+- **Decision:** V1 uses one canonical `Knowledge Item` concept. Capture does not require taxonomy selection. A Knowledge Item preserves its accepted content and relevant provenance. `Resource`, `Working Note`, `Finding`, `Decision`, `Reflection`, and `Artifact` are not separate canonical v1 knowledge types; they may be useful descriptive or user-facing language but do not create separate lifecycles or promotion rules. An accepted persisted correction supersedes the affected prior knowledge rather than silently rewriting it. Superseded knowledge must not be presented as current unqualified knowledge, and the correction's provenance must remain reconstructible at the product-semantic level.
+- **Boundary:** Deletion is distinct from correction or supersession, and supersession must not prevent later user-directed deletion under `DATA-001`. This decision defines no technical versioning, event sourcing, storage history, identifiers, or persistence mechanism.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly approved alternative B1 with the taxonomy-free capture, provenance, correction, supersession, deletion, and implementation-neutral qualifications recorded in this decision.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
 ### MOD-004 — Project and knowledge relationship
 
 - **Question:** Is knowledge project-bound, reusable across projects, or both?
-- **Status:** OPEN
+- **Status:** APPROVED
 - **Decision owner:** `hdangprod`
-- **Rationale:** The v1 direction emphasizes project execution while retrieval examples imply reusable historical knowledge.
+- **Rationale:** The approved v1 direction is project-centered, while the approved scenarios establish project-originated knowledge and probe its later usefulness in a different Project.
 - **Alternatives:** Project-bound; globally reusable; project-originated with controlled cross-project reuse.
-- **Dependencies:** PRD-002; MOD-003; VAL-001.
-- **Affected artifacts:** Future `product/DOMAIN_MODEL.md`; future `product/SCENARIOS.md`; `product/PRODUCT_REQUIREMENTS.md`.
-- **Approval evidence:** None — unresolved.
+- **Normative dependencies:** `GOV-008`; `PRD-002` revision 1; `MOD-003` revision 1; `VAL-001` revision 1.
+- **Affected artifacts:** Future `product/DOMAIN_MODEL.md`; `product/SCENARIOS.md`; `product/PRODUCT_REQUIREMENTS.md`.
+- **Decision:** V1 knowledge is project-originated with controlled cross-project reuse. When a Knowledge Item is captured during Project work, its originating Project is preserved as provenance. The item may later assist work in another Project when materially relevant. Reuse does not convert project-specific knowledge into universal truth; relevant origin or context and material uncertainty remain available where needed for correct interpretation, and the user can correct or reject inappropriate reuse.
+- **Boundary:** The model remains project-centered while permitting useful continuity across Projects. This decision requires no global automatic retrieval, ranking, similarity search, embeddings, or other retrieval or implementation mechanism.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly approved alternative C1 with the project-origin, controlled-reuse, contextual-uncertainty, user-correction, and implementation-neutral qualifications recorded in this decision.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
@@ -330,27 +399,39 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 
 ### BEH-001 — State and current-context authority
 
-- **Question:** What does stateful behavior mean, and how is current project/task context selected, corrected, and resumed?
-- **Status:** OPEN
+- **Question:** How is current Project or Action context selected, distinguished from lifecycle state, corrected, and resumed?
+- **Status:** APPROVED
 - **Decision owner:** `hdangprod`
-- **Rationale:** The seed requires preserved context but does not define its authority or correction semantics.
-- **Alternatives:** Explicit user selection; inferred context; hybrid selection with user correction.
-- **Dependencies:** PRD-002; MOD-001; MOD-002.
+- **Rationale:** Approved evidence requires multiple simultaneously active Projects, useful resumption, visible uncertainty, and authoritative user correction, but does not decide whether current conversational focus must always be explicit or may be inferred.
+- **Alternatives:** E1 — hybrid explicit-first context; E2 — explicit selection only; E3 — inference-first context based primarily on recency or prior focus.
+- **Normative dependencies:** `GOV-008`; `PRD-002` revision 1; `MOD-001` revision 1; `MOD-002` revision 1; `VAL-001` revision 1.
 - **Affected artifacts:** `product/PRODUCT_REQUIREMENTS.md`; future `product/DOMAIN_MODEL.md`; future `product/SCENARIOS.md`.
-- **Approval evidence:** None — unresolved.
+- **Scenario evidence:** `SCN-001` requires an active Project; `SCN-003` requires resumption while distinguishing accepted facts from inference; and `SCN-006` requires ambiguous selection to remain uncertain and user correction to control the result.
+- **Decision:** Project lifecycle state and conversational focus are distinct. Multiple Projects may be `Active`; conversation may discuss multiple Projects but may use one provisional current target when an operation requires one. Explicit current user selection, statement, or correction is authoritative. Prior accepted context may support resumption but yields to the user's current explicit intent. Liam may infer provisional conversational context when evidence is sufficiently unambiguous, but inference remains inference and does not become accepted domain fact merely by being inferred. When ambiguity would affect an accepted state-changing operation, its target must be clarified before acceptance. Inference may support non-state-changing retrieval, explanation, or recommendation when uncertainty is exposed. A state-changing operation targets one Project and, where applicable, one Action belonging to that Project.
+- **Boundary:** This decision defines no recency algorithm, context window, ranking, retrieval mechanism, or persistence strategy.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly approved alternative E1 with the lifecycle-versus-focus distinction, explicit-user precedence, provisional-inference, ambiguity-clarification, non-state-changing inference, target-cardinality, and implementation-neutral qualifications recorded in this decision.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
 ### BEH-002 — Next-action recommendation policy
 
 - **Question:** Which inputs, precedence rules, explanations, and user overrides govern next-action recommendations?
-- **Status:** OPEN
+- **Status:** APPROVED
 - **Decision owner:** `hdangprod`
-- **Rationale:** The seed cites time, energy, priority, dependencies, and lateness without a policy for reconciling them.
-- **Alternatives:** User-ranked rules; system scoring; advisory shortlist with human selection.
-- **Dependencies:** PRD-002; MOD-002; BEH-001; VAL-001.
+- **Rationale:** Approved evidence requires a concrete useful recommendation, material-basis visibility, meaningful uncertainty, and user override while prohibiting an invented universal scoring policy.
+- **Alternatives:** F1 — context-sensitive advisory recommendation; F2 — persistent user-authored precedence rules; F3 — shortlist-only assistance that never selects one leading candidate.
+- **Normative dependencies:** `GOV-008`; `PRD-002` revision 1; `MOD-002` revision 1; `BEH-001` revision 1; `VAL-001` revision 1.
 - **Affected artifacts:** `product/PRODUCT_REQUIREMENTS.md`; future `product/SCENARIOS.md`.
-- **Approval evidence:** None — unresolved.
+- **Scenario evidence:** `SCN-002` requires refinement to a concrete Action; `SCN-003` requires a concrete restart Action; and `SCN-007` requires an actionable choice under conflicting signals without fixed universal precedence or blocked user override.
+- **Decision:** Recommendation is context-sensitive and advisory. It may consider the user's explicit current intent and constraints, accepted Project context, relevant `Open` Actions, accepted progress and unresolved matters, relevant Knowledge Items with appropriate provenance, and dependencies or constraints known from accepted context. Explicit current user intent and constraints prevail over contradictory inference. V1 defines no universal scoring function or permanent precedence hierarchy among remaining signals. Material conflict or uncertainty is exposed. Liam may recommend one leading candidate when evidence supports one or a short set when ambiguity is material. Recommendations are user-overridable; rejection or inaction does not alter domain state, and a proposed Action does not become accepted merely because Liam recommends it.
+- **Boundary:** This decision defines no ranking algorithm, numeric scoring, embeddings, similarity function, retrieval implementation, prompt strategy, model choice, or other architecture.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly approved alternative F1 with the permitted evidence, user-intent precedence, conflict and uncertainty visibility, leading-candidate or shortlist behavior, advisory and override semantics, non-acceptance of recommendations, and architecture-neutral qualifications recorded in this decision.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
@@ -376,13 +457,19 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 ### BEH-004 — Human-control boundary
 
 - **Question:** Which actions are advisory, state-changing, confirmable, reversible, or prohibited?
-- **Status:** OPEN
+- **Status:** APPROVED
 - **Decision owner:** `hdangprod`
-- **Rationale:** The seed preserves human judgment for important actions without defining the boundary.
-- **Alternatives:** Advise-only; draft changes with confirmation; bounded automatic state changes.
-- **Dependencies:** PRD-002; BEH-001; BEH-002; DATA-001.
+- **Rationale:** Approved evidence requires intentional capture, truthful acceptance status, safe correction or retry, user-directed deletion, and clear handling of mixed or prohibited requests without deciding whether every state change needs a second confirmation turn.
+- **Alternatives:** G1 — risk-proportionate explicit control; G2 — second confirmation for every state change; G3 — one explicit unambiguous direction is sufficient even for destructive deletion.
+- **Normative dependencies:** `GOV-008`; `PRD-002` revision 1; `BEH-001` revision 1; `BEH-002` revision 1; `DATA-001` revision 1; `MOD-002` revision 1; `MOD-003` revision 1.
 - **Affected artifacts:** `product/PRODUCT_REQUIREMENTS.md`; future `product/SCENARIOS.md`.
-- **Approval evidence:** None — unresolved.
+- **Scenario evidence:** `SCN-001`, `SCN-004`, and `SCN-008` require visible accepted or failed state changes and correction; `SCN-010` requires user-directed deletion; and `SCN-011` requires distinguishable handling of acceptable, prohibited, and out-of-authority portions of one request.
+- **Decision:** Retrieval, explanation, summarization, recommendations, and proposals are advisory or non-state-changing and do not alter accepted Project, Action, or Knowledge Item state. Clear and unambiguous explicit user direction is sufficient without an additional confirmation turn for establishing a Project, accepting an Action, recording accepted progress, completing or reopening a Project or Action, intentionally capturing a Knowledge Item, or persisting a correction or supersession. The original explicit instruction may authorize such an ordinary change when target and effect are clear. Ambiguous target, scope, or material effect requires clarification before acceptance, and inference alone never changes accepted domain state. Destructive deletion has no guaranteed product-semantic undo: its scope must be clear and the user must explicitly confirm it in an additional confirmation step. Mixed acceptable, prohibited, or unresolved portions receive separate outcomes; success for one does not imply success for another.
+- **Boundary:** Completion remains reopenable and knowledge correction uses supersession. No product-semantic reversibility is promised after confirmed deletion. Authentication material remains outside intended capture; Liam does not claim medical, legal, or financial authority; v1 scope cannot expand silently; and an unaccepted state change cannot be reported as accepted. This decision selects no UI pattern, transaction or undo mechanism, authorization system, persistence design, or implementation protocol.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly approved alternative G1 with the advisory and state-changing classifications, ordinary-change authorization, ambiguity clarification, inference prohibition, additional deletion confirmation, mixed-request separation, prohibited outcomes, reversibility limits, and implementation-neutral qualifications recorded in this decision.
 - **Supersedes:** None.
 - **Superseded by:** None.
 

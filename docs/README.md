@@ -66,7 +66,7 @@ Valid lifecycle states are class-specific: `CANONICAL` uses `DRAFT`, `PROPOSED`,
 | [`development/CURRENT.md`](development/CURRENT.md) | OPERATIONAL / ACTIVE | Live operational snapshot | Reflects authorization recorded in governing artifacts; it does not create, extend, or approve authorization. |
 | [`product/PRODUCT_REQUIREMENTS.md`](../product/PRODUCT_REQUIREMENTS.md) | CANONICAL / APPROVED, revision 1 | Approved product scope, outcomes, non-goals, capability map, and technology-neutral constraints | Created under human-approved C2 authorization `GOV-004`; approved through human G2 disposition `GOV-005`. |
 | [`product/SCENARIOS.md`](../product/SCENARIOS.md) | CANONICAL / APPROVED, revision 1 | Scenario corpus, semantic acceptance evidence, Product Intent traceability, and explicit ambiguity record | Created under human-approved C3 authorization `GOV-006`; approved through human G3 disposition `GOV-007`, which also approves `VAL-001`. |
-| `product/DOMAIN_MODEL.md` | NOT_CREATED | Future vocabulary, conceptual relationships, lifecycles, and invariants | Reserved for C4; creation requires prior authorization. |
+| [`product/DOMAIN_MODEL.md`](../product/DOMAIN_MODEL.md) | CANONICAL / APPROVED, revision 1 | Approved vocabulary, conceptual relationships, lifecycles, context authority, human-control semantics, and invariants | Created under human-approved C4 authorization `GOV-008`; approved through human G4 disposition `GOV-009`. |
 | `development/DELIVERY_CONTRACT.md` | NOT_CREATED | Future delivery governance, Task Packet contract, and engineering DoR/DoD | Reserved for C6; creation requires prior authorization. |
 
 `NOT_CREATED` is a reservation, not a lifecycle status and not authorization to create a document.
