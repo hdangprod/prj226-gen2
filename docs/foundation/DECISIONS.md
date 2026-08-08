@@ -154,6 +154,54 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 - **Supersedes:** None.
 - **Superseded by:** None.
 
+### GOV-006 — C3 Scenario Corpus authorization
+
+- **Question:** Authorize C3 Scenario and Acceptance Evidence under the approved Generation 2 Foundation Program while preserving G3, C4, and runtime boundaries.
+- **Status:** APPROVED
+- **Decision owner:** `github:hdangprod`
+- **Rationale:** G2 is approved and the human owner has explicitly authorized C3 so that the smallest useful, independently reviewable scenario corpus can test the approved Product Intent without entering domain design or later work.
+- **Alternatives:** Keep C3 unauthorized; authorize C3 within the approved program boundary; authorize a broader stage or runtime scope.
+- **Normative dependencies:** `GOV-005`.
+- **Affected artifacts:** `docs/foundation/DECISIONS.md`, `docs/development/CURRENT.md`, `docs/README.md`, and C3-authorized scenario and semantic-acceptance materials.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly authorized “C3 — Scenario Corpus,” directed reconstruction of repository authority, and authorized preparation of the C3 baseline and necessary repository-state updates under the approved Product Intent and Foundation Program boundaries.
+- **Authorized scope:** A compact scenario corpus, semantic acceptance evidence, Product Intent traceability, ambiguity and gap records, and decision or operational-state updates necessary to prepare the C3 baseline.
+- **Does not authorize:** Approval of `VAL-001`; G3 approval or gate disposition; C4 or any later Foundation stage; domain-model finalization; runtime architecture; technology or provider selection; schemas; APIs; implementation planning; runtime source code; deployment; or later gate review.
+- **Editorial-only change attestation:** The `docs/README.md` ownership-map update records the authorized creation and proposed lifecycle status of the previously reserved scenario artifact. It changes no documentation-control semantics, topic ownership, authorization rule, normative dependency rule, or approved C1 meaning and therefore does not reopen G1.
+- **Supersedes:** None.
+- **Superseded by:** None.
+
+### GOV-007 — G3 scenario and acceptance-evidence baseline
+
+- **Question:** Approve `product/SCENARIOS.md` revision 1 and `VAL-001` as the completed C3 scenario and acceptance-evidence baseline for G3.
+- **Status:** APPROVED
+- **Decision owner:** `github:hdangprod`
+- **Rationale:** C3 requires independently reviewable, traceable scenario and semantic-acceptance evidence before a human may dispose G3. The proposed baseline has completed independent review without expanding product scope or entering C4 or runtime work.
+- **Alternatives:** Approve the proposed C3 baseline; return it for revision; reject it.
+- **Normative dependencies:** `GOV-006`; `PRD-001` revision 1; `PRD-002` revision 1; `PRD-003` revision 1; `PRD-004` revision 1; `BEH-003` revision 1; `DATA-001` revision 1; `QLT-001` revision 1; `product/PRODUCT_REQUIREMENTS.md` revision 1; `VAL-001` revision 1; `product/SCENARIOS.md` revision 1; C3 verification evidence satisfying the C3 and G3 criteria in [FOUNDATION_PROGRAM.md](FOUNDATION_PROGRAM.md).
+- **Affected artifacts:** `product/SCENARIOS.md`, `docs/foundation/DECISIONS.md`, `docs/development/CURRENT.md`, and the artifact-status row in `docs/README.md`.
+- **Approved decision:** `VAL-001`.
+- **Approved decision revision:** 1.
+- **Approved artifact:** `product/SCENARIOS.md`.
+- **Approved revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** Independent review recorded `G3 REVIEW: PASS`. The human owner explicitly approved G3, `VAL-001` revision 1, and `product/SCENARIOS.md` revision 1 on 2026-08-09.
+- **C3 verification evidence:**
+  - C3 authorization: PASS — `GOV-006` is human-approved and preserves G3, C4, later-stage, and runtime prohibitions.
+  - Scenario and acceptance baseline: PASS — `product/SCENARIOS.md` revision 1 contains 12 scenario families with complete semantic schemas and 11 corpus-wide invariants derived from approved Product Intent.
+  - Product Intent traceability: PASS — all 37 approved Product Intent statements are validly covered by scenario evidence, corpus-wide invariants, or both.
+  - Unresolved decisions: PASS — `BEH-001`, `BEH-002`, `BEH-004`, and `MOD-001` through `MOD-004` remain open and are exposed without selecting their unresolved semantics.
+  - Excluded later work: PASS — no C4 domain model, architecture, technology or provider selection, schema, API, delivery, implementation, runtime source, or deployment artifact was introduced.
+  - Documentation structure: PASS — deterministic scenario-ID, required-field, requirement-reference, relative-link, and changed-file whitespace checks succeed.
+  - Change scope: PASS — changes are limited to C3-authorized scenario evidence and necessary decision, operational-state, and ownership-map updates.
+- **Editorial-only change attestation:** The `docs/README.md` ownership-map update records the approved lifecycle status of `product/SCENARIOS.md` revision 1. It changes no documentation-control semantics, topic ownership, authorization rule, normative dependency rule, or approved C1 meaning and therefore does not reopen G1.
+- **Does not authorize:** C4 or any later Foundation stage; domain modeling; runtime architecture; technology or provider selection; persistence; schemas; APIs; delivery or orchestration architecture; implementation planning; runtime source code; or deployment.
+- **Supersedes:** None.
+- **Superseded by:** None.
+
 ## Product definition
 
 ### PRD-001 — Initial user and collaboration boundary
@@ -361,13 +409,19 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 ### VAL-001 — Scenario corpus and acceptance evidence
 
 - **Question:** What real-user scenario coverage and semantic acceptance evidence are required before product foundation approval?
-- **Status:** OPEN
+- **Status:** APPROVED
 - **Decision owner:** `hdangprod`
 - **Rationale:** The seed calls for a larger Golden Dataset but its scope and acceptance role are unresolved.
 - **Alternatives:** Founder scenarios; broader research scenarios; combined corpus with scenario IDs and semantic expected outcomes.
-- **Dependencies:** PRD-001; PRD-002.
-- **Affected artifacts:** Future `product/SCENARIOS.md`; `product/PRODUCT_REQUIREMENTS.md`; future `product/DOMAIN_MODEL.md`.
-- **Approval evidence:** None — unresolved.
+- **Normative dependencies:** `GOV-006`; `PRD-001`; `PRD-002`; `PRD-003`; `PRD-004`; `BEH-003`; `DATA-001`; `QLT-001`; `product/PRODUCT_REQUIREMENTS.md` revision 1.
+- **Affected artifacts:** `product/SCENARIOS.md`; `product/PRODUCT_REQUIREMENTS.md`; future `product/DOMAIN_MODEL.md`.
+- **Decision:** Use a compact, founder-grounded corpus of 12 scenario families with stable IDs and semantic expected outcomes. The corpus spans representative project contexts only where domain variation tests the approved product model. Each scenario traces to approved Product Intent, defines observable behavior and prohibited outcomes without exact-text matching, and records rather than resolves open behavior or domain semantics. Corpus-wide invariants cover approved constraints that do not require separate scenario multiplication. Representative domains are evidence of semantic coverage, not broader-market validation.
+- **Approved decision revision:** 1.
+- **Approved artifact:** `product/SCENARIOS.md`, revision 1.
+- **Approval decision:** `GOV-007`.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** Independent review recorded `G3 REVIEW: PASS`. The human owner explicitly approved this decision and `product/SCENARIOS.md` revision 1 through `GOV-007` on 2026-08-09.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
