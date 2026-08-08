@@ -299,6 +299,58 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 - **Supersedes:** None.
 - **Superseded by:** None.
 
+### GOV-012 — C6 Delivery Governance authorization
+
+- **Question:** Authorize C6 Delivery Governance under the approved Generation 2 Foundation Program while preserving G6, C7, architecture, engineering, and runtime boundaries.
+- **Status:** APPROVED
+- **Decision owner:** `github:hdangprod`
+- **Rationale:** G5 and the Product Foundation revision 1 are approved, and the human project owner has explicitly authorized C6 so that the minimum provider-neutral delivery-governance and engineering work-contract baseline can be decided and proposed without entering architecture, implementation, or control-plane construction.
+- **Alternatives:** Keep C6 unauthorized; authorize C6 within the approved program boundary; authorize a broader stage, architecture, engineering, or runtime scope.
+- **Normative dependencies:** `GOV-011`.
+- **Affected artifacts:** `docs/foundation/DECISIONS.md`, `docs/development/CURRENT.md`, `docs/README.md`, and C6-authorized `development/DELIVERY_CONTRACT.md` materials.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human project owner explicitly authorized “C6 — Delivery Governance” under the scope, dependencies, exit criteria, and prohibitions of the approved Generation 2 Foundation Program; authorized resolution of `DLV-001` and `DLV-002`; directed that this authorization be recorded durably before C6 work begins; and limited C6 to defining a provider-neutral delivery governance contract that later tooling may implement.
+- **Authorized inputs:** `product/PRODUCT_FOUNDATION.md` revision 1; `product/PRODUCT_REQUIREMENTS.md` revision 1; `product/SCENARIOS.md` revision 1; `product/DOMAIN_MODEL.md` revision 1; approved repository governance; and applicable approved decision records.
+- **Authorized scope:** Decision facilitation and resolution for `DLV-001` and `DLV-002`; preparation of the minimum provider-neutral delivery-governance contract, Task Packet and engineering-entry/completion contract, scope and authority controls, role and evidence semantics, verification and independent-review boundaries, bounded recovery and escalation, concurrency and isolation invariants, durable execution-evidence semantics, deterministic documentation verification, and a proposed G6 disposition and review candidate.
+- **Does not authorize:** G6 approval or independent gate disposition; C7; runtime product architecture or architecture decisions; persistence, database, schema, or API design; runtime technology or provider selection; implementation planning or engineering tasks; source code; deployment; or implementation of an orchestration or control-plane system.
+- **Supersedes:** None.
+- **Superseded by:** None.
+
+### GOV-013 — G6 Delivery Governance disposition
+
+- **Question:** Approve `development/DELIVERY_CONTRACT.md` revision 1 and `DLV-001` and `DLV-002` revision 1 as the completed C6 Delivery Governance baseline for G6.
+- **Status:** APPROVED
+- **Decision owner:** `github:hdangprod`
+- **Rationale:** C6 requires an independently reviewable provider-neutral delivery-governance baseline that makes authority, scope, readiness, evidence, review, recovery, escalation, isolation, and completion reconstructible without authorizing engineering work.
+- **Alternatives:** Approve the proposed C6 baseline after independent review; return it for revision; reject it.
+- **Normative dependencies:** `GOV-012`; `GOV-011`; `DLV-001` revision 1; `DLV-002` revision 1; `product/PRODUCT_FOUNDATION.md` revision 1; `development/DELIVERY_CONTRACT.md` revision 1; C6 verification evidence satisfying the C6 and G6 criteria in [FOUNDATION_PROGRAM.md](FOUNDATION_PROGRAM.md).
+- **Affected artifacts:** `development/DELIVERY_CONTRACT.md`, `docs/foundation/DECISIONS.md`, `docs/development/CURRENT.md`, and the artifact-status row in `docs/README.md`.
+- **Approved normative inputs:** `DLV-001` revision 1 and `DLV-002` revision 1 are human-approved inputs to this G6 disposition.
+- **Approved artifact:** `development/DELIVERY_CONTRACT.md`.
+- **Approved revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** Independent review recorded `G6 REVIEW: PASS` against `development/DELIVERY_CONTRACT.md` revision 1, Git blob `0b7bfa2ef21862109e8a45053f7a2106eb00217a`. The human project owner explicitly approved G6 and `development/DELIVERY_CONTRACT.md` revision 1 on 2026-08-09.
+- **C6 verification evidence:**
+  - C6 authorization: PASS — `GOV-012` is human-approved and preserves G6, C7, architecture, engineering, runtime, and control-plane implementation boundaries.
+  - Delivery decisions: PASS — `DLV-001` and `DLV-002` revision 1 record the human-approved responsibility, autonomy, Task Packet, Delivery Record, readiness, completion, review, correction, and provider-neutrality dispositions.
+  - Delivery Contract completeness: PASS — revision 1 defines required responsibilities and capability abstraction; task dependency and lifecycle semantics; Task Packet and role-specific context; risk supplements; DoR and DoD; Delivery Record; deterministic verification and evidence precedence; independent review and findings; correction, failure classification, bounded recovery, escalation, concurrency, isolation, and durable evidence.
+  - Human approval boundary: PASS — Human Reserved Authority is non-bypassable, G6 remains a human decision, and qualitative autonomy cannot create authority.
+  - Provider neutrality: PASS — durable semantics separate responsibility, capability profile, runner, and model or provider; no named runner, model, or provider is normative.
+  - Review independence: PASS — the candidate producer cannot independently provide required final semantic review; review binds to an exact candidate and deterministic evidence.
+  - Task and evidence traceability: PASS — Task Packet dispatch input is distinguishable from the durable Delivery Record, and candidate, verification, review, finding, repair, decision, and completion state are reconstructible without chat history.
+  - Documentation integrity: PASS — required repository-relative links resolve, decision states and revisions are consistent, and changed-file whitespace validation succeeds.
+  - Change scope: PASS — changes are limited to the C6 contract, C6 authorization and decisions, G6 disposition, operational state, and documentation ownership row.
+  - Excluded work: PASS — no runtime architecture, architecture decision, persistence, database, schema, API, technology or provider selection, engineering task, source code, deployment, or control-plane implementation is introduced or authorized.
+- **Independent G6 review:** PASS — independent review recorded `G6 REVIEW: PASS` against the exact Delivery Contract candidate identified above; no G6 gate-blocking findings remain.
+- **Human disposition:** APPROVED — the human project owner approved G6 and `development/DELIVERY_CONTRACT.md` revision 1 on 2026-08-09.
+- **Editorial-only change attestation:** The `docs/README.md` ownership-map update records the authorized creation and approved lifecycle status of the previously reserved Delivery Contract. It changes no documentation-control semantics, topic-authority rule, authorization rule, dependency rule, or approved C1 meaning and therefore does not reopen G1.
+- **Does not authorize:** C7; runtime architecture or architecture decisions; persistence, database, schema, or API design; technology or provider selection; implementation planning or engineering tasks; source code; deployment; control-plane implementation; or runtime work.
+- **Supersedes:** None.
+- **Superseded by:** None.
+
 ## Product definition
 
 ### PRD-001 — Initial user and collaboration boundary
@@ -597,26 +649,40 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 ### DLV-001 — Provider-neutral AI governance
 
 - **Question:** What provider-neutral roles and controls govern reasoning, implementation, review, and escalation?
-- **Status:** DEFERRED
+- **Status:** APPROVED
 - **Decision owner:** `hdangprod`
-- **Rationale:** The seed names Codex and OpenCode examples, but the durable workflow must remain model-independent and is assigned to C6.
-- **Alternatives:** Capability-based roles; provider-specific roles; single-model workflow.
-- **Dependencies:** G5; C6 authorization.
-- **Affected artifacts:** Future `development/DELIVERY_CONTRACT.md`.
-- **Approval evidence:** Deferred to C6.
+- **Rationale:** Interchangeable humans and AI agents require stable responsibility, capability, evidence, independence, recovery, and human-authority semantics that remain valid when runners, models, and providers change. Safe autonomous continuation must be governed by evidence and explicit authority rather than raw model confidence.
+- **Alternatives:** Minimum safe responsibility separation with a qualitative evidence contract; fully granular permanent roles; collapsed delivery responsibilities; a normative numeric autonomy threshold; a hybrid normative threshold; provider-specific roles; a single-model workflow.
+- **Normative dependencies:** `GOV-011`; `GOV-012`; `product/PRODUCT_FOUNDATION.md` revision 1.
+- **Affected artifacts:** `development/DELIVERY_CONTRACT.md`.
+- **Decision:** Use minimum safe, provider-neutral responsibility separation. The durable responsibilities are Delivery Planner / Controller, Builder, Deterministic Verifier, Independent Reviewer, and Human Reserved Authority. Scout is a bounded read-only assignment mode. Adjudication is an exceptional responsibility used only when ordinary planner or reviewer recovery cannot resolve a material semantic, authority, or review dispute. Responsibility separation defines authority and evidence boundaries, not a requirement for a separate process, provider, model, or software service for each responsibility. The producer of a candidate cannot independently provide its required final semantic review. Durable routing separates `RESPONSIBILITY → CAPABILITY PROFILE → RUNNER → MODEL / PROVIDER`; named systems are not delivery authority.
+- **Autonomy decision:** Use a qualitative evidence contract and no normative numeric autonomy threshold. Autonomous continuation is permitted only at the lifecycle point where all applicable authority, scope, dependency, readiness, deterministic-evidence, independent-review, ambiguity, recovery, reversibility, and Human Reserved Authority conditions are satisfied. Numeric confidence or autonomy scores may be non-authoritative routing or calibration signals only; they create no authority, override no failed evidence or human boundary, and no `85%` or other threshold is normative without calibrated operating evidence.
+- **Human Reserved Authority:** Non-bypassable cases include product-scope semantic changes; Foundation or other governance gate approval; architecture approval; security-boundary decisions; irreversible or destructive actions where human approval is required; unresolved conflicts between authoritative sources; unapproved scope expansion; and any decision repository governance explicitly reserves to a human.
+- **Recovery boundary:** Where safe and authorized, bounded recovery may reread canonical authority, gather missing deterministic evidence, use bounded Scout or Reviewer analysis, narrow or split the work contract, and re-evaluate readiness or authority. Blind retry loops are prohibited. Materially identical repeated failure requires diagnosis or reclassification, and recovery must not attempt to bypass Human Reserved Authority.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human project owner explicitly approved minimum safe separation and the qualitative evidence contract with the responsibility, independence, provider-neutrality, autonomy, Human Reserved Authority, bounded-recovery, and no-normative-threshold qualifications recorded in this decision.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
 ### DLV-002 — Delivery packet and engineering completion contract
 
 - **Question:** What engineering Definition of Ready/Done and Task Packet format will govern implementation work?
-- **Status:** DEFERRED
+- **Status:** APPROVED
 - **Decision owner:** `hdangprod`
-- **Rationale:** These delivery artifacts are assigned to C6 and no implementation task is authorized now.
-- **Alternatives:** One standard packet; lighter ad hoc packet; tiered packet by risk.
-- **Dependencies:** G5; C6 authorization.
-- **Affected artifacts:** Future `development/DELIVERY_CONTRACT.md`.
-- **Approval evidence:** Deferred to C6.
+- **Rationale:** Future work needs one reconstructible work-contract model that supplies minimally sufficient dispatch context and separates that input from evidence generated during delivery. Risk may add controls without fragmenting governance into unrelated packet systems.
+- **Alternatives:** One standard core with risk-based supplements; unrelated tiered packet formats; a lighter ad hoc packet.
+- **Normative dependencies:** `GOV-011`; `GOV-012`; `DLV-001`; `product/PRODUCT_FOUNDATION.md` revision 1.
+- **Affected artifacts:** `development/DELIVERY_CONTRACT.md`.
+- **Decision:** Use one common delivery-contract model with a standard minimum Task Packet and a distinguishable durable Delivery Record. Higher-risk work adds controls, evidence, or review to the common contract rather than using unrelated packet systems. The Task Packet contains minimally sufficient dispatch and readiness context: Task ID, objective, normative authority, dependencies, relevant context or resources, allowed and forbidden scope, constraints and invariants, Definition of Done, required verification, risk classification, assigned responsibility and capability profile, Human Reserved Authority boundaries, and prior finding IDs for corrective work where applicable. It requires neither whole conversation transcripts nor unrelated repository history. The Delivery Record contains evidence generated after dispatch, including execution status, exact candidate revision, verification evidence, review result, finding IDs, repair and recheck history, obtained human decisions or approvals, and completion evidence. Future tooling may represent both together, but their information semantics and lifecycle remain distinguishable.
+- **Readiness decision:** A task is Ready only when its objective, normative authority, task authorization, dependencies, scope boundaries, Definition of Done, verification contract, necessary Human Reserved Decisions, and resource or write-conflict controls are sufficient as applicable. A blocked task does not block independent Ready work.
+- **Completion decision:** A task is Done only when applicable authorized scope is complete; no unauthorized expansion is present; deterministic verification passes; required evidence is durable; required review is `REVIEW GREEN` or equivalent; blocking findings are resolved; the reviewed candidate is identifiable; required Human Reserved approvals are recorded; and resulting state is reconstructible without transient conversation history. Builder assertion alone is never completion, and the contract promises `REVIEW GREEN`, not impossible certainty.
+- **Review decision:** Independent review binds to the exact candidate. Structured findings route correction. Bounded fixes without material unrelated semantic change receive targeted recheck; fresh full independent review is required only for material semantic or high-risk change, compromised independence, unresolved disagreement, or an explicit gate requirement.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human project owner explicitly approved the standard core with risk-based supplements and the Task Packet, Delivery Record, readiness, completion, review, correction, and provider-neutrality qualifications recorded in this decision.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
