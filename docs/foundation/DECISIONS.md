@@ -109,57 +109,118 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 - **Supersedes:** None.
 - **Superseded by:** None.
 
+### GOV-004 — C2 Product Intent authorization
+
+- **Question:** Authorize C2 Product Intent under the approved Generation 2 Foundation Program while preserving all later-stage and runtime prohibitions.
+- **Status:** APPROVED
+- **Decision owner:** `github:hdangprod`
+- **Rationale:** G1 is approved and the human owner has explicitly authorized C2 so that a proposed, independently reviewable product-intent baseline can be prepared for G2 without entering C3 or later work.
+- **Alternatives:** Keep C2 unauthorized; authorize C2 within the approved program boundary; authorize a broader stage or runtime scope.
+- **Normative dependencies:** `GOV-002`.
+- **Affected artifacts:** `docs/foundation/DECISIONS.md`, `docs/development/CURRENT.md`, and C2-authorized product-intent materials.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-08.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly authorized C2 Product Intent under the scope, constraints, sequencing rules, and prohibitions of the approved Generation 2 Foundation Program and directed that this authorization be recorded before C2 work begins.
+- **Authorized scope:** C2 product-intent materials and decision-record updates needed to establish a proposed product-intent baseline and decision context for an approved v1 boundary.
+- **Does not authorize:** C3 or any later Foundation stage; scenario-corpus work; domain modeling; runtime architecture; technology or provider selection; implementation planning; runtime source code; deployment; or G2 approval.
+- **Supersedes:** None.
+- **Superseded by:** None.
+
+### GOV-005 — G2 product-intent baseline
+
+- **Question:** Approve `product/PRODUCT_REQUIREMENTS.md` revision 1 as the C2 product-intent baseline for G2.
+- **Status:** APPROVED
+- **Decision owner:** `github:hdangprod`
+- **Rationale:** C2 requires an independently reviewable proposed product-intent baseline whose approved inputs, unresolved decisions, and excluded work are reconstructible from repository artifacts before a human may dispose G2.
+- **Alternatives:** Approve the proposed C2 baseline; return it for revision; reject it.
+- **Normative dependencies:** `GOV-004`; `PRD-001` revision 1; `PRD-002` revision 1; `PRD-003` revision 1; `PRD-004` revision 1; `BEH-003` revision 1; `DATA-001` revision 1; `QLT-001` revision 1; `product/PRODUCT_REQUIREMENTS.md` revision 1; C2 verification evidence satisfying the C2 and G2 criteria in [FOUNDATION_PROGRAM.md](FOUNDATION_PROGRAM.md).
+- **Affected artifacts:** `product/PRODUCT_REQUIREMENTS.md`, `docs/foundation/DECISIONS.md`, `docs/development/CURRENT.md`, and the artifact-status row in `docs/README.md`.
+- **Approved artifact:** `product/PRODUCT_REQUIREMENTS.md`.
+- **Approved revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** Independent review recorded `G2 REVIEW: PASS`. The human owner explicitly approved G2 and `product/PRODUCT_REQUIREMENTS.md` revision 1 on 2026-08-09.
+- **C2 verification evidence:**
+  - C2 authorization: PASS — `GOV-004` is human-approved and preserves all later-stage and runtime prohibitions.
+  - Required C2 decision inputs: PASS — `PRD-001` through `PRD-004`, `BEH-003`, `DATA-001`, and `QLT-001` are human-approved at decision revision 1.
+  - Approved product-intent baseline: PASS — `product/PRODUCT_REQUIREMENTS.md` revision 1 is `CANONICAL / APPROVED` and traces every baseline section to an approved decision.
+  - Unresolved behavior decisions: PASS — `BEH-001`, `BEH-002`, and `BEH-004` remain `OPEN` and their undecided semantics are explicit in the approved baseline.
+  - Excluded later work: PASS — no C3 scenario corpus, domain model, runtime architecture, provider or technology selection, schema, API, implementation plan, runtime source, or deployment artifact was introduced.
+  - Documentation structure: PASS — deterministic relative-link validation succeeds and all product-intent statement IDs are unique.
+  - Change scope: PASS — changes are limited to C2 decision records, the approved C2 product-intent artifact, the operational snapshot, and the documentation-control artifact-status row required to replace its prior `NOT_CREATED` reservation.
+- **Editorial-only change attestation:** The `docs/README.md` ownership-map update records the authorized creation and approved lifecycle status of the previously reserved product-intent artifact. It changes no documentation-control semantics, topic ownership, authorization rule, normative dependency rule, or approved C1 meaning and therefore does not reopen G1.
+- **Does not authorize:** C3 or later Foundation work; scenario-corpus work; domain modeling; runtime architecture; provider or technology selection; schemas; APIs; implementation planning; runtime source code; or deployment.
+- **Supersedes:** None.
+- **Superseded by:** None.
+
 ## Product definition
 
 ### PRD-001 — Initial user and collaboration boundary
 
 - **Question:** Is the initial product for the founder only, a broader single-user audience, or collaborative use?
-- **Status:** OPEN
+- **Status:** APPROVED
 - **Decision owner:** `hdangprod`
 - **Rationale:** The seed uses personal and singular-user language but does not establish the audience boundary.
 - **Alternatives:** Founder-only; broader single-user; collaborative.
-- **Dependencies:** GOV-002.
-- **Affected artifacts:** Future `product/PRODUCT_REQUIREMENTS.md`; future `product/SCENARIOS.md`; future `product/DOMAIN_MODEL.md`.
-- **Approval evidence:** None — unresolved.
+- **Normative dependencies:** `GOV-002`; `GOV-004`.
+- **Affected artifacts:** `product/PRODUCT_REQUIREMENTS.md`; future `product/SCENARIOS.md`; future `product/DOMAIN_MODEL.md`.
+- **Decision:** Founder-only single-user is the initial v1 validation boundary. V1 has one user, no collaboration, no shared ownership, and no multi-user permissions or coordination semantics. Product semantics must use a general single-user concept where sufficient rather than hard-coding the founder's personal identity. Broader single-user applicability may be evaluated later from evidence but is not a v1 requirement.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-08.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly approved alternative A with the boundary clarification recorded in this decision.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
 ### PRD-002 — Exact v1 boundary
 
 - **Question:** What exact v1 outcome, scope, non-goals, and boundary with the Personal Life Operating System vision are approved?
-- **Status:** OPEN
+- **Status:** APPROVED
 - **Decision owner:** `hdangprod`
 - **Rationale:** The Stateful Personal Project & Knowledge Assistant is a seed hypothesis, not an approved scope.
 - **Alternatives:** Narrow project-and-knowledge assistant; project-management-only product; broader Life OS scope.
-- **Dependencies:** GOV-002; PRD-001.
-- **Affected artifacts:** Future `product/PRODUCT_REQUIREMENTS.md`; future `product/SCENARIOS.md`.
-- **Approval evidence:** None — unresolved.
+- **Normative dependencies:** `GOV-002`; `GOV-004`; `PRD-001`.
+- **Affected artifacts:** `product/PRODUCT_REQUIREMENTS.md`; future `product/SCENARIOS.md`.
+- **Decision:** Liam v1 is a narrow project-and-knowledge assistant for helping the user move active projects forward, preserve enough project and work context to resume without mentally reconstructing it, capture and retrieve useful knowledge generated during project execution, and determine a concrete useful next action. The broader Personal Life Operating System is a long-term direction and is outside the v1 boundary.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-08.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly approved alternative A and the outcome, scope, and non-goal boundary recorded in this decision.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
 ### PRD-003 — Product usefulness and success criteria
 
 - **Question:** What outcomes and evidence demonstrate that v1 is useful?
-- **Status:** OPEN
+- **Status:** APPROVED
 - **Decision owner:** `hdangprod`
 - **Rationale:** The seed states an aspiration to reduce mental load but supplies no approval metric.
 - **Alternatives:** Behavioral outcomes; usage measures; a combined outcome-and-usage baseline.
-- **Dependencies:** PRD-001; PRD-002.
-- **Affected artifacts:** Future `product/PRODUCT_REQUIREMENTS.md`; future `product/SCENARIOS.md`.
-- **Approval evidence:** None — unresolved.
+- **Normative dependencies:** `GOV-004`; `PRD-001`; `PRD-002`.
+- **Affected artifacts:** `product/PRODUCT_REQUIREMENTS.md`; future `product/SCENARIOS.md`.
+- **Decision:** V1 uses a combined, outcome-led usefulness baseline. Primary usefulness is demonstrated by whether the user can resume active work without manually reconstructing important context, determine a concrete next useful action, capture relevant project knowledge with low friction, and retrieve that knowledge later when relevant. Usage metrics may support this evidence but usage alone is not proof of usefulness.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-08.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly approved alternative C and the four primary usefulness outcomes recorded in this decision.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
 ### PRD-004 — Language and interaction needs
 
 - **Question:** Which user languages and interaction needs belong in v1?
-- **Status:** OPEN
+- **Status:** APPROVED
 - **Decision owner:** `hdangprod`
 - **Rationale:** The seed includes Vietnamese requests while repository documents are English and no interaction boundary is approved.
 - **Alternatives:** Vietnamese-first; English-first; bilingual; one interaction surface; multiple interaction surfaces.
-- **Dependencies:** PRD-001; PRD-002.
-- **Affected artifacts:** Future `product/PRODUCT_REQUIREMENTS.md`; future `product/SCENARIOS.md`.
-- **Approval evidence:** None — unresolved.
+- **Normative dependencies:** `GOV-004`; `PRD-001`; `PRD-002`.
+- **Affected artifacts:** `product/PRODUCT_REQUIREMENTS.md`; future `product/SCENARIOS.md`.
+- **Decision:** V1 supports Vietnamese and English through one coherent text-based conversational experience. This decision selects no channel, application, provider, protocol, or technology. Multiple interaction surfaces are outside the current v1 boundary unless later evidence requires them.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-08.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly approved alternative A with the interaction and technology-neutral boundaries recorded in this decision.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
@@ -173,7 +234,7 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 - **Rationale:** The seed explicitly requires validation of the initial conceptual hierarchy.
 - **Alternatives:** Mandatory hierarchy; optional levels; separate Milestone and Phase concepts; one shared Milestone/Phase concept.
 - **Dependencies:** PRD-002; VAL-001.
-- **Affected artifacts:** Future `product/DOMAIN_MODEL.md`; future `product/SCENARIOS.md`; future `product/PRODUCT_REQUIREMENTS.md`.
+- **Affected artifacts:** Future `product/DOMAIN_MODEL.md`; future `product/SCENARIOS.md`; `product/PRODUCT_REQUIREMENTS.md`.
 - **Approval evidence:** None — unresolved.
 - **Supersedes:** None.
 - **Superseded by:** None.
@@ -212,7 +273,7 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 - **Rationale:** The v1 direction emphasizes project execution while retrieval examples imply reusable historical knowledge.
 - **Alternatives:** Project-bound; globally reusable; project-originated with controlled cross-project reuse.
 - **Dependencies:** PRD-002; MOD-003; VAL-001.
-- **Affected artifacts:** Future `product/DOMAIN_MODEL.md`; future `product/SCENARIOS.md`; future `product/PRODUCT_REQUIREMENTS.md`.
+- **Affected artifacts:** Future `product/DOMAIN_MODEL.md`; future `product/SCENARIOS.md`; `product/PRODUCT_REQUIREMENTS.md`.
 - **Approval evidence:** None — unresolved.
 - **Supersedes:** None.
 - **Superseded by:** None.
@@ -227,7 +288,7 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 - **Rationale:** The seed requires preserved context but does not define its authority or correction semantics.
 - **Alternatives:** Explicit user selection; inferred context; hybrid selection with user correction.
 - **Dependencies:** PRD-002; MOD-001; MOD-002.
-- **Affected artifacts:** Future `product/PRODUCT_REQUIREMENTS.md`; future `product/DOMAIN_MODEL.md`; future `product/SCENARIOS.md`.
+- **Affected artifacts:** `product/PRODUCT_REQUIREMENTS.md`; future `product/DOMAIN_MODEL.md`; future `product/SCENARIOS.md`.
 - **Approval evidence:** None — unresolved.
 - **Supersedes:** None.
 - **Superseded by:** None.
@@ -240,7 +301,7 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 - **Rationale:** The seed cites time, energy, priority, dependencies, and lateness without a policy for reconciling them.
 - **Alternatives:** User-ranked rules; system scoring; advisory shortlist with human selection.
 - **Dependencies:** PRD-002; MOD-002; BEH-001; VAL-001.
-- **Affected artifacts:** Future `product/PRODUCT_REQUIREMENTS.md`; future `product/SCENARIOS.md`.
+- **Affected artifacts:** `product/PRODUCT_REQUIREMENTS.md`; future `product/SCENARIOS.md`.
 - **Approval evidence:** None — unresolved.
 - **Supersedes:** None.
 - **Superseded by:** None.
@@ -248,13 +309,19 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 ### BEH-003 — Minimum v1 capability map
 
 - **Question:** Which observable user capabilities are required for v1?
-- **Status:** OPEN
+- **Status:** APPROVED
 - **Decision owner:** `hdangprod`
 - **Rationale:** The seed lists potential behaviors but marks exact scope and capability map unresolved.
 - **Alternatives:** Planning-first set; knowledge-first set; balanced project-and-knowledge set.
-- **Dependencies:** PRD-002; PRD-003; VAL-001.
-- **Affected artifacts:** Future `product/PRODUCT_REQUIREMENTS.md`; future `product/SCENARIOS.md`.
-- **Approval evidence:** None — unresolved.
+- **Normative dependencies:** `GOV-004`; `PRD-002`; `PRD-003`.
+- **Downstream validation dependency:** `VAL-001` must later define acceptance evidence for these capabilities under separately authorized C3 work; it is not a prerequisite to this product-intent decision.
+- **Affected artifacts:** `product/PRODUCT_REQUIREMENTS.md`; future `product/SCENARIOS.md`.
+- **Decision:** V1 uses a balanced, outcome-aligned minimum capability map: establish an active project and its intended outcome; preserve progress and enough working context for the user to resume without manually reconstructing important context; refine immediate work into concrete actions and help identify a useful next action; capture useful project knowledge with low friction; and retrieve relevant captured knowledge during later project work.
+- **Boundary:** This decision defines observable product capabilities only. It does not decide project hierarchy semantics, entity lifecycles, active or current context selection, recommendation scoring or precedence, or confirmation requirements for state-changing actions. Those remain owned by their later or open decisions.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-08.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly approved alternative C with the capability map and boundary recorded in this decision.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
@@ -266,7 +333,7 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 - **Rationale:** The seed preserves human judgment for important actions without defining the boundary.
 - **Alternatives:** Advise-only; draft changes with confirmation; bounded automatic state changes.
 - **Dependencies:** PRD-002; BEH-001; BEH-002; DATA-001.
-- **Affected artifacts:** Future `product/PRODUCT_REQUIREMENTS.md`; future `product/SCENARIOS.md`.
+- **Affected artifacts:** `product/PRODUCT_REQUIREMENTS.md`; future `product/SCENARIOS.md`.
 - **Approval evidence:** None — unresolved.
 - **Supersedes:** None.
 - **Superseded by:** None.
@@ -274,13 +341,18 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 ### DATA-001 — Data-control policy
 
 - **Question:** What privacy, retention, deletion, export, and sensitive-domain policy applies to v1?
-- **Status:** OPEN
+- **Status:** APPROVED
 - **Decision owner:** `hdangprod`
 - **Rationale:** The long-term vision includes potentially sensitive domains while privacy and retention remain unresolved.
 - **Alternatives:** User-directed retention; policy-based retention; hybrid controls with explicit sensitive-domain exclusions.
-- **Dependencies:** PRD-001; PRD-002; PRD-004.
-- **Affected artifacts:** Future `product/PRODUCT_REQUIREMENTS.md`; future `product/SCENARIOS.md`.
-- **Approval evidence:** None — unresolved.
+- **Normative dependencies:** `GOV-004`; `PRD-001`; `PRD-002`; `PRD-004`.
+- **Affected artifacts:** `product/PRODUCT_REQUIREMENTS.md`; future `product/SCENARIOS.md`.
+- **Decision:** V1 uses a hybrid data-control policy. The user decides what information to intentionally capture. Accepted captured data is retained predictably until the user deletes it or otherwise directs its removal. User-controlled deletion and export are required product capabilities. User data must not be silently repurposed outside Liam's approved product function. Credentials, authentication secrets, private keys, access tokens, and equivalent authentication material are outside the intended v1 capture boundary. Liam must not represent itself as a medical, legal, or financial authority. Ordinary project information is not automatically prohibited merely because a project concerns health, fitness, personal finance, or another potentially sensitive domain.
+- **Boundary:** This decision establishes product-level data expectations only. It does not select storage, encryption, retention implementation, authentication mechanisms, providers, schemas, or other technical controls.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-08.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly approved alternative C with the data-control policy and technology-neutral boundary recorded in this decision.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
@@ -294,7 +366,7 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 - **Rationale:** The seed calls for a larger Golden Dataset but its scope and acceptance role are unresolved.
 - **Alternatives:** Founder scenarios; broader research scenarios; combined corpus with scenario IDs and semantic expected outcomes.
 - **Dependencies:** PRD-001; PRD-002.
-- **Affected artifacts:** Future `product/SCENARIOS.md`; future `product/PRODUCT_REQUIREMENTS.md`; future `product/DOMAIN_MODEL.md`.
+- **Affected artifacts:** Future `product/SCENARIOS.md`; `product/PRODUCT_REQUIREMENTS.md`; future `product/DOMAIN_MODEL.md`.
 - **Approval evidence:** None — unresolved.
 - **Supersedes:** None.
 - **Superseded by:** None.
@@ -302,13 +374,18 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 ### QLT-001 — Technology-neutral quality constraints
 
 - **Question:** What user-significant scale, reliability, failure, operability, and testability constraints must inform later architecture?
-- **Status:** OPEN
+- **Status:** APPROVED
 - **Decision owner:** `hdangprod`
 - **Rationale:** The seed identifies testing and observability as unresolved but does not state product-level constraints.
 - **Alternatives:** Reliability-first constraints; responsiveness-first constraints; balanced constraints based on approved v1 use.
-- **Dependencies:** PRD-002; PRD-003; BEH-003; DATA-001.
-- **Affected artifacts:** Future `product/PRODUCT_REQUIREMENTS.md`; future `product/SCENARIOS.md`.
-- **Approval evidence:** None — unresolved.
+- **Normative dependencies:** `GOV-004`; `PRD-002`; `PRD-003`; `BEH-003`; `DATA-001`.
+- **Affected artifacts:** `product/PRODUCT_REQUIREMENTS.md`; future `product/SCENARIOS.md`.
+- **Decision:** V1 uses balanced, reliability-weighted quality constraints. It is optimized for one user's accumulated project and knowledge history, with no multi-user or market-scale requirement. An accepted capture or state change must not be silently lost or falsely reported as successful. Failures must be visible and preserve enough of the user's intent or input to allow safe recovery or retry where applicable. Uncertain retrieval or recommendation results must expose meaningful uncertainty and remain correctable by the user. Routine text interaction should remain conversationally usable, but no arbitrary latency service-level objective is set before evidence exists. All required v1 capabilities must eventually have observable pass/fail acceptance evidence. When responsiveness conflicts with preservation, correctness, or recoverability, the latter qualities take precedence.
+- **Boundary:** This decision is technology-neutral and does not select implementation or testing mechanisms.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-08.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly approved alternative C with the quality constraints and technology-neutral boundary recorded in this decision.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
@@ -320,7 +397,7 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 - **Rationale:** Roadmap and release sequencing cannot be defined until the v1 product boundary is approved.
 - **Alternatives:** No roadmap until v1 approval; milestone roadmap; release roadmap.
 - **Dependencies:** PRD-002; PRD-003.
-- **Affected artifacts:** Future `product/PRODUCT_REQUIREMENTS.md`; `docs/development/CURRENT.md`.
+- **Affected artifacts:** `product/PRODUCT_REQUIREMENTS.md`; `docs/development/CURRENT.md`.
 - **Approval evidence:** Deferred until `PRD-002` is approved.
 - **Supersedes:** None.
 - **Superseded by:** None.
