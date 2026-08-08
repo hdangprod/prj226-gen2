@@ -250,6 +250,55 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 - **Supersedes:** None.
 - **Superseded by:** None.
 
+### GOV-010 — C5 Product Foundation Baseline authorization
+
+- **Question:** Authorize C5 Product Foundation Baseline under the approved Generation 2 Foundation Program while preserving G5, C6, later-stage, architecture, delivery, and runtime boundaries.
+- **Status:** APPROVED
+- **Decision owner:** `github:hdangprod`
+- **Rationale:** G4 and the Domain Model revision 1 are approved, and the human owner has explicitly authorized C5 so that the approved product-intent, scenario, domain, data-control, quality, and validation evidence can be reconciled into the minimum coherent proposed Product Foundation Baseline without entering solution design or later-stage work.
+- **Alternatives:** Keep C5 unauthorized; authorize C5 within the approved program boundary; authorize a broader stage or runtime scope.
+- **Normative dependencies:** `GOV-009`; `product/PRODUCT_REQUIREMENTS.md` revision 1; `product/SCENARIOS.md` revision 1; `product/DOMAIN_MODEL.md` revision 1; `VAL-001` revision 1.
+- **Affected artifacts:** `docs/foundation/DECISIONS.md`, `docs/development/CURRENT.md`, `docs/README.md`, and C5-authorized baseline and traceability materials.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human project owner explicitly authorized “C5 — Product Foundation Baseline” under the scope, dependencies, exit criteria, and prohibitions of the approved Generation 2 Foundation Program and directed that this authorization be recorded durably before C5 work begins.
+- **Authorized scope:** Reconciliation of approved Product Intent revision 1, Scenario Corpus revision 1, Domain Model revision 1, approved product, behavior, model, data-control, validation, and quality decisions into the minimum coherent proposed Product Foundation Baseline; foundation traceability; contradiction, gap, unresolved-decision, and boundary classification; deterministic documentation verification; and preparation of a proposed G5 disposition and review candidate.
+- **Does not authorize:** G5 approval or independent gate disposition; C6 or C7; runtime architecture or architecture decisions; persistence, database, schema, or API design; provider or technology selection; delivery governance; implementation planning or engineering tasks; deployment; runtime source code; or any claim that C5 defines solution architecture.
+- **Supersedes:** None.
+- **Superseded by:** None.
+
+### GOV-011 — G5 Product Foundation Baseline disposition
+
+- **Question:** Approve `product/PRODUCT_FOUNDATION.md` revision 1 as the completed C5 Product Foundation Baseline for G5.
+- **Status:** APPROVED
+- **Decision owner:** `github:hdangprod`
+- **Rationale:** C5 requires an independently reviewable reconciliation of the approved Product Intent, Scenario Corpus, Domain Model, data-control, validation, and quality evidence before a human may dispose G5.
+- **Alternatives:** Approve the proposed C5 baseline; return it for revision; reject it.
+- **Normative dependencies:** `GOV-010`; `PRD-001` revision 1; `PRD-002` revision 1; `PRD-003` revision 1; `PRD-004` revision 1; `BEH-001` revision 1; `BEH-002` revision 1; `BEH-003` revision 1; `BEH-004` revision 1; `MOD-001` revision 1; `MOD-002` revision 1; `MOD-003` revision 1; `MOD-004` revision 1; `DATA-001` revision 1; `VAL-001` revision 1; `QLT-001` revision 1; `product/PRODUCT_REQUIREMENTS.md` revision 1; `product/SCENARIOS.md` revision 1; `product/DOMAIN_MODEL.md` revision 1; `product/PRODUCT_FOUNDATION.md` revision 1; C5 verification evidence satisfying the C5 and G5 criteria in [FOUNDATION_PROGRAM.md](FOUNDATION_PROGRAM.md).
+- **Affected artifacts:** `product/PRODUCT_FOUNDATION.md`, `docs/foundation/DECISIONS.md`, `docs/development/CURRENT.md`, and the artifact-status row in `docs/README.md`.
+- **Approved decision revision:** 1.
+- **Approved artifact:** `product/PRODUCT_FOUNDATION.md`.
+- **Approved revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** Independent review recorded `G5 REVIEW: PASS`. The human owner explicitly approved G5 and `product/PRODUCT_FOUNDATION.md` revision 1 on 2026-08-09.
+- **C5 verification evidence:**
+  - C5 authorization: PASS — `GOV-010` is human-approved and preserves G5, C6, later-stage, architecture, delivery, implementation, and runtime boundaries.
+  - Approved foundation inputs: PASS — Product Intent revision 1, Scenario Corpus revision 1, Domain Model revision 1, `VAL-001` revision 1, and every required PRD, BEH, MOD, DATA, and QLT decision are human-approved.
+  - Internal reconciliation: PASS — all required product-boundary, usefulness, capability, vocabulary, lifecycle, context, recommendation, knowledge, human-control, data-control, and quality dimensions reconcile without an actual contradiction.
+  - Traceability: PASS — every `PF-*` foundation statement traces semantically to approved decisions and applicable Product Intent, scenario, and Domain Model evidence.
+  - Unresolved decisions: PASS — no decision record is `OPEN`; `PLAN-001`, `DLV-001`, `DLV-002`, and `ARC-001` through `ARC-006` remain explicitly `DEFERRED`, unnecessary for C5, and assigned to later separately authorized work.
+  - Documentation integrity: PASS — approved artifact revisions and decision states are valid, required repository-relative links resolve, referenced decision, Product Intent, scenario, invariant, and foundation IDs exist, and changed-file whitespace validation succeeds.
+  - Change scope: PASS — changed paths are limited to the C5 baseline, C5 authorization and G5 disposition records, the operational snapshot, and the documentation ownership row.
+  - Excluded later work: PASS — no architecture, persistence, database, schema, API, provider, technology, delivery-governance, implementation-plan, engineering-task, runtime-source, or deployment artifact is introduced.
+- **Independent G5 review:** PASS — independent review recorded `G5 REVIEW: PASS` with no G5 gate-blocking findings.
+- **Human disposition:** APPROVED — the human owner approved G5 and `product/PRODUCT_FOUNDATION.md` revision 1 on 2026-08-09.
+- **Editorial-only change attestation:** The `docs/README.md` ownership-map update records the authorized creation and approved lifecycle status of the C5 baseline. It changes no documentation-control semantics, topic-authority rule, authorization rule, dependency rule, or approved C1 meaning and therefore does not reopen G1.
+- **Does not authorize:** C6 or C7; architecture; persistence, database, schema, or API design; provider or technology selection; delivery governance; implementation planning or engineering tasks; deployment; or runtime source code.
+- **Supersedes:** None.
+- **Superseded by:** None.
+
 ## Product definition
 
 ### PRD-001 — Initial user and collaboration boundary

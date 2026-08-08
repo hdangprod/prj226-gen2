@@ -20,6 +20,8 @@
 - **G3 — Scenario and Acceptance Evidence:** APPROVED BY HUMAN
 - **C4 — Domain and Lifecycle Semantics:** COMPLETE
 - **G4 — Domain Model:** APPROVED BY HUMAN
+- **C5 — Product Foundation Baseline:** COMPLETE
+- **G5 — Product Foundation Baseline:** APPROVED BY HUMAN
 - **Runtime architecture design:** NOT AUTHORIZED (PROHIBITED)
 - **Runtime implementation:** NOT AUTHORIZED (PROHIBITED)
 
@@ -43,25 +45,30 @@
 - **C4 verification:** PASS — all required C4 decisions are human-approved; the minimum domain model traces to approved Product Intent and all 12 scenarios; required files, sections, links, decision fields, and whitespace validate; change scope is C4-only; and no runtime or later-stage artifact was introduced.
 - **C1 baseline:** [Foundation Program](../foundation/FOUNDATION_PROGRAM.md), [documentation control plane](../README.md), [decision register](../foundation/DECISIONS.md), [AGENTS.md](../../AGENTS.md), [README.md](../../README.md), and [FOUNDATION_SEED.md](../../FOUNDATION_SEED.md).
 - **G4 disposition:** `GOV-009` is APPROVED by the human owner on 2026-08-09. The original independent review returned `G4 REVIEW: NEEDS FIX` with `G4-F001` and `G4-F002`; both were corrected, and the same reviewer returned `G4 TARGETED RECHECK: PASS`. No G4 blockers remain.
+- **C5 authorization:** `GOV-010` is APPROVED by the human owner. It authorizes only C5 reconciliation, baseline, traceability, decision-record, and verification work and preserves G5, C6, later-stage, architecture, delivery, implementation, and runtime prohibitions.
+- **C5 approved baseline:** [Liam v1 Product Foundation Baseline, revision 1](../../product/PRODUCT_FOUNDATION.md) is `CANONICAL / APPROVED` through human G5 disposition `GOV-011`. It reconciles the approved Product Intent, Scenario Corpus, Domain Model, product, behavior, model, data-control, validation, and quality evidence without replacing their detailed topic authority.
+- **C5 reconciliation:** PASS — independent G5 review found no actual contradiction, required new C5 product decision, or G5 gate blocker; all missing C5 connections are reconciled, and intentionally unmodeled semantics and all nine deferred decision records remain explicit.
+- **C5 verification:** PASS — approved inputs, statuses, revisions, repository-relative links, referenced IDs, traceability, change scope, whitespace, and excluded-work boundaries validate.
+- **G5 disposition:** `GOV-011` is `APPROVED` by the human owner on 2026-08-09. Independent evidence recorded `G5 REVIEW: PASS`; no G5 blockers remain. G5 approval approves C5 and `product/PRODUCT_FOUNDATION.md` revision 1 only.
 
 ## Authorized work
 
-C4 — Domain and Lifecycle Semantics is complete. `GOV-009` records the human G4 approval of `product/DOMAIN_MODEL.md` revision 1 after the independent review and targeted recheck. C5 remains separately unauthorized.
+C5 — Product Foundation Baseline is complete through human G5 disposition `GOV-011`, which approves `product/PRODUCT_FOUNDATION.md` revision 1. C6 is the next planned stage and remains separately unauthorized.
 
 This snapshot reflects authorization recorded in approved governance artifacts; it does not create, extend, or approve authorization.
 
-**Current stage state:** C4 — Domain and Lifecycle Semantics — COMPLETE / G4 APPROVED BY HUMAN
+**Current stage state:** C5 — Product Foundation Baseline — COMPLETE / G5 APPROVED BY HUMAN
 
-**Next planned stage:** C5 — Product Foundation Baseline
-**Authorization:** NOT AUTHORIZED
+**Next planned stage:** C6 — Delivery Governance
+**Authorization:** NOT AUTHORIZED — C6 requires separate explicit human authorization.
 **Preconditions:**
 
-- G4 approved through `GOV-009` — satisfied.
-- Explicit human authorization for C5 — not recorded.
+- G5 approved through `GOV-011` — satisfied.
+- Explicit human authorization for C6 — not recorded.
 
-**Corresponding gate:** G4 — Domain Model — APPROVED BY HUMAN through `GOV-009`.
+**Corresponding gate:** G5 — Product Foundation Baseline — APPROVED BY HUMAN through `GOV-011`.
 
-**C5–C7:** NOT AUTHORIZED.
+**C6–C7:** NOT AUTHORIZED.
 
 ## Explicit prohibitions
 
@@ -70,6 +77,6 @@ This snapshot reflects authorization recorded in approved governance artifacts; 
 - Do not choose databases, persistence technologies, Cloudflare services, frameworks, MCP providers, or LLM providers.
 - Do not create schemas, ADRs, implementation tasks, or speculative placeholder documents.
 - Do not resolve product, architecture, technology, or G1-approval decisions without the human owner.
-- Do not begin C5 or any later Foundation stage.
+- Do not begin C6 or any later Foundation stage.
 
 For document authority and reading order, use [docs/README.md](../README.md). For stages, gates, and eligibility, use the [Foundation Program](../foundation/FOUNDATION_PROGRAM.md). For all open and deferred decisions, use [DECISIONS.md](../foundation/DECISIONS.md).
