@@ -332,7 +332,7 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 - **Approved revision:** 1.
 - **Approved on:** 2026-08-09.
 - **Approved by:** `github:hdangprod`.
-- **Approval evidence:** Independent review recorded `G6 REVIEW: PASS` against `development/DELIVERY_CONTRACT.md` revision 1, Git blob `0b7bfa2ef21862109e8a45053f7a2106eb00217a`. The human project owner explicitly approved G6 and `development/DELIVERY_CONTRACT.md` revision 1 on 2026-08-09.
+- **Approval evidence:** The originally recorded `G6 REVIEW: PASS` candidate blob `0b7bfa2ef21862109e8a45053f7a2106eb00217a` is unavailable and is not relied upon as sole evidence for the current authoritative artifact; no identity or semantic-equivalence claim is made between that missing blob and the current artifact. A supplemental independent G6 review against `development/DELIVERY_CONTRACT.md` revision 1, exact Git blob `5c23c9d9224575466f20e3ca26949c1bbf86ffc0`, returned `G6 SUPPLEMENTAL REVIEW: PASS`. The current authoritative Delivery Contract revision 1 therefore has independently reconstructible G6 review evidence. The human project owner explicitly approved G6 and `development/DELIVERY_CONTRACT.md` revision 1 on 2026-08-09.
 - **C6 verification evidence:**
   - C6 authorization: PASS — `GOV-012` is human-approved and preserves G6, C7, architecture, engineering, runtime, and control-plane implementation boundaries.
   - Delivery decisions: PASS — `DLV-001` and `DLV-002` revision 1 record the human-approved responsibility, autonomy, Task Packet, Delivery Record, readiness, completion, review, correction, and provider-neutrality dispositions.
@@ -344,10 +344,66 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
   - Documentation integrity: PASS — required repository-relative links resolve, decision states and revisions are consistent, and changed-file whitespace validation succeeds.
   - Change scope: PASS — changes are limited to the C6 contract, C6 authorization and decisions, G6 disposition, operational state, and documentation ownership row.
   - Excluded work: PASS — no runtime architecture, architecture decision, persistence, database, schema, API, technology or provider selection, engineering task, source code, deployment, or control-plane implementation is introduced or authorized.
-- **Independent G6 review:** PASS — independent review recorded `G6 REVIEW: PASS` against the exact Delivery Contract candidate identified above; no G6 gate-blocking findings remain.
+- **Independent G6 review:** PASS — the originally recorded candidate blob is unavailable and is not asserted to be identical or semantically equivalent to the current artifact. Supplemental independent review recorded `G6 SUPPLEMENTAL REVIEW: PASS` against exact current Delivery Contract blob `5c23c9d9224575466f20e3ca26949c1bbf86ffc0`; no G6 gate-blocking findings remain.
 - **Human disposition:** APPROVED — the human project owner approved G6 and `development/DELIVERY_CONTRACT.md` revision 1 on 2026-08-09.
 - **Editorial-only change attestation:** The `docs/README.md` ownership-map update records the authorized creation and approved lifecycle status of the previously reserved Delivery Contract. It changes no documentation-control semantics, topic-authority rule, authorization rule, dependency rule, or approved C1 meaning and therefore does not reopen G1.
 - **Does not authorize:** C7; runtime architecture or architecture decisions; persistence, database, schema, or API design; technology or provider selection; implementation planning or engineering tasks; source code; deployment; control-plane implementation; or runtime work.
+- **Supersedes:** None.
+- **Superseded by:** None.
+
+### GOV-014 — C7 Engineering-Entry Readiness authorization
+
+- **Question:** Authorize C7 Engineering-Entry Readiness under the approved Generation 2 Foundation Program while preserving G7, architecture, engineering, implementation, and runtime boundaries.
+- **Status:** APPROVED
+- **Decision owner:** `github:hdangprod`
+- **Rationale:** G6 and the Delivery Contract revision 1 are approved, and the human project owner has explicitly authorized C7 to determine whether the approved foundation and delivery governance are sufficiently complete, bounded, reconstructible, and clean-context ready for a later separately authorized architecture or engineering assignment.
+- **Alternatives:** Keep C7 unauthorized; authorize C7 within the approved program boundary; authorize a broader stage, architecture, engineering, implementation, or runtime scope.
+- **Normative dependencies:** `GOV-013`; `GOV-011`; `product/PRODUCT_FOUNDATION.md` revision 1; `development/DELIVERY_CONTRACT.md` revision 1.
+- **Affected artifacts:** `docs/foundation/DECISIONS.md`, `docs/development/CURRENT.md`, `docs/README.md`, and C7-authorized readiness evidence or gap records.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human project owner explicitly authorized “C7 — Engineering-Entry Readiness” under the scope, dependencies, exit criteria, and prohibitions of the approved Generation 2 Foundation Program and directed that this authorization be recorded durably before C7 work begins.
+- **Authorized inputs:** Approved repository documentation governance; `product/PRODUCT_FOUNDATION.md` revision 1 and its applicable approved dependencies; `development/DELIVERY_CONTRACT.md` revision 1; the approved Foundation Program and decision register; and the current operational state.
+- **Authorized scope:** Clean-context and clean-room reconstructibility assessment; authority, product-foundation, evidence, delivery, human-control, deferred-decision, scope, and repository-hygiene readiness assessment; readiness classification and smallest-valid-correction gap records; deterministic documentation verification; and preparation of a proposed G7 disposition and review candidate.
+- **Does not authorize:** G7 approval or independent gate disposition; runtime architecture design or architecture approval; architecture decisions; persistence, database, schema, or API design; technology, provider, or deployment selection; implementation planning or engineering tasks; source code; deployment; control-plane implementation; or any post-Foundation work.
+- **Supersedes:** None.
+- **Superseded by:** None.
+
+### GOV-015 — G7 Engineering-Entry Readiness disposition
+
+- **Question:** Approve C7 Engineering-Entry Readiness evidence revision 1 as satisfying the C7 exit criteria and complete the Generation 2 Foundation at G7 without authorizing post-Foundation work.
+- **Status:** APPROVED
+- **Decision owner:** `github:hdangprod`
+- **Rationale:** C7 requires independently reviewable evidence that a clean-context worker can reconstruct the approved product contract, delivery contract, authority boundary, deferred decisions, and next authorizable boundary without prior chat or invented product, delivery, architecture, or implementation semantics.
+- **Alternatives:** Approve G7 after independent review; return the C7 evidence for bounded correction; reject the proposed readiness disposition.
+- **Normative dependencies:** `GOV-014`; `GOV-013`; `GOV-011`; `product/PRODUCT_FOUNDATION.md` revision 1; `development/DELIVERY_CONTRACT.md` revision 1; `docs/development/ENGINEERING_ENTRY_READINESS.md` evidence revision 1; C7 verification evidence satisfying the C7 and G7 criteria in [FOUNDATION_PROGRAM.md](FOUNDATION_PROGRAM.md).
+- **Affected artifacts:** `docs/development/ENGINEERING_ENTRY_READINESS.md`, `docs/foundation/DECISIONS.md`, and `docs/development/CURRENT.md`.
+- **Approved C7 evidence:** `docs/development/ENGINEERING_ENTRY_READINESS.md` evidence revision 1, Git blob `91cd6d59adcec17caf6935a07e694650edb20753`. This `DERIVED / ACTIVE` evidence remains non-authoritative; its acceptance as G7 evidence is recorded by this decision.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The original independent G7 review returned `G7 REVIEW: NEEDS FIX` with `G7-F001` (current Delivery Contract review pedigree was not reconstructible) and `G7-F002` (readiness item 21 incorrectly stated a brittle Task Packet field count). A supplemental independent review returned `G6 SUPPLEMENTAL REVIEW: PASS` against current Delivery Contract revision 1, exact Git blob `5c23c9d9224575466f20e3ca26949c1bbf86ffc0`. The bounded C7 repair preserved the approved product and delivery semantics, repaired the pedigree record, and made item 21 defer to the canonical Task Packet table. The targeted independent recheck returned `G7 TARGETED RECHECK: PASS`, resolving `G7-F001` and `G7-F002`. The human owner then explicitly approved G7, C7 evidence revision 1 identified above, and completion of the Generation 2 Foundation Program. Deterministic verification and review evidence do not themselves approve G7.
+- **C7 verification evidence:**
+  - C7 authorization: PASS — `GOV-014` records explicit human C7 authorization after G6 approval and preserves all G7, architecture, engineering, implementation, and runtime boundaries.
+  - Required reading path: PASS — `README.md` → `AGENTS.md` → `docs/README.md` → `docs/development/CURRENT.md` resolves and routes the worker to current canonical authority.
+  - Artifact authority and lifecycle: PASS — the Foundation Program, decision register, Product Foundation revision 1, and Delivery Contract revision 1 are `CANONICAL / APPROVED`; this C7 evidence is `DERIVED / ACTIVE` and makes no competing authority claim.
+  - Product readiness: PASS — the Product Foundation directly or validly reconciles the v1 boundary, outcomes, capabilities, canonical vocabulary, lifecycles, context and inference boundary, recommendation, knowledge, human control, data control, quality, and intentional omissions.
+  - Evidence traceability: PASS — Product Foundation statements trace to approved decisions and applicable Product Intent, Scenario Corpus, and Domain Model evidence.
+  - Delivery readiness: PASS — Delivery Contract revision 1, exact Git blob `5c23c9d9224575466f20e3ca26949c1bbf86ffc0`, has independently reconstructible G6 review evidence through `G6 SUPPLEMENTAL REVIEW: PASS`; it defines responsibilities, provider-neutral capability abstraction, Task Packet and Delivery Record semantics, DoR, DoD, verification and evidence precedence, independent review, correction and recheck, Human Reserved Authority, bounded recovery and escalation, isolation, concurrency, and durable-state requirements. The unavailable originally recorded blob `0b7bfa2ef21862109e8a45053f7a2106eb00217a` is not treated as sole reconstructible evidence and is not asserted identical or semantically equivalent.
+  - Decision states: PASS — every C1–C6-required decision is final and approved; no record is `OPEN`; only `PLAN-001` and `ARC-001` through `ARC-006` are `DEFERRED`, and their later boundaries are reconstructible without resolving them.
+  - Clean-context simulation: PASS — all 35 entry questions are classified `R1`, `R2`, or legitimate `R3`; no answer is `R4` or dependent on prior chat.
+  - Readiness dimensions: PASS — authority, product, evidence, delivery, human-control, deferred-decision, clean-context, and scope readiness are all `READY`.
+  - Clean-room interpretation: PASS — product contract, delivery contract, authority boundary, deferred decisions, and next authorizable work reconcile without a material alternate interpretation.
+  - Post-G7 boundary: PASS — G7/Foundation completion does not authorize architecture or engineering; architecture requires a separate scoped human authorization and human approval, and engineering requires its own applicable authorization and Delivery Contract readiness.
+  - Repository-relative links: PASS — all local Markdown links in repository Markdown artifacts resolve.
+  - Repository hygiene: PASS — no inaccessible normative dependency, machine-local authority reference, conflicting lifecycle metadata, authority-relevant stale current-state claim, or unresolved ownership conflict was found. Chronologically stale “pending G5” wording in deferred records is `EDITORIAL_NON_BLOCKING` because controlling states and later boundaries remain unambiguous.
+  - Excluded work: PASS — repository inventory and changed-path review contain no runtime source tree, architecture artifact, ADR, schema, API design, provider or technology selection, implementation backlog or engineering task, deployment plan, or control-plane implementation.
+  - Change scope: PASS — C7 changes are limited to the C7 authorization and proposed G7 records, the operational snapshot, and the minimal derived readiness evidence.
+  - Whitespace integrity: PASS — `git diff --check` succeeds.
+- **Independent G7 review:** `G7 REVIEW: NEEDS FIX` — `G7-F001` and `G7-F002`; `G6 SUPPLEMENTAL REVIEW: PASS` against current Delivery Contract blob `5c23c9d9224575466f20e3ca26949c1bbf86ffc0`; targeted C7 repair; `G7 TARGETED RECHECK: PASS` — `G7-F001` and `G7-F002` resolved.
+- **Human disposition:** APPROVED — `github:hdangprod` approved G7, C7 evidence revision 1, and completion of the Generation 2 Foundation Program on 2026-08-09.
+- **Foundation completion:** APPROVED — G7 completes the Generation 2 Foundation Program only. It does not authorize any post-Foundation work.
+- **Does not authorize:** Architecture; architecture decisions or approval; persistence, database, schema, or API design; technology or provider selection; engineering or implementation planning; engineering tasks; source code; deployment; control-plane implementation; or any post-Foundation stage or work.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
