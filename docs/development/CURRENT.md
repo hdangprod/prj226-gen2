@@ -27,9 +27,10 @@
 - **C7 — Engineering-Entry Readiness:** COMPLETE
 - **G7 — Engineering-Entry Readiness:** APPROVED BY HUMAN
 - **Generation 2 Foundation Program:** COMPLETE
-- **Runtime architecture design:** NOT AUTHORIZED (PROHIBITED)
+- **Runtime Architecture Phase:** COMPLETE — Runtime Architecture revision 1 approved by human through `GOV-017`.
 - **Engineering work:** NOT AUTHORIZED (PROHIBITED)
 - **Runtime implementation:** NOT AUTHORIZED (PROHIBITED)
+- **Deployment:** NOT AUTHORIZED (PROHIBITED)
 - **Control-plane implementation:** NOT AUTHORIZED (PROHIBITED)
 
 ## Baseline and review state
@@ -67,6 +68,9 @@
 - **C7 verification:** PASS — reading order, repository-relative links, artifact lifecycle and revisions, decision IDs and states, C1–C6 gate history, Product Foundation and Delivery Contract authority, deferred boundaries, post-G7 authorization boundary, clean-context reconstructibility, prohibited-output absence, changed-path scope, and whitespace integrity validate.
 - **G7 disposition:** `GOV-015` is `APPROVED` by `github:hdangprod` on 2026-08-09. The decision accepts C7 Engineering-Entry Readiness evidence revision 1, exact Git blob `91cd6d59adcec17caf6935a07e694650edb20753`, after the original `G7 REVIEW: NEEDS FIX`, resolution of `G7-F001` and `G7-F002`, and `G7 TARGETED RECHECK: PASS`.
 - **Foundation completion:** G7 approval through `GOV-015` completes the Generation 2 Foundation Program. It does not authorize architecture, engineering, implementation, deployment, provider or technology selection, or control-plane work.
+- **Runtime Architecture Phase authorization:** `GOV-016` is APPROVED by the human owner. It authorizes a separately scoped post-Foundation Runtime Architecture Phase, including analysis and proposed architecture artifacts needed to resolve `ARC-001` through `ARC-006` through explicit human decisions. It does not modify Foundation completion or authorize engineering or implementation.
+- **Runtime Architecture decisions:** `ARC-001` through `ARC-006` revision 1 are human-approved. No architecture-review blocker remains. Engineering implementation remains prohibited.
+- **Runtime Architecture baseline:** [Liam v1 Runtime Architecture Baseline, revision 1](../architecture/RUNTIME_ARCHITECTURE.md) is `CANONICAL / APPROVED` through human disposition `GOV-017` by `github:hdangprod` on 2026-08-09. The original `ARCHITECTURE REVIEW: NEEDS FIX` findings `AR-F001` and `AR-F002` were repaired; `ARCHITECTURE TARGETED RECHECK: PASS` resolved both. Approval does not authorize engineering.
 
 ## Authorized work
 
@@ -74,7 +78,7 @@ The Generation 2 Foundation Program is complete through human G7 disposition `GO
 
 This snapshot reflects authorization recorded in approved governance artifacts; it does not create, extend, or approve authorization.
 
-**Current stage state:** Generation 2 Foundation Program — COMPLETE; C7 — Engineering-Entry Readiness — COMPLETE
+**Current stage state:** Generation 2 Foundation Program — COMPLETE; C7 — Engineering-Entry Readiness — COMPLETE; Runtime Architecture Phase — COMPLETE
 
 **Current gate:** G7 — Engineering-Entry Readiness — APPROVED BY HUMAN
 **Disposition:** `APPROVED` through `GOV-015` by `github:hdangprod` on 2026-08-09.
@@ -88,18 +92,18 @@ This snapshot reflects authorization recorded in approved governance artifacts; 
 
 **Foundation gates:** C1–C7 are COMPLETE; G1–G7 are APPROVED BY HUMAN. No Foundation gate remains pending.
 
-**Next possible work:** No post-Foundation work is currently authorized. Any architecture or engineering work requires a separate explicit human authorization with its own scope after the applicable readiness and approval conditions are met.
+**Next possible work:** A separately authorized Engineering Phase. No engineering, implementation, deployment, or control-plane work is currently authorized.
 
 **C7:** COMPLETE. **G7:** APPROVED BY HUMAN. The Generation 2 Foundation Program is COMPLETE.
 
 ## Explicit prohibitions
 
 - Do not create `src/` or runtime code.
-- Do not design runtime architecture.
-- Do not choose databases, persistence technologies, Cloudflare services, frameworks, MCP providers, or LLM providers.
-- Do not create schemas, ADRs, implementation tasks, or speculative placeholder documents.
-- Do not resolve product, architecture, technology, or G1-approval decisions without the human owner.
-- Do not treat C7 authorization, readiness evidence, G7 eligibility, or eventual Foundation completion as architecture or engineering authorization.
+- Do not modify historical Foundation gate meanings or treat this Architecture Phase as C8.
+- Do not approve or resolve `ARC-001` through `ARC-006` without an explicit human decision.
+- Do not create runtime source code, schemas, migrations, executable APIs, implementation tasks, or control-plane implementation.
+- Do not deploy, provision infrastructure, or create production credentials or secrets.
+- Do not treat this Architecture Phase, C7 authorization, readiness evidence, G7 eligibility, or Foundation completion as engineering authorization.
 - Do not implement an orchestration or control-plane system.
 
 For document authority and reading order, use [docs/README.md](../README.md). For stages, gates, and eligibility, use the [Foundation Program](../foundation/FOUNDATION_PROGRAM.md). For all open and deferred decisions, use [DECISIONS.md](../foundation/DECISIONS.md).

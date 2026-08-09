@@ -745,77 +745,153 @@ Each record contains: ID, question, status, decision owner, rationale, alternati
 ### ARC-001 — Persistence ownership
 
 - **Question:** Which runtime boundary owns persistence?
-- **Status:** DEFERRED
-- **Decision owner:** `hdangprod`
-- **Rationale:** The seed lists persistence ownership as unresolved; runtime architecture design is prohibited before G5.
-- **Alternatives:** Not evaluated; evaluation is prohibited before G5.
-- **Dependencies:** G5; approved product foundation.
-- **Affected artifacts:** Future architecture artifact, not yet authorized.
-- **Approval evidence:** Deferred pending G5.
+- **Status:** APPROVED
+- **Decision owner:** `github:hdangprod`
+- **Rationale:** The approved one-deployable logical-boundary architecture requires one clear product-semantic authority for accepted Project, Action, Knowledge Item, accepted progress/context, provenance, supersession, and deletion state. The architecture must distinguish that authority from physical persistence and derived or transient state.
+- **Alternatives:** Domain/application boundary owns accepted-state semantics through a controlled persistence responsibility; a separately deployed state/memory service owns accepted state; model/provider, conversation, or retrieval state is treated as the primary memory authority.
+- **Normative dependencies:** `GOV-016`; `ARC-002` revision 1; `product/PRODUCT_FOUNDATION.md` revision 1.
+- **Affected artifacts:** `docs/architecture/ARCHITECTURE_PHASE.md` and the future proposed architecture baseline.
+- **Decision:** The Liam domain/application boundary owns authoritative accepted-state semantics and all authoritative state transitions. Authoritative durable records are persisted through a persistence responsibility controlled by that boundary; neither a persistence adapter, database, nor infrastructure independently defines, invents, or alters product semantics. Retrieval/search indexes, caches, embeddings or similarity representations if later adopted, conversational/model context, generated recommendations, inferred Current Context, and external provider state are non-authoritative. They may assist behavior but may not silently become accepted state or override the authoritative durable record.
+- **Architecture invariants:** (1) All accepted domain-state changes pass through the Liam application/domain authority boundary. (2) A state-changing operation is not reported successfully accepted unless required authoritative persistence succeeds. (3) Model output, recommendation, inferred context, retrieval results, and provider responses do not become accepted domain state merely by being produced. (4) Derived representations are reconstructible or correctable from authoritative state where applicable. (5) Derived retrieval must not present superseded knowledge as current unqualified knowledge. (6) User-authorized deletion must not leave derived representations intentionally usable as current product knowledge; later engineering must provide propagation, partial-failure detection, and recovery. (7) External provider state is never the sole durable source of accepted Project, Action, Knowledge Item, provenance, or lifecycle state.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly approved this decision and its stated semantic-authority, durable-persistence, non-authoritative-state, and invariant clarifications.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
 ### ARC-002 — Runtime architecture boundaries
 
 - **Question:** What runtime boundaries are required?
-- **Status:** DEFERRED
-- **Decision owner:** `hdangprod`
-- **Rationale:** Architecture must be derived from approved product requirements after G5.
-- **Alternatives:** Not evaluated; evaluation is prohibited before G5.
-- **Dependencies:** G5; approved product foundation.
-- **Affected artifacts:** Future architecture artifact, not yet authorized.
-- **Approval evidence:** Deferred pending G5.
+- **Status:** APPROVED
+- **Decision owner:** `github:hdangprod`
+- **Rationale:** Liam v1 is a narrow single-user validation product. Its approved semantics require explicit separation of responsibilities and external dependencies, but do not establish a scale, collaboration, security-isolation, or operational requirement for multiple Liam services.
+- **Alternatives:** One Liam application deployable with explicit logical boundaries; two deployables separating conversational orchestration from state/memory; multiple distributed services partitioned by domain or integration.
+- **Normative dependencies:** `GOV-016`; `product/PRODUCT_FOUNDATION.md` revision 1.
+- **Affected artifacts:** `docs/architecture/ARCHITECTURE_PHASE.md` and the future proposed architecture baseline.
+- **Decision:** Use one Liam application deployment boundary by default, with explicit internal logical/module boundaries. Logical/module boundaries, the application deployment boundary, persistence infrastructure, and external provider/integration boundaries are distinct. Do not create separate Liam runtime services merely because logical responsibilities differ. A database, model provider, or other externally hosted dependency may exist if later selected through an applicable architecture decision, but is not thereby a separate Liam domain service. Additional deployables require demonstrated reliability, isolation, scale, security, or operational need rather than speculative multi-user or Life OS growth.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly approved this decision and its single-deployable, explicit-boundary, external-dependency, and evidence-based future-separation clarifications.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
 ### ARC-003 — Integration strategy and provider choices
 
 - **Question:** What integrations are needed, and which providers, if any, are selected?
-- **Status:** DEFERRED
-- **Decision owner:** `hdangprod`
-- **Rationale:** Integration needs must follow approved capabilities; provider selection is prohibited now.
-- **Alternatives:** Not evaluated; evaluation is prohibited before G5.
-- **Dependencies:** G5; BEH-003; QLT-001.
-- **Affected artifacts:** Future architecture artifact, not yet authorized.
-- **Approval evidence:** Deferred pending G5.
+- **Status:** APPROVED
+- **Decision owner:** `github:hdangprod`
+- **Rationale:** The approved v1 boundary needs no external productivity, knowledge, collaboration, identity-sharing, or multi-surface integration. It may require a conversational/model capability, but no provider state may become product truth.
+- **Alternatives:** A minimal replaceable conversational/model capability boundary with no other v1 integrations; external productivity/knowledge/collaboration integrations; provider-owned conversation/tools/memory as primary product-state mechanism.
+- **Normative dependencies:** `GOV-016`; `ARC-001` revision 1; `ARC-002` revision 1; `ARC-005` revision 1; `product/PRODUCT_FOUNDATION.md` revision 1.
+- **Affected artifacts:** `docs/architecture/ARCHITECTURE_PHASE.md` and the future proposed architecture baseline.
+- **Decision:** Use a minimal external-integration strategy. The only potentially required runtime integration class is a bounded, replaceable conversational/model capability that supports legitimate model reasoning or generation. The Liam application/domain remains authoritative for all accepted state, provenance, lifecycle, deletion, state-transition validity, and human-control decisions. Model results are advisory, inferred, generated, or proposed until explicitly accepted through the approved application-owned semantics. No calendar, email, Notion, Obsidian, Slack, Drive, GitHub, web-search, browser-automation, project-system, external-knowledge-store, third-party-task-system, or multiple-channel integration is a v1 requirement. No named provider is selected or mandated; provider/model selection is delegated to `ARC-006`.
+- **Architecture invariants:** (1) A provider response cannot directly mutate accepted domain state. (2) Provider-derived proposals pass through application-owned human-control and domain validation before acceptance. (3) Timeout, refusal, malformed/unusable output, unavailability, or model error cannot corrupt authoritative state or be reported as successful mutation. (4) Core semantics do not depend on provider-specific memory, hidden state, proprietary history, or domain semantics. (5) Provider state is never the sole durable record of accepted state or correction. (6) Only data required for the model interaction crosses the boundary; authentication material is neither intended knowledge nor unnecessary model context. (7) Successful provider response and successful accepted-state mutation are distinguishable outcomes.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly approved the minimal integration strategy, provider neutrality, data-minimization, and failure-isolation clarifications.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
 ### ARC-004 — Technical testing and observability strategy
 
 - **Question:** What technical verification and observability strategy is required?
-- **Status:** DEFERRED
-- **Decision owner:** `hdangprod`
-- **Rationale:** Technology-neutral quality constraints come first; mechanisms are prohibited before G5.
-- **Alternatives:** Not evaluated; evaluation is prohibited before G5.
-- **Dependencies:** G5; QLT-001.
-- **Affected artifacts:** Future architecture artifact, not yet authorized.
-- **Approval evidence:** Deferred pending G5.
+- **Status:** APPROVED
+- **Decision owner:** `github:hdangprod`
+- **Rationale:** Approved quality, human-control, accepted-memory, retrieval, deletion, and provider-boundary semantics require evidence that can prove and diagnose outcomes at the authority boundaries. A selected telemetry or test product cannot define those requirements.
+- **Alternatives:** Semantic-invariant-driven verification and observability; primarily end-to-end conversational tests with limited boundary checks; provider availability/latency monitoring without domain-operation evidence.
+- **Normative dependencies:** `GOV-016`; `ARC-001` revision 1; `ARC-002` revision 1; `ARC-003` revision 1; `ARC-005` revision 1; `product/PRODUCT_FOUNDATION.md` revision 1.
+- **Affected artifacts:** `docs/architecture/ARCHITECTURE_PHASE.md` and the future proposed architecture baseline.
+- **Decision:** Use semantic-invariant-driven technical verification and runtime observability. Later engineering must verify and diagnose: durable accepted-state truthfulness, failed-mutation clarity and recoverability, lifecycle and supersession correctness, application-owned human-control boundaries, retrieval provenance/currentness/qualification, deletion/export and derived-state propagation or recovery, isolation and reconstruction of derived retrieval state, provider failure isolation, uncertainty/recommendation behavior, and retry safety. Verification covers deterministic unit, integration, scenario/acceptance, invariant, failure-injection, and contract-check categories as applicable; runtime observability follows the logical path `request → interpretation/proposal → state-change authorization → authoritative persistence result → derived-state update → provider result → user-visible outcome`. Correlated operational evidence uses data-minimized identifiers, outcome/status, transition category, timing, and error classification where practical rather than uncontrolled conversational-content capture. No SLO, test framework, telemetry vendor, log format, metrics backend, queue, retry library, database, host, or model provider is selected.
+- **Architecture invariants:** (1) Provider invocation outcome, provider output, application interpretation, attempted mutation, authoritative persistence result, and user-visible result remain distinguishable. (2) Provider success is not proof of accepted-state success. (3) Observability does not become an uncontrolled secondary knowledge store. (4) Authentication material is not intentionally logged, traced, or diagnosed as user content. (5) No unsupported latency, uptime, retention, volume, or availability target becomes architecture authority.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly approved the invariant-driven verification, logical observability, data-minimization, provider-isolation, and no-invented-SLO clarifications.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
 ### ARC-005 — Runtime project-memory architecture
 
 - **Question:** How will runtime project memory be implemented?
-- **Status:** DEFERRED
-- **Decision owner:** `hdangprod`
-- **Rationale:** Repository-based development continuity is a founding governance principle; runtime implementation is a separate architecture question.
-- **Alternatives:** Not evaluated; evaluation is prohibited before G5.
-- **Dependencies:** G5; BEH-001; DATA-001.
-- **Affected artifacts:** Future architecture artifact, not yet authorized.
-- **Approval evidence:** Deferred pending G5.
+- **Status:** APPROVED
+- **Decision owner:** `github:hdangprod`
+- **Rationale:** Approved persistence ownership and runtime boundaries establish that useful continuity must be layered: canonical accepted state must remain under Liam application/domain authority, while retrieval, conversation, and model inference remain subordinate.
+- **Alternatives:** Layered canonical memory with minimal subordinate retrieval; canonical memory with mandatory semantic/embedding retrieval from the outset; conversation/model-provider history as primary project memory.
+- **Normative dependencies:** `GOV-016`; `ARC-001` revision 1; `ARC-002` revision 1; `product/PRODUCT_FOUNDATION.md` revision 1.
+- **Affected artifacts:** `docs/architecture/ARCHITECTURE_PHASE.md` and the future proposed architecture baseline.
+- **Decision:** Use a layered canonical-memory architecture. Layer 1 is authoritative accepted memory controlled by the Liam application/domain authority: Project and Action identity, ownership, outcomes/lifecycle, accepted progress and required accepted context, Knowledge Item content, originating-Project provenance, correction/supersession, deletion effect, and other accepted Product Foundation state. Layer 2 is a minimal subordinate retrieval view/projection derived from authoritative memory for relevant project and knowledge retrieval; it is logical architecture, not a requirement for a separately persisted index, service, vector store, or search engine. Querying authoritative persistence directly is sufficient where it meets approved retrieval and quality requirements; separately materialized retrieval is introduced only for demonstrated need. Layer 3 is transient conversational working context. Layer 4 is advisory/provisional model inference and recommendation. Only explicit accepted state belongs in Layer 1; provider history is never Liam's sole durable record.
+- **Retrieval mechanism boundary:** This decision selects no embedding, vector, semantic, graph, full-text, retrieval-service, retrieval-database, ranking, LLM-memory, persistence, schema, ORM, cache, provider, framework, or hosting mechanism.
+- **Architecture invariants:** (1) Retrieved product truth remains grounded in authoritative accepted state. (2) Cross-project reuse retains sufficient originating Project/context provenance. (3) Superseded Knowledge is not returned as current unqualified knowledge; historical surfacing retains its status. (4) Deleted authoritative knowledge is not intentionally usable as current product knowledge through a stale derived view; partial deletion/staleness is detectable and recoverable by later engineering. (5) Derived retrieval failure, staleness, or loss cannot corrupt authoritative accepted memory. (6) Every separately materialized retrieval representation is rebuildable or safely reconstructible from accepted state and approved provenance. (7) Retrieval relevance, ranking, model interpretation, and contextual inference do not convert material into accepted state. (8) Loss of transient conversation context does not silently delete or rewrite authoritative state; resumption-required information exists in authoritative accepted memory.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly approved this decision and its four-layer architecture, retrieval neutrality, minimal-v1, and retrieval-correctness clarifications.
 - **Supersedes:** None.
 - **Superseded by:** None.
 
 ### ARC-006 — Technology selection
 
 - **Question:** Which database, framework, Cloudflare services, MCP providers, LLM providers, persistence technologies, and other runtime technologies are selected?
-- **Status:** DEFERRED
-- **Decision owner:** `hdangprod`
-- **Rationale:** Technology choices remain explicitly unapproved and must follow architecture design.
-- **Alternatives:** Not evaluated; evaluation is prohibited before G5.
-- **Dependencies:** G5; approved runtime architecture inputs.
-- **Affected artifacts:** Future architecture artifact, not yet authorized.
-- **Approval evidence:** Deferred pending G5.
+- **Status:** APPROVED
+- **Decision owner:** `github:hdangprod`
+- **Rationale:** The five preceding approved architecture decisions now establish the minimum actual technology needs: one deployable application runtime, authoritative durable SQL persistence, provider-portable conversational capability, and proportionate observability. They expressly do not require separate retrieval, vector, cache, queue, integration, or service infrastructure.
+- **Alternatives:** Cloudflare-native initial profile with provider-portable model capability; Cloudflare Workers plus external serverless Postgres and separate diagnostics; independently hosted application plus managed Postgres and separate provider/observability stack.
+- **Normative dependencies:** `GOV-016`; `ARC-001` through `ARC-005`, revision 1; `product/PRODUCT_FOUNDATION.md` revision 1; `development/DELIVERY_CONTRACT.md` revision 1.
+- **Affected artifacts:** `docs/architecture/ARCHITECTURE_PHASE.md`, the future proposed architecture baseline, and later separately authorized engineering materials.
+- **Decision:** Select TypeScript as the application language; Cloudflare Workers as the initial single-deployable runtime; Cloudflare D1 as the initial authoritative SQLite-compatible SQL persistence technology; and Cloudflare-native observability as the initial operational baseline. Select no separate vector database, search service, cache service, queue, external productivity integration, or provider-owned memory for v1. The initial deployment profile targets approximately zero incremental infrastructure/API cost for founder-only validation while current free-tier limits suffice. Free-tier limits are operating constraints rather than product semantics: exceeding one may justify a deployment-plan upgrade and does not require architecture redesign.
+- **Model capability decision:** Select a provider-portable model capability boundary, not OpenAI or any named premium provider as an architectural dependency. The required boundary is `DOMAIN/APPLICATION → MODEL CAPABILITY PORT → PROVIDER ADAPTER → MODEL`; provider request/response types, conversation identifiers, hosted memory, tool-call formats, and persistence semantics must not leak into the domain/application core. The initial cost-constrained validation candidate is Cloudflare Workers AI model `@cf/zai-org/glm-4.7-flash`, used only through the model adapter. It is a replaceable configuration, not product authority. Cloudflare documents it as multilingual across 100+ languages with function calling and multi-turn tool calling; it is therefore capable of the minimum model-capability contract at the platform level. It must still pass Liam's approved semantic/scenario evidence before being considered sufficient. A failure permits model/provider replacement without changing domain, persistence, memory, or human-control architecture. OpenAI Responses API and future provider/model choices remain supported premium migration paths through the same port and adapter.
+- **Persistence portability decision:** The required boundary is `DOMAIN/APPLICATION → PERSISTENCE PORT → D1 ADAPTER`. D1 binding APIs and SQLite/D1-specific extensions remain isolated from domain/application semantics where practical, allowing a later SQL-provider migration without product-model redesign.
+- **Operating constraints and evidence:** Current Cloudflare documentation records Workers AI free allocation of 10,000 Neurons/day, Workers Free allowance of 100,000 requests/day, and D1 Free allowance of 5 million reads/day, 100,000 writes/day, and 5 GB total storage. Exceeding a limit produces an explicit failure or requires plan upgrade; it must not be represented as accepted-state success. The free candidate's model capability must be evaluated with the approved bilingual conversational and structured/tool-mediated scenarios before any claim of sufficient product behavior.
+- **Architecture invariants:** (1) Domain/application semantics are independent of model/provider and persistence-provider types. (2) Liam owns durable conversation/project state required by the Product Foundation; provider-managed history never becomes canonical memory. (3) Free-tier exhaustion affects operations/cost only, not product truth or architecture. (4) Model insufficiency routes to provider/model substitution through the adapter, not domain/persistence redesign. (5) No technology selection permits bypass of `ARC-001` through `ARC-005` invariants.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human owner explicitly approved the cost-first, provider-portable amendment; Cloudflare current documentation verifies that the initial model candidate supports multilingual dialogue and function calling, and that the stated free-tier allocations exist. This evidence establishes candidate capability only; Liam semantic sufficiency remains subject to approved scenario evidence.
+- **Supersedes:** None.
+- **Superseded by:** None.
+
+### GOV-017 — Runtime Architecture Baseline disposition
+
+- **Question:** Approve `docs/architecture/RUNTIME_ARCHITECTURE.md` revision 1 as the Liam v1 Runtime Architecture Baseline.
+- **Status:** APPROVED
+- **Decision owner:** `github:hdangprod`
+- **Rationale:** All six `ARC-*` decisions are human-approved under `GOV-016`. A single minimum architecture baseline integrates their responsibility, memory, integration, technology, and verification consequences. After independent review, targeted repair, targeted recheck, and human disposition, it is approved architecture authority. Engineering remains separately unauthorized.
+- **Alternatives:** Approve the proposed baseline; return it for correction; reject it; defer disposition.
+- **Normative dependencies:** `GOV-016`; `ARC-001` through `ARC-006`, revision 1; `product/PRODUCT_FOUNDATION.md` revision 1; `development/DELIVERY_CONTRACT.md` revision 1; deterministic architecture-document verification.
+- **Affected artifacts:** `docs/architecture/RUNTIME_ARCHITECTURE.md`, `docs/architecture/ARCHITECTURE_PHASE.md`, `docs/foundation/DECISIONS.md`, `docs/development/CURRENT.md`, and `docs/README.md`.
+- **Approved artifact:** `docs/architecture/RUNTIME_ARCHITECTURE.md`, revision 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** Passing deterministic verification bound to the exact candidate, independent architecture review, and explicit human approval. Neither decision completion nor review substitutes for human approval.
+- **Deterministic verification:** PASS after targeted repair — the exact candidate and its approved Product Foundation and Delivery Contract inputs exist; all six `ARC-*` records are human-approved revision 1; canonical status, revision, proposed disposition, dependencies, traceability, approved technology boundaries, engineering prohibition, current review state, and required Model Capability Contract/data-boundary content are present; required repository-relative links resolve; no `src/` runtime source tree exists; and `git diff --check` passes. Scope is limited to architecture/governance/operational documentation.
+- **Independent architecture review:** `ARCHITECTURE REVIEW: NEEDS FIX` — independent review identified `AR-F001` (stale Architecture Phase operational-state language) and `AR-F002` (incomplete model-capability/provider-data boundary). Neither finding reopened an `ARC-*` decision or changed approved technology selection.
+- **Targeted repair:** `AR-F001` updated the Architecture Phase dossier to the actual post-decision/review sequence. `AR-F002` added the provider-neutral Liam-owned conceptual Model Capability Contract, provider-representation confinement, non-authoritative provider-state/retention rule, minimum-necessary data exposure, authentication-material exclusion, and provider-term acceptance condition to the baseline.
+- **Targeted independent recheck:** `ARCHITECTURE TARGETED RECHECK: PASS` — `AR-F001 RESOLVED`; `AR-F002 RESOLVED`; no `ARC-*` decision reopened; no material unrelated architecture change occurred; authoritative-state ownership, four-layer memory, persistence portability, free-profile semantics, architecture simplicity, and integration scope remain unchanged; no source, schema, API, deployment, provisioning, or engineering artifact was introduced.
+- **Exact independently rechecked candidate:** `docs/architecture/ARCHITECTURE_PHASE.md` blob `e3aea16f98d2957de84b7ed24b3ea00885fef444`; `docs/architecture/RUNTIME_ARCHITECTURE.md` blob `598352ea0680ff421e5bfa11512f521bcddbfaa2`.
+- **Human disposition:** APPROVED — the human project owner approved Runtime Architecture revision 1 and this `GOV-017` disposition on 2026-08-09.
+- **Does not authorize:** Engineering implementation, Task Packets, runtime source, schemas, migrations, executable APIs, deployment, infrastructure provisioning, production credentials, or control-plane implementation.
+- **Supersedes:** None.
+- **Superseded by:** None.
+
+### GOV-016 — Runtime Architecture Phase authorization
+
+- **Question:** Authorize a separately scoped PRJ226 Generation 2 Runtime Architecture Phase after completion of the Foundation Program.
+- **Status:** APPROVED
+- **Decision owner:** `github:hdangprod`
+- **Rationale:** The Generation 2 Foundation Program is complete through human G7 disposition `GOV-015`. The human project owner explicitly authorized a post-Foundation Architecture Phase so that the approved product and delivery baselines can be used to derive, evaluate, and prepare a reviewable runtime architecture baseline without beginning engineering implementation.
+- **Alternatives:** Keep post-Foundation work unauthorized; authorize runtime architecture within a bounded phase; authorize engineering implementation together with architecture.
+- **Normative dependencies:** `GOV-015`; `product/PRODUCT_FOUNDATION.md` revision 1; `development/DELIVERY_CONTRACT.md` revision 1.
+- **Affected artifacts:** `docs/foundation/DECISIONS.md`, `docs/development/CURRENT.md`, and the minimum architecture decision and baseline artifacts created under this authorization.
+- **Approved decision revision:** 1.
+- **Approved on:** 2026-08-09.
+- **Approved by:** `github:hdangprod`.
+- **Approval evidence:** The human project owner explicitly authorized the Runtime Architecture Phase, directed that this authorization be recorded before architecture work begins, and designated architecture approval as Human Reserved Authority.
+- **Authorized scope:** Reconstruct approved Foundation and Delivery Contract authority; derive architecture drivers and constraints; analyze alternatives; define logical, deployable, persistence, and external-integration boundaries; resolve `ARC-001` through `ARC-006` only through explicit human decisions; define project-memory, integration, verification, observability, technology, provider, security/data-boundary, and conceptual deployment requirements where necessary; create the minimum independently reviewable architecture candidate and deterministic documentation verification evidence.
+- **Does not authorize:** Modification of the completed Foundation Program or its gate meanings; approval of `ARC-001` through `ARC-006` by any non-human; runtime application source code; service, module, component, schema, migration, executable API, control-plane, deployment, infrastructure provisioning, production credentials or secrets; engineering backlog execution; implementation Task Packets; or engineering implementation. Engineering requires a separate later human authorization.
+- **Architecture approval boundary:** A proposed architecture baseline and each `ARC-*` disposition remain subject to explicit human approval. No Planner, Builder, Reviewer, model, provider, or automated process may approve architecture on behalf of the human owner.
+- **Editorial-only change attestation:** The `docs/README.md` ownership-map row records the authorized operational Architecture Phase dossier and introduces no change to documentation governance, Foundation-gate meaning, or architecture decision authority.
 - **Supersedes:** None.
 - **Superseded by:** None.
