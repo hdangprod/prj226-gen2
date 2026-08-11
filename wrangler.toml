@@ -1,0 +1,12 @@
+name = "liam-runtime-foundation"
+main = "src/index.ts"
+compatibility_date = "2026-08-09"
+
+# This configuration intentionally has no account, route, binding, or secret.
+# It supports local/tooling verification only; deployment remains unauthorized.
+
+[[d1_databases]]
+binding = "LIAM_DB"
+database_name = "liam-authority-local"
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"

@@ -4,7 +4,7 @@
 
 **Lifecycle status:** ACTIVE
 
-**Last updated:** 2026-08-09
+**Last updated:** 2026-08-12
 
 **Decision owner:** `hdangprod`
 
@@ -28,9 +28,10 @@
 - **G7 — Engineering-Entry Readiness:** APPROVED BY HUMAN
 - **Generation 2 Foundation Program:** COMPLETE
 - **Runtime Architecture Phase:** COMPLETE — Runtime Architecture revision 1 approved by human through `GOV-017`.
-- **Engineering work:** NOT AUTHORIZED (PROHIBITED)
-- **Runtime implementation:** NOT AUTHORIZED (PROHIBITED)
-- **Deployment:** NOT AUTHORIZED (PROHIBITED)
+- **Engineering Phase:** AUTHORIZED BY HUMAN through `GOV-018`; Engineering delivery is active with `ENG-001`, `ENG-002`, `ENG-003`, and `ENG-008` complete, and no task Ready or Running.
+- **Engineering work:** AUTHORIZED only within `GOV-018`, the approved Product Foundation and Runtime Architecture, the Delivery Contract, and a valid Ready Task Packet.
+- **Runtime implementation:** AUTHORIZED within that bounded Engineering scope; no implementation task is `RUNNING`.
+- **Production deployment and paid-service activation:** NOT AUTHORIZED (PROHIBITED)
 - **Control-plane implementation:** NOT AUTHORIZED (PROHIBITED)
 
 ## Baseline and review state
@@ -69,41 +70,43 @@
 - **G7 disposition:** `GOV-015` is `APPROVED` by `github:hdangprod` on 2026-08-09. The decision accepts C7 Engineering-Entry Readiness evidence revision 1, exact Git blob `91cd6d59adcec17caf6935a07e694650edb20753`, after the original `G7 REVIEW: NEEDS FIX`, resolution of `G7-F001` and `G7-F002`, and `G7 TARGETED RECHECK: PASS`.
 - **Foundation completion:** G7 approval through `GOV-015` completes the Generation 2 Foundation Program. It does not authorize architecture, engineering, implementation, deployment, provider or technology selection, or control-plane work.
 - **Runtime Architecture Phase authorization:** `GOV-016` is APPROVED by the human owner. It authorizes a separately scoped post-Foundation Runtime Architecture Phase, including analysis and proposed architecture artifacts needed to resolve `ARC-001` through `ARC-006` through explicit human decisions. It does not modify Foundation completion or authorize engineering or implementation.
-- **Runtime Architecture decisions:** `ARC-001` through `ARC-006` revision 1 are human-approved. No architecture-review blocker remains. Engineering implementation remains prohibited.
+- **Runtime Architecture decisions:** `ARC-001` through `ARC-006` revision 1 are human-approved. No architecture-review blocker remains.
 - **Runtime Architecture baseline:** [Liam v1 Runtime Architecture Baseline, revision 1](../architecture/RUNTIME_ARCHITECTURE.md) is `CANONICAL / APPROVED` through human disposition `GOV-017` by `github:hdangprod` on 2026-08-09. The original `ARCHITECTURE REVIEW: NEEDS FIX` findings `AR-F001` and `AR-F002` were repaired; `ARCHITECTURE TARGETED RECHECK: PASS` resolved both. Approval does not authorize engineering.
+- **Engineering Phase authorization:** `GOV-018` is APPROVED by `github:hdangprod` on 2026-08-09. It separately authorizes implementation of the approved Liam v1 Product Foundation and Runtime Architecture under Delivery Contract revision 1 while preserving product, architecture, production, paid-service, security, destructive-action, and control-plane Human Reserved boundaries.
+- **Engineering readiness and plan:** [Engineering Plan revision 1](ENGINEERING_PLAN.md) records `ENGINEERING DoR: PASS`, the implementation obligations and Task DAG, exact evidence rules, concurrency boundaries, and the first execution wave. It is `OPERATIONAL / ACTIVE` and cannot expand `GOV-018` or any approved product or architecture authority.
+- **Engineering task state:** `ENG-001`, `ENG-002`, `ENG-003`, and `ENG-008` are `DONE` with durable Delivery Records. Exact `ENG-003` candidate `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6` has deterministic verification PASS, targeted persistence/data-boundary review GREEN, and closed `ENG-003-F001` / `ENG-003-F001-R1` repair history. Exact `ENG-008` candidate `5fb3343b2a531782ef83d7c874ec95ae221676a700f4c92b3d77591de39c1696` has deterministic verification PASS and independent boundary/security review GREEN. `ENG-004`, `ENG-005`, and `ENG-009` remain `PROPOSED` pending their own Task Packets and task-level DoR re-evaluations. No Task Packet is `RUNNING`, and this state update dispatches no Builder work.
 
 ## Authorized work
 
-The Generation 2 Foundation Program is complete through human G7 disposition `GOV-015`. C7 Engineering-Entry Readiness is complete, and [C7 Engineering-Entry Readiness Evidence, revision 1](ENGINEERING_ENTRY_READINESS.md) remains `DERIVED / ACTIVE` evidence accepted by `GOV-015`; it is not a new source of authority.
+The Generation 2 Foundation Program is complete through human G7 disposition `GOV-015`, and Runtime Architecture revision 1 is approved through `GOV-017`. C7 Engineering-Entry Readiness Evidence revision 1 remains accepted historical readiness evidence; the current Engineering authorization is the separate human decision `GOV-018`.
 
 This snapshot reflects authorization recorded in approved governance artifacts; it does not create, extend, or approve authorization.
 
-**Current stage state:** Generation 2 Foundation Program — COMPLETE; C7 — Engineering-Entry Readiness — COMPLETE; Runtime Architecture Phase — COMPLETE
+**Current stage state:** Generation 2 Foundation Program — COMPLETE; Runtime Architecture Phase — COMPLETE; Engineering Phase — AUTHORIZED; Engineering planning — ACTIVE; Builder execution — `ENG-001`, `ENG-002`, `ENG-003`, and `ENG-008` COMPLETE, no task READY or RUNNING
 
-**Current gate:** G7 — Engineering-Entry Readiness — APPROVED BY HUMAN
-**Disposition:** `APPROVED` through `GOV-015` by `github:hdangprod` on 2026-08-09.
-**Completion conditions:**
+**Current Engineering authority:** `GOV-018` — APPROVED BY HUMAN on 2026-08-09.
+**Engineering gate:** None created or implied. Task readiness and completion are governed by Delivery Contract revision 1 and do not approve product, architecture, production release, or another gate.
+**Engineering Definition of Ready:** PASS for bounded implementation planning. No successor task is presently `READY`: `ENG-004`, `ENG-005`, and `ENG-009` require their own Task Packets and task-level DoR re-evaluations before they may become `READY`.
 
-- G6 approved through `GOV-013` — satisfied.
-- C7 separately authorized through `GOV-014` — satisfied.
-- C7 exit evidence exists — satisfied.
-- No C7 gate-blocking readiness defect remains — satisfied.
-- G7 independently reviewed and human-approved through `GOV-015` — satisfied.
+- Product Foundation revision 1 approved through `GOV-011` — satisfied.
+- Delivery Contract revision 1 approved through `GOV-013` — satisfied.
+- Runtime Architecture revision 1 and `ARC-001` through `ARC-006` approved through `GOV-017` — satisfied.
+- Engineering explicitly authorized through `GOV-018` — satisfied.
+- Blocking product or architecture decisions — none.
+- Approved TypeScript, Cloudflare Workers, D1, direct-SQL retrieval, Cloudflare-native observability, and Workers AI candidate baseline — present.
+- Human Reserved boundaries — explicit in `GOV-018`, the Delivery Contract, and the Engineering Plan.
 
 **Foundation gates:** C1–C7 are COMPLETE; G1–G7 are APPROVED BY HUMAN. No Foundation gate remains pending.
 
-**Next possible work:** A separately authorized Engineering Phase. No engineering, implementation, deployment, or control-plane work is currently authorized.
-
-**C7:** COMPLETE. **G7:** APPROVED BY HUMAN. The Generation 2 Foundation Program is COMPLETE.
+**Next executable work:** None. `ENG-003` is closed as `DONE` in its [Delivery Record](delivery/ENG-003-d1-authority-foundation.md). `ENG-004` and `ENG-005` now have their listed implementation predecessor satisfied, and `ENG-009` has `ENG-001` and `ENG-008` DONE; none is executable until its own bounded Task Packet, task-level DoR re-evaluation, and path/resource-lock check are complete. This state update starts no implementation.
 
 ## Explicit prohibitions
 
-- Do not create `src/` or runtime code.
-- Do not modify historical Foundation gate meanings or treat this Architecture Phase as C8.
-- Do not approve or resolve `ARC-001` through `ARC-006` without an explicit human decision.
-- Do not create runtime source code, schemas, migrations, executable APIs, implementation tasks, or control-plane implementation.
-- Do not deploy, provision infrastructure, or create production credentials or secrets.
-- Do not treat this Architecture Phase, C7 authorization, readiness evidence, G7 eligibility, or Foundation completion as engineering authorization.
+- Do not change approved Product Foundation semantics, change `ARC-001` through `ARC-006`, or introduce an architecture boundary or additional runtime service without explicit human authority.
+- Do not add vector, embedding, search, cache, queue, provider-hosted canonical memory, or other infrastructure contrary to Runtime Architecture revision 1.
+- Do not activate paid usage or billing, provision cost-incurring production infrastructure, deploy production, create or rotate production credentials or secrets, or perform destructive production operations.
+- Do not weaken human-control, deletion, export, data-control, authentication-material exclusion, or accepted-state truthfulness requirements.
+- Do not execute implementation without a valid Ready Task Packet, controlled write ownership, deterministic evidence, and required independent review under Delivery Contract revision 1.
 - Do not implement an orchestration or control-plane system.
 
 For document authority and reading order, use [docs/README.md](../README.md). For stages, gates, and eligibility, use the [Foundation Program](../foundation/FOUNDATION_PROGRAM.md). For all open and deferred decisions, use [DECISIONS.md](../foundation/DECISIONS.md).
