@@ -4,15 +4,15 @@
 
 **Lifecycle status:** ACTIVE
 
-**Task Packet revision:** 1
+**Task Packet revision:** 2
 
-**Current task state:** `READY` in [Engineering Plan revision 1](../ENGINEERING_PLAN.md)
+**Current task state:** `NEEDS FIX` in [Engineering Plan revision 1](../ENGINEERING_PLAN.md)
 
 **Authorization:** `GOV-018`
 
 **Canonical Task Packet contract:** [Delivery Contract revision 1, Task Packet](../../../development/DELIVERY_CONTRACT.md#task-packet)
 
-This artifact populates the canonical Task Packet for `ENG-004`; it does not redefine the Task Packet schema or dispatch Builder work. Post-dispatch execution, evidence, findings, and completion state belong in a distinct Delivery Record.
+This artifact populates the canonical Task Packet for `ENG-004`; it does not redefine the Task Packet schema or dispatch Builder work. Revision 2 records the upstream dependency and downstream repair constraints raised by `ENG-004-F003` without widening the task's existing write lock. Post-dispatch execution, evidence, findings, and completion state belong in the distinct [Delivery Record](../delivery/ENG-004-project-action-context-slice.md).
 
 ## Task ID
 
@@ -37,19 +37,20 @@ This task does not implement retrieval or recommendation, interaction wording or
 
 ## Dependencies and accepted upstream evidence
 
-Canonical implementation predecessors, and no others, are:
+Canonical implementation predecessors are:
 
 1. `ENG-002` — `DONE`; exact accepted sixteen-file manifest `a0c4613503812ece55e20c2da616b21df165ee5d2ec77b6f8ed5b8381d68319f`.
 2. `ENG-003` — `DONE`; exact accepted thirteen-file manifest `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6`, lockfile SHA-256 `445fd78c4279e62c210b8005aa4406070a832c740bfa5c905deede3b6d230ab6`, and migration SHA-256 `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`.
 
-Both predecessor lifecycle states and accepted manifestations are canonically satisfied. On 2026-08-13, the Controller recovered the exact ENG-003 candidate from `4bfc836f67dd73f5bf2db30dce168f7c578c16a8`, reproduced its component and aggregate hashes, and passed fresh integrated deterministic verification on this dispatch base. This packet still does not itself dispatch Builder work.
+The exact ENG-003 revision-1 candidate above remains the historical baseline against which reviewed ENG-004 aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431` was built. `ENG-004-F003` subsequently exposed a missing authoritative expected-state lifecycle-transition capability at that persistence boundary. ENG-003 is reopened under Task Packet revision 2 and must return to `DONE` on an accepted repair candidate before ENG-004 repair may be dispatched.
 
 No Human Reserved decision or external resource is otherwise required.
 
 ## Relevant context
 
 - ENG-002 already owns and defines the Project, Action, Accepted Progress, Accepted Project Context, Current Context, ordinary-mutation authorization, ambiguity, and operation-outcome semantics. This task composes them; it must not redefine them.
-- ENG-003 already owns the provider-neutral accepted-state persistence port, D1 adapter, ordered schema, atomic commit receipt, retry/idempotency, and false-success boundary. This task consumes them read-only; it must not repair or extend that foundation.
+- ENG-003 owns the provider-neutral accepted-state persistence port, D1 adapter, ordered schema, atomic commit receipt, retry/idempotency, authoritative lifecycle-transition, and false-success boundary. This task consumes the accepted repaired boundary read-only; it must not repair or extend it.
+- A caller-supplied Project or Action snapshot is not authoritative proof that the entity exists or has the supplied prior lifecycle. Creation and transition are distinct persistence intents.
 - Multiple Projects may be `Active`. Current Context is provisional and distinct from lifecycle. Explicit user selection/correction is authoritative; ambiguous mutation has no write.
 - Accepted progress may exist without an Action and never completes an Action by itself. Project completion never cascades.
 - Later `ENG-006` consumes this slice for direct-SQL retrieval and resumption. Later `ENG-010` consumes it for bilingual interaction and Human Control orchestration.
@@ -86,9 +87,9 @@ All needed test configuration and fixtures must remain inside those task-owned d
 
 1. Application/domain validation and valid ENG-002 Human Control evidence precede every persistence attempt.
 2. Ambiguous, unauthorized, invalid, advisory, proposed, or failed operations issue no persistence write and cannot return accepted success.
-3. A valid transition returns accepted success only for `committed` or the same-operation/same-write-set `already-committed` result from authoritative persistence. Persistence failure remains distinguishable, truthful, and retryable only when the port marks it retryable.
+3. A valid transition returns accepted success only for `committed` or the same-operation/same-transition `already-committed` result from authoritative persistence. Missing authoritative state, expected-state mismatch, ownership mismatch, conflict, or persistence failure remains distinguishable and cannot be accepted success.
 4. Operation identities and write sets are stable across a safe retry; reusing an operation identity with a different write set is not accepted.
-5. Project creation requires an intended outcome and starts `Active`; explicit completion/reopening is user-authoritative. Action creation starts `Open`, belongs to exactly one Project, and explicit completion/reopening is user-authoritative.
+5. Project creation requires an intended outcome and uses the accepted insert-only capability that starts `Active`; Project completion/reopening requests an authoritative `Active -> Completed` / `Completed -> Active` transition by identity. Action creation uses the accepted insert-only capability that starts `Open` under exactly one existing Project; Action completion/reopening requests an authoritative `Open -> Completed` / `Completed -> Open` transition without reassigning ownership.
 6. Project completion changes only that Project. It does not change Action lifecycle, accepted context/progress, or Knowledge.
 7. Accepted progress and context facts preserve Project ownership. Optional Action ownership must match the same Project. Progress does not complete an Action.
 8. Explicit Current Context selection/correction prevails over inference. Ambiguity affecting a mutation produces clarification-required/no-write behavior.
@@ -104,7 +105,7 @@ All needed test configuration and fixtures must remain inside those task-owned d
 
 ## Definition of Done
 
-1. Project establishment, Action acceptance, Project/Action completion and reopening, accepted context facts, accepted progress, progress correction, and explicit target selection/correction are composed through existing ENG-002 contracts without changing them.
+1. Project establishment, Action acceptance, Project/Action completion and reopening, accepted context facts, accepted progress, progress correction, and explicit target selection/correction are composed through existing ENG-002 contracts and the accepted ENG-003 revision-2 persistence contract without changing domain semantics.
 2. Every accepted mutation is committed through the ENG-003 port before accepted success; failed, invalid, unauthorized, ambiguous, conflicting duplicate, and partial/durability-failure paths never report accepted success.
 3. Tests prove no Project-completion cascade, no progress-implies-completion, exact Project/Action ownership, multiple Active Projects, explicit-correction precedence, and ambiguity no-write behavior.
 4. Failure and retry tests prove stable same-operation retry behavior, visible failure, no duplicate semantic effect, and no false success.
@@ -112,7 +113,7 @@ All needed test configuration and fixtures must remain inside those task-owned d
 6. All upstream domain, Human Control, persistence, foundation, typecheck, lint, build, and smoke regressions pass without modifying protected files.
 7. Changed paths equal the packet's exclusive locks; dependency, migration, root configuration, shared helper, barrel, Worker entry, and sibling-task paths are unchanged.
 8. Per-file and aggregate manifests are stable before and after deterministic verification.
-9. An Independent Reviewer returns `REVIEW GREEN` for product lifecycle, Human Control, accepted-success, and persistence-boundary fidelity, or every blocking finding is repaired and required rechecks pass.
+9. A fresh full Independent Reviewer returns `REVIEW GREEN` for product lifecycle, Human Control, accepted-success, and persistence-boundary fidelity after the F003 repair, or every blocking finding is repaired and required rechecks pass.
 10. The Delivery Record binds packet revision, reconciled upstream manifests, isolated base, exact candidate, commands/evidence, review, findings, and final completion authority.
 
 ## Verification contract
@@ -125,7 +126,7 @@ Required checks and pass criteria:
 2. `npm ci --ignore-scripts`, `npm run typecheck`, `npm run lint`, `npm run build`, and `npm run smoke` pass without changing `package-lock.json`.
 3. `npx vitest run --config tests/domain/vitest.config.ts` and `npm run test:persistence` pass as upstream regressions.
 4. The task-owned application-service and local-D1 suites pass through their task-local Vitest configurations; `npm run migrate:local` succeeds against a fresh isolated local database and repeated application reports no pending migration.
-5. A traceable matrix covers establish/complete/reopen Project and Action, context facts, progress and correction, optional Action ownership, multiple Active Projects, explicit target correction, ambiguous target, invalid/unauthorized input, persistence failure, same-operation retry, conflicting duplicate, and no-cascade/no-implied-completion behavior.
+5. A traceable matrix covers establish/complete/reopen Project and Action, missing entity, fabricated caller snapshot, stale/concurrent expected state, context facts, progress and correction, optional Action ownership, ownership mismatch/reassignment, multiple Active Projects, explicit target correction, ambiguous target, invalid/unauthorized input, persistence failure, same-operation retry, conflicting duplicate, receipt alignment, and no-cascade/no-implied-completion behavior.
 6. Failure injection proves the service reports accepted success only after durable commit and issues no write for ambiguity, invalid transition, failed authorization, advice, proposal, or inference.
 7. Static import/API scans prove no D1/SQL/Worker/provider type leaks into the task-owned application service and no model, retrieval, Knowledge, export/deletion, provider, network, or extra-service implementation appears.
 8. A changed-path scan proves only the three exclusive roots changed; protected-hash checks prove every read-only upstream file is byte-identical to the reconciled base.
@@ -136,7 +137,7 @@ An unavailable command, base mismatch, lock violation, or unstable manifest is e
 
 ## Independent review
 
-**Required result:** fresh full product-semantic and persistence-boundary review by an actor independent of the Builder, with Strong Semantic Reasoning.
+**Required result:** fresh full product-semantic and persistence-boundary review by an actor independent of the Builder, with Strong Semantic Reasoning. The accepted upstream repair changes the persistence authority composition, so a targeted F003-only recheck is insufficient.
 
 Review focuses on lifecycle fidelity, Project/Action ownership, context/progress semantics, ambiguity and explicit-correction authority, Human Control evidence, no-write boundaries, accepted-success truthfulness, retry/idempotency, adapter neutrality, downstream-scope exclusion, and exact-candidate/evidence binding. Security review is targeted to authority-evidence misuse and unintended data or secret handling. A material semantic, Human Control, persistence, security-boundary, or scope change requires fresh full review; a bounded repair may receive targeted recheck only under the Delivery Contract.
 
@@ -148,7 +149,7 @@ Controls are the narrow task roots, immutable upstream manifests, isolated Build
 
 ## Assignment and isolation
 
-- **Planner / Controller:** resolves the upstream manifestation blocker; selects and records the exact clean base; re-evaluates DoR; dispatches; owns locks, state, findings, and Delivery Record.
+- **Planner / Controller:** obtains accepted ENG-003 revision-2 evidence, selects and records the reconciled clean base, re-evaluates DoR, dispatches, and owns locks, state, findings, and Delivery Record.
 - **Builder:** one Standard Delivery worker with strong domain/application and transactional composition capability; exclusive writer only within the three allowed roots; cannot review its own candidate.
 - **Deterministic Verifier:** Deterministic Execution profile; independent read-only isolated worktree; writes only ephemeral ignored outputs.
 - **Independent Reviewer:** different actor from the Builder; Strong Semantic Reasoning; read-only exact-candidate review.
@@ -164,20 +165,22 @@ Controls are the narrow task roots, immutable upstream manifests, isolated Build
 
 ## Human Reserved boundaries
 
-Stop and prepare a Decision Packet for a Product Foundation or Runtime Architecture change, a new canonical concept/state or Human Control rule, a security-authority decision, new service/infrastructure, paid usage or billing, production provisioning/deployment/credential/destructive action, unresolved authoritative conflict, unapproved scope expansion, or development control-plane implementation. Reconciling the already accepted ENG-003 manifestation without changing it is ordinary delivery recovery, not a new Human Reserved decision.
+Stop and prepare a Decision Packet for a Product Foundation or Runtime Architecture change, a new canonical concept/state or Human Control rule, a security-authority decision, new service/infrastructure, paid usage or billing, production provisioning/deployment/credential/destructive action, unresolved authoritative conflict, unapproved scope expansion, or development control-plane implementation. Consuming the accepted ENG-003 revision-2 contract within the unchanged ENG-004 lock is ordinary authorized Engineering work, not a new Human Reserved decision.
 
 ## Definition of Ready evaluation
 
 | Delivery Contract condition | Result |
 | --- | --- |
 | Objective, authority, invariants, DoD, verification, review, assignments, and bounded context are explicit | PASS |
-| Canonical predecessors are `DONE` | PASS |
-| Accepted predecessor manifestation is present in the intended dispatch base | PASS — exact ENG-003 aggregate `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6` reproduced after integrated verification |
+| Canonical predecessors are `DONE` | FAIL — ENG-003 is reopened and its revision-2 repair is not accepted |
+| Accepted predecessor manifestation is present in the intended dispatch base | FAIL — only the historical revision-1 ENG-003 aggregate is present; the repaired aggregate does not yet exist |
 | Exclusive/read-only/forbidden paths and resource locks are explicit and disjoint from ENG-005 | PASS |
 | Human Reserved decision required to begin | PASS — none |
 
-**Task-level DoR:** `READY`. The prior sole blocker was resolved by exact ENG-003 manifestation recovery and fresh integrated verification. This state does not dispatch a Builder.
+**Task-level DoR:** `BLOCKED / NEEDS FIX`. The exact reviewed candidate exists and its deterministic evidence passed, but blocking `ENG-004-F003` requires an accepted ENG-003 revision-2 predecessor and then a bounded ENG-004 repair. This state does not dispatch a Builder.
 
 ## Prior findings
 
-No ENG-004 candidate finding exists. The upstream rejected ENG-003 manifestation is a dependency/integration blocker, not an ENG-004 work-product finding.
+- `ENG-004-F001` — historically `CLOSED` for exact reviewed aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431`; genuine local-D1 evidence/harness repair history is retained in the Delivery Record.
+- `ENG-004-F002` — historically `CLOSED` for the same exact aggregate; lifecycle/target/failure matrix repair history is retained in the Delivery Record.
+- `ENG-004-F003` — `OPEN — BLOCKING`; caller-supplied Project/Action state was treated as proof of authoritative prior lifecycle before put/upsert persistence. Upstream repair is routed to ENG-003 revision 2; downstream ENG-004 repair remains inside the unchanged three-root lock.
