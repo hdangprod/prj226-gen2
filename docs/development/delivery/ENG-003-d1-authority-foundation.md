@@ -112,6 +112,14 @@ The independent persistence/data-boundary reviewer answered **NO** to whether ca
 
 `ENG-003-F001` is **CLOSED** for `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6`.
 
+## Manifestation recovery — 2026-08-13
+
+The canonical dispatch worktree was found to contain the rejected initial thirteen-file manifestation `450730fa653a4781797a0b6ac54cd4a7d91e9e9d0c78c888ffb4404595267036`, while this Delivery Record has always identified `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6` as the accepted candidate. This was a manifestation discrepancy, not a new candidate or an ENG-003 reconstruction.
+
+The accepted source was recovered from Git commit `4bfc836f67dd73f5bf2db30dce168f7c578c16a8`, preserved under local ref `recovery/eng-003-accepted`, and restored by exact path-scoped Git recovery only. All thirteen component hashes and aggregate `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6` reproduced before and after fresh integrated verification. The ENG-002 manifest `a0c4613503812ece55e20c2da616b21df165ee5d2ec77b6f8ed5b8381d68319f` and ENG-008 manifest `5fb3343b2a531782ef83d7c874ec95ae221676a700f4c92b3d77591de39c1696` also reproduced unchanged.
+
+Fresh integrated evidence on the intended dispatch base passed clean install, typecheck, lint, root tests, ENG-002 (`37/37`), ENG-003 persistence (`31/31`), build, smoke, dependency listing, and local-only D1 migration (`24` commands) followed by no-pending-migration reapplication. The existing targeted review remains valid under the Delivery Contract: the accepted candidate bytes and semantic scope did not change, and no integration defect was found. `ENG-003` remains `DONE`.
+
 ## Repair and recheck history
 
 Completion was not a first-pass success. The following candidate sequence is retained as historical delivery provenance; only the final candidate above is accepted.

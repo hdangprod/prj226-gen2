@@ -22,13 +22,11 @@ export type AcceptedStateWrite =
   | { readonly kind: "put-progress"; readonly progress: AcceptedProgress }
   | {
       readonly kind: "correct-progress";
-      readonly prior: AcceptedProgress;
       readonly successor: AcceptedProgress;
     }
   | { readonly kind: "put-knowledge"; readonly item: KnowledgeItem }
   | {
       readonly kind: "correct-knowledge";
-      readonly prior: KnowledgeItem;
       readonly successor: KnowledgeItem;
     };
 

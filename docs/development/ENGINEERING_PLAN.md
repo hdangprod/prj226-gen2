@@ -6,7 +6,7 @@
 
 **Plan revision:** 1
 
-**Last updated:** 2026-08-12
+**Last updated:** 2026-08-13
 
 **Decision owner:** `github:hdangprod`
 
@@ -103,15 +103,15 @@ The arrows express implementation dependencies, not product roadmap or release p
 
 ## Task state and evidence matrix
 
-No task is `RUNNING`. `ENG-001`, `ENG-002`, `ENG-003`, and `ENG-008` are `DONE`. `ENG-004` and `ENG-005` now have their listed implementation predecessor complete but remain `PROPOSED`: neither has a Task Packet or task-level Definition of Ready re-evaluation. `ENG-009` likewise remains `PROPOSED` because it has no Task Packet or task-level Definition of Ready re-evaluation. All other nodes remain `PROPOSED` pending their listed predecessors and a complete Ready Task Packet.
+No task is `RUNNING`. `ENG-001`, `ENG-002`, `ENG-003`, and `ENG-008` are `DONE`. `ENG-004` and `ENG-005` have complete revision 1 Task Packets and are `READY` after exact ENG-003 manifestation recovery and fresh integrated verification. `ENG-009` remains `PROPOSED` because it has no Task Packet or task-level Definition of Ready re-evaluation. All other nodes remain `PROPOSED` pending their listed predecessors and a complete Ready Task Packet.
 
 | Task | Objective and dependencies | State | Risk and required review | Primary deterministic evidence |
 | --- | --- | --- | --- | --- |
 | `ENG-001` | Establish the locked TypeScript/Workers toolchain, one deployable shell, local/test configuration, and repository verification interface. Depends on `GOV-018` and this plan. | `DONE` | MODERATE; independent architecture/configuration review required | Clean install; typecheck; lint; unit and smoke tests; build; configuration, forbidden-dependency/service, secret, and whitespace checks; [Delivery Record](delivery/ENG-001-runtime-foundation.md) |
 | `ENG-002` | Implement the pure domain/application kernel and operation-result contracts. Depends on `ENG-001 DONE`. | `DONE` — exact candidate manifest `a0c4613503812ece55e20c2da616b21df165ee5d2ec77b6f8ed5b8381d68319f`; verification PASS; review GREEN | HIGH product-semantic risk; strong independent semantic review complete | Transition and invariant matrices; no-mutation proposal/inference/failure tests; no extra state, hierarchy, taxonomy, provider, or infrastructure types; [Delivery Record](delivery/ENG-002-domain-application-kernel.md) |
 | `ENG-003` | Create the minimal D1 schema/migrations, persistence port and adapter, constraints, atomic accepted writes, retry/idempotency, and false-success defenses. Depends on `ENG-002`. | `DONE` — exact candidate manifest `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6`; verification PASS; targeted review GREEN | HIGH persistence/migration/data risk; independent persistence review complete | Fresh migration; constraint and adapter-contract tests; commit failure injection; duplicate/retry and partial-failure tests; adapter-boundary scan; [Delivery Record](delivery/ENG-003-d1-authority-foundation.md) |
-| `ENG-004` | Deliver Project, Action, accepted progress/context, lifecycle, target, and resumption mutation behavior. Depends on `ENG-002`, `ENG-003`. | `PROPOSED` | HIGH lifecycle/human-control risk; independent product-semantic review required | Domain plus local-D1 tests for establish/complete/reopen, no cascade, progress not completion, ambiguity no-write, truthful failure/retry |
-| `ENG-005` | Deliver intentional Knowledge capture, origin provenance, correction, supersession chains, and current standing. Depends on `ENG-002`, `ENG-003`. | `PROPOSED` | HIGH data-semantic risk; independent semantic/data review required | Origin immutability, atomic correction, chain/currentness, unrelated-item isolation, no casual capture, failure/duplicate tests |
+| `ENG-004` | Deliver Project, Action, accepted progress/context, lifecycle, target, and resumption mutation behavior. Depends on `ENG-002`, `ENG-003`. | `READY` — Task Packet revision 1 complete; accepted ENG-003 manifestation reproduced and integrated verification passed | HIGH lifecycle/human-control risk; independent product-semantic review required | Domain plus local-D1 tests for establish/complete/reopen, no cascade, progress not completion, ambiguity no-write, truthful failure/retry |
+| `ENG-005` | Deliver intentional Knowledge capture, origin provenance, correction, supersession chains, and current standing. Depends on `ENG-002`, `ENG-003`. | `READY` — Task Packet revision 1 complete; accepted ENG-003 manifestation reproduced and integrated verification passed | HIGH data-semantic risk; independent semantic/data review required | Origin immutability, atomic correction, chain/currentness, unrelated-item isolation, no casual capture, failure/duplicate tests |
 | `ENG-006` | Deliver simplest-sufficient direct-SQL retrieval and accepted-context resumption with provenance, currentness, bounded cross-Project reuse, and uncertainty. Depends on `ENG-003`, `ENG-004`, `ENG-005`. | `PROPOSED` | MODERATE-HIGH retrieval/architecture risk; independent semantic/architecture review required | Query fixtures; superseded/deleted exclusion; qualified historical result; origin preservation; transient-session-loss recovery; no vector/search/cache dependency scan |
 | `ENG-007` | Deliver authoritative export and clear-scope, separately confirmed deletion with visible partial-failure/retry behavior. Depends on `ENG-003` through `ENG-006` as applicable. | `PROPOSED` | HIGH destructive/data-control risk; fresh independent review required | Export-authority equality; no delete before confirmation; injected failure no-change/no-false-success; post-delete retrieval; duplicate/retry and provenance-chain tests |
 | `ENG-008` | Define the Liam-owned provider-neutral Model Capability Port and deterministic model double with bounded context, uncertainty, proposal, and normalized failure outcomes. Depends on `ENG-002`. | `DONE` — exact candidate manifest `5fb3343b2a531782ef83d7c874ec95ae221676a700f4c92b3d77591de39c1696`; verification PASS; review GREEN | HIGH architecture/data-boundary risk; independent boundary/security review complete | Port contract tests; context-minimization and secret-exclusion fixtures; proposal-no-write checks; provider-free import/API scan; [Delivery Record](delivery/ENG-008-model-capability-port.md) |
@@ -139,6 +139,8 @@ Delivery Records are maintained under [`docs/development/delivery/`](delivery/) 
 | [`ENG-001 — Runtime and Tooling Foundation`](tasks/ENG-001-runtime-foundation.md) | 1 | `DONE` | Verification PASS, independent review GREEN, and durable Delivery Record are complete. |
 | [`ENG-002 — Domain and Application Kernel`](tasks/ENG-002-domain-application-kernel.md) | 1 | `DONE` | Exact candidate recorded; verification PASS; independent review GREEN; durable Delivery Record complete. |
 | [`ENG-003 — D1 Authority Foundation`](tasks/ENG-003-d1-authority-foundation.md) | 1 | `DONE` | Exact final candidate recorded; deterministic verification PASS; independent persistence/data-boundary review GREEN; complete repair/recheck history and durable Delivery Record present. |
+| [`ENG-004 — Project/Action/context slice`](tasks/ENG-004-project-action-context-slice.md) | 1 | `READY` | Exact ENG-003 manifestation reproduced and integrated verification passed; dispatch remains subject to its explicit isolated Builder assignment. |
+| [`ENG-005 — Knowledge/provenance slice`](tasks/ENG-005-knowledge-provenance-slice.md) | 1 | `READY` | Exact ENG-003 manifestation reproduced and integrated verification passed; dispatch remains subject to its explicit isolated Builder assignment. |
 | [`ENG-008 — Model Capability Port and Deterministic Double`](tasks/ENG-008-model-capability-port.md) | 1 | `DONE` | Exact final candidate recorded; deterministic verification PASS; independent boundary/security review GREEN; durable Delivery Record complete. |
 
 The first execution wave is deliberately serial:
@@ -147,15 +149,44 @@ The first execution wave is deliberately serial:
 2. Its verification and independent review were bound to the exact candidate, the historical manifest-ordering mismatch was resolved as provenance recovery, and its Delivery Record was closed before `DONE`.
 3. `ENG-002` established the semantic contract fork point used by persistence and model work; its exact candidate passed deterministic verification and independent semantic review, and its Delivery Record is closed.
 4. `ENG-008` subsequently completed with exact-candidate deterministic PASS and independent boundary/security review GREEN. Its completion satisfies `ENG-009`'s listed implementation predecessors, but `ENG-009` has no Task Packet and remains `PROPOSED`.
-5. `ENG-003` subsequently completed on exact candidate manifest `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6` after final deterministic PASS, targeted review GREEN, and closure of `ENG-003-F001` and `ENG-003-F001-R1`. Its completion satisfies the listed implementation predecessors of `ENG-004` and `ENG-005`, but neither has a Task Packet or task-level DoR; both remain `PROPOSED`. This controller update dispatches no Builder.
+5. `ENG-003` subsequently completed on exact candidate manifest `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6` after final deterministic PASS, targeted review GREEN, and closure of `ENG-003-F001` and `ENG-003-F001-R1`. Its completion satisfies the canonical predecessor lifecycle requirement of `ENG-004` and `ENG-005`.
+6. Planning preparation created complete revision 1 Task Packets and disjoint prospective locks for `ENG-004` and `ENG-005`. On 2026-08-13, the Controller recovered the accepted ENG-003 manifestation from `4bfc836f67dd73f5bf2db30dce168f7c578c16a8`, reproduced aggregate `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6`, and completed fresh integrated verification. Both packets therefore pass DoR and are `READY`; this controller update dispatches no Builder.
 
-The initial `ENG-001` and `ENG-002` wave was deliberately serial while the implementation and test conventions were being established. After `ENG-002 DONE`, `ENG-003` and `ENG-008` were the first safe parallel pair. With both now `DONE`, no task is currently `READY`: `ENG-004`, `ENG-005`, and `ENG-009` each require its own bounded Task Packet and task-level DoR before dispatch can be evaluated.
+The initial `ENG-001` and `ENG-002` wave was deliberately serial while the implementation and test conventions were being established. After `ENG-002 DONE`, `ENG-003` and `ENG-008` were the first safe parallel pair. `ENG-004` and `ENG-005` are now independently `READY`; `ENG-009` still requires a separate Task Packet and task-level DoR.
+
+## ENG-004 / ENG-005 preparation and lock disposition
+
+The packets assign disjoint prospective Builder ownership:
+
+| Task | Exclusive source lock | Exclusive test locks |
+| --- | --- | --- |
+| `ENG-004` | `src/application/services/projectActionContext/**` | `tests/application/services/projectActionContext/**`; `tests/integration/d1/projectActionContext/**` |
+| `ENG-005` | `src/application/services/knowledgeProvenance/**` | `tests/application/services/knowledgeProvenance/**`; `tests/integration/d1/knowledgeProvenance/**` |
+
+Both tasks consume `src/domain/**`, `src/application/contracts/**`, `src/application/ports/persistence/**`, `src/infrastructure/d1/**`, `migrations/0001_authoritative_state.sql`, existing regression tests/helpers, root configuration, dependency files, and `src/index.ts` as read-only accepted upstream state. Each task keeps its Vitest configuration, fixtures, local D1 state, and manifest evidence inside its own isolated worktree and task-owned test roots.
+
+| Collision-prone surface | Classification | Reason |
+| --- | --- | --- |
+| Shared `index.ts` / barrel exports | `AVOIDABLE` | Task services are imported directly by task tests; shared barrels and `src/index.ts` are protected. Later `ENG-010` owns composition. |
+| Common application ports | `READ_ONLY_SHARED` | Both consume the accepted ENG-003 persistence port without changing it. |
+| Common application services | `AVOIDABLE` | Each slice owns a distinct new service root; no common service is required. |
+| Shared domain types and Human Control contracts | `READ_ONLY_SHARED` | ENG-002 is complete authority and must remain unchanged. |
+| Worker entrypoint/composition root | `DEFER_INTEGRATION` | `ENG-010` is the existing DAG convergence/integration owner; neither vertical slice modifies `src/index.ts`. |
+| Package scripts, `package.json`, lockfile, and root test configuration | `AVOIDABLE` | Existing binaries/commands and task-local Vitest configuration suffice; root files are protected. |
+| Test helpers and fixtures | `AVOIDABLE` | Existing upstream helpers are read-only; new fixtures/harnesses stay task-local. |
+| Infrastructure composition and local emulator state | `READ_ONLY_SHARED` | Accepted D1 configuration/adapter/migration are immutable inputs; separate worktrees and local D1 state prevent resource collision. |
+| Persistence integration paths | `READ_ONLY_SHARED` | Both use the same accepted port/adapter/schema but own no persistence-foundation write. |
+| Model capability integration paths | `READ_ONLY_SHARED` | Neither task needs model paths; they are prohibited from changing them. |
+
+The accepted ENG-003 base is reconciled and both packets pass DoR without amendment. These locks support parallel isolated Builders and reviewers. The current binding disposition is:
+
+`ENG-004/ENG-005 DISPATCH: PARALLEL_SAFE`
 
 ## Concurrency and writer isolation
 
 - Every writing task receives one active Builder and exclusive ownership of the exact paths in its Task Packet.
 - `ENG-003` persistence work and `ENG-008` model-port work were concurrency-safe after `ENG-002` because their adapter, port, and test paths were disjoint; both are now `DONE`.
-- `ENG-004` Project/Action/context and `ENG-005` Knowledge/provenance work may proceed concurrently after `ENG-003` only after each has an explicit Task Packet and task-level DoR that confirms their declared application-module and test locks remain disjoint.
+- `ENG-004` Project/Action/context and `ENG-005` Knowledge/provenance have disjoint source/test locks and may proceed concurrently in isolated worktrees; neither changes shared roots, barrels, configuration, persistence, or composition.
 - `ENG-006` waits for both vertical slices so retrieval cannot invent incomplete state contracts. `ENG-007` waits for retrieval and persistence so deletion/export evidence covers actual authority paths.
 - `ENG-010` is the integration convergence point and is serialized against its predecessors. `ENG-011` has intentionally broad runtime instrumentation scope and receives a single exclusive writer.
 - Read-only verification and review may run concurrently only when independence, exact-candidate binding, and evidence integrity remain intact.
@@ -205,7 +236,8 @@ Ordinary source layout, TypeScript types, table and index design, ordered migrat
 ## Blockers, findings, and planning outcome
 
 - **Current blocking Human Decision Packets:** None.
-- **Current task state:** No task is `READY` or `RUNNING`. `ENG-003` is `DONE` with durable exact-candidate verification/review/recheck evidence. `ENG-004` and `ENG-005` have their implementation predecessor satisfied but remain `PROPOSED` until each has a bounded Task Packet and task-level DoR re-evaluation. `ENG-009` has `ENG-001` and `ENG-008` DONE but likewise remains `PROPOSED` until its Task Packet and DoR exist. Later tasks await their listed Engineering predecessors; these are ordinary DAG dependencies, not Human Reserved blockers.
+- **Current task state:** `ENG-004` and `ENG-005` are `READY` and no task is `RUNNING`. `ENG-003` remains canonically `DONE` with durable exact-candidate verification/review/recheck evidence; its accepted manifestation has been recovered and freshly verified. `ENG-009` has `ENG-001` and `ENG-008` DONE but remains `PROPOSED` until its separate Task Packet and DoR exist. Later tasks retain their declared dependencies.
+- **Manifestation recovery:** The Controller recovered the already accepted thirteen-file ENG-003 candidate into the intended dispatch base, reproduced its component and aggregate hashes, and reran the contracted integrated verification. This was ordinary delivery recovery and path/integration control; it changed no Product or Runtime Architecture authority and required no Human Reserved decision.
 - **Intentionally absent semantics:** Project abandonment or Action withdrawal, extra planning hierarchy, non-project knowledge, knowledge taxonomy/promotion, permanent recommendation precedence, and deletion undo remain unmodeled and must not be invented.
 - **Current external condition:** `ENG-013` later requires free non-production Workers AI access plus current data-use, retention, caching/storage, hosted-state, training/improvement, and license/terms evidence. This does not block `ENG-001` through deterministic acceptance.
 - **Delivery boundary confirmation:** The initial planning session created only planning/governance artifacts. The later `ENG-001` candidate is limited to its approved runtime-foundation scope and has no schema, migration, provider call, remote resource, credential, deployment, paid-service, or control-plane implementation. This state update starts no Builder work.
