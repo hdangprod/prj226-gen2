@@ -6,7 +6,7 @@
 
 **Task Packet revision:** 1
 
-**Current task state:** `READY` in [Engineering Plan revision 1](../ENGINEERING_PLAN.md)
+**Current task state:** `BLOCKED` in [Engineering Plan revision 1](../ENGINEERING_PLAN.md) pending repaired shared-persistence reconciliation
 
 **Authorization:** `GOV-018`
 
@@ -42,7 +42,7 @@ Canonical implementation predecessors, and no others, are:
 1. `ENG-002` — `DONE`; exact accepted sixteen-file manifest `a0c4613503812ece55e20c2da616b21df165ee5d2ec77b6f8ed5b8381d68319f`.
 2. `ENG-003` — `DONE`; exact accepted thirteen-file manifest `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6`, lockfile SHA-256 `445fd78c4279e62c210b8005aa4406070a832c740bfa5c905deede3b6d230ab6`, and migration SHA-256 `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`.
 
-Both predecessor lifecycle states and accepted manifestations are canonically satisfied. On 2026-08-13, the Controller recovered the exact ENG-003 candidate from `4bfc836f67dd73f5bf2db30dce168f7c578c16a8`, reproduced its component and aggregate hashes, and passed fresh integrated deterministic verification on this dispatch base. This packet still does not itself dispatch Builder work.
+The exact ENG-003 revision-1 manifestation above remains historical accepted evidence. ENG-003 is now reopened under Task Packet revision 2 because downstream review exposed a persistence-owned authoritative lifecycle-transition defect. That repair changes files this packet treats as protected shared dependencies. ENG-005 has no Knowledge-semantic finding and its exclusive lock is unchanged, but dispatch/final evidence must wait for the accepted repaired persistence candidate and readiness reconciliation. This packet does not dispatch Builder work.
 
 No Human Reserved decision or external resource is otherwise required.
 
@@ -150,7 +150,7 @@ Controls are the narrow task roots, immutable upstream manifests, isolated Build
 
 ## Assignment and isolation
 
-- **Planner / Controller:** resolves the upstream manifestation blocker; selects and records the exact clean base; re-evaluates DoR; dispatches; owns locks, state, findings, and Delivery Record.
+- **Planner / Controller:** obtains accepted ENG-003 revision-2 evidence, selects and records the reconciled clean base, re-evaluates DoR, dispatches, and owns locks, state, findings, and Delivery Record.
 - **Builder:** one Standard Delivery worker with strong domain/application, provenance, and transactional composition capability; exclusive writer only within the three allowed roots; cannot review its own candidate.
 - **Deterministic Verifier:** Deterministic Execution profile; independent read-only isolated worktree; writes only ephemeral ignored outputs.
 - **Independent Reviewer:** different actor from the Builder; Strong Semantic Reasoning; read-only exact-candidate review.
@@ -166,19 +166,19 @@ Controls are the narrow task roots, immutable upstream manifests, isolated Build
 
 ## Human Reserved boundaries
 
-Stop and prepare a Decision Packet for a Product Foundation or Runtime Architecture change, a new Knowledge taxonomy/state/origin/correction/Human Control rule, a security-authority decision, new service/infrastructure, paid usage or billing, production provisioning/deployment/credential/destructive action, unresolved authoritative conflict, unapproved scope expansion, or development control-plane implementation. Reconciling the already accepted ENG-003 manifestation without changing it is ordinary delivery recovery, not a new Human Reserved decision.
+Stop and prepare a Decision Packet for a Product Foundation or Runtime Architecture change, a new Knowledge taxonomy/state/origin/correction/Human Control rule, a security-authority decision, new service/infrastructure, paid usage or billing, production provisioning/deployment/credential/destructive action, unresolved authoritative conflict, unapproved scope expansion, or development control-plane implementation. Reconciling the accepted ENG-003 revision-2 manifestation without changing Knowledge semantics or this packet's lock is ordinary delivery recovery, not a new Human Reserved decision.
 
 ## Definition of Ready evaluation
 
 | Delivery Contract condition | Result |
 | --- | --- |
 | Objective, authority, invariants, DoD, verification, review, assignments, and bounded context are explicit | PASS |
-| Canonical predecessors are `DONE` | PASS |
-| Accepted predecessor manifestation is present in the intended dispatch base | PASS — exact ENG-003 aggregate `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6` reproduced after integrated verification |
+| Canonical predecessors are `DONE` | FAIL — ENG-003 is reopened and its revision-2 repair is not accepted |
+| Accepted predecessor manifestation is present in the intended dispatch base | FAIL — only the historical revision-1 ENG-003 aggregate is present; the repaired aggregate does not yet exist |
 | Exclusive/read-only/forbidden paths and resource locks are explicit and disjoint from ENG-004 | PASS |
 | Human Reserved decision required to begin | PASS — none |
 
-**Task-level DoR:** `READY`. The prior sole blocker was resolved by exact ENG-003 manifestation recovery and fresh integrated verification. This state does not dispatch a Builder.
+**Task-level DoR:** `BLOCKED`. The accepted repaired ENG-003 revision-2 manifestation is not yet available for protected-hash reconciliation and final evidence binding. No Knowledge-semantic repair or lock expansion is authorized.
 
 ## Prior findings
 

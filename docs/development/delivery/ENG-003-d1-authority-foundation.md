@@ -6,9 +6,9 @@
 
 **Task ID:** `ENG-003`
 
-**Task Packet revision:** 1
+**Task Packet revision:** 2 (reopened repair); revision 1 remains the completed historical baseline below
 
-**Current lifecycle state:** `DONE`
+**Current lifecycle state:** `READY` — reopened for bounded upstream repair of `ENG-004-F003`
 
 **Authorization:** `GOV-018`
 
@@ -18,7 +18,15 @@
 
 **Recorded:** 2026-08-12
 
-## Delivery outcome
+## Reopening disposition — 2026-08-13
+
+Independent review of exact downstream ENG-004 aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431` identified blocking `ENG-004-F003`: caller-supplied Project/Action snapshots could be transformed and submitted through revision-1 put/upsert writes without authoritative proof that the entity already existed in the expected lifecycle. The missing capability belongs to the persistence port/D1 adapter boundary owned by ENG-003.
+
+This is both a newly discovered defect in the accepted upstream persistence boundary and an omitted capability required by ENG-004. It does not invalidate or erase the exact revision-1 candidate, its then-passing evidence, or closed `ENG-003-F001` / `ENG-003-F001-R1` history. It does invalidate ENG-003's current `DONE` lifecycle claim until the bounded revision-2 repair passes fresh deterministic verification and fresh full independent persistence/data-boundary review.
+
+The revision-2 repair is `READY` and not dispatched. Its exact lock is `src/application/ports/persistence/**`, `src/infrastructure/d1/**`, `tests/application/ports/persistence/**`, and `tests/infrastructure/d1/**`. Migrations, root files, domain/contracts, ENG-004, ENG-005, and every other path are protected. No Human Reserved decision is required because the repair implements already approved lifecycle and authoritative-persistence semantics without changing product or architecture authority.
+
+## Revision-1 delivery outcome (historical accepted baseline)
 
 `ENG-003` completed its bounded D1 authority-foundation scope after a sequence of persistence-boundary repairs and independent rechecks. The accepted result supplies the application-owned persistence port, ordered D1 migration, D1-local adapter and types, atomic accepted-write behavior, safe duplicate/retry behavior, and false-success defenses required by its Task Packet. It creates no downstream vertical slice, retrieval, export/deletion, model/provider, interaction, observability, production, paid-service, credential, or control-plane capability.
 
@@ -118,7 +126,7 @@ The canonical dispatch worktree was found to contain the rejected initial thirte
 
 The accepted source was recovered from Git commit `4bfc836f67dd73f5bf2db30dce168f7c578c16a8`, preserved under local ref `recovery/eng-003-accepted`, and restored by exact path-scoped Git recovery only. All thirteen component hashes and aggregate `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6` reproduced before and after fresh integrated verification. The ENG-002 manifest `a0c4613503812ece55e20c2da616b21df165ee5d2ec77b6f8ed5b8381d68319f` and ENG-008 manifest `5fb3343b2a531782ef83d7c874ec95ae221676a700f4c92b3d77591de39c1696` also reproduced unchanged.
 
-Fresh integrated evidence on the intended dispatch base passed clean install, typecheck, lint, root tests, ENG-002 (`37/37`), ENG-003 persistence (`31/31`), build, smoke, dependency listing, and local-only D1 migration (`24` commands) followed by no-pending-migration reapplication. The existing targeted review remains valid under the Delivery Contract: the accepted candidate bytes and semantic scope did not change, and no integration defect was found. `ENG-003` remains `DONE`.
+Fresh integrated evidence on the intended dispatch base passed clean install, typecheck, lint, root tests, ENG-002 (`37/37`), ENG-003 persistence (`31/31`), build, smoke, dependency listing, and local-only D1 migration (`24` commands) followed by no-pending-migration reapplication. The existing targeted review remained valid for the exact revision-1 candidate at that lifecycle point: its bytes and then-reviewed semantic scope did not change, and no integration defect was found. ENG-003 was `DONE` before the later F003 reopening recorded above.
 
 ## Repair and recheck history
 
@@ -149,6 +157,6 @@ No Human Reserved intervention was required for closure. No Product authority ch
 
 All applicable Delivery Contract and Task Packet Definition of Done conditions are satisfied: authorized scope is complete; no unauthorized scope expansion is present; deterministic verification passed; durable evidence is bound to the exact candidate; independent review is GREEN; all blocking findings and required rechecks passed; the reviewed candidate is identifiable; no Human Reserved approval was required; write/integration conflicts are resolved; and the result is reconstructible without transient conversation history.
 
-**Controller disposition:** `ENG-003 → DONE` under Delivery Contract revision 1.
+**Historical revision-1 Controller disposition:** `ENG-003 → DONE` under Delivery Contract revision 1. The current lifecycle is the reopened revision-2 `READY` state recorded at the top of this Delivery Record.
 
 This closure does not modify the accepted candidate, dispatch a downstream Builder, create a downstream task ID, implement downstream functionality, merge a branch, modify Runtime Architecture, deploy, provision infrastructure, or activate any external, paid, production, or control-plane action.
