@@ -8,7 +8,7 @@
 
 **Task Packet revision:** 2
 
-**Current lifecycle state:** `READY — REBUILD_AUTHORIZED`; no Builder has been dispatched and no new candidate exists
+**Current lifecycle state:** `READY — BOUNDED_REPAIR_AUTHORIZED`; regenerated candidate `676bd5c5e2fd8daf245602b43e2d72e5230f5c3b` has a blocking finite Bearer-material discriminator defect; ENG-005 is not `DONE`
 
 **Authorization:** `GOV-018`
 
@@ -62,3 +62,41 @@ No Human Reserved decision is required: the rebuild changes no Product Foundatio
 The required sequence is: Builder reconstruction from the current canonical base → fresh **full** deterministic verification, including genuine local-D1 evidence and immutable upstream/lock checks → fresh **full** independent semantic/data and persistence-boundary review → Controller closure only if all Delivery Contract Definition of Done conditions are met. Review validity cannot be inherited from the lost historical candidate.
 
 `ENG-006` and every later dependency-bound task remain undispatched; `ENG-009` remains `PROPOSED`.
+
+## ENG-005 revision-2 V001 Controller disposition — 2026-08-14
+
+**Disposition:** `ENG-005 V001 CONTROLLER: BOUNDED_REPAIR_AUTHORIZED`
+
+The canonical controller `HEAD` before this disposition was `a13801e126fc58a56f1a076ee7d8efc77017dc3c`. The pre-repair regenerated ENG-005 candidate is commit `676bd5c5e2fd8daf245602b43e2d72e5230f5c3b`, tree `825c739ecf248860c138c67b1f30dbbc74d65610`, aggregate `28b104136e5b47dd267be611aeddd9df0873a0d3791ffc7973bb2cd6ea108d91`, and rebuild base `a13801e126fc58a56f1a076ee7d8efc77017dc3c`. It is `NOT DONE`.
+
+Fresh V001 deterministic verification previously returned `ENG-005 REV2 VERIFICATION: FAIL` with blocking evidence gap `ENG-005-REV2-V001`. The evidence-only Builder disposition was `ENG-005 REV2 V001 REPAIR: BLOCKED — PRODUCTION_DEFECT_DISCOVERED`: `npm run typecheck` passed, while `npx vitest run --config tests/application/services/knowledgeProvenance/vitest.config.ts` passed 16 of 17 tests. That evidence work changed no production code.
+
+### Finding and authority
+
+`ENG-005-REV2-F002` is **BLOCKING — WORK_PRODUCT_DEFECT**. The V001 evidence repair showed that the candidate's finite Bearer pattern treats `Bearer authentication` as actual authentication material. The explicit reproducer, `Bearer authentication is documented here without any token material.`, was prohibited on capture instead of accepted. This is a production semantic defect, not merely an evidence gap.
+
+The violated authority is Task Packet revision-2 invariant 11 and Verification Contract check 8, together with `DATA-001` and `PI-DATA-005`. Those sources require that credentials, authentication secrets, private keys, access tokens, and equivalent authentication material are outside intended Knowledge capture, while the finite service-local guard must not reject ordinary prose for an isolated word such as `password` or `access token`. `ENG-005-F001` remains historical closed provenance for that same finite-guard boundary; its protections must be re-established for the regenerated candidate.
+
+`GOV-018` authorizes the smallest correction entirely inside the existing ENG-005 lock. It enforces already-approved data-control and Knowledge eligibility semantics, changes no Product Foundation, Domain Model, Runtime Architecture, security-authority decision, service/infrastructure boundary, migration, or protected upstream artifact, and therefore needs **no Human Reserved disposition**.
+
+### Bounded repair contract
+
+The next Builder may modify only:
+
+- `src/application/services/knowledgeProvenance/**`;
+- `tests/application/services/knowledgeProvenance/**`; and
+- `tests/integration/d1/knowledgeProvenance/**`.
+
+It must make the smallest correction that distinguishes actual Bearer authentication material from ordinary explanatory prose. It must reject realistic synthetic Bearer-material forms, including canonical equivalents of `Authorization: Bearer <synthetic-token>` and `Bearer <synthetic-token>`, on both capture and correction with no commit, receipt, successor, or standing change. It must accept the explicit benign-Bearer reproducer where otherwise valid, and retain/add Task Packet-required ordinary `password` and `access token` prose controls. The repair must recognize actual material structure, not introduce a token-vocabulary denylist, generalized DLP, entropy analysis, external scanner, vendor-token catalog, ML classifier, generic security architecture, or user self-classification bypass.
+
+All paths and topics outside that lock remain prohibited, including ENG-003, ENG-004, the persistence port, D1 adapter, migration, domain/contracts, root configuration, governance authority, provider/model, retrieval, deployment, and downstream work. Accepted upstream identities remain immutable: ENG-003 aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`, ENG-004 aggregate `6be8bc2b4d58cd1a0e9be7ea6a3762dafee0aa5a26796bb8e97214e48c1725c2`, and migration `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`.
+
+### V001 evidence and required gates
+
+The isolated V001 evidence worktree at `builder/eng-005-rev2-v001-evidence` contains uncommitted task-local test changes. They are reviewable evidence input only and are not canonical candidate bytes. The next Builder starts fresh from the exact pre-repair candidate, selectively incorporates only tests within the authorized lock, and produces a new candidate commit, tree, per-file manifest, and aggregate; temporary worktree state must not be adopted by identity accident.
+
+The full V001 matrix remains required after the repair: invalid or missing correction authorization; missing, ambiguous, non-current, and cyclic correction targets; multi-step lineage; unrelated-item isolation; invalid originating Project; correction durability failure and atomic rollback; real-D1 operation-ID conflict and malformed retry; explicit Bearer material; and representative credential, password, and authentication-secret material, with their required benign prose controls. Any additional V001 test that exposes a separate production semantic defect outside the Bearer discriminator requires an immediate stop and `BLOCKED — ADDITIONAL_PRODUCTION_DEFECT_DISCOVERED`; it cannot be folded into this repair.
+
+Because production code changes, the replacement candidate requires fresh **full** deterministic verification under the whole Task Packet Verification Contract, not targeted verification and not historical verifier evidence. It then requires a fresh **full** independent semantic/data and persistence-boundary review before Controller closure. ENG-005 must not be marked `DONE` until every applicable Delivery Contract DoD condition is independently satisfied. `ENG-006` and later dependency-bound work remain unauthorized/undispatched.
+
+**Exact next Builder state:** `READY — BOUNDED_REPAIR_AUTHORIZED`; start from `676bd5c5e2fd8daf245602b43e2d72e5230f5c3b`, repair only the Bearer-material discriminator and task-scoped evidence inside the three permitted roots, produce a new candidate, then complete the required full gates.
