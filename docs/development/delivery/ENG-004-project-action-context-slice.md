@@ -26,6 +26,8 @@ Exact ENG-004 aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f41425484
 
 `ENG-004-F003` is `OPEN — BLOCKING`. ENG-004 is not `DONE`, but the accepted ENG-003 revision-2 baseline removes its upstream prerequisite.
 
+The original F003-repair dispatch then identified a delivery recovery defect: the historical reviewed seven-file ENG-004 implementation/test slice had never been manifested into canonical state, so a bounded repair had no valid target. No Builder file was modified. The Controller recovered the exact historical bytes and returned the task to `READY_FOR_BOUNDED_REPAIR`; this recovery is not a new candidate, verification pass, review pass, finding closure, or ENG-004 acceptance.
+
 ## Candidate identity and evidence state
 
 | Identity | Value |
@@ -40,6 +42,26 @@ Exact ENG-004 aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f41425484
 
 The verified candidate remained stable through deterministic verification and review. This record does not copy the candidate into the canonical branch, modify it, or accept it.
 
+## Historical candidate recovery — 2026-08-13
+
+Controller recovery began from canonical base `9296deedc43426f0df5668fe1ed78112d4818e7d`. It inspected all local Git refs, reflogs, stashes, registered worktrees, unreachable commits/trees/blobs, packed objects, and configured alternate-object surfaces, then compared blob content SHA-256 values rather than Git object IDs. It also inspected registered/stale task worktrees, repository recovery surfaces, plausible temporary locations, and available editor/local backup records. No Git tree contained the task root; the only matching Git-local file content was the shared `node-runtime.d.ts` byte sequence at a different ENG-003 test path. A preserved local execution record contained the original ordered `apply_patch` payloads for all seven task-owned files; applying those exact records only to an isolated Controller recovery baseline reproduced the complete historical manifest below.
+
+| SHA-256 | Recovered historical path |
+| --- | --- |
+| `f493d5e0786eaf1b88c764e96f4388f34472b62528db3b564716d26edb3cb0e8` | `src/application/services/projectActionContext/projectActionContextService.ts` |
+| `e8b5a3485e95c530779dd3e01c281e4bfdd46ec9164fdeac3d32b201b43f8c04` | `tests/application/services/projectActionContext/projectActionContextService.test.ts` |
+| `0559a46c472d03789aeb4736486e016a8c2332f05c3293ace5ce547d05a823d2` | `tests/application/services/projectActionContext/vitest.config.ts` |
+| `9d32b38caf7e6be332fdb3f580bc679825460454d08295e9a7dd8f2bf9ccfbe4` | `tests/integration/d1/projectActionContext/localD1.ts` |
+| `4edf85ee1aab36faf1a1e93be1fb6fca9aa57f29b494525465d95b5b22e8b598` | `tests/integration/d1/projectActionContext/node-runtime.d.ts` |
+| `638b4455b2906982260230c077defc41c18b532172f0ef89b294a5e90705ff95` | `tests/integration/d1/projectActionContext/projectActionContextPersistence.test.ts` |
+| `e9aa4796008099fb7786537df3b0d350d3bd84496a96badd0c51aafb10c02ef2` | `tests/integration/d1/projectActionContext/vitest.config.ts` |
+
+The recovered repository-path-sorted aggregate is exactly `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431`. ENG-003 revision 2 remains untouched: its nine-file aggregate still reproduces `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685` in the recovery baseline, and the migration is unchanged. The recovery worktree contains only the seven recovered ENG-004 task-owned files relative to the canonical base.
+
+### ENG-003 revision-2 compatibility assessment
+
+The recovered service creates and transitions Projects/Actions through legacy `put-project` and `put-action` write shapes. ENG-003 revision 2 instead exposes insert-only `create-project`/`create-action` writes and identity-plus-expected-state `transition-project`/`transition-action` writes. The recovery does not adapt either form. The required adaptation is confined to the recovered service plus task-owned service/local-D1 tests and test doubles; it remains wholly inside the existing three-root ENG-004 lock. The next Builder must start from the recovered baseline composed over ENG-003 revision 2, perform the F003 repair, and produce a new manifest. The recovered bytes are not themselves ENG-004 acceptance and are not asserted to compile or pass against ENG-003 revision 2.
+
 ## Finding history
 
 - `ENG-004-F001`: initially the required genuine local-D1 evidence was absent; a later real-D1 harness timed out; the final bounded harness repair completed repeatably against the accepted migration and authoritative readback. `CLOSED` for the exact reviewed aggregate.
@@ -52,7 +74,7 @@ F003 does not reopen F001 or F002. Their historical closure remains bound to thi
 
 F003 is both a defect in the accepted upstream authoritative-persistence boundary and an omitted persistence capability required by ENG-004. The canonical owner is ENG-003, whose packet owns the provider-neutral persistence port, D1 adapter, atomicity, receipts/idempotency, and false-success boundary. ENG-004 cannot repair that dependency under its application-service-only lock.
 
-The Controller reopened ENG-003 under Task Packet revision 2 rather than inventing a new task ID. ENG-003 revision 2 is now accepted and path-scoped manifested. ENG-004 is `READY_FOR_BOUNDED_REPAIR`; no ENG-004 implementation repair occurs in this Controller step.
+The Controller reopened ENG-003 under Task Packet revision 2 rather than inventing a new task ID. ENG-003 revision 2 is now accepted and path-scoped manifested. ENG-004 is `READY_FOR_BOUNDED_REPAIR` from the recovered historical baseline; no ENG-004 implementation repair occurs in this Controller step.
 
 ## Required downstream repair after ENG-003 acceptance
 

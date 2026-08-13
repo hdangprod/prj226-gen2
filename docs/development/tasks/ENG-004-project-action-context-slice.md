@@ -6,13 +6,13 @@
 
 **Task Packet revision:** 2
 
-**Current task state:** `READY_FOR_BOUNDED_REPAIR` in [Engineering Plan revision 1](../ENGINEERING_PLAN.md); `ENG-004-F003` remains open and blocking
+**Current task state:** `READY_FOR_BOUNDED_REPAIR` from the exact recovered historical baseline composed over canonical ENG-003 revision 2; `ENG-004-F003` remains open and blocking
 
 **Authorization:** `GOV-018`
 
 **Canonical Task Packet contract:** [Delivery Contract revision 1, Task Packet](../../../development/DELIVERY_CONTRACT.md#task-packet)
 
-This artifact populates the canonical Task Packet for `ENG-004`; it does not redefine the Task Packet schema or dispatch Builder work. Revision 2 records the upstream dependency and downstream repair constraints raised by `ENG-004-F003` without widening the task's existing write lock. Post-dispatch execution, evidence, findings, and completion state belong in the distinct [Delivery Record](../delivery/ENG-004-project-action-context-slice.md).
+This artifact populates the canonical Task Packet for `ENG-004`; it does not redefine the Task Packet schema or dispatch Builder work. Revision 2 records the upstream dependency and downstream repair constraints raised by `ENG-004-F003` without widening the task's existing write lock. The missing historical seven-file work product was subsequently recovered byte-for-byte into an isolated Controller recovery baseline; it is a repair prerequisite, not ENG-004 acceptance. Post-dispatch execution, evidence, findings, and completion state belong in the distinct [Delivery Record](../delivery/ENG-004-project-action-context-slice.md).
 
 ## Task ID
 
@@ -42,7 +42,7 @@ Canonical implementation predecessors are:
 1. `ENG-002` — `DONE`; exact accepted sixteen-file manifest `a0c4613503812ece55e20c2da616b21df165ee5d2ec77b6f8ed5b8381d68319f`.
 2. `ENG-003` — `DONE`; revision-1 aggregate `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6` remains historical accepted evidence, and accepted revision-2 aggregate is `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`; the migration remains `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`.
 
-The exact ENG-003 revision-1 candidate above remains the historical baseline against which reviewed ENG-004 aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431` was built. `ENG-004-F003` exposed a missing authoritative expected-state lifecycle-transition capability at that persistence boundary. ENG-003 revision 2 is now accepted and manifested; ENG-004 may receive its bounded repair after recording the reconciled predecessor identity.
+The exact ENG-003 revision-1 candidate above remains the historical baseline against which reviewed ENG-004 aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431` was built. `ENG-004-F003` exposed a missing authoritative expected-state lifecycle-transition capability at that persistence boundary. The historical seven-file aggregate was never manifested into the canonical branch, but Controller recovery reproduced every recorded file hash and the exact aggregate in an isolated baseline on canonical base `9296deedc43426f0df5668fe1ed78112d4818e7d`. ENG-003 revision 2 is accepted and manifested; the next Builder starts from that recovered baseline composed over ENG-003 rev2, not from an empty task root.
 
 No Human Reserved decision or external resource is otherwise required.
 
@@ -174,10 +174,11 @@ Stop and prepare a Decision Packet for a Product Foundation or Runtime Architect
 | Objective, authority, invariants, DoD, verification, review, assignments, and bounded context are explicit | PASS |
 | Canonical predecessors are `DONE` | PASS — ENG-003 revision 2 is `DONE` on aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685` |
 | Accepted predecessor manifestation is present in the intended dispatch base | PASS — the accepted revision-2 persistence port/adapter/test manifest is path-scoped manifested; migration remains unchanged |
+| Exact historical ENG-004 repair target is available | PASS — all seven historical task-owned hashes and aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431` reproduced in the isolated Controller recovery baseline |
 | Exclusive/read-only/forbidden paths and resource locks are explicit and disjoint from ENG-005 | PASS |
 | Human Reserved decision required to begin | PASS — none |
 
-**Task-level DoR:** `READY_FOR_BOUNDED_REPAIR`. The exact reviewed candidate exists and its historical deterministic evidence passed. `ENG-004-F003` remains open and requires a bounded repair under the unchanged three-root lock, fresh deterministic verification, and a fresh full independent semantic/persistence-boundary review. This state does not itself dispatch a Builder.
+**Task-level DoR:** `READY_FOR_BOUNDED_REPAIR`. The exact reviewed historical candidate is recovered, but is not itself accepted against ENG-003 revision 2. `ENG-004-F003` remains open and requires bounded task-owned adaptation/repair under the unchanged three-root lock, fresh deterministic verification, and a fresh full independent semantic/persistence-boundary review. This state does not itself dispatch a Builder.
 
 ## Prior findings
 
