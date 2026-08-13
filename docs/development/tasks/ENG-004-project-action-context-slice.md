@@ -6,13 +6,13 @@
 
 **Task Packet revision:** 2
 
-**Current task state:** `READY_FOR_BOUNDED_REPAIR` from the exact recovered historical baseline composed over canonical ENG-003 revision 2; `ENG-004-F003` remains open and blocking
+**Current task state:** `DONE` — final accepted aggregate `6be8bc2b4d58cd1a0e9be7ea6a3762dafee0aa5a26796bb8e97214e48c1725c2` is canonically manifested; `ENG-004-F001`, `ENG-004-F002`, `ENG-004-F003`, and `ENG-004-F003-R1` are closed
 
 **Authorization:** `GOV-018`
 
 **Canonical Task Packet contract:** [Delivery Contract revision 1, Task Packet](../../../development/DELIVERY_CONTRACT.md#task-packet)
 
-This artifact populates the canonical Task Packet for `ENG-004`; it does not redefine the Task Packet schema or dispatch Builder work. Revision 2 records the upstream dependency and downstream repair constraints raised by `ENG-004-F003` without widening the task's existing write lock. The missing historical seven-file work product was subsequently recovered byte-for-byte into an isolated Controller recovery baseline; it is a repair prerequisite, not ENG-004 acceptance. Post-dispatch execution, evidence, findings, and completion state belong in the distinct [Delivery Record](../delivery/ENG-004-project-action-context-slice.md).
+This artifact populates the canonical Task Packet for `ENG-004`; it does not redefine the Task Packet schema or dispatch Builder work. Revision 2 recorded the upstream dependency and downstream repair constraints raised by `ENG-004-F003` without widening the task's existing write lock. The missing historical seven-file work product was recovered byte-for-byte into an isolated Controller recovery baseline, then the accepted F003-R1 candidate was path-scoped manifested. Post-dispatch execution, evidence, findings, and completion state are retained in the distinct [Delivery Record](../delivery/ENG-004-project-action-context-slice.md).
 
 ## Task ID
 
@@ -178,10 +178,11 @@ Stop and prepare a Decision Packet for a Product Foundation or Runtime Architect
 | Exclusive/read-only/forbidden paths and resource locks are explicit and disjoint from ENG-005 | PASS |
 | Human Reserved decision required to begin | PASS — none |
 
-**Task-level DoR:** `READY_FOR_BOUNDED_REPAIR`. The exact reviewed historical candidate is recovered, but is not itself accepted against ENG-003 revision 2. `ENG-004-F003` remains open and requires bounded task-owned adaptation/repair under the unchanged three-root lock, fresh deterministic verification, and a fresh full independent semantic/persistence-boundary review. This state does not itself dispatch a Builder.
+**Historical task-level DoR:** `READY_FOR_BOUNDED_REPAIR`. The exact reviewed historical candidate was recovered, was not itself accepted against ENG-003 revision 2, and required bounded task-owned adaptation/repair under the unchanged three-root lock, fresh deterministic verification, and a fresh full independent semantic/persistence-boundary review. Those conditions were subsequently satisfied by the accepted final aggregate `6be8bc2b4d58cd1a0e9be7ea6a3762dafee0aa5a26796bb8e97214e48c1725c2`.
 
 ## Prior findings
 
 - `ENG-004-F001` — historically `CLOSED` for exact reviewed aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431`; genuine local-D1 evidence/harness repair history is retained in the Delivery Record.
 - `ENG-004-F002` — historically `CLOSED` for the same exact aggregate; lifecycle/target/failure matrix repair history is retained in the Delivery Record.
-- `ENG-004-F003` — `OPEN — BLOCKING`; caller-supplied Project/Action state was treated as proof of authoritative prior lifecycle before put/upsert persistence. Upstream repair is routed to ENG-003 revision 2; downstream ENG-004 repair remains inside the unchanged three-root lock.
+- `ENG-004-F003` — historically `OPEN — BLOCKING`; caller-supplied Project/Action state was treated as proof of authoritative prior lifecycle before put/upsert persistence. Its upstream repair was routed to ENG-003 revision 2, and the downstream repair remained inside the unchanged three-root lock. `CLOSED` by the final accepted candidate.
+- `ENG-004-F003-R1` — historically `OPEN — BLOCKING`; the first F003 repair still allowed caller lifecycle to gate a transition and could echo caller-derived unrelated state. `CLOSED` by the final accepted candidate, whose lifecycle result is limited to authoritative `{ id, state }` equivalent.

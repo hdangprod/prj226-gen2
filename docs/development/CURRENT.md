@@ -4,7 +4,7 @@
 
 **Lifecycle status:** ACTIVE
 
-**Last updated:** 2026-08-13
+**Last updated:** 2026-08-14
 
 **Decision owner:** `hdangprod`
 
@@ -28,7 +28,7 @@
 - **G7 — Engineering-Entry Readiness:** APPROVED BY HUMAN
 - **Generation 2 Foundation Program:** COMPLETE
 - **Runtime Architecture Phase:** COMPLETE — Runtime Architecture revision 1 approved by human through `GOV-017`.
-- **Engineering Phase:** AUTHORIZED BY HUMAN through `GOV-018`; Engineering delivery is active with `ENG-001`, `ENG-002`, `ENG-003` revision 2, and `ENG-008` complete; `ENG-004` is Ready for bounded repair; `ENG-005` is Ready for baseline reconciliation; and no task Running.
+- **Engineering Phase:** AUTHORIZED BY HUMAN through `GOV-018`; Engineering delivery is active with `ENG-001`, `ENG-002`, `ENG-003` revision 2, `ENG-004`, and `ENG-008` complete; `ENG-005` is Ready for baseline reconciliation; and no task Running.
 - **Engineering work:** AUTHORIZED only within `GOV-018`, the approved Product Foundation and Runtime Architecture, the Delivery Contract, and a valid Ready Task Packet.
 - **Runtime implementation:** AUTHORIZED within that bounded Engineering scope; no implementation task is `RUNNING`.
 - **Production deployment and paid-service activation:** NOT AUTHORIZED (PROHIBITED)
@@ -74,7 +74,7 @@
 - **Runtime Architecture baseline:** [Liam v1 Runtime Architecture Baseline, revision 1](../architecture/RUNTIME_ARCHITECTURE.md) is `CANONICAL / APPROVED` through human disposition `GOV-017` by `github:hdangprod` on 2026-08-09. The original `ARCHITECTURE REVIEW: NEEDS FIX` findings `AR-F001` and `AR-F002` were repaired; `ARCHITECTURE TARGETED RECHECK: PASS` resolved both. Approval does not authorize engineering.
 - **Engineering Phase authorization:** `GOV-018` is APPROVED by `github:hdangprod` on 2026-08-09. It separately authorizes implementation of the approved Liam v1 Product Foundation and Runtime Architecture under Delivery Contract revision 1 while preserving product, architecture, production, paid-service, security, destructive-action, and control-plane Human Reserved boundaries.
 - **Engineering readiness and plan:** [Engineering Plan revision 1](ENGINEERING_PLAN.md) records `ENGINEERING DoR: PASS`, the implementation obligations and Task DAG, exact evidence rules, concurrency boundaries, and the first execution wave. It is `OPERATIONAL / ACTIVE` and cannot expand `GOV-018` or any approved product or architecture authority.
-- **Engineering task state:** `ENG-001`, `ENG-002`, `ENG-003`, and `ENG-008` are `DONE`. ENG-003 revision-1 candidate `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6`, its PASS/GREEN evidence, and closed `ENG-003-F001` / `ENG-003-F001-R1` history remain exact historical evidence. ENG-003 revision 2 is accepted and path-scoped manifested on aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`, closing `ENG-003-R2-V001` and `ENG-003-R2-F001` without changing the migration (`adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`). Exact ENG-004 aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431` passed historical deterministic verification and closed `ENG-004-F001` / `ENG-004-F002`; its seven unmanifested task-owned bytes have now been exactly recovered into an isolated baseline. `ENG-004-F003` is `OPEN — BLOCKING`, so ENG-004 is `READY_FOR_BOUNDED_REPAIR`, not DONE; the next Builder must start from the recovered baseline composed over ENG-003 rev2. ENG-005 is `READY_FOR_BASELINE_RECONCILIATION`: no Knowledge semantic repair is indicated, but it must reconcile/rebase its candidate, bind new manifests, run integrated deterministic verification, and receive a review-validity disposition. No task is Running. `ENG-009` remains `PROPOSED` pending its separate Task Packet and task-level DoR.
+- **Engineering task state:** `ENG-001`, `ENG-002`, `ENG-003`, `ENG-004`, and `ENG-008` are `DONE`. ENG-003 revision-1 candidate `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6`, its PASS/GREEN evidence, and closed `ENG-003-F001` / `ENG-003-F001-R1` history remain exact historical evidence. ENG-003 revision 2 is accepted and path-scoped manifested on aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`, closing `ENG-003-R2-V001` and `ENG-003-R2-F001` without changing the migration (`adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`). ENG-004 is accepted and path-scoped manifested on final aggregate `6be8bc2b4d58cd1a0e9be7ea6a3762dafee0aa5a26796bb8e97214e48c1725c2`; its original aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431`, recovery commit `f8e7d6a08361a88a7f146b76e1599bb4daa71150`, F003 repair, and F003-R1 repair history are retained in its Delivery Record. `ENG-004-F001`, `ENG-004-F002`, `ENG-004-F003`, and `ENG-004-F003-R1` are closed; final deterministic evidence is PASS and full review is GREEN. ENG-005 remains `READY_FOR_BASELINE_RECONCILIATION`: no Knowledge semantic repair is indicated, but its historical eight-file bytes are not currently recoverable from available Git branch/tree or unreachable-blob surfaces, so recovery classification precedes reconciliation, rebase/manifest binding, integrated deterministic verification, and review-validity disposition. No task is Running. `ENG-009` remains `PROPOSED` pending its separate Task Packet and task-level DoR.
 
 ## Authorized work
 
@@ -82,11 +82,11 @@ The Generation 2 Foundation Program is complete through human G7 disposition `GO
 
 This snapshot reflects authorization recorded in approved governance artifacts; it does not create, extend, or approve authorization.
 
-**Current stage state:** Generation 2 Foundation Program — COMPLETE; Runtime Architecture Phase — COMPLETE; Engineering Phase — AUTHORIZED; Engineering planning — ACTIVE; Builder execution — `ENG-001`, `ENG-002`, `ENG-003` revision 2, and `ENG-008` COMPLETE; `ENG-004` READY_FOR_BOUNDED_REPAIR; `ENG-005` READY_FOR_BASELINE_RECONCILIATION; no task RUNNING
+**Current stage state:** Generation 2 Foundation Program — COMPLETE; Runtime Architecture Phase — COMPLETE; Engineering Phase — AUTHORIZED; Engineering planning — ACTIVE; Builder execution — `ENG-001`, `ENG-002`, `ENG-003` revision 2, `ENG-004`, and `ENG-008` COMPLETE; `ENG-005` READY_FOR_BASELINE_RECONCILIATION; no task RUNNING
 
 **Current Engineering authority:** `GOV-018` — APPROVED BY HUMAN on 2026-08-09.
 **Engineering gate:** None created or implied. Task readiness and completion are governed by Delivery Contract revision 1 and do not approve product, architecture, production release, or another gate.
-**Engineering Definition of Ready:** PASS for bounded implementation planning. ENG-003 Task Packet revision 2 is complete and Controller-closed. ENG-004 is ready only for its unchanged three-root F003 repair from its exact recovered historical baseline, which requires fresh deterministic verification and a fresh full independent review. ENG-005 is ready only for baseline reconciliation, integrated deterministic re-verification, and review-validity determination. `ENG-009` requires its own separate Task Packet and task-level DoR re-evaluation.
+**Engineering Definition of Ready:** PASS for bounded implementation planning. ENG-003 Task Packet revision 2 and ENG-004 Task Packet revision 2 are complete and Controller-closed. ENG-005 is ready only for recovery classification of its historical candidate, baseline reconciliation, integrated deterministic re-verification, and review-validity determination; no reconstruction is authorized implicitly. `ENG-009` requires its own separate Task Packet and task-level DoR re-evaluation.
 
 - Product Foundation revision 1 approved through `GOV-011` — satisfied.
 - Delivery Contract revision 1 approved through `GOV-013` — satisfied.
@@ -98,7 +98,7 @@ This snapshot reflects authorization recorded in approved governance artifacts; 
 
 **Foundation gates:** C1–C7 are COMPLETE; G1–G7 are APPROVED BY HUMAN. No Foundation gate remains pending.
 
-**Next executable work:** [`ENG-004`](tasks/ENG-004-project-action-context-slice.md) may be dispatched only from its exact recovered historical baseline for the unchanged three-root F003 repair. [`ENG-005`](tasks/ENG-005-knowledge-provenance-slice.md) may proceed only with persistence-baseline reconciliation, rebase/manifest binding, integrated deterministic verification, and review-validity determination; no Knowledge semantic repair is authorized. `ENG-009` still needs a separate planning pass.
+**Next executable work:** [`ENG-005`](tasks/ENG-005-knowledge-provenance-slice.md) may proceed only with historical-candidate recovery classification, then persistence-baseline reconciliation, rebase/manifest binding, integrated deterministic verification, and review-validity determination; no Knowledge semantic repair or implicit reconstruction is authorized. `ENG-009` still needs a separate planning pass.
 
 ## Explicit prohibitions
 

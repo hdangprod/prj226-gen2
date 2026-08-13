@@ -8,7 +8,7 @@
 
 **Task Packet revision:** 2 (revision 1 governed the reviewed candidate)
 
-**Current lifecycle state:** `READY_FOR_BOUNDED_REPAIR`
+**Current lifecycle state:** `DONE` — accepted final aggregate `6be8bc2b4d58cd1a0e9be7ea6a3762dafee0aa5a26796bb8e97214e48c1725c2` is path-scoped manifested
 
 **Authorization:** `GOV-018`
 
@@ -18,7 +18,33 @@
 
 **Recorded:** 2026-08-13
 
-## Current disposition
+## Controller closure — 2026-08-14
+
+The Controller confirmed canonical pre-closure `HEAD` `4c0354088c04417110a8e904356a868fb2a7bb4a`; accepted Builder candidate `358fdb84649375af6c38dac349fe15934ffaf062`; and candidate tree `5c615f522101f6d909b1f075a3b28893a8304a56`. All seven candidate bytes reproduced before promotion and were then copied by controlled path-scoped manifestation only. The canonical worktree reproduced the same path-sorted aggregate after manifestation: `6be8bc2b4d58cd1a0e9be7ea6a3762dafee0aa5a26796bb8e97214e48c1725c2`.
+
+| SHA-256 | Final manifested path |
+| --- | --- |
+| `822fc2ab9d58fb95d671a22c74f916824926dbc170a41290c34588f89182de59` | `src/application/services/projectActionContext/projectActionContextService.ts` |
+| `b9a8bae8ebf068c6095e3bab71dcf01bb9a03356fbe699d8bc8d9782380ce6ad` | `tests/application/services/projectActionContext/projectActionContextService.test.ts` |
+| `0559a46c472d03789aeb4736486e016a8c2332f05c3293ace5ce547d05a823d2` | `tests/application/services/projectActionContext/vitest.config.ts` |
+| `9d32b38caf7e6be332fdb3f580bc679825460454d08295e9a7dd8f2bf9ccfbe4` | `tests/integration/d1/projectActionContext/localD1.ts` |
+| `4edf85ee1aab36faf1a1e93be1fb6fca9aa57f29b494525465d95b5b22e8b598` | `tests/integration/d1/projectActionContext/node-runtime.d.ts` |
+| `29b53ed1e90dd2a1d6ef1f8f2b2e333c29cdf01ce9ac24bf583e98235742d65d` | `tests/integration/d1/projectActionContext/projectActionContextPersistence.test.ts` |
+| `e9aa4796008099fb7786537df3b0d350d3bd84496a96badd0c51aafb10c02ef2` | `tests/integration/d1/projectActionContext/vitest.config.ts` |
+
+The manifest is the SHA-256 of this newline-delimited listing in repository-path sort order. The accepted ENG-003 revision-2 aggregate remains `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`; no persistence port, adapter, or migration changed. `migrations/0001_authoritative_state.sql` remains `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`.
+
+Historical provenance is retained without substitution: the original reviewed aggregate was `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431`; its exact recovery is preserved at `recovery/eng-004-historical-a795e4a`, commit `f8e7d6a08361a88a7f146b76e1599bb4daa71150`; the first F003 repair aggregate was `61081ebf01a19b32d9e99932c1bf75a9d0d76b3e8f5518053331b886cdef4674`; and the final F003-R1 repair is the accepted aggregate above. `ENG-004-F001`, `ENG-004-F002`, `ENG-004-F003`, and `ENG-004-F003-R1` are all `CLOSED` and remain independently reviewable in this record.
+
+The final semantics use insert-only Project creation with initial `Active` and insert-only Action creation with initial `Open` under exactly one owning Project. Lifecycle operations use identity plus the fixed authoritative expected state (`Active -> Completed -> Active` for Projects; `Open -> Completed -> Open` for Actions); caller snapshots do not prove existence or prior lifecycle. ENG-003 persistence owns authoritative existence, expected lifecycle, immutable Action ownership, receipts, and concurrency. Lifecycle results are intentionally narrow authoritative `{ id, state }` equivalents and do not echo caller-supplied Project outcome or Action content. Human Control remains operation-bound, target-bound, authorization-required, and distinct from persistence-state authority.
+
+Final deterministic evidence is `ENG-002: 37/37 PASS`, `ENG-003 persistence: 37/37 PASS`, `ENG-004 service: 17/17 PASS`, `ENG-004 integration: 4/4 PASS`, and repeated genuine local-D1 `PASS`. It covers lifecycle creation/completion/reopen, fabricated and stale snapshots, inverse caller lifecycle, ownership mismatch, retries/conflicts, durability failure, receipt/state alignment, no cascade, unrelated-state preservation, truthful unrelated fields, and Current Context regressions. Fresh full independent semantic/persistence review returned `ENG-004 REVIEW: GREEN` for exact candidate `358fdb84649375af6c38dac349fe15934ffaf062`; it closed F003-R1 and confirmed the prior F001/F002/F003 closures. No Human Reserved disposition is required because the final repair implements already-approved Product, Domain, and Runtime Architecture semantics.
+
+The Node `20.5.0` versus transitive `undici >=20.18.1` engine warning and sandbox loopback restriction for Miniflare remain non-blocking environment observations: genuine local-D1 evidence passed repeatedly in the permitted local environment, and no task consequence was demonstrated.
+
+`ENG-004` is therefore `DONE`. The pre-closure material below is retained as historical recovery, finding, and routing provenance.
+
+## Pre-closure disposition — historical
 
 Exact ENG-004 aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431` passed deterministic verification, including the repaired genuine local-D1 evidence. Independent semantic/persistence-boundary review then returned:
 
@@ -28,7 +54,7 @@ Exact ENG-004 aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f41425484
 
 The original F003-repair dispatch then identified a delivery recovery defect: the historical reviewed seven-file ENG-004 implementation/test slice had never been manifested into canonical state, so a bounded repair had no valid target. No Builder file was modified. The Controller recovered the exact historical bytes and returned the task to `READY_FOR_BOUNDED_REPAIR`; this recovery is not a new candidate, verification pass, review pass, finding closure, or ENG-004 acceptance.
 
-## Candidate identity and evidence state
+## Historical candidate identity and evidence state
 
 | Identity | Value |
 | --- | --- |
