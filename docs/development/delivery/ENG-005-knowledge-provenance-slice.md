@@ -8,7 +8,7 @@
 
 **Task Packet revision:** 2
 
-**Current lifecycle state:** `READY — BOUNDED_REPAIR_AUTHORIZED`; regenerated candidate `676bd5c5e2fd8daf245602b43e2d72e5230f5c3b` has a blocking finite Bearer-material discriminator defect; ENG-005 is not `DONE`
+**Current lifecycle state:** `VERIFICATION PENDING — VERIFICATION_CONTRACT_RECONCILED`; candidate `1d58b114ceaeed370e5f2fb8084660f7bd106385` requires fresh full deterministic verification under the clarified exact-target contract; ENG-005 is not `DONE`
 
 **Authorization:** `GOV-018`
 
@@ -100,3 +100,27 @@ The full V001 matrix remains required after the repair: invalid or missing corre
 Because production code changes, the replacement candidate requires fresh **full** deterministic verification under the whole Task Packet Verification Contract, not targeted verification and not historical verifier evidence. It then requires a fresh **full** independent semantic/data and persistence-boundary review before Controller closure. ENG-005 must not be marked `DONE` until every applicable Delivery Contract DoD condition is independently satisfied. `ENG-006` and later dependency-bound work remain unauthorized/undispatched.
 
 **Exact next Builder state:** `READY — BOUNDED_REPAIR_AUTHORIZED`; start from `676bd5c5e2fd8daf245602b43e2d72e5230f5c3b`, repair only the Bearer-material discriminator and task-scoped evidence inside the three permitted roots, produce a new candidate, then complete the required full gates.
+
+## ENG-005 revision-2 F002/V001 Controller clarification — 2026-08-14
+
+**Disposition:** `ENG-005 REV2 F002/V001 RE-REPAIR: VERIFICATION_CONTRACT_RECONCILED`
+
+The Controller authority for this reconciliation is `90af460c70e6f975e7bb0e32d80e92efd9438616`. The current source candidate is `1d58b114ceaeed370e5f2fb8084660f7bd106385`, tree `ff64dbd7905c48744ffa6cafc970e1e86f4cfcab`; its reported full seven-file aggregate is `f72f98d9431b1fbb0466ef564d7515604c210064086b6afb22846a21bcb799fe` and its reported three-file repair-delta aggregate is `0a4bc5c6d6d57776f6cb9412018f7241f08deaaebf7533324b44c072bc72ca02`.
+
+No new candidate was produced by the latest Builder. It used a fresh isolated clean worktree at the exact candidate and made no file changes. The prior `ENG-005 REV2 F002/V001 RE-REPAIR: BLOCKED — AMBIGUITY_VERIFICATION_CONTRACT_UNREPRESENTABLE` is therefore a verification-contract/Task Packet gap, not a source-candidate repair or a new product defect.
+
+### Exact boundary fact
+
+`KnowledgeProvenanceService.correct` accepts one `prior` Knowledge snapshot, validates it as one closed record, and invokes domain correction with that one item. It has no candidate collection, target-search, target-resolution, contextual-inference, selection, or clarification-result input. Consequently, no valid ENG-005 correction request contains two or more plausible targets. Supplying an array as `prior` is rejected as `correction-prior-malformed`; the recorded test proves malformed-input rejection and no write only. It is not, and must not be renamed or accepted as, evidence of canonical ambiguous-target behavior.
+
+### Canonical ownership and unchanged invariant
+
+The approved Domain Model requires clarification before acceptance when an ambiguous state-changing target would affect an accepted change, and states that inference alone cannot change accepted state. The approved Runtime Architecture places `target/authority check` before domain validation and authoritative persistence in the state-changing interaction flow. The Engineering Plan assigns the planned text-interaction and human-control orchestration, including ambiguity clarification, to `ENG-010`.
+
+Accordingly, ambiguity handling is owned at the upstream interaction/application target-resolution boundary before an exact Knowledge target is passed to ENG-005. `ENG-010` is identified as the existing planned task; this reconciliation creates no new task ID and dispatches no downstream work. ENG-005's exact-target API structurally requires ambiguity to have been resolved or rejected before invocation. No write may occur on unresolved ambiguity at that owning boundary.
+
+The Product Foundation, Domain Model, Runtime Architecture, Human Control semantics, `DATA-001`, `PI-DATA-005`, `QLT-001`, and `GOV-018` remain unchanged. This is a verification-evidence applicability correction within the existing ENG-005 Task Packet and lock, not a waiver of the ambiguity invariant, an API addition, a target-selection feature, a new service boundary, or a Human Reserved matter.
+
+### Required next gates
+
+The Task Packet Verification Contract now requires malformed or missing exact-target no-write evidence, non-current exact-target and lineage controls, and explicitly marks ambiguous-target runtime evidence as not applicable at this service boundary. It preserves the global ambiguity invariant as upstream `ENG-010` evidence. The exact current candidate requires a fresh full deterministic run under that corrected contract. If it passes, a fresh full independent semantic/data and persistence-boundary review remains required before Controller closure. No Builder, Verifier, or Reviewer may mark ENG-005 `DONE` from this clarification alone.

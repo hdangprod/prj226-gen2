@@ -6,7 +6,7 @@
 
 **Task Packet revision:** 2
 
-**Current task state:** `READY — BOUNDED_REPAIR_AUTHORIZED` — the regenerated candidate exposed `ENG-005-REV2-F002`, a finite eligibility-guard defect. The next Builder may correct that existing approved boundary only within this packet's three write roots; ENG-005 is not `DONE`.
+**Current task state:** `VERIFICATION PENDING — VERIFICATION_CONTRACT_RECONCILED` — candidate `1d58b114ceaeed370e5f2fb8084660f7bd106385` remains unaccepted. Its prior full-verification failure established that ambiguous-target runtime evidence is not representable at this exact-target service boundary; a fresh full deterministic run under this clarified contract is required. ENG-005 is not `DONE`.
 
 **Authorization:** `GOV-018`
 
@@ -92,12 +92,13 @@ All needed test configuration and fixtures must remain inside those task-owned d
 3. Every captured Knowledge Item preserves exactly one originating Project. Correction preserves that origin and unrelated items remain byte/semantically unchanged.
 4. Initial accepted Knowledge is current with empty lineage. Correction targets exactly one current item, creates one new current successor, atomically marks the predecessor superseded, and preserves a reconstructible linear chain.
 5. Correction never silently rewrites the prior item, changes its origin, branches or cycles a lineage, changes unrelated Knowledge, deletes data, or introduces a taxonomy/promotion state.
-6. Accepted success is returned only for `committed` or the same-operation/same-write-set `already-committed` result. Failure, invalid/ambiguous target, authorization rejection, and conflicting duplicates remain non-accepted and truthful.
+6. Accepted success is returned only for `committed` or the same-operation/same-write-set `already-committed` result. Failure, missing or malformed exact target, authorization rejection, and conflicting duplicates remain non-accepted and truthful.
 7. Operation identities and write sets are stable across a safe retry; reusing an operation identity with a different write set is not accepted.
 8. Current/superseded standing and origin are authoritative accepted state. Retrieval, relevance, reuse, model output, and provider state remain non-authoritative and outside this slice.
 9. D1/SQL and Worker types remain outside the application service contract. The service depends on the provider-neutral persistence port.
 10. Tests and evidence use synthetic data and exclude authentication material and real sensitive user data.
 11. A finite service-local eligibility guard rejects repository-defined authentication material on both capture and correction: credentials, authentication secrets, private keys, access tokens, and equivalent material. It must not create generalized secret scanning or reject ordinary prose merely for an isolated keyword such as “password” or “access token”.
+12. `correct` receives one already-resolved, exact prior Knowledge snapshot; it has no candidate-search, target-selection, context-inference, or clarification-result surface. A missing or malformed exact prior is rejected with no write. The approved ambiguous-state-changing-target invariant remains mandatory at the upstream interaction/application target-resolution boundary before this service is invoked; unresolved ambiguity must not produce an accepted write.
 
 ## Expected artifacts
 
@@ -110,7 +111,7 @@ All needed test configuration and fixtures must remain inside those task-owned d
 
 1. Intentional capture and accepted correction are composed through existing ENG-002 contracts without changing them.
 2. Every accepted capture/correction is committed through the ENG-003 port before accepted success; failed, invalid, unauthorized, casual/inferred, conflicting duplicate, and durability-failure paths never report accepted success.
-3. Tests prove immutable origin, initial current standing, atomic predecessor/successor correction, reconstructible linear chains, currentness, unrelated-item isolation, and rejection of missing/ambiguous/non-current/cyclic/branched/origin-mismatched correction.
+3. Tests prove immutable origin, initial current standing, atomic predecessor/successor correction, reconstructible linear chains, currentness, unrelated-item isolation, and rejection of missing or malformed exact targets, non-current/cyclic/branched/origin-mismatched correction. They do not represent malformed input as proof of ambiguous-target clarification.
 4. Failure and retry tests prove stable same-operation retry behavior, visible failure, no duplicate semantic effect, and no false success.
 5. Genuine Wrangler-backed local-D1 evidence proves capture and multi-step correction chains against the accepted migration/adapter, including atomic standing changes and constraint rejection. FakeD1 may support deterministic failure/rollback paths but cannot substitute for this evidence.
 6. All upstream domain, Human Control, persistence, foundation, typecheck, lint, build, and smoke regressions pass without modifying protected files.
@@ -129,13 +130,14 @@ Required checks and pass criteria:
 2. `npm ci --ignore-scripts`, `npm run typecheck`, `npm run lint`, `npm run build`, and `npm run smoke` pass without changing `package-lock.json`.
 3. `npx vitest run --config tests/domain/vitest.config.ts` and `npm run test:persistence` pass as upstream regressions.
 4. The task-owned application-service and genuine Wrangler-backed local-D1 suites pass through their task-local Vitest configurations; `npm run migrate:local` succeeds against a fresh isolated local database and repeated application reports no pending migration. FakeD1-only local-D1 evidence is an explicit failure.
-5. A traceable matrix covers intentional initial capture, casual/inferred no-capture, origin preservation, accepted correction, multi-step linear chain/currentness, non-current/missing/ambiguous target, identity collision, branch/cycle, origin mismatch, unrelated-item isolation, invalid/unauthorized input, persistence failure, same-operation retry, and conflicting duplicate.
-6. Failure injection proves accepted success only after durable commit, atomic predecessor/successor standing, no unrelated change, and no write for rejected authorization, casual capture, ambiguity, advice, retrieval, or inference.
+5. A traceable matrix covers intentional initial capture, casual/inferred no-capture, origin preservation, accepted correction, multi-step linear chain/currentness, non-current/missing/malformed exact target, identity collision, branch/cycle, origin mismatch, unrelated-item isolation, invalid/unauthorized input, persistence failure, same-operation retry, and conflicting duplicate. Ambiguous-target clarification is not applicable as runtime evidence at this exact-target service boundary.
+6. Failure injection proves accepted success only after durable commit, atomic predecessor/successor standing, no unrelated change, and no write for rejected authorization, missing or malformed exact target, casual capture, advice, retrieval, or inference.
 7. Static import/API and forbidden-concept scans prove no D1/SQL/Worker/provider type leaks into the task-owned service and no taxonomy, promotion, retrieval/ranking, cross-Project selection, deletion/export, model/provider, network, or extra-service implementation appears.
 8. Authentication-material fixtures prove the finite service-local eligibility guard rejects the defined categories on both capture and correction, while ordinary prose with isolated category words remains eligible where otherwise valid; scans prove excluded material is never accepted as Knowledge or retained in task evidence.
 9. A changed-path scan proves only the three exclusive roots changed; protected-hash checks prove every read-only upstream file is byte-identical to the reconciled base.
 10. Generate a repository-relative, path-sorted SHA-256 listing for every changed file and its aggregate SHA-256; reproduce both before and after all checks.
 11. `git diff --check` passes and the isolated worktree is free of unrelated or sibling-task changes.
+12. An array or other non-snapshot supplied as `prior` is recorded only as malformed-exact-target rejection evidence. It must not be labeled or accepted as evidence that the service handled an ambiguous correction target. Ambiguous-target clarification evidence belongs to the upstream state-changing interaction/application boundary, planned as part of `ENG-010`, before an exact target reaches this service.
 
 An unavailable command, base mismatch, lock violation, or unstable manifest is explicit failure/inability and returns to the Planner / Controller for classification.
 
@@ -175,18 +177,21 @@ Stop and prepare a Decision Packet for a Product Foundation or Runtime Architect
 
 | Delivery Contract condition | Result |
 | --- | --- |
-| Objective, authority, invariants, DoD, verification, review, assignments, and bounded context are explicit | PASS |
+| Objective, authority, invariants, DoD, verification, review, assignments, and bounded context are explicit | PASS — the exact-target boundary and the ambiguity-evidence applicability are explicit |
 | Canonical predecessors are `DONE` | PASS — ENG-003 revision 2 is `DONE` on aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685` |
 | Accepted predecessor manifestation is present in the intended dispatch base | PASS — the accepted ENG-003 revision-2 persistence manifest and accepted ENG-004 state are present |
 | Historical ENG-005 candidate is recoverable for reconciliation | FAIL / reclassified — none of the eight exact SHA-256 payloads was recovered; revised packet explicitly authorizes rebuild instead |
 | Exclusive/read-only/forbidden paths and resource locks are explicit and disjoint from ENG-004 | PASS |
 | Reconstruction remains inside approved engineering authority and packet lock | PASS — `GOV-018` authorizes it; no Product, Domain, Runtime Architecture, security-authority, or scope change is introduced |
+| Ambiguous correction-target runtime evidence is executable at this service boundary | NOT APPLICABLE — `correct` accepts exactly one prior snapshot; `ENG-010` owns the planned upstream text-interaction and human-control orchestration boundary that must clarify an ambiguous state-changing target before this service can be invoked |
 | Human Reserved decision required to begin | PASS — none |
 
-**Task-level DoR:** `READY — BOUNDED_REPAIR_AUTHORIZED`. The pre-repair regenerated candidate is `676bd5c5e2fd8daf245602b43e2d72e5230f5c3b`, tree `825c739ecf248860c138c67b1f30dbbc74d65610`, aggregate `28b104136e5b47dd267be611aeddd9df0873a0d3791ffc7973bb2cd6ea108d91`, on canonical rebuild base `a13801e126fc58a56f1a076ee7d8efc77017dc3c`. The next Builder starts fresh from that exact candidate and produces a new candidate and path-sorted manifest. It may make the smallest repair to invariant 11's existing finite service-local eligibility guard so that actual Bearer authentication material remains prohibited while ordinary explanatory Bearer prose remains eligible. No lock expansion, generalized DLP/token-vocabulary classifier, historical-identity claim, or other production repair is authorized. It must complete fresh **full** deterministic verification followed by fresh **full** independent semantic/data and persistence-boundary review.
+**Task-level DoR:** `READY — VERIFICATION_CONTRACT_RECONCILED`; candidate `1d58b114ceaeed370e5f2fb8084660f7bd106385`, tree `ff64dbd7905c48744ffa6cafc970e1e86f4cfcab`, remains the exact unaccepted candidate. The reported seven-file candidate aggregate is `f72f98d9431b1fbb0466ef564d7515604c210064086b6afb22846a21bcb799fe`; the three-file repair delta aggregate is `0a4bc5c6d6d57776f6cb9412018f7241f08deaaebf7533324b44c072bc72ca02`. No production repair, lock expansion, target-selection API, clarification-result surface, generalized DLP/token-vocabulary classifier, historical-identity claim, or other semantic change is authorized by this clarification. A fresh **full** deterministic verification must bind this clarified contract to the exact candidate, followed by fresh **full** independent semantic/data and persistence-boundary review if verification passes.
 
 ## Prior findings
 
 `ENG-005-F001` remains historical, `CLOSED` provenance for the lost candidate: authentication material could be accepted and purported local-D1 evidence used FakeD1. Its bounded repair added the finite service-local eligibility guard for capture and correction plus genuine Wrangler-backed local-D1 evidence; no generalized DLP/secret-scanning system or user self-classification bypass was authorized. It does not establish a current candidate finding, but its protections are mandatory for the rebuild.
 
 `ENG-005-REV2-F002` is **BLOCKING — WORK_PRODUCT_DEFECT** for regenerated candidate `676bd5c5e2fd8daf245602b43e2d72e5230f5c3b`. The existing Bearer pattern treats `Bearer authentication` as if `authentication` were credential material, so it rejects the ordinary explanatory text `Bearer authentication is documented here without any token material.`. This violates invariant 11, `DATA-001`, and `PI-DATA-005`: actual credentials, authentication secrets, private keys, access tokens, and equivalent authentication material remain outside intended capture, but the finite guard must not reject ordinary prose for an isolated authentication term. The defect applies to both capture and correction, because both use the same guard. The permitted repair recognizes actual Bearer-material structure (including realistic synthetic `Authorization: Bearer <token>` or `Bearer <token>` forms) without a denylist of ordinary English words. It must retain negative synthetic Bearer-material controls and the required benign `Bearer`, `password`, and `access token` prose controls. Any additional V001 test that exposes another production semantic defect outside this Bearer discriminator stops the task as `BLOCKED — ADDITIONAL_PRODUCTION_DEFECT_DISCOVERED` and returns to the Controller; the Builder must not widen this repair.
+
+`ENG-005-REV2-V001` is **CLOSED — VERIFICATION_CONTRACT_RECONCILIATION** for candidate `1d58b114ceaeed370e5f2fb8084660f7bd106385`. Its array-as-`prior` case proves only `correction-prior-malformed` and no write; it is not ambiguous-target evidence. This packet preserves the canonical requirement to clarify an ambiguous state-changing target before acceptance, assigns that runtime evidence to the planned upstream `ENG-010` interaction/application boundary, and requires no Human Reserved decision because no Product, Domain, Runtime Architecture, API, or service-boundary semantics changed.
