@@ -8,7 +8,7 @@
 
 **Task Packet revision:** 2 (reopened repair); revision 1 remains the completed historical baseline below
 
-**Current lifecycle state:** `READY` — reopened for bounded upstream repair of `ENG-004-F003`
+**Current lifecycle state:** `DONE` — revision 2 accepted and manifested after the bounded upstream repair of `ENG-004-F003`
 
 **Authorization:** `GOV-018`
 
@@ -16,15 +16,48 @@
 
 **Task Packet:** [ENG-003 — D1 Authority Foundation](../tasks/ENG-003-d1-authority-foundation.md)
 
-**Recorded:** 2026-08-12
+**Recorded:** 2026-08-13
 
-## Reopening disposition — 2026-08-13
+## Revision-2 Controller closure — 2026-08-13
+
+The Controller established the exact revision-2 candidate `d2637c9f9cb52c64dac6557ee5643594a602cd8f` as a descendant of intended base `a24ee6ede0a83d7b78b33295f15897a2c90da20a`. Its nine-file, repository-path-sorted manifest reproduced aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685` before and after controlled path-scoped manifestation. The accepted migration remains byte-identical at `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`. The candidate changes neither Product, Domain, Runtime Architecture, migration, nor ENG-004/ENG-005 implementation paths.
+
+| SHA-256 | Accepted revision-2 path |
+| --- | --- |
+| `c81ea78e5b352ee6752e82e2b855203ba03918225afc05bdf80542f86556815c` | `src/application/ports/persistence/acceptedStatePersistence.ts` |
+| `d332eaaa43658b94e2923e8757bb3885c6e9734620f263e2a9abd19517557c5d` | `src/infrastructure/d1/d1AcceptedStatePersistence.ts` |
+| `811978f5272fc55232fbaf0e76693310984769979d4810939c793024663feb78` | `src/infrastructure/d1/d1Types.ts` |
+| `e828741d2fb0ba782e3d630afbfb5ec709ab3f9d9edd9439314abcc621d77071` | `tests/application/ports/persistence/acceptedStatePersistence.test.ts` |
+| `069ec2a6b3ff7d3d884c4d90205eb7dd40c27b3831d2a9c412f57e9c679dc184` | `tests/infrastructure/d1/d1AcceptedStatePersistence.local.test.ts` |
+| `175d7f6f9c3fcf80eca6971976d835bfa2c17343d1337488ae58c432294fa337` | `tests/infrastructure/d1/d1AcceptedStatePersistence.test.ts` |
+| `8365426c80f954b51573f932a674966ff4655102714e1ad23b2dbcc40102b0d7` | `tests/infrastructure/d1/fakeD1.ts` |
+| `d466061a5d8bae5026b190ced9858b730a74a855ac5a22747ce9af36b21c6e4b` | `tests/infrastructure/d1/localD1.ts` |
+| `4edf85ee1aab36faf1a1e93be1fb6fca9aa57f29b494525465d95b5b22e8b598` | `tests/infrastructure/d1/node-runtime.d.ts` |
+
+### Accepted revision-2 authority semantics
+
+- Project creation is insert-only and accepts initial `Active` only. Action creation is insert-only, accepts initial `Open` only, and requires exactly one existing owning Project.
+- Project transitions require the existing authoritative Project and persisted expected state (`Active <-> Completed`). Action transitions likewise require the authoritative Action, immutable persisted ownership, and persisted expected state (`Open <-> Completed`). Neither transition can create a missing entity.
+- The persistence boundary—not a caller snapshot—owns expected-state validation. The authoritative condition, lifecycle mutation, and receipt are one durable decision; failed conditions make neither a mutation nor a success receipt.
+- Exact retry returns `already-committed` without a second mutation and with exactly one authoritative receipt. A different canonical operation under the same operation ID conflicts. Project completion does not cascade to Actions, and narrow lifecycle updates preserve unrelated accepted state.
+
+### Revision-2 gate and finding history
+
+The Builder produced the revision-2 candidate sequence. The initial deterministic verifier returned `ENG-003 REV2 VERIFICATION: FAIL` with `ENG-003-R2-V001`: receipt lookup incorrectly assumed a database-level `first()` method. The bounded repair uses the actual D1 surface, `database.prepare(...).bind(...).first()`, removes database-level `first()` from `D1DatabaseLike`, and makes `FakeD1` match that pinned production surface. A fresh full deterministic verifier returned `ENG-003 REV2 VERIFICATION: PASS`; `ENG-003-R2-V001` is `CLOSED`.
+
+A fresh full persistence/data-boundary review then returned `ENG-003 REV2 REVIEW: NEEDS FIX` with `ENG-003-R2-F001`, an evidence-completeness defect rather than a production semantic defect. The first evidence repair added real-D1 missing/stale Action, Project reopen, Action reopen, and competing expected-state transition cases. The first targeted review still required direct successful-retry receipt-cardinality evidence. The micro evidence repair added genuine local-D1 assertions that `local-project-complete` and `local-action-complete` each have `COUNT(*) = 1` after exact retry. Independent micro evidence verification passed, and the final targeted review returned `ENG-003 REV2 TARGETED REVIEW: GREEN`. `ENG-003-R2-F001` is `CLOSED`.
+
+Final deterministic evidence is `ENG-003 persistence: 37/37 PASS`, `ENG-002 regression: 37/37 PASS`, and genuine migration-backed local D1 `PASS`. The real-D1 matrix covers Project and Action create/complete/reopen/missing/stale behavior, ownership mismatch, exact retries, competing expected-state transitions, failed-operation no-receipt, no cascade, unrelated-state preservation, and accepted receipt cardinality. Competing transitions produce one commit, one rejection, final `Completed`, and one accepted receipt. Fresh application of the accepted migration records 24 commands; replay has no pending migration. Controller rerun on the manifested bytes also passed clean install, typecheck, lint, build, smoke, `37/37` persistence tests, and repeated local migration application.
+
+**Revision-2 Controller disposition:** `ENG-003 -> DONE`. No Human Reserved disposition is required: the accepted repair implements approved persistence authority and changes no Product, Domain, or Runtime Architecture authority.
+
+## Reopening disposition — 2026-08-13 (historical)
 
 Independent review of exact downstream ENG-004 aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431` identified blocking `ENG-004-F003`: caller-supplied Project/Action snapshots could be transformed and submitted through revision-1 put/upsert writes without authoritative proof that the entity already existed in the expected lifecycle. The missing capability belongs to the persistence port/D1 adapter boundary owned by ENG-003.
 
-This is both a newly discovered defect in the accepted upstream persistence boundary and an omitted capability required by ENG-004. It does not invalidate or erase the exact revision-1 candidate, its then-passing evidence, or closed `ENG-003-F001` / `ENG-003-F001-R1` history. It does invalidate ENG-003's current `DONE` lifecycle claim until the bounded revision-2 repair passes fresh deterministic verification and fresh full independent persistence/data-boundary review.
+This was both a newly discovered defect in the accepted upstream persistence boundary and an omitted capability required by ENG-004. It did not invalidate or erase the exact revision-1 candidate, its then-passing evidence, or closed `ENG-003-F001` / `ENG-003-F001-R1` history. It temporarily invalidated ENG-003's current `DONE` lifecycle claim until the bounded revision-2 repair passed fresh deterministic verification and fresh full independent persistence/data-boundary review.
 
-The revision-2 repair is `READY` and not dispatched. Its exact lock is `src/application/ports/persistence/**`, `src/infrastructure/d1/**`, `tests/application/ports/persistence/**`, and `tests/infrastructure/d1/**`. Migrations, root files, domain/contracts, ENG-004, ENG-005, and every other path are protected. No Human Reserved decision is required because the repair implements already approved lifecycle and authoritative-persistence semantics without changing product or architecture authority.
+The revision-2 repair was `READY` and dispatched under the exact lock `src/application/ports/persistence/**`, `src/infrastructure/d1/**`, `tests/application/ports/persistence/**`, and `tests/infrastructure/d1/**`. Migrations, root files, domain/contracts, ENG-004, ENG-005, and every other path remained protected. No Human Reserved decision was required because the repair implements already approved lifecycle and authoritative-persistence semantics without changing product or architecture authority.
 
 ## Revision-1 delivery outcome (historical accepted baseline)
 
@@ -157,6 +190,6 @@ No Human Reserved intervention was required for closure. No Product authority ch
 
 All applicable Delivery Contract and Task Packet Definition of Done conditions are satisfied: authorized scope is complete; no unauthorized scope expansion is present; deterministic verification passed; durable evidence is bound to the exact candidate; independent review is GREEN; all blocking findings and required rechecks passed; the reviewed candidate is identifiable; no Human Reserved approval was required; write/integration conflicts are resolved; and the result is reconstructible without transient conversation history.
 
-**Historical revision-1 Controller disposition:** `ENG-003 → DONE` under Delivery Contract revision 1. The current lifecycle is the reopened revision-2 `READY` state recorded at the top of this Delivery Record.
+**Historical revision-1 Controller disposition:** `ENG-003 → DONE` under Delivery Contract revision 1. Revision 2 subsequently reopened and repaired the omitted lifecycle-transition authority, and is now independently accepted and `DONE` as recorded above.
 
 This closure does not modify the accepted candidate, dispatch a downstream Builder, create a downstream task ID, implement downstream functionality, merge a branch, modify Runtime Architecture, deploy, provision infrastructure, or activate any external, paid, production, or control-plane action.

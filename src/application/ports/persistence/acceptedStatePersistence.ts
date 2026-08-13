@@ -1,10 +1,13 @@
 import type {
   AcceptedProgress,
   Action,
+  ActionId,
+  ActionState,
   KnowledgeItem,
   NonEmptyText,
   Project,
   ProjectId,
+  ProjectState,
 } from "../../../domain/model";
 
 export type PersistenceOperationId = string & {
@@ -12,8 +15,21 @@ export type PersistenceOperationId = string & {
 };
 
 export type AcceptedStateWrite =
-  | { readonly kind: "put-project"; readonly project: Project }
-  | { readonly kind: "put-action"; readonly action: Action }
+  | { readonly kind: "create-project"; readonly project: Project }
+  | {
+      readonly kind: "transition-project";
+      readonly projectId: ProjectId;
+      readonly expectedState: ProjectState;
+      readonly nextState: ProjectState;
+    }
+  | { readonly kind: "create-action"; readonly action: Action }
+  | {
+      readonly kind: "transition-action";
+      readonly actionId: ActionId;
+      readonly projectId: ProjectId;
+      readonly expectedState: ActionState;
+      readonly nextState: ActionState;
+    }
   | {
       readonly kind: "append-context-facts";
       readonly projectId: ProjectId;

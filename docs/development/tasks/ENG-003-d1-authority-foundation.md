@@ -6,7 +6,7 @@
 
 **Task Packet revision:** 2
 
-**Current task state:** `READY` for the bounded `ENG-004-F003` upstream repair in [Engineering Plan revision 1](../ENGINEERING_PLAN.md)
+**Current task state:** `DONE` on accepted revision-2 aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`; revision 1 remains historical accepted evidence
 
 **Authorization:** `GOV-018`
 
@@ -36,7 +36,7 @@ Revision 2 reopens this task only for the persistence-owned portion of blocking 
 - No prerequisite Human Reserved decision or external resource is required. The repair preserves the approved Product Foundation and Runtime Architecture and introduces no service, infrastructure, or product state.
 - The revision-2 ownership below is disjoint from ENG-004's application-service lock and every ENG-005 write lock. It must be integrated before either downstream task can bind final evidence to the repaired persistence baseline.
 
-All Delivery Contract Definition of Ready conditions for this bounded repair are satisfied. The defect, required semantics, exact locks, deterministic evidence, review depth, assignment, and Human Reserved boundary are explicit. This packet is `READY`; this planning update does not dispatch a Builder.
+All Delivery Contract Definition of Ready conditions for this bounded repair were satisfied at dispatch. The defect, required semantics, exact locks, deterministic evidence, review depth, assignment, and Human Reserved boundary were explicit. The accepted outcome is now recorded in the Delivery Record.
 
 ## Relevant context
 
@@ -131,4 +131,4 @@ Stop for product/architecture/security-boundary change, new service/infrastructu
 | Exact write ownership is sufficient and collision-controlled | PASS — four persistence-owned roots; downstream writers are serialized from integration |
 | Human Reserved decision required to begin | PASS — none; approved semantics and architecture are preserved |
 
-**Task-level DoR:** `READY`. This status authorizes only dispatch under the revision-2 packet; this Controller update starts no Builder.
+**Task-level DoR:** `SATISFIED`. The bounded revision-2 work was dispatched, verified, independently reviewed, and Controller-closed without widening this packet.

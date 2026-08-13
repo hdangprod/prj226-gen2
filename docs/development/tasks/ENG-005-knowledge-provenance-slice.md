@@ -6,7 +6,7 @@
 
 **Task Packet revision:** 1
 
-**Current task state:** `BLOCKED` in [Engineering Plan revision 1](../ENGINEERING_PLAN.md) pending repaired shared-persistence reconciliation
+**Current task state:** `READY_FOR_BASELINE_RECONCILIATION` in [Engineering Plan revision 1](../ENGINEERING_PLAN.md); no Knowledge semantic repair is authorized or indicated
 
 **Authorization:** `GOV-018`
 
@@ -40,9 +40,9 @@ This task does not implement retrieval or cross-Project relevance selection, del
 Canonical implementation predecessors, and no others, are:
 
 1. `ENG-002` — `DONE`; exact accepted sixteen-file manifest `a0c4613503812ece55e20c2da616b21df165ee5d2ec77b6f8ed5b8381d68319f`.
-2. `ENG-003` — `DONE`; exact accepted thirteen-file manifest `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6`, lockfile SHA-256 `445fd78c4279e62c210b8005aa4406070a832c740bfa5c905deede3b6d230ab6`, and migration SHA-256 `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`.
+2. `ENG-003` — `DONE`; revision-1 aggregate `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6` remains historical accepted evidence, and accepted revision-2 aggregate is `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`; migration SHA-256 remains `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`.
 
-The exact ENG-003 revision-1 manifestation above remains historical accepted evidence. ENG-003 is now reopened under Task Packet revision 2 because downstream review exposed a persistence-owned authoritative lifecycle-transition defect. That repair changes files this packet treats as protected shared dependencies. ENG-005 has no Knowledge-semantic finding and its exclusive lock is unchanged, but dispatch/final evidence must wait for the accepted repaired persistence candidate and readiness reconciliation. This packet does not dispatch Builder work.
+The exact ENG-003 revision-1 manifestation above remains historical accepted evidence. ENG-003 revision 2 is now accepted and path-scoped manifested after the persistence-owned authoritative lifecycle-transition repair. ENG-005 has no Knowledge-semantic finding and its exclusive lock is unchanged. Its existing semantic candidate must be reconciled/rebased and re-manifested against the accepted shared baseline, followed by integrated deterministic verification and a Controller determination whether the independent review is refreshed or remains valid under the Delivery Contract. This packet does not dispatch Builder work.
 
 No Human Reserved decision or external resource is otherwise required.
 
@@ -122,7 +122,7 @@ The Deterministic Verifier is read-only and must run in an isolated worktree dis
 
 Required checks and pass criteria:
 
-1. Reproduce all thirteen ENG-003 component hashes and aggregate `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6` before testing; any mismatch is inability/FAIL, never PASS.
+1. Preserve the historical ENG-003 revision-1 aggregate `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6` as provenance, and reproduce the nine accepted ENG-003 revision-2 component hashes and aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685` before testing; any revision-2 mismatch is inability/FAIL, never PASS.
 2. `npm ci --ignore-scripts`, `npm run typecheck`, `npm run lint`, `npm run build`, and `npm run smoke` pass without changing `package-lock.json`.
 3. `npx vitest run --config tests/domain/vitest.config.ts` and `npm run test:persistence` pass as upstream regressions.
 4. The task-owned application-service and local-D1 suites pass through their task-local Vitest configurations; `npm run migrate:local` succeeds against a fresh isolated local database and repeated application reports no pending migration.
@@ -173,13 +173,13 @@ Stop and prepare a Decision Packet for a Product Foundation or Runtime Architect
 | Delivery Contract condition | Result |
 | --- | --- |
 | Objective, authority, invariants, DoD, verification, review, assignments, and bounded context are explicit | PASS |
-| Canonical predecessors are `DONE` | FAIL — ENG-003 is reopened and its revision-2 repair is not accepted |
-| Accepted predecessor manifestation is present in the intended dispatch base | FAIL — only the historical revision-1 ENG-003 aggregate is present; the repaired aggregate does not yet exist |
+| Canonical predecessors are `DONE` | PASS — ENG-003 revision 2 is `DONE` on aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685` |
+| Accepted predecessor manifestation is present in the intended dispatch base | PASS — the accepted revision-2 persistence manifest is present; ENG-005 still needs its own reconciled candidate/evidence binding |
 | Exclusive/read-only/forbidden paths and resource locks are explicit and disjoint from ENG-004 | PASS |
 | Human Reserved decision required to begin | PASS — none |
 
-**Task-level DoR:** `BLOCKED`. The accepted repaired ENG-003 revision-2 manifestation is not yet available for protected-hash reconciliation and final evidence binding. No Knowledge-semantic repair or lock expansion is authorized.
+**Task-level DoR:** `READY_FOR_BASELINE_RECONCILIATION`. The predecessor blocker is removed, but a reconciled/rebased ENG-005 candidate, new path-sorted manifest, integrated deterministic verification, and review-validity disposition are required before completion or final evidence. No Knowledge-semantic repair or lock expansion is authorized.
 
 ## Prior findings
 
-No ENG-005 candidate finding exists. The upstream rejected ENG-003 manifestation is a dependency/integration blocker, not an ENG-005 work-product finding.
+No ENG-005 candidate finding exists. The accepted ENG-003 revision-2 baseline creates a required reconciliation/evidence-binding step, not an ENG-005 work-product or Knowledge-semantic finding.

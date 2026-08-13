@@ -6,7 +6,7 @@
 
 **Task Packet revision:** 2
 
-**Current task state:** `NEEDS FIX` in [Engineering Plan revision 1](../ENGINEERING_PLAN.md)
+**Current task state:** `READY_FOR_BOUNDED_REPAIR` in [Engineering Plan revision 1](../ENGINEERING_PLAN.md); `ENG-004-F003` remains open and blocking
 
 **Authorization:** `GOV-018`
 
@@ -40,9 +40,9 @@ This task does not implement retrieval or recommendation, interaction wording or
 Canonical implementation predecessors are:
 
 1. `ENG-002` — `DONE`; exact accepted sixteen-file manifest `a0c4613503812ece55e20c2da616b21df165ee5d2ec77b6f8ed5b8381d68319f`.
-2. `ENG-003` — `DONE`; exact accepted thirteen-file manifest `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6`, lockfile SHA-256 `445fd78c4279e62c210b8005aa4406070a832c740bfa5c905deede3b6d230ab6`, and migration SHA-256 `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`.
+2. `ENG-003` — `DONE`; revision-1 aggregate `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6` remains historical accepted evidence, and accepted revision-2 aggregate is `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`; the migration remains `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`.
 
-The exact ENG-003 revision-1 candidate above remains the historical baseline against which reviewed ENG-004 aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431` was built. `ENG-004-F003` subsequently exposed a missing authoritative expected-state lifecycle-transition capability at that persistence boundary. ENG-003 is reopened under Task Packet revision 2 and must return to `DONE` on an accepted repair candidate before ENG-004 repair may be dispatched.
+The exact ENG-003 revision-1 candidate above remains the historical baseline against which reviewed ENG-004 aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431` was built. `ENG-004-F003` exposed a missing authoritative expected-state lifecycle-transition capability at that persistence boundary. ENG-003 revision 2 is now accepted and manifested; ENG-004 may receive its bounded repair after recording the reconciled predecessor identity.
 
 No Human Reserved decision or external resource is otherwise required.
 
@@ -122,7 +122,7 @@ The Deterministic Verifier is read-only and must run in an isolated worktree dis
 
 Required checks and pass criteria:
 
-1. Reproduce all thirteen ENG-003 component hashes and aggregate `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6` before testing; any mismatch is inability/FAIL, never PASS.
+1. Preserve the historical ENG-003 revision-1 aggregate `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6` as provenance, and reproduce the nine accepted ENG-003 revision-2 component hashes and aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685` before testing; any revision-2 mismatch is inability/FAIL, never PASS.
 2. `npm ci --ignore-scripts`, `npm run typecheck`, `npm run lint`, `npm run build`, and `npm run smoke` pass without changing `package-lock.json`.
 3. `npx vitest run --config tests/domain/vitest.config.ts` and `npm run test:persistence` pass as upstream regressions.
 4. The task-owned application-service and local-D1 suites pass through their task-local Vitest configurations; `npm run migrate:local` succeeds against a fresh isolated local database and repeated application reports no pending migration.
@@ -172,12 +172,12 @@ Stop and prepare a Decision Packet for a Product Foundation or Runtime Architect
 | Delivery Contract condition | Result |
 | --- | --- |
 | Objective, authority, invariants, DoD, verification, review, assignments, and bounded context are explicit | PASS |
-| Canonical predecessors are `DONE` | FAIL — ENG-003 is reopened and its revision-2 repair is not accepted |
-| Accepted predecessor manifestation is present in the intended dispatch base | FAIL — only the historical revision-1 ENG-003 aggregate is present; the repaired aggregate does not yet exist |
+| Canonical predecessors are `DONE` | PASS — ENG-003 revision 2 is `DONE` on aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685` |
+| Accepted predecessor manifestation is present in the intended dispatch base | PASS — the accepted revision-2 persistence port/adapter/test manifest is path-scoped manifested; migration remains unchanged |
 | Exclusive/read-only/forbidden paths and resource locks are explicit and disjoint from ENG-005 | PASS |
 | Human Reserved decision required to begin | PASS — none |
 
-**Task-level DoR:** `BLOCKED / NEEDS FIX`. The exact reviewed candidate exists and its deterministic evidence passed, but blocking `ENG-004-F003` requires an accepted ENG-003 revision-2 predecessor and then a bounded ENG-004 repair. This state does not dispatch a Builder.
+**Task-level DoR:** `READY_FOR_BOUNDED_REPAIR`. The exact reviewed candidate exists and its historical deterministic evidence passed. `ENG-004-F003` remains open and requires a bounded repair under the unchanged three-root lock, fresh deterministic verification, and a fresh full independent semantic/persistence-boundary review. This state does not itself dispatch a Builder.
 
 ## Prior findings
 

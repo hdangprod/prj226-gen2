@@ -85,9 +85,9 @@ Exact package and tool versions are selected and lockfile-bound by `ENG-001`. A 
 ```text
 ENG-001 Runtime/tooling foundation
   -> ENG-002 Domain/application kernel
-       -> ENG-003 D1 authority foundation (reopened revision-2 lifecycle-transition repair)
-            -> ENG-004 Project/Action/context slice ----+
-            -> ENG-005 Knowledge/provenance slice ------+-> ENG-006 Direct-SQL retrieval/resumption
+       -> ENG-003 D1 authority foundation (DONE on accepted revision-2 lifecycle-transition baseline)
+            -> ENG-004 Project/Action/context slice (READY_FOR_BOUNDED_REPAIR) ----+
+            -> ENG-005 Knowledge/provenance slice (READY_FOR_BASELINE_RECONCILIATION) ------+-> ENG-006 Direct-SQL retrieval/resumption
                                                             -> ENG-007 Export/confirmed deletion
        -> ENG-008 Model Capability Port and deterministic double
             -> ENG-009 Workers AI adapter
@@ -103,15 +103,15 @@ The arrows express implementation dependencies, not product roadmap or release p
 
 ## Task state and evidence matrix
 
-No task is `RUNNING`. `ENG-001`, `ENG-002`, and `ENG-008` are `DONE`. `ENG-003` is reopened and `READY` under Task Packet revision 2 for the bounded persistence-owned repair required by `ENG-004-F003`. `ENG-004` is `NEEDS FIX`; its exact verified candidate is blocked on the accepted ENG-003 repair. `ENG-005` is `BLOCKED` from dispatch/final evidence until the repaired shared persistence baseline is accepted and reconciled. `ENG-009` remains `PROPOSED` because it has no Task Packet or task-level Definition of Ready re-evaluation. All other nodes remain `PROPOSED` pending their listed predecessors and a complete Ready Task Packet.
+No task is `RUNNING`. `ENG-001`, `ENG-002`, `ENG-003`, and `ENG-008` are `DONE`. ENG-003 revision 2 is accepted on aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`; its revision-1 aggregate remains historical accepted evidence. `ENG-004` is `READY_FOR_BOUNDED_REPAIR` with `ENG-004-F003` open/blocking. `ENG-005` is `READY_FOR_BASELINE_RECONCILIATION`: it has no Knowledge-semantic finding but must reconcile/rebase its candidate and bind fresh integrated evidence to the accepted persistence baseline. `ENG-009` remains `PROPOSED` because it has no Task Packet or task-level Definition of Ready re-evaluation. All other nodes remain `PROPOSED` pending their listed predecessors and a complete Ready Task Packet.
 
 | Task | Objective and dependencies | State | Risk and required review | Primary deterministic evidence |
 | --- | --- | --- | --- | --- |
 | `ENG-001` | Establish the locked TypeScript/Workers toolchain, one deployable shell, local/test configuration, and repository verification interface. Depends on `GOV-018` and this plan. | `DONE` | MODERATE; independent architecture/configuration review required | Clean install; typecheck; lint; unit and smoke tests; build; configuration, forbidden-dependency/service, secret, and whitespace checks; [Delivery Record](delivery/ENG-001-runtime-foundation.md) |
 | `ENG-002` | Implement the pure domain/application kernel and operation-result contracts. Depends on `ENG-001 DONE`. | `DONE` — exact candidate manifest `a0c4613503812ece55e20c2da616b21df165ee5d2ec77b6f8ed5b8381d68319f`; verification PASS; review GREEN | HIGH product-semantic risk; strong independent semantic review complete | Transition and invariant matrices; no-mutation proposal/inference/failure tests; no extra state, hierarchy, taxonomy, provider, or infrastructure types; [Delivery Record](delivery/ENG-002-domain-application-kernel.md) |
-| `ENG-003` | Create and maintain the minimal D1 persistence port/adapter, constraints, atomic accepted writes and authoritative expected-state lifecycle transitions, retry/idempotency, and false-success defenses. Depends on `ENG-002`. | `READY` — reopened Task Packet revision 2; revision-1 aggregate `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6` remains historical accepted evidence; bounded `ENG-004-F003` repair not dispatched | HIGH persistence/lifecycle/data risk; fresh full independent persistence review required | Insert-only initial state; authoritative existence/ownership/expected-state transitions; concurrent/stale conflict; receipt atomicity; local-D1 and revision-1 regression evidence; [Delivery Record](delivery/ENG-003-d1-authority-foundation.md) |
-| `ENG-004` | Deliver Project, Action, accepted progress/context, lifecycle, target, and resumption mutation behavior. Depends on `ENG-002` and repaired `ENG-003 DONE`. | `NEEDS FIX` — exact aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431` verification PASS; review `NEEDS FIX`; `ENG-004-F003` OPEN/BLOCKING; F001/F002 CLOSED | HIGH lifecycle/human-control/persistence-authority risk; fresh full review required after repair | Existing matrix plus fabricated-snapshot, missing-entity, expected-state/concurrency, ownership, receipt, and real-D1 regressions; [Delivery Record](delivery/ENG-004-project-action-context-slice.md) |
-| `ENG-005` | Deliver intentional Knowledge capture, origin provenance, correction, supersession chains, and current standing. Depends on `ENG-002`, accepted repaired `ENG-003`. | `BLOCKED` — no semantic finding; shared persistence baseline must be repaired, accepted, and reconciled before dispatch/final evidence | HIGH data-semantic risk; independent semantic/data review required | Origin immutability, atomic correction, chain/currentness, unrelated-item isolation, no casual capture, failure/duplicate tests |
+| `ENG-003` | Create and maintain the minimal D1 persistence port/adapter, constraints, atomic accepted writes and authoritative expected-state lifecycle transitions, retry/idempotency, and false-success defenses. Depends on `ENG-002`. | `DONE` — revision-2 aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685` accepted; revision-1 aggregate `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6` preserved as history | HIGH persistence/lifecycle/data risk; fresh full independent persistence review GREEN | Insert-only initial state; authoritative existence/ownership/expected-state transitions; concurrent/stale conflict; receipt atomicity; `37/37` local-D1 persistence evidence; [Delivery Record](delivery/ENG-003-d1-authority-foundation.md) |
+| `ENG-004` | Deliver Project, Action, accepted progress/context, lifecycle, target, and resumption mutation behavior. Depends on `ENG-002` and repaired `ENG-003 DONE`. | `READY_FOR_BOUNDED_REPAIR` — exact aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431` verification PASS; `ENG-004-F003` OPEN/BLOCKING; F001/F002 CLOSED | HIGH lifecycle/human-control/persistence-authority risk; fresh full review required after repair | Existing matrix plus fabricated-snapshot, missing-entity, expected-state/concurrency, ownership, receipt, and real-D1 regressions; [Delivery Record](delivery/ENG-004-project-action-context-slice.md) |
+| `ENG-005` | Deliver intentional Knowledge capture, origin provenance, correction, supersession chains, and current standing. Depends on `ENG-002`, accepted repaired `ENG-003`. | `READY_FOR_BASELINE_RECONCILIATION` — no semantic finding; reconcile/rebase candidate and manifests, then run integrated deterministic verification and determine review validity | HIGH data-semantic risk; independent semantic/data review required | Origin immutability, atomic correction, chain/currentness, unrelated-item isolation, no casual capture, failure/duplicate tests |
 | `ENG-006` | Deliver simplest-sufficient direct-SQL retrieval and accepted-context resumption with provenance, currentness, bounded cross-Project reuse, and uncertainty. Depends on `ENG-003`, `ENG-004`, `ENG-005`. | `PROPOSED` | MODERATE-HIGH retrieval/architecture risk; independent semantic/architecture review required | Query fixtures; superseded/deleted exclusion; qualified historical result; origin preservation; transient-session-loss recovery; no vector/search/cache dependency scan |
 | `ENG-007` | Deliver authoritative export and clear-scope, separately confirmed deletion with visible partial-failure/retry behavior. Depends on `ENG-003` through `ENG-006` as applicable. | `PROPOSED` | HIGH destructive/data-control risk; fresh independent review required | Export-authority equality; no delete before confirmation; injected failure no-change/no-false-success; post-delete retrieval; duplicate/retry and provenance-chain tests |
 | `ENG-008` | Define the Liam-owned provider-neutral Model Capability Port and deterministic model double with bounded context, uncertainty, proposal, and normalized failure outcomes. Depends on `ENG-002`. | `DONE` — exact candidate manifest `5fb3343b2a531782ef83d7c874ec95ae221676a700f4c92b3d77591de39c1696`; verification PASS; review GREEN | HIGH architecture/data-boundary risk; independent boundary/security review complete | Port contract tests; context-minimization and secret-exclusion fixtures; proposal-no-write checks; provider-free import/API scan; [Delivery Record](delivery/ENG-008-model-capability-port.md) |
@@ -129,8 +129,8 @@ Delivery Records are maintained under [`docs/development/delivery/`](delivery/) 
 | --- | --- | --- |
 | `ENG-001` | `DONE` | [ENG-001 Runtime Foundation Delivery Record](delivery/ENG-001-runtime-foundation.md) |
 | `ENG-002` | `DONE` | [ENG-002 Domain and Application Kernel Delivery Record](delivery/ENG-002-domain-application-kernel.md) |
-| `ENG-003` | `READY` — reopened repair | [ENG-003 D1 Authority Foundation Delivery Record](delivery/ENG-003-d1-authority-foundation.md) |
-| `ENG-004` | `NEEDS FIX` | [ENG-004 Project/Action/context slice Delivery Record](delivery/ENG-004-project-action-context-slice.md) |
+| `ENG-003` | `DONE` — accepted revision-2 baseline | [ENG-003 D1 Authority Foundation Delivery Record](delivery/ENG-003-d1-authority-foundation.md) |
+| `ENG-004` | `READY_FOR_BOUNDED_REPAIR` | [ENG-004 Project/Action/context slice Delivery Record](delivery/ENG-004-project-action-context-slice.md) |
 | `ENG-008` | `DONE` | [ENG-008 Model Capability Port and Deterministic Double Delivery Record](delivery/ENG-008-model-capability-port.md) |
 
 ## Task Packet index and first execution wave
@@ -139,9 +139,9 @@ Delivery Records are maintained under [`docs/development/delivery/`](delivery/) 
 | --- | --- | --- | --- |
 | [`ENG-001 — Runtime and Tooling Foundation`](tasks/ENG-001-runtime-foundation.md) | 1 | `DONE` | Verification PASS, independent review GREEN, and durable Delivery Record are complete. |
 | [`ENG-002 — Domain and Application Kernel`](tasks/ENG-002-domain-application-kernel.md) | 1 | `DONE` | Exact candidate recorded; verification PASS; independent review GREEN; durable Delivery Record complete. |
-| [`ENG-003 — D1 Authority Foundation`](tasks/ENG-003-d1-authority-foundation.md) | 2 | `READY` | Dispatch only one bounded persistence Builder under the four-root revision-2 lock; no Builder is dispatched by this plan update. |
-| [`ENG-004 — Project/Action/context slice`](tasks/ENG-004-project-action-context-slice.md) | 2 | `NEEDS FIX` | Wait for ENG-003 revision-2 `DONE`, reconcile its exact accepted API/candidate, then dispatch a bounded repair under the unchanged three-root lock. |
-| [`ENG-005 — Knowledge/provenance slice`](tasks/ENG-005-knowledge-provenance-slice.md) | 1 | `BLOCKED` | Re-evaluate against the accepted repaired shared persistence baseline before dispatch/final evidence; no Knowledge semantic change is authorized. |
+| [`ENG-003 — D1 Authority Foundation`](tasks/ENG-003-d1-authority-foundation.md) | 2 | `DONE` | Accepted candidate manifested exactly; durable Delivery Record, deterministic evidence, full review, and targeted review are complete. |
+| [`ENG-004 — Project/Action/context slice`](tasks/ENG-004-project-action-context-slice.md) | 2 | `READY_FOR_BOUNDED_REPAIR` | Record the accepted predecessor identity, then dispatch only the existing three-root bounded repair and require fresh verification plus fresh full review. |
+| [`ENG-005 — Knowledge/provenance slice`](tasks/ENG-005-knowledge-provenance-slice.md) | 1 | `READY_FOR_BASELINE_RECONCILIATION` | Reconcile/rebase and re-manifest the existing semantic candidate against the accepted shared persistence baseline; re-run integrated verification and determine review validity. |
 | [`ENG-008 — Model Capability Port and Deterministic Double`](tasks/ENG-008-model-capability-port.md) | 1 | `DONE` | Exact final candidate recorded; deterministic verification PASS; independent boundary/security review GREEN; durable Delivery Record complete. |
 
 The first execution wave is deliberately serial:
@@ -152,9 +152,9 @@ The first execution wave is deliberately serial:
 4. `ENG-008` subsequently completed with exact-candidate deterministic PASS and independent boundary/security review GREEN. Its completion satisfies `ENG-009`'s listed implementation predecessors, but `ENG-009` has no Task Packet and remains `PROPOSED`.
 5. `ENG-003` completed revision 1 on exact candidate manifest `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6` after final deterministic PASS, targeted review GREEN, and closure of `ENG-003-F001` and `ENG-003-F001-R1`. That candidate and history remain exact historical accepted evidence.
 6. ENG-004 aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431` later passed deterministic verification, closing `ENG-004-F001` and `ENG-004-F002`, but independent review raised blocking `ENG-004-F003`: lifecycle methods trusted caller snapshots and used persistence put/upsert rather than authoritative existing-state transitions.
-7. F003 is both an upstream accepted-artifact defect and an omitted persistence capability. The Controller therefore reopened the existing boundary owner, ENG-003, under Task Packet revision 2 rather than creating a new task ID. ENG-004 is `NEEDS FIX`; ENG-005 is held from dispatch/final evidence until the shared persistence baseline is accepted and reconciled. This update dispatches no Builder.
+7. F003 is both an upstream accepted-artifact defect and an omitted persistence capability. The Controller reopened the existing boundary owner, ENG-003, under Task Packet revision 2 rather than creating a new task ID. Revision 2 is now accepted on aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`; ENG-004 is ready for its bounded repair and ENG-005 is ready for baseline reconciliation only. This update dispatches no Builder.
 
-The initial `ENG-001` and `ENG-002` wave was deliberately serial while implementation and test conventions were established. ENG-003 revision 2 is now the only Ready repair. ENG-004 repair and ENG-005 dispatch/final integration wait for its accepted candidate. ENG-009 still requires a separate Task Packet and task-level DoR.
+The initial `ENG-001` and `ENG-002` wave was deliberately serial while implementation and test conventions were established. After ENG-003 revision-2 acceptance, ENG-004 may be dispatched only for its bounded service repair; ENG-005 may proceed only through baseline reconciliation, evidence rebinding, and review-validity determination. ENG-009 still requires a separate Task Packet and task-level DoR.
 
 ## ENG-003 repair and downstream lock disposition
 
@@ -174,7 +174,7 @@ The packets assign disjoint prospective Builder ownership:
 | `ENG-004` | `src/application/services/projectActionContext/**` | `tests/application/services/projectActionContext/**`; `tests/integration/d1/projectActionContext/**` |
 | `ENG-005` | `src/application/services/knowledgeProvenance/**` | `tests/application/services/knowledgeProvenance/**`; `tests/integration/d1/knowledgeProvenance/**` |
 
-Both tasks consume `src/domain/**`, `src/application/contracts/**`, the eventual accepted ENG-003 persistence repair, `migrations/0001_authoritative_state.sql`, existing regression tests/helpers, root configuration, dependency files, and `src/index.ts` as read-only accepted upstream state. Their prior parallel-safe disposition is suspended until that shared dependency is accepted and reconciled.
+Both tasks consume `src/domain/**`, `src/application/contracts/**`, the accepted ENG-003 revision-2 persistence repair, `migrations/0001_authoritative_state.sql`, existing regression tests/helpers, root configuration, dependency files, and `src/index.ts` as read-only accepted upstream state. Their prospective source locks remain disjoint, but no parallel Builder dispatch is authorized until ENG-005 completes baseline reconciliation and ENG-004's repair dispatch is formally recorded.
 
 | Collision-prone surface | Classification | Reason |
 | --- | --- | --- |
@@ -191,17 +191,17 @@ Both tasks consume `src/domain/**`, `src/application/contracts/**`, the eventual
 
 The current binding disposition is:
 
-`ENG-003 REPAIR: READY / NOT DISPATCHED`
+`ENG-003 REVISION 2: DONE`
 
-`ENG-004: NEEDS FIX — WAIT FOR ENG-003`
+`ENG-004: READY_FOR_BOUNDED_REPAIR — F003 OPEN`
 
-`ENG-005: BLOCKED FROM DISPATCH/FINAL EVIDENCE — RECONCILE AFTER ENG-003`
+`ENG-005: READY_FOR_BASELINE_RECONCILIATION — NO SEMANTIC REPAIR`
 
 ## Concurrency and writer isolation
 
 - Every writing task receives one active Builder and exclusive ownership of the exact paths in its Task Packet.
 - ENG-003 revision-1 persistence work and ENG-008 model-port work were concurrency-safe after ENG-002 because their adapter, port, and test paths were disjoint; both reached `DONE` before the later ENG-003 reopening.
-- ENG-003 revision-2 persistence writing is serialized ahead of ENG-004 repair and ENG-005 dispatch/final evidence because both consume its paths as protected shared authority.
+- ENG-003 revision-2 persistence writing is complete. ENG-004's repair remains serialized until its Builder is formally dispatched; ENG-005 must reconcile its candidate and evidence before any parallel-safe disposition is reconsidered.
 - `ENG-006` waits for both vertical slices so retrieval cannot invent incomplete state contracts. `ENG-007` waits for retrieval and persistence so deletion/export evidence covers actual authority paths.
 - `ENG-010` is the integration convergence point and is serialized against its predecessors. `ENG-011` has intentionally broad runtime instrumentation scope and receives a single exclusive writer.
 - Read-only verification and review may run concurrently only when independence, exact-candidate binding, and evidence integrity remain intact.
@@ -251,7 +251,7 @@ Ordinary source layout, TypeScript types, table and index design, ordered migrat
 ## Blockers, findings, and planning outcome
 
 - **Current blocking Human Decision Packets:** None.
-- **Current task state:** no task is `RUNNING`. `ENG-003` revision 2 is `READY` and not dispatched; its revision-1 exact candidate and closed finding history remain durable. `ENG-004` is `NEEDS FIX` on verified aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431`, with F001/F002 closed and F003 open/blocking. `ENG-005` is blocked from dispatch/final evidence pending repaired persistence reconciliation. `ENG-009` remains `PROPOSED` until its separate Task Packet and DoR exist. Later tasks retain their declared dependencies.
+- **Current task state:** no task is `RUNNING`. `ENG-003` revision 2 is `DONE` on accepted aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`; its revision-1 exact candidate and closed finding history remain durable. `ENG-004` is `READY_FOR_BOUNDED_REPAIR` on verified aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431`, with F001/F002 closed and F003 open/blocking. `ENG-005` is `READY_FOR_BASELINE_RECONCILIATION`, with no semantic finding but required candidate/evidence reconciliation. `ENG-009` remains `PROPOSED` until its separate Task Packet and DoR exist. Later tasks retain their declared dependencies.
 - **Manifestation recovery:** The Controller recovered the already accepted thirteen-file ENG-003 candidate into the intended dispatch base, reproduced its component and aggregate hashes, and reran the contracted integrated verification. This was ordinary delivery recovery and path/integration control; it changed no Product or Runtime Architecture authority and required no Human Reserved decision.
 - **Intentionally absent semantics:** Project abandonment or Action withdrawal, extra planning hierarchy, non-project knowledge, knowledge taxonomy/promotion, permanent recommendation precedence, and deletion undo remain unmodeled and must not be invented.
 - **Current external condition:** `ENG-013` later requires free non-production Workers AI access plus current data-use, retention, caching/storage, hosted-state, training/improvement, and license/terms evidence. This does not block `ENG-001` through deterministic acceptance.

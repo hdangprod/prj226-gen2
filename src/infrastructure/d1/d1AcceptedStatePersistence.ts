@@ -10,12 +10,14 @@ import type {
   AcceptedProgress,
   Action,
   ActionId,
+  ActionState,
   KnowledgeItem,
   KnowledgeItemId,
   NonEmptyText,
   ProgressId,
   Project,
   ProjectId,
+  ProjectState,
 } from "../../domain/model";
 
 const RECEIPT_QUERY = "SELECT fingerprint FROM persistence_operations WHERE operation_id = ?";
@@ -135,15 +137,32 @@ function canonicalizeWrite(raw: unknown): AcceptedStateWrite | undefined {
   if (!isRecord(raw)) return undefined;
   const kind = raw.kind;
   switch (kind) {
-    case "put-project": {
+    case "create-project": {
       if (!hasExactOwnKeys(raw, ["kind", "project"])) return undefined;
       const project = canonicalizeProject(raw.project);
-      return project === undefined ? undefined : { kind, project };
+      return project === undefined || project.state !== "Active" ? undefined : { kind, project };
     }
-    case "put-action": {
+    case "transition-project": {
+      if (!hasExactOwnKeys(raw, ["kind", "projectId", "expectedState", "nextState"])) return undefined;
+      const projectId = raw.projectId;
+      const expectedState = raw.expectedState;
+      const nextState = raw.nextState;
+      if (typeof projectId !== "string" || (expectedState !== "Active" && expectedState !== "Completed") || (nextState !== "Active" && nextState !== "Completed") || expectedState === nextState) return undefined;
+      return { kind, projectId: projectId as ProjectId, expectedState: expectedState as ProjectState, nextState: nextState as ProjectState };
+    }
+    case "create-action": {
       if (!hasExactOwnKeys(raw, ["kind", "action"])) return undefined;
       const action = canonicalizeAction(raw.action);
-      return action === undefined ? undefined : { kind, action };
+      return action === undefined || action.state !== "Open" ? undefined : { kind, action };
+    }
+    case "transition-action": {
+      if (!hasExactOwnKeys(raw, ["kind", "actionId", "projectId", "expectedState", "nextState"])) return undefined;
+      const actionId = raw.actionId;
+      const projectId = raw.projectId;
+      const expectedState = raw.expectedState;
+      const nextState = raw.nextState;
+      if (typeof actionId !== "string" || typeof projectId !== "string" || (expectedState !== "Open" && expectedState !== "Completed") || (nextState !== "Open" && nextState !== "Completed") || expectedState === nextState) return undefined;
+      return { kind, actionId: actionId as ActionId, projectId: projectId as ProjectId, expectedState: expectedState as ActionState, nextState: nextState as ActionState };
     }
     case "append-context-facts": {
       if (!hasExactOwnKeys(raw, ["kind", "projectId", "facts"])) return undefined;
@@ -202,11 +221,15 @@ function canonicalizeCommit(raw: unknown): AcceptedStateCommit | undefined {
   if (!isRecord(raw) || !hasExactOwnKeys(raw, ["operationId", "writes"])) return undefined;
   const operationId = raw.operationId;
   const canonicalWrites = canonicalizeWriteArray(raw.writes);
-  if (typeof operationId !== "string" || canonicalWrites === undefined) return undefined;
+  if (typeof operationId !== "string" || canonicalWrites === undefined || (canonicalWrites.some(isLifecycleTransition) && canonicalWrites.length !== 1)) return undefined;
   return {
     operationId: operationId as PersistenceOperationId,
     writes: canonicalWrites,
   };
+}
+
+function isLifecycleTransition(write: AcceptedStateWrite): write is Extract<AcceptedStateWrite, { kind: "transition-project" | "transition-action" }> {
+  return write.kind === "transition-project" || write.kind === "transition-action";
 }
 
 function stable(value: unknown): string {
@@ -233,10 +256,14 @@ function statementsForWrite(
   write: AcceptedStateWrite,
 ): readonly D1PreparedStatement[] {
   switch (write.kind) {
-    case "put-project":
-      return [statement(database, "INSERT INTO projects (id, intended_outcome, state) VALUES (?, ?, ?) ON CONFLICT(id) DO UPDATE SET state = excluded.state", write.project.id, write.project.intendedOutcome, write.project.state)];
-    case "put-action":
-      return [statement(database, "INSERT INTO actions (id, project_id, description, state) VALUES (?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET state = excluded.state", write.action.id, write.action.projectId, write.action.description, write.action.state)];
+    case "create-project":
+      return [statement(database, "INSERT INTO projects (id, intended_outcome, state) VALUES (?, ?, 'Active')", write.project.id, write.project.intendedOutcome)];
+    case "transition-project":
+      return [statement(database, "UPDATE projects SET state = ? WHERE id = ? AND state = ?", write.nextState, write.projectId, write.expectedState)];
+    case "create-action":
+      return [statement(database, "INSERT INTO actions (id, project_id, description, state) VALUES (?, ?, ?, 'Open')", write.action.id, write.action.projectId, write.action.description)];
+    case "transition-action":
+      return [statement(database, "UPDATE actions SET state = ? WHERE id = ? AND project_id = ? AND state = ?", write.nextState, write.actionId, write.projectId, write.expectedState)];
     case "append-context-facts":
       return write.facts.map((fact, index) => statement(database, "INSERT INTO accepted_context_facts (project_id, ordinal, fact) VALUES (?, (SELECT COALESCE(MAX(ordinal), -1) + 1 + ? FROM accepted_context_facts WHERE project_id = ?), ?)", write.projectId, index, write.projectId, fact));
     case "put-progress":
@@ -263,6 +290,27 @@ function isConstraintFailure(error: unknown): boolean {
   return /constraint|unique|foreign key|check/i.test(message);
 }
 
+function changedExactlyOnce(result: { readonly meta?: { readonly changes?: number } } | undefined): boolean {
+  return result?.meta?.changes === 1;
+}
+
+function readReceipt(
+  database: D1DatabaseLike,
+  operationId: PersistenceOperationId,
+): Promise<unknown> {
+  return statement(database, RECEIPT_QUERY, operationId).first<unknown>();
+}
+
+function receiptLookupResult(receipt: unknown, fingerprint: string): PersistenceCommitResult {
+  if (receipt === null) return { kind: "persistence-failed", reason: "constraint-conflict", retryable: false };
+  if (!isRecord(receipt) || !Object.prototype.hasOwnProperty.call(receipt, "fingerprint") || typeof receipt.fingerprint !== "string") {
+    return { kind: "persistence-failed", reason: "durability-failure", retryable: true };
+  }
+  return receipt.fingerprint === fingerprint
+    ? { kind: "already-committed" }
+    : { kind: "persistence-failed", reason: "operation-id-conflict", retryable: false };
+}
+
 export class D1AcceptedStatePersistence implements AcceptedStatePersistence {
   constructor(private readonly database: D1DatabaseLike) {}
 
@@ -279,18 +327,27 @@ export class D1AcceptedStatePersistence implements AcceptedStatePersistence {
     const fingerprint = stable(canonical.writes);
     try {
       const writes = canonical.writes.flatMap((write) => statementsForWrite(this.database, write));
-      const receipt = statement(this.database, "INSERT INTO persistence_operations (operation_id, fingerprint) VALUES (?, ?)", canonical.operationId, fingerprint);
+      const transition = canonical.writes.length === 1 && isLifecycleTransition(canonical.writes[0]!);
+      const receipt = transition
+        ? statement(this.database, "INSERT INTO persistence_operations (operation_id, fingerprint) SELECT ?, ? WHERE changes() = 1", canonical.operationId, fingerprint)
+        : statement(this.database, "INSERT INTO persistence_operations (operation_id, fingerprint) VALUES (?, ?)", canonical.operationId, fingerprint);
       const results = await this.database.batch([...writes, receipt]);
       if (results.length !== writes.length + 1 || results.some(({ success }) => !success)) {
         return { kind: "persistence-failed", reason: "durability-failure", retryable: true };
+      }
+      if (transition && (!changedExactlyOnce(results[0]) || !changedExactlyOnce(results[1]))) {
+        try {
+          return receiptLookupResult(await readReceipt(this.database, canonical.operationId), fingerprint);
+        } catch {
+          return { kind: "persistence-failed", reason: "durability-failure", retryable: true };
+        }
       }
       return { kind: "committed" };
     } catch (error) {
       if (isConstraintFailure(error)) {
         try {
-          const existing = await this.database.first<{ fingerprint: string }>(RECEIPT_QUERY, canonical.operationId);
-          if (existing?.fingerprint === fingerprint) return { kind: "already-committed" };
-          if (existing !== null) return { kind: "persistence-failed", reason: "operation-id-conflict", retryable: false };
+          const result = receiptLookupResult(await readReceipt(this.database, canonical.operationId), fingerprint);
+          if (result.kind !== "persistence-failed" || result.reason !== "constraint-conflict") return result;
         } catch {
           return { kind: "persistence-failed", reason: "durability-failure", retryable: true };
         }

@@ -2,12 +2,13 @@ import { describe, expect, it } from "vitest";
 import { persistenceOperationId, type AcceptedStateCommit, type AcceptedStateWrite } from "../../../src/application/ports/persistence";
 import { actionId, knowledgeItemId, nonEmptyText, progressId, projectId } from "../../../src/domain/model";
 import { D1AcceptedStatePersistence } from "../../../src/infrastructure/d1";
+import type { D1DatabaseLike } from "../../../src/infrastructure/d1/d1Types";
 import { FakeD1 } from "./fakeD1";
 
 function commit(operation = "operation-1", outcome = "Ship safely"): AcceptedStateCommit {
   return {
     operationId: persistenceOperationId(operation),
-    writes: [{ kind: "put-project", project: { id: projectId("project-1"), intendedOutcome: nonEmptyText(outcome)!, state: "Active" } }],
+    writes: [{ kind: "create-project", project: { id: projectId("project-1"), intendedOutcome: nonEmptyText(outcome)!, state: "Active" } }],
   };
 }
 
@@ -40,7 +41,7 @@ describe("D1 accepted-state adapter", () => {
     await expect(adapter.commitAcceptedState(commit("project-create", "Original"))).resolves.toEqual({ kind: "committed" });
     await expect(adapter.commitAcceptedState({
       operationId: persistenceOperationId("project-conflict"),
-      writes: [{ kind: "put-project", project: { id: projectId("project-1"), intendedOutcome: nonEmptyText("Different")!, state: "Completed" } }],
+      writes: [{ kind: "create-project", project: { id: projectId("project-1"), intendedOutcome: nonEmptyText("Different")!, state: "Active" } }],
     })).resolves.toEqual({ kind: "persistence-failed", reason: "constraint-conflict", retryable: false });
     expect(database.projects.get("project-1")).toEqual({ intendedOutcome: "Original", state: "Active" });
     expect(database.receipts.has("project-conflict")).toBe(false);
@@ -52,7 +53,7 @@ describe("D1 accepted-state adapter", () => {
     await adapter.commitAcceptedState(commit("project-create", "Original"));
     await expect(adapter.commitAcceptedState({
       operationId: persistenceOperationId("project-complete"),
-      writes: [{ kind: "put-project", project: { id: projectId("project-1"), intendedOutcome: nonEmptyText("Original")!, state: "Completed" } }],
+      writes: [{ kind: "transition-project", projectId: projectId("project-1"), expectedState: "Active", nextState: "Completed" }],
     })).resolves.toEqual({ kind: "committed" });
     expect(database.projects.get("project-1")?.state).toBe("Completed");
   });
@@ -62,18 +63,106 @@ describe("D1 accepted-state adapter", () => {
     const adapter = new D1AcceptedStatePersistence(database);
     await adapter.commitAcceptedState(commit("project-create"));
     const original = { id: actionId("action-1"), projectId: projectId("project-1"), description: nonEmptyText("Original action")!, state: "Open" as const };
-    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("action-create"), writes: [{ kind: "put-action", action: original }] })).resolves.toEqual({ kind: "committed" });
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("action-create"), writes: [{ kind: "create-action", action: original }] })).resolves.toEqual({ kind: "committed" });
     await expect(adapter.commitAcceptedState({
       operationId: persistenceOperationId("action-conflict"),
-      writes: [{ kind: "put-action", action: { ...original, description: nonEmptyText("Different action")!, state: "Completed" } }],
+      writes: [{ kind: "create-action", action: { ...original, description: nonEmptyText("Different action")!, state: "Open" } }],
     })).resolves.toEqual({ kind: "persistence-failed", reason: "constraint-conflict", retryable: false });
     expect(database.actions.get("action-1")).toEqual({ projectId: "project-1", description: "Original action", state: "Open" });
     expect(database.receipts.has("action-conflict")).toBe(false);
     await expect(adapter.commitAcceptedState({
       operationId: persistenceOperationId("action-complete"),
-      writes: [{ kind: "put-action", action: { ...original, state: "Completed" } }],
+      writes: [{ kind: "transition-action", actionId: original.id, projectId: original.projectId, expectedState: "Open", nextState: "Completed" }],
     })).resolves.toEqual({ kind: "committed" });
     expect(database.actions.get("action-1")?.state).toBe("Completed");
+  });
+
+  it("uses authoritative existence, ownership, and expected state for lifecycle transitions", async () => {
+    const database = new FakeD1();
+    const adapter = new D1AcceptedStatePersistence(database);
+    const failed = { kind: "persistence-failed", reason: "constraint-conflict", retryable: false } as const;
+    const project = { id: projectId("authoritative-project"), intendedOutcome: nonEmptyText("Authoritative outcome")!, state: "Active" as const };
+    const action = { id: actionId("authoritative-action"), projectId: project.id, description: nonEmptyText("Authoritative action")!, state: "Open" as const };
+
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("completed-project-create"), writes: [{ kind: "create-project", project: { ...project, state: "Completed" } }] })).resolves.toEqual(failed);
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("completed-action-create"), writes: [{ kind: "create-action", action: { ...action, state: "Completed" } }] })).resolves.toEqual(failed);
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("missing-project-transition"), writes: [{ kind: "transition-project", projectId: project.id, expectedState: "Active", nextState: "Completed" }] })).resolves.toEqual(failed);
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("missing-action-transition"), writes: [{ kind: "transition-action", actionId: action.id, projectId: project.id, expectedState: "Open", nextState: "Completed" }] })).resolves.toEqual(failed);
+    expect(database.projects).toHaveLength(0);
+    expect(database.actions).toHaveLength(0);
+    expect(database.receipts).toHaveLength(0);
+
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("project-create-authoritative"), writes: [{ kind: "create-project", project }] })).resolves.toEqual({ kind: "committed" });
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("project-create-authoritative"), writes: [{ kind: "create-project", project }] })).resolves.toEqual({ kind: "already-committed" });
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("missing-owner-action-create"), writes: [{ kind: "create-action", action: { ...action, id: actionId("missing-owner-action"), projectId: projectId("missing-owner") } }] })).resolves.toEqual(failed);
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("action-create-authoritative"), writes: [{ kind: "create-action", action }] })).resolves.toEqual({ kind: "committed" });
+
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("wrong-project-state"), writes: [{ kind: "transition-project", projectId: project.id, expectedState: "Completed", nextState: "Active" }] })).resolves.toEqual(failed);
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("project-complete-authoritative"), writes: [{ kind: "transition-project", projectId: project.id, expectedState: "Active", nextState: "Completed" }] })).resolves.toEqual({ kind: "committed" });
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("project-complete-authoritative"), writes: [{ kind: "transition-project", projectId: project.id, expectedState: "Active", nextState: "Completed" }] })).resolves.toEqual({ kind: "already-committed" });
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("stale-project-state"), writes: [{ kind: "transition-project", projectId: project.id, expectedState: "Active", nextState: "Completed" }] })).resolves.toEqual(failed);
+
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("wrong-action-owner"), writes: [{ kind: "transition-action", actionId: action.id, projectId: projectId("other-project"), expectedState: "Open", nextState: "Completed" }] })).resolves.toEqual(failed);
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("action-complete-authoritative"), writes: [{ kind: "transition-action", actionId: action.id, projectId: project.id, expectedState: "Open", nextState: "Completed" }] })).resolves.toEqual({ kind: "committed" });
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("action-complete-authoritative"), writes: [{ kind: "transition-action", actionId: action.id, projectId: project.id, expectedState: "Open", nextState: "Completed" }] })).resolves.toEqual({ kind: "already-committed" });
+    expect(database.actions.get(action.id)?.state).toBe("Completed");
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("action-reopen-authoritative"), writes: [{ kind: "transition-action", actionId: action.id, projectId: project.id, expectedState: "Completed", nextState: "Open" }] })).resolves.toEqual({ kind: "committed" });
+    expect(database.projects.get(project.id)?.state).toBe("Completed");
+    expect(database.actions.get(action.id)?.state).toBe("Open");
+    for (const operation of ["completed-project-create", "completed-action-create", "missing-project-transition", "missing-action-transition", "missing-owner-action-create", "wrong-project-state", "stale-project-state", "wrong-action-owner"]) {
+      expect(database.receipts.has(operation)).toBe(false);
+    }
+  });
+
+  it("uses only the D1 database and prepared-statement methods available in production", async () => {
+    const database = new FakeD1();
+    const productionSurface: D1DatabaseLike = {
+      prepare: database.prepare.bind(database),
+      batch: database.batch.bind(database),
+    };
+    const adapter = new D1AcceptedStatePersistence(productionSurface);
+    const failed = { kind: "persistence-failed", reason: "constraint-conflict", retryable: false } as const;
+    const project = { id: projectId("surface-project"), intendedOutcome: nonEmptyText("Surface")!, state: "Active" as const };
+    const action = { id: actionId("surface-action"), projectId: project.id, description: nonEmptyText("Surface action")!, state: "Open" as const };
+
+    expect("first" in productionSurface).toBe(false);
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("surface-create-project"), writes: [{ kind: "create-project", project }] })).resolves.toEqual({ kind: "committed" });
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("surface-transition-project"), writes: [{ kind: "transition-project", projectId: project.id, expectedState: "Active", nextState: "Completed" }] })).resolves.toEqual({ kind: "committed" });
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("surface-transition-project"), writes: [{ kind: "transition-project", projectId: project.id, expectedState: "Active", nextState: "Completed" }] })).resolves.toEqual({ kind: "already-committed" });
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("surface-transition-project"), writes: [{ kind: "transition-project", projectId: project.id, expectedState: "Completed", nextState: "Active" }] })).resolves.toEqual({ kind: "persistence-failed", reason: "operation-id-conflict", retryable: false });
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("surface-stale-project"), writes: [{ kind: "transition-project", projectId: project.id, expectedState: "Active", nextState: "Completed" }] })).resolves.toEqual(failed);
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("surface-missing-project"), writes: [{ kind: "transition-project", projectId: projectId("missing-project"), expectedState: "Active", nextState: "Completed" }] })).resolves.toEqual(failed);
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("surface-create-action"), writes: [{ kind: "create-action", action }] })).resolves.toEqual({ kind: "committed" });
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("surface-wrong-owner"), writes: [{ kind: "transition-action", actionId: action.id, projectId: projectId("other-project"), expectedState: "Open", nextState: "Completed" }] })).resolves.toEqual(failed);
+    expect(database.projects.get(project.id)?.state).toBe("Completed");
+    expect(database.actions.get(action.id)?.state).toBe("Open");
+    expect(database.receipts.has("surface-stale-project")).toBe(false);
+    expect(database.receipts.has("surface-missing-project")).toBe(false);
+    expect(database.receipts.has("surface-wrong-owner")).toBe(false);
+  });
+
+  it("treats malformed receipt-query results as retryable durability failures", async () => {
+    const database = new FakeD1();
+    const adapter = new D1AcceptedStatePersistence(database);
+    const project = { id: projectId("malformed-receipt-project"), intendedOutcome: nonEmptyText("Malformed receipt")!, state: "Active" as const };
+    await adapter.commitAcceptedState({ operationId: persistenceOperationId("malformed-receipt-create"), writes: [{ kind: "create-project", project }] });
+    await adapter.commitAcceptedState({ operationId: persistenceOperationId("malformed-receipt-complete"), writes: [{ kind: "transition-project", projectId: project.id, expectedState: "Active", nextState: "Completed" }] });
+    database.receiptLookupOverride = { enabled: true, value: undefined };
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("malformed-receipt-stale"), writes: [{ kind: "transition-project", projectId: project.id, expectedState: "Active", nextState: "Completed" }] })).resolves.toEqual({ kind: "persistence-failed", reason: "durability-failure", retryable: true });
+    expect(database.projects.get(project.id)?.state).toBe("Completed");
+    expect(database.receipts.has("malformed-receipt-stale")).toBe(false);
+  });
+
+  it("maps a receipt-query failure to a retryable durability failure", async () => {
+    const database = new FakeD1();
+    const adapter = new D1AcceptedStatePersistence(database);
+    const project = { id: projectId("receipt-query-project"), intendedOutcome: nonEmptyText("Receipt query")!, state: "Active" as const };
+    await adapter.commitAcceptedState({ operationId: persistenceOperationId("receipt-query-create"), writes: [{ kind: "create-project", project }] });
+    await adapter.commitAcceptedState({ operationId: persistenceOperationId("receipt-query-complete"), writes: [{ kind: "transition-project", projectId: project.id, expectedState: "Active", nextState: "Completed" }] });
+    database.failReceiptLookup = new Error("D1 unavailable");
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("receipt-query-stale"), writes: [{ kind: "transition-project", projectId: project.id, expectedState: "Active", nextState: "Completed" }] })).resolves.toEqual({ kind: "persistence-failed", reason: "durability-failure", retryable: true });
+    expect(database.projects.get(project.id)?.state).toBe("Completed");
+    expect(database.receipts.has("receipt-query-stale")).toBe(false);
   });
 
   it("makes identical retries safe and rejects operation-id collisions", async () => {
@@ -220,8 +309,8 @@ describe("D1 accepted-state adapter", () => {
     const progress = { id: progressId("nested-progress"), projectId: projectId("nested-project"), statement: nonEmptyText("Progress")!, standing: "current" as const, unexpected: "ignored" };
     const knowledge = { id: knowledgeItemId("nested-knowledge"), originatingProjectId: projectId("nested-project"), content: nonEmptyText("Knowledge")!, standing: "current" as const, supersessionChain: [], unexpected: "ignored" };
     const writes: AcceptedStateWrite[] = [
-      { kind: "put-project", project },
-      { kind: "put-action", action },
+      { kind: "create-project", project },
+      { kind: "create-action", action },
       { kind: "put-progress", progress },
       { kind: "correct-progress", successor: progress },
       { kind: "put-knowledge", item: knowledge },
@@ -250,11 +339,11 @@ describe("D1 accepted-state adapter", () => {
     const malformed: AcceptedStateCommit[] = [
       { operationId: persistenceOperationId("symbol-progress"), writes: [{ kind: "correct-progress", successor: symbolProgress } as unknown as AcceptedStateWrite] },
       { operationId: persistenceOperationId("hidden-knowledge"), writes: [{ kind: "correct-knowledge", successor: nonEnumerableKnowledge } as unknown as AcceptedStateWrite] },
-      { operationId: persistenceOperationId("symbol-project"), writes: [{ kind: "put-project", project: symbolProject } as unknown as AcceptedStateWrite] },
+      { operationId: persistenceOperationId("symbol-project"), writes: [{ kind: "create-project", project: symbolProject } as unknown as AcceptedStateWrite] },
       { operationId: persistenceOperationId("array-extra"), writes: [{ kind: "append-context-facts", projectId: projectId("project-1"), facts } as unknown as AcceptedStateWrite] },
       { operationId: persistenceOperationId("null-progress"), writes: [{ kind: "correct-progress", successor: null } as unknown as AcceptedStateWrite] },
       { operationId: persistenceOperationId("primitive-knowledge"), writes: [{ kind: "put-knowledge", item: "bad" } as unknown as AcceptedStateWrite] },
-      { operationId: persistenceOperationId("missing-project"), writes: [{ kind: "put-project", project: { id: projectId("missing"), state: "Active" } } as unknown as AcceptedStateWrite] },
+      { operationId: persistenceOperationId("missing-project"), writes: [{ kind: "create-project", project: { id: projectId("missing"), state: "Active" } } as unknown as AcceptedStateWrite] },
       { operationId: persistenceOperationId("object-fact"), writes: [{ kind: "append-context-facts", projectId: projectId("project-1"), facts: [{ unexpected: true }] } as unknown as AcceptedStateWrite] },
     ];
     for (const commit of malformed) await expect(adapter.commitAcceptedState(commit)).resolves.toEqual(invalid);
@@ -292,7 +381,7 @@ describe("D1 accepted-state adapter", () => {
       },
       state: "Active" as const,
     };
-    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("mutation-project"), writes: [{ kind: "put-project", project }] })).resolves.toEqual({ kind: "committed" });
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("mutation-project"), writes: [{ kind: "create-project", project }] })).resolves.toEqual({ kind: "committed" });
     expect(intendedOutcomeReads).toBe(1);
     expect(database.projects.get("mutation-project")?.intendedOutcome).toBe("Original");
     expect(database.receipts.get("mutation-project")).toContain("Original");
@@ -380,7 +469,7 @@ describe("D1 accepted-state adapter", () => {
     const invalid = { kind: "persistence-failed", reason: "constraint-conflict", retryable: false } as const;
     const project = Object.assign(Object.create({ id: projectId("inherited-id") }) as Record<string, unknown>, { intendedOutcome: nonEmptyText("Outcome")!, state: "Active" as const });
     const progress = Object.assign(Object.create({ projectId: projectId("inherited-project") }) as Record<string, unknown>, { id: progressId("required-progress"), statement: nonEmptyText("Progress")!, standing: "current" as const });
-    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("required-project"), writes: [{ kind: "put-project", project: project as never }] })).resolves.toEqual(invalid);
+    await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("required-project"), writes: [{ kind: "create-project", project: project as never }] })).resolves.toEqual(invalid);
     await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("required-progress"), writes: [{ kind: "put-progress", progress: progress as never }] })).resolves.toEqual(invalid);
     expect(database.batches).toHaveLength(0);
   });
@@ -461,9 +550,9 @@ describe("D1 accepted-state adapter", () => {
   });
 
   it("canonicalizes commit writes from own indices without invoking inherited iterators", async () => {
-    const writeA: AcceptedStateWrite = { kind: "put-project", project: { id: projectId("write-a"), intendedOutcome: nonEmptyText("A")!, state: "Active" } };
-    const writeB: AcceptedStateWrite = { kind: "put-project", project: { id: projectId("write-b"), intendedOutcome: nonEmptyText("B")!, state: "Active" } };
-    const writeC: AcceptedStateWrite = { kind: "put-project", project: { id: projectId("write-c"), intendedOutcome: nonEmptyText("C")!, state: "Active" } };
+    const writeA: AcceptedStateWrite = { kind: "create-project", project: { id: projectId("write-a"), intendedOutcome: nonEmptyText("A")!, state: "Active" } };
+    const writeB: AcceptedStateWrite = { kind: "create-project", project: { id: projectId("write-b"), intendedOutcome: nonEmptyText("B")!, state: "Active" } };
+    const writeC: AcceptedStateWrite = { kind: "create-project", project: { id: projectId("write-c"), intendedOutcome: nonEmptyText("C")!, state: "Active" } };
     let iteratorReads = 0;
     const writes: AcceptedStateWrite[] = [writeA, writeB];
     Object.setPrototypeOf(writes, {
@@ -484,7 +573,7 @@ describe("D1 accepted-state adapter", () => {
 
   it("rejects malformed commit write arrays before receipt lookup without invoking getters or iterators", async () => {
     const invalid = { kind: "persistence-failed", reason: "constraint-conflict", retryable: false } as const;
-    const write: AcceptedStateWrite = { kind: "put-project", project: { id: projectId("write-shape"), intendedOutcome: nonEmptyText("Shape")!, state: "Active" } };
+    const write: AcceptedStateWrite = { kind: "create-project", project: { id: projectId("write-shape"), intendedOutcome: nonEmptyText("Shape")!, state: "Active" } };
     const database = new FakeD1();
     const adapter = new D1AcceptedStatePersistence(database);
     await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("writes-existing"), writes: [write] })).resolves.toEqual({ kind: "committed" });
@@ -517,9 +606,9 @@ describe("D1 accepted-state adapter", () => {
   });
 
   it("preserves write order and isolates raw writes and their iterator after canonicalization", async () => {
-    const first: AcceptedStateWrite = { kind: "put-project", project: { id: projectId("write-first"), intendedOutcome: nonEmptyText("First")!, state: "Active" } };
-    const second: AcceptedStateWrite = { kind: "put-project", project: { id: projectId("write-second"), intendedOutcome: nonEmptyText("Second")!, state: "Active" } };
-    const replacement: AcceptedStateWrite = { kind: "put-project", project: { id: projectId("write-replacement"), intendedOutcome: nonEmptyText("Replacement")!, state: "Active" } };
+    const first: AcceptedStateWrite = { kind: "create-project", project: { id: projectId("write-first"), intendedOutcome: nonEmptyText("First")!, state: "Active" } };
+    const second: AcceptedStateWrite = { kind: "create-project", project: { id: projectId("write-second"), intendedOutcome: nonEmptyText("Second")!, state: "Active" } };
+    const replacement: AcceptedStateWrite = { kind: "create-project", project: { id: projectId("write-replacement"), intendedOutcome: nonEmptyText("Replacement")!, state: "Active" } };
     const writes: AcceptedStateWrite[] = [first, second];
     const database = new FakeD1();
     const adapter = new D1AcceptedStatePersistence(database);
@@ -532,16 +621,16 @@ describe("D1 accepted-state adapter", () => {
     expect(database.receipts.get("writes-owned")).toContain("write-first");
     expect(database.receipts.get("writes-owned")).toContain("write-second");
     expect(database.receipts.get("writes-owned")).not.toContain("write-replacement");
-    const retryFirst: AcceptedStateWrite = { kind: "put-project", project: { id: projectId("write-first"), intendedOutcome: nonEmptyText("First")!, state: "Active" } };
-    const retrySecond: AcceptedStateWrite = { kind: "put-project", project: { id: projectId("write-second"), intendedOutcome: nonEmptyText("Second")!, state: "Active" } };
+    const retryFirst: AcceptedStateWrite = { kind: "create-project", project: { id: projectId("write-first"), intendedOutcome: nonEmptyText("First")!, state: "Active" } };
+    const retrySecond: AcceptedStateWrite = { kind: "create-project", project: { id: projectId("write-second"), intendedOutcome: nonEmptyText("Second")!, state: "Active" } };
     await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("writes-owned"), writes: [retryFirst, retrySecond] })).resolves.toEqual({ kind: "already-committed" });
     await expect(adapter.commitAcceptedState({ operationId: persistenceOperationId("writes-owned"), writes: [retrySecond, retryFirst] })).resolves.toEqual({ kind: "persistence-failed", reason: "operation-id-conflict", retryable: false });
   });
 
   it("keeps multiple canonical writes and the receipt atomic on partial failure", async () => {
     const writes: AcceptedStateWrite[] = [
-      { kind: "put-project", project: { id: projectId("atomic-a"), intendedOutcome: nonEmptyText("A")!, state: "Active" } },
-      { kind: "put-project", project: { id: projectId("atomic-b"), intendedOutcome: nonEmptyText("B")!, state: "Active" } },
+      { kind: "create-project", project: { id: projectId("atomic-a"), intendedOutcome: nonEmptyText("A")!, state: "Active" } },
+      { kind: "create-project", project: { id: projectId("atomic-b"), intendedOutcome: nonEmptyText("B")!, state: "Active" } },
     ];
     const database = new FakeD1();
     database.partialResult = true;

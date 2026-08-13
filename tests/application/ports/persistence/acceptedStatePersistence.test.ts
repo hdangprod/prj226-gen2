@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from "vitest";
 import { persistenceOperationId, type AcceptedStateWrite, type PersistenceCommitResult } from "../../../../src/application/ports/persistence";
-import type { AcceptedProgress, KnowledgeItem } from "../../../../src/domain/model";
+import type { AcceptedProgress, Action, KnowledgeItem, Project } from "../../../../src/domain/model";
 
 describe("provider-neutral persistence contract", () => {
   it("keeps durable success and failure distinguishable", () => {
@@ -30,5 +30,23 @@ describe("provider-neutral persistence contract", () => {
     const obsoleteKnowledgeSnapshot: AcceptedStateWrite = { kind: "correct-knowledge", prior: {} as KnowledgeItem, successor: {} as KnowledgeItem };
     expect(obsoleteProgressSnapshot).toBeDefined();
     expect(obsoleteKnowledgeSnapshot).toBeDefined();
+  });
+
+  it("separates lifecycle creation from expected-state transition intent", () => {
+    expectTypeOf<Extract<AcceptedStateWrite, { readonly kind: "create-project" }>>().toEqualTypeOf<{
+      readonly kind: "create-project";
+      readonly project: Project;
+    }>();
+    expectTypeOf<Extract<AcceptedStateWrite, { readonly kind: "create-action" }>>().toEqualTypeOf<{
+      readonly kind: "create-action";
+      readonly action: Action;
+    }>();
+
+    // @ts-expect-error A transition carries identifiers and expected state, never a caller snapshot.
+    const projectSnapshotTransition: AcceptedStateWrite = { kind: "transition-project", project: {} as Project };
+    // @ts-expect-error An Action transition must include its immutable owning Project identity.
+    const ownerlessActionTransition: AcceptedStateWrite = { kind: "transition-action", actionId: "action" as Action["id"], expectedState: "Open", nextState: "Completed" };
+    expect(projectSnapshotTransition).toBeDefined();
+    expect(ownerlessActionTransition).toBeDefined();
   });
 });
