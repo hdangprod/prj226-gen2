@@ -56,7 +56,7 @@ Controller recovery began from canonical base `9296deedc43426f0df5668fe1ed78112d
 | `638b4455b2906982260230c077defc41c18b532172f0ef89b294a5e90705ff95` | `tests/integration/d1/projectActionContext/projectActionContextPersistence.test.ts` |
 | `e9aa4796008099fb7786537df3b0d350d3bd84496a96badd0c51aafb10c02ef2` | `tests/integration/d1/projectActionContext/vitest.config.ts` |
 
-The recovered repository-path-sorted aggregate is exactly `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431`. ENG-003 revision 2 remains untouched: its nine-file aggregate still reproduces `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685` in the recovery baseline, and the migration is unchanged. The recovery worktree contains only the seven recovered ENG-004 task-owned files relative to the canonical base.
+The recovered repository-path-sorted aggregate is exactly `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431`. The exact seven-file recovery baseline is durably preserved on local recovery ref `recovery/eng-004-historical-a795e4a` at commit `f8e7d6a08361a88a7f146b76e1599bb4daa71150`, rooted at canonical base `9296deedc43426f0df5668fe1ed78112d4818e7d`; that commit is historical recovery provenance, not ENG-004 acceptance. ENG-003 revision 2 remains untouched: its nine-file aggregate still reproduces `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685` in the recovery baseline, and the migration is unchanged. The recovery baseline contains only the seven recovered ENG-004 task-owned files relative to the canonical base.
 
 ### ENG-003 revision-2 compatibility assessment
 
