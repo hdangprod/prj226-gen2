@@ -8,7 +8,7 @@
 
 **Task Packet revision:** 2
 
-**Current lifecycle state:** `READY — BOUNDED_REPAIR_AUTHORIZED`; reviewed candidate `239535a075b7b10626fc1f1adf9687daf08b0088` failed independent review on `ENG-005-REV2-IR-F001`; ENG-005 is not `DONE`
+**Current lifecycle state:** `DONE` — accepted final aggregate `333f27f33f5725751a3cb48bbd0009253faab26282e218883b6393c3d3ae90f0` is path-scoped manifested
 
 **Authorization:** `GOV-018`
 
@@ -16,7 +16,58 @@
 
 **Task Packet:** [ENG-005 — Knowledge/provenance slice](../tasks/ENG-005-knowledge-provenance-slice.md)
 
-**Recorded:** 2026-08-14
+**Recorded:** 2026-08-15
+
+## Controller closure — 2026-08-15
+
+The Controller confirmed canonical pre-closure `HEAD` `e6bc1439ade290a7b8ac0f301d534981c5a3a078`; accepted Builder candidate `81b023deb2b1a61630a2c8cb3aaee22050182bb8` (tree `833a11f345dedd240c892d473dd99e701d34cf3e`), descending through the authorized lineage:
+`e6bc1439ade290a7b8ac0f301d534981c5a3a078` → `2ea1d0a611757efb061dc7d4c7f989d7212582af` → `180bd7a17569f33a797a0eb95bfce8e02f2efc82` → `91c15266c5ca8c26825aa74dd1ffc3ad58cb3c90` → `1a4629095b17ceb81a8e32694ba8eca537ef7b58` → `3f8a3d743f5b71023cb6609ebd32f33e00aa69f0` → `81b023deb2b1a61630a2c8cb3aaee22050182bb8`.
+
+All seven candidate bytes reproduced before and after controlled path-scoped manifestation into the canonical working tree, reproducing full canonical aggregate `333f27f33f5725751a3cb48bbd0009253faab26282e218883b6393c3d3ae90f0` and IR-F005 repair-delta aggregate `8faa44d016e712f28d8af7e0a8226734103b9c8a32a99d94f069b05bfa1215f4`.
+
+| SHA-256 | Final manifested path |
+| --- | --- |
+| `01e7c1bd4969b6e4b12cba9185bde45f604a514bb94dfa24904582b0f9cf08b1` | `src/application/services/knowledgeProvenance/knowledgeProvenanceService.ts` |
+| `661976e0b4ce2d908c09322eafa1dd836a11f73b377a51bfe00a07ad02cc6595` | `tests/application/services/knowledgeProvenance/knowledgeProvenanceService.test.ts` |
+| `b993f7599a73a735b4efc85c7bd8a71a8c23401665d4da09bc767b60f0bedbda` | `tests/application/services/knowledgeProvenance/vitest.config.ts` |
+| `4edf85ee1aab36faf1a1e93be1fb6fca9aa57f29b494525465d95b5b22e8b598` | `tests/integration/d1/knowledgeProvenance/node-runtime.d.ts` |
+| `6168da89c80c8491ae9cc808b2b7d9a98e5a724c70737edd9bf0c599804df59e` | `tests/integration/d1/knowledgeProvenance/vitest.config.ts` |
+| `545d3081942f660649936ae41f847093d5f3aa9064a9412ab138cb5270c14274` | `tests/integration/d1/knowledgeProvenance/wranglerLocalD1.test.ts` |
+| `d44220ce2ebd2e145efa00a43b9c388a0d0032406d4a566ed709490d05496ce2` | `tests/integration/d1/knowledgeProvenance/wranglerLocalD1.ts` |
+
+The manifest is the SHA-256 of this newline-delimited listing in repository-path sort order. The accepted upstream aggregates remain unchanged: ENG-002 manifest `a0c4613503812ece55e20c2da616b21df165ee5d2ec77b6f8ed5b8381d68319f`, ENG-003 revision-2 aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`, ENG-004 aggregate `6be8bc2b4d58cd1a0e9be7ea6a3762dafee0aa5a26796bb8e97214e48c1725c2`, and migration `migrations/0001_authoritative_state.sql` at `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`.
+
+### Finding chain closure
+
+All historical and revision-2 findings for ENG-005 are `CLOSED`:
+- `ENG-005-F001`: CLOSED — finite guard for authentication material added; genuine Wrangler-backed local-D1 evidence established.
+- `ENG-005-REV2-V001`: CLOSED — verification contract reconciled; malformed target verified as malformed input rather than ambiguous target; target ambiguity assigned upstream to planned `ENG-010`.
+- `ENG-005-REV2-F002`: CLOSED — Bearer discriminator false positives repaired; benign explanatory Bearer prose preserved.
+- `ENG-005-REV2-IR-F001`: CLOSED — bare alphanumeric Bearer bypass (`Bearer tokenonly123`) rejected on capture and correction without persistence.
+- `ENG-005-REV2-IR-F002`: CLOSED — textual and simple code-wrapped Bearer envelopes rejected without persistence.
+- `ENG-005-REV2-IR-F003`: CLOSED — alphabetic opaque Bearer tokens rejected without persistence.
+- `ENG-005-REV2-IR-F004`: CLOSED — embedded inline-code Bearer spans rejected without persistence.
+- `ENG-005-REV2-IR-F005`: CLOSED — plural credential and token assignment labels (`credentials=`, `access_tokens=`, `auth_tokens=`, `passwords=`, `passphrases=`, `auth_secrets=`, `authentication_secrets=`, `client_secrets=`) rejected on capture and correction without persistence or receipts; benign plural prose controls accepted.
+
+### Final gate evidence
+
+1. Deterministic Verification: `ENG-005 REV2 IR-F005 VERIFICATION: PASS`
+   - `npm run typecheck`: PASS
+   - `npm run lint`: PASS
+   - `npm run build`: PASS
+   - `npm run smoke`: PASS
+   - ENG-002 domain tests: `37/37` PASS
+   - ENG-003 persistence tests: `37/37` PASS
+   - ENG-004 service + integration tests: `17/17` service PASS, `4/4` integration PASS
+   - ENG-005 service unit tests: `15/15` PASS
+   - ENG-005 Wrangler-backed local D1 tests: `9/9` PASS across 3 fresh standalone executions
+   - Manifest and hash stability: PASS
+   - Scope and lock check: PASS (only 3 task-owned files modified).
+
+2. Full Semantic / Data + Persistence Review: `ENG-005 REVIEW: GREEN`
+   - Intentional capture, immutable originating Project, linear supersession chains, atomic standing changes, Human Control validation, truthfulness, DATA-001 finite guard coverage, benign prose preservation, exact-target boundary ownership, and persistence atomicity independently verified and approved.
+
+**Controller disposition:** `ENG-005 -> DONE`. No Human Reserved disposition is required: the final repair implements already-approved Product, Domain, Data Control, and Runtime Architecture semantics without changing reserved authority.
 
 ## Controller recovery classification — 2026-08-14
 
@@ -45,69 +96,74 @@ The initial Builder aggregate was `cbdd59de5090a2ab85638f94cdfd00d64723c662566ae
 
 The bounded historical repair added a finite service-local eligibility guard for credentials, authentication secrets, private keys, access tokens, and equivalent material; it protected both capture and correction, allowed no user self-classification bypass, and did not establish generalized secret scanning. It added genuine Wrangler-backed local-D1 evidence while retaining FakeD1 only for deterministic rollback/failure paths. Historical fresh verification later reported `ENG-005-F001 CLOSED` with service `9/9`, integration `3/3`, ENG-002 `37/37`, ENG-003 revision-1 `31/31`, and real local-D1 evidence. Those facts remain historical provenance, not evidence for regenerated bytes.
 
-No Knowledge/provenance semantic defect is known. The prior disposition was interface/behavior compatible with the later ENG-003 repair, but the missing candidate makes baseline reconciliation impossible.
+No Knowledge/provenance semantic defect is known. The prior disposition was interface/behavior compatible with the later ENG-003 repair, but the missing candidate made baseline reconciliation impossible.
 
-## Reconstruction authority and required sequence
+## Historical reconstruction authority and sequence — 2026-08-14 (consumed/completed)
 
-`GOV-018` explicitly authorizes the approved Knowledge Item/provenance/supersession behavior, TypeScript application code, D1-backed integration evidence, local/test configuration, and bounded engineering documentation. Task Packet revision 2 narrows that authority to the existing ENG-005 write lock:
+> [!NOTE]
+> **Historical record:** This section records historical reconstruction authority and execution sequence established on 2026-08-14 following candidate recovery failure. That authority was fully consumed by the accepted repair lineage ending in candidate `81b023deb2b1a61630a2c8cb3aaee22050182bb8`. It does not authorize any current Builder, repair, reconstruction, or implementation work.
+
+`GOV-018` explicitly authorized the approved Knowledge Item/provenance/supersession behavior, TypeScript application code, D1-backed integration evidence, local/test configuration, and bounded engineering documentation. Task Packet revision 2 narrowed that authority to the existing ENG-005 write lock:
 
 - `src/application/services/knowledgeProvenance/**`
 - `tests/application/services/knowledgeProvenance/**`
 - `tests/integration/d1/knowledgeProvenance/**`
 
-The rebuild must consume accepted ENG-003 revision 2 aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`, preserve accepted ENG-004 aggregate `6be8bc2b4d58cd1a0e9be7ea6a3762dafee0aa5a26796bb8e97214e48c1725c2`, and leave migration `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99` untouched. It must preserve intentional capture, exactly one immutable originating Project, correction by atomic linear supersession rather than overwrite, current/predecessor behavior, accepted-success truthfulness, the F001 eligibility protections, and genuine Wrangler-backed local-D1 evidence. It must not claim that new bytes are recovered or equal to the historical aggregate.
+The rebuild was required to consume accepted ENG-003 revision 2 aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`, preserve accepted ENG-004 aggregate `6be8bc2b4d58cd1a0e9be7ea6a3762dafee0aa5a26796bb8e97214e48c1725c2`, and leave migration `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99` untouched. It was required to preserve intentional capture, exactly one immutable originating Project, correction by atomic linear supersession rather than overwrite, current/predecessor behavior, accepted-success truthfulness, the F001 eligibility protections, and genuine Wrangler-backed local-D1 evidence. It did not claim that new bytes were recovered or equal to the historical aggregate.
 
-No Human Reserved decision is required: the rebuild changes no Product Foundation, Domain Model, Runtime Architecture, security-authority decision, service/infrastructure boundary, migration, lock, or protected upstream artifact. Any discovered need for such a change stops the task and routes a Decision Packet.
+No Human Reserved decision was required: the rebuild changed no Product Foundation, Domain Model, Runtime Architecture, security-authority decision, service/infrastructure boundary, migration, lock, or protected upstream artifact.
 
-The required sequence is: Builder reconstruction from the current canonical base → fresh **full** deterministic verification, including genuine local-D1 evidence and immutable upstream/lock checks → fresh **full** independent semantic/data and persistence-boundary review → Controller closure only if all Delivery Contract Definition of Done conditions are met. Review validity cannot be inherited from the lost historical candidate.
+The required sequence was: Builder reconstruction from the current canonical base → fresh **full** deterministic verification, including genuine local-D1 evidence and immutable upstream/lock checks → fresh **full** independent semantic/data and persistence-boundary review → Controller closure only if all Delivery Contract Definition of Done conditions were met. This sequence completed successfully on final candidate `81b023deb2b1a61630a2c8cb3aaee22050182bb8`.
 
 `ENG-006` and every later dependency-bound task remain undispatched; `ENG-009` remains `PROPOSED`.
 
-## ENG-005 revision-2 V001 Controller disposition — 2026-08-14
+## Historical ENG-005 revision-2 V001 Controller disposition — 2026-08-14 (superseded)
 
-**Disposition:** `ENG-005 V001 CONTROLLER: BOUNDED_REPAIR_AUTHORIZED`
+> [!NOTE]
+> **Historical disposition:** This section records historical 2026-08-14 V001/F002 bounded repair authority. It was consumed by subsequent repair candidates and is no longer executable.
 
-The canonical controller `HEAD` before this disposition was `a13801e126fc58a56f1a076ee7d8efc77017dc3c`. The pre-repair regenerated ENG-005 candidate is commit `676bd5c5e2fd8daf245602b43e2d72e5230f5c3b`, tree `825c739ecf248860c138c67b1f30dbbc74d65610`, aggregate `28b104136e5b47dd267be611aeddd9df0873a0d3791ffc7973bb2cd6ea108d91`, and rebuild base `a13801e126fc58a56f1a076ee7d8efc77017dc3c`. It is `NOT DONE`.
+**Historical disposition:** `ENG-005 V001 CONTROLLER: BOUNDED_REPAIR_AUTHORIZED (superseded)`
+
+The canonical controller `HEAD` before this disposition was `a13801e126fc58a56f1a076ee7d8efc77017dc3c`. The pre-repair regenerated ENG-005 candidate was commit `676bd5c5e2fd8daf245602b43e2d72e5230f5c3b`, tree `825c739ecf248860c138c67b1f30dbbc74d65610`, aggregate `28b104136e5b47dd267be611aeddd9df0873a0d3791ffc7973bb2cd6ea108d91`, and rebuild base `a13801e126fc58a56f1a076ee7d8efc77017dc3c`.
 
 Fresh V001 deterministic verification previously returned `ENG-005 REV2 VERIFICATION: FAIL` with blocking evidence gap `ENG-005-REV2-V001`. The evidence-only Builder disposition was `ENG-005 REV2 V001 REPAIR: BLOCKED — PRODUCTION_DEFECT_DISCOVERED`: `npm run typecheck` passed, while `npx vitest run --config tests/application/services/knowledgeProvenance/vitest.config.ts` passed 16 of 17 tests. That evidence work changed no production code.
 
 ### Finding and authority
 
-`ENG-005-REV2-F002` is **BLOCKING — WORK_PRODUCT_DEFECT**. The V001 evidence repair showed that the candidate's finite Bearer pattern treats `Bearer authentication` as actual authentication material. The explicit reproducer, `Bearer authentication is documented here without any token material.`, was prohibited on capture instead of accepted. This is a production semantic defect, not merely an evidence gap.
+`ENG-005-REV2-F002` was historically **BLOCKING — WORK_PRODUCT_DEFECT** at discovery for candidate `676bd5c5e2fd8daf245602b43e2d72e5230f5c3b`. The V001 evidence repair showed that the candidate's finite Bearer pattern treated `Bearer authentication` as actual authentication material. The explicit reproducer, `Bearer authentication is documented here without any token material.`, was prohibited on capture instead of accepted. This was a production semantic defect, not merely an evidence gap, and was subsequently `CLOSED` by candidate `1d58b114ceaeed370e5f2fb8084660f7bd106385`.
 
-The violated authority is Task Packet revision-2 invariant 11 and Verification Contract check 8, together with `DATA-001` and `PI-DATA-005`. Those sources require that credentials, authentication secrets, private keys, access tokens, and equivalent authentication material are outside intended Knowledge capture, while the finite service-local guard must not reject ordinary prose for an isolated word such as `password` or `access token`. `ENG-005-F001` remains historical closed provenance for that same finite-guard boundary; its protections must be re-established for the regenerated candidate.
+The violated authority was Task Packet revision-2 invariant 11 and Verification Contract check 8, together with `DATA-001` and `PI-DATA-005`. Those sources require that credentials, authentication secrets, private keys, access tokens, and equivalent authentication material are outside intended Knowledge capture, while the finite service-local guard must not reject ordinary prose for an isolated word such as `password` or `access token`. `ENG-005-F001` remains historical closed provenance for that same finite-guard boundary.
 
-`GOV-018` authorizes the smallest correction entirely inside the existing ENG-005 lock. It enforces already-approved data-control and Knowledge eligibility semantics, changes no Product Foundation, Domain Model, Runtime Architecture, security-authority decision, service/infrastructure boundary, migration, or protected upstream artifact, and therefore needs **no Human Reserved disposition**.
+`GOV-018` authorized the smallest correction entirely inside the existing ENG-005 lock without a Human Reserved disposition.
 
-### Bounded repair contract
+### Historical bounded repair contract (consumed)
 
-The next Builder may modify only:
+The assigned Builder was authorized to modify only:
 
 - `src/application/services/knowledgeProvenance/**`;
 - `tests/application/services/knowledgeProvenance/**`; and
 - `tests/integration/d1/knowledgeProvenance/**`.
 
-It must make the smallest correction that distinguishes actual Bearer authentication material from ordinary explanatory prose. It must reject realistic synthetic Bearer-material forms, including canonical equivalents of `Authorization: Bearer <synthetic-token>` and `Bearer <synthetic-token>`, on both capture and correction with no commit, receipt, successor, or standing change. It must accept the explicit benign-Bearer reproducer where otherwise valid, and retain/add Task Packet-required ordinary `password` and `access token` prose controls. The repair must recognize actual material structure, not introduce a token-vocabulary denylist, generalized DLP, entropy analysis, external scanner, vendor-token catalog, ML classifier, generic security architecture, or user self-classification bypass.
+It was required to make the smallest correction distinguishing actual Bearer authentication material from ordinary explanatory prose, rejecting realistic synthetic Bearer-material forms on both capture and correction without commit, receipt, successor, or standing change, while accepting the explicit benign-Bearer reproducer and retaining required prose controls.
 
-All paths and topics outside that lock remain prohibited, including ENG-003, ENG-004, the persistence port, D1 adapter, migration, domain/contracts, root configuration, governance authority, provider/model, retrieval, deployment, and downstream work. Accepted upstream identities remain immutable: ENG-003 aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`, ENG-004 aggregate `6be8bc2b4d58cd1a0e9be7ea6a3762dafee0aa5a26796bb8e97214e48c1725c2`, and migration `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`.
+All paths and topics outside that lock remained prohibited. Accepted upstream identities remained immutable: ENG-003 aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`, ENG-004 aggregate `6be8bc2b4d58cd1a0e9be7ea6a3762dafee0aa5a26796bb8e97214e48c1725c2`, and migration `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`.
 
-### V001 evidence and required gates
+### Historical V001 evidence and required gates
 
-The isolated V001 evidence worktree at `builder/eng-005-rev2-v001-evidence` contains uncommitted task-local test changes. They are reviewable evidence input only and are not canonical candidate bytes. The next Builder starts fresh from the exact pre-repair candidate, selectively incorporates only tests within the authorized lock, and produces a new candidate commit, tree, per-file manifest, and aggregate; temporary worktree state must not be adopted by identity accident.
+The isolated V001 evidence worktree at `builder/eng-005-rev2-v001-evidence` contained uncommitted task-local test changes. The replacement candidate required fresh **full** deterministic verification under the whole Task Packet Verification Contract followed by fresh **full** independent review.
 
-The full V001 matrix remains required after the repair: invalid or missing correction authorization; missing, ambiguous, non-current, and cyclic correction targets; multi-step lineage; unrelated-item isolation; invalid originating Project; correction durability failure and atomic rollback; real-D1 operation-ID conflict and malformed retry; explicit Bearer material; and representative credential, password, and authentication-secret material, with their required benign prose controls. Any additional V001 test that exposes a separate production semantic defect outside the Bearer discriminator requires an immediate stop and `BLOCKED — ADDITIONAL_PRODUCTION_DEFECT_DISCOVERED`; it cannot be folded into this repair.
+**Historical F002 next-Builder state:** `READY — BOUNDED_REPAIR_AUTHORIZED (superseded)`; that disposition directed a Builder to start from `676bd5c5e2fd8daf245602b43e2d72e5230f5c3b`, repair only the Bearer-material discriminator and task-scoped evidence inside the three permitted roots, and complete required gates. It is retained as candidate-scoped history and was superseded by the IR-F001 disposition below.
 
-Because production code changes, the replacement candidate requires fresh **full** deterministic verification under the whole Task Packet Verification Contract, not targeted verification and not historical verifier evidence. It then requires a fresh **full** independent semantic/data and persistence-boundary review before Controller closure. ENG-005 must not be marked `DONE` until every applicable Delivery Contract DoD condition is independently satisfied. `ENG-006` and later dependency-bound work remain unauthorized/undispatched.
+## Historical ENG-005 revision-2 F002/V001 Controller clarification — 2026-08-14 (consumed)
 
-**Historical F002 next-Builder state:** `READY — BOUNDED_REPAIR_AUTHORIZED`; that disposition directed a Builder to start from `676bd5c5e2fd8daf245602b43e2d72e5230f5c3b`, repair only the Bearer-material discriminator and task-scoped evidence inside the three permitted roots, produce a new candidate, then complete the required full gates. It is retained as candidate-scoped history and is superseded for further execution by the IR-F001 disposition below.
+> [!NOTE]
+> **Historical reconciliation:** This section records historical 2026-08-14 contract clarification assigning ambiguous-target clarification upstream to planned `ENG-010`.
 
-## ENG-005 revision-2 F002/V001 Controller clarification — 2026-08-14
+**Historical disposition:** `ENG-005 REV2 F002/V001 RE-REPAIR: VERIFICATION_CONTRACT_RECONCILED`
 
-**Disposition:** `ENG-005 REV2 F002/V001 RE-REPAIR: VERIFICATION_CONTRACT_RECONCILED`
+The Controller authority for this reconciliation was `90af460c70e6f975e7bb0e32d80e92efd9438616`. The source candidate at that stage was `1d58b114ceaeed370e5f2fb8084660f7bd106385`, tree `ff64dbd7905c48744ffa6cafc970e1e86f4cfcab`; its reported full seven-file aggregate was `f72f98d9431b1fbb0466ef564d7515604c210064086b6afb22846a21bcb799fe` and its reported three-file repair-delta aggregate was `0a4bc5c6d6d57776f6cb9412018f7241f08deaaebf7533324b44c072bc72ca02`.
 
-The Controller authority for this reconciliation is `90af460c70e6f975e7bb0e32d80e92efd9438616`. The current source candidate is `1d58b114ceaeed370e5f2fb8084660f7bd106385`, tree `ff64dbd7905c48744ffa6cafc970e1e86f4cfcab`; its reported full seven-file aggregate is `f72f98d9431b1fbb0466ef564d7515604c210064086b6afb22846a21bcb799fe` and its reported three-file repair-delta aggregate is `0a4bc5c6d6d57776f6cb9412018f7241f08deaaebf7533324b44c072bc72ca02`.
-
-No new candidate was produced by the latest Builder. It used a fresh isolated clean worktree at the exact candidate and made no file changes. The prior `ENG-005 REV2 F002/V001 RE-REPAIR: BLOCKED — AMBIGUITY_VERIFICATION_CONTRACT_UNREPRESENTABLE` is therefore a verification-contract/Task Packet gap, not a source-candidate repair or a new product defect.
+No new candidate was produced by that Builder step; the prior blocking report was a verification-contract/Task Packet gap, not a new product defect.
 
 ### Exact boundary fact
 
@@ -117,36 +173,39 @@ No new candidate was produced by the latest Builder. It used a fresh isolated cl
 
 The approved Domain Model requires clarification before acceptance when an ambiguous state-changing target would affect an accepted change, and states that inference alone cannot change accepted state. The approved Runtime Architecture places `target/authority check` before domain validation and authoritative persistence in the state-changing interaction flow. The Engineering Plan assigns the planned text-interaction and human-control orchestration, including ambiguity clarification, to `ENG-010`.
 
-Accordingly, ambiguity handling is owned at the upstream interaction/application target-resolution boundary before an exact Knowledge target is passed to ENG-005. `ENG-010` is identified as the existing planned task; this reconciliation creates no new task ID and dispatches no downstream work. ENG-005's exact-target API structurally requires ambiguity to have been resolved or rejected before invocation. No write may occur on unresolved ambiguity at that owning boundary.
+Accordingly, ambiguity handling is owned at the upstream interaction/application target-resolution boundary before an exact Knowledge target is passed to ENG-005. `ENG-010` is identified as the existing planned task; this reconciliation created no new task ID and dispatched no downstream work. ENG-005's exact-target API structurally requires ambiguity to have been resolved or rejected before invocation. No write may occur on unresolved ambiguity at that owning boundary.
 
-The Product Foundation, Domain Model, Runtime Architecture, Human Control semantics, `DATA-001`, `PI-DATA-005`, `QLT-001`, and `GOV-018` remain unchanged. This is a verification-evidence applicability correction within the existing ENG-005 Task Packet and lock, not a waiver of the ambiguity invariant, an API addition, a target-selection feature, a new service boundary, or a Human Reserved matter.
+The Product Foundation, Domain Model, Runtime Architecture, Human Control semantics, `DATA-001`, `PI-DATA-005`, `QLT-001`, and `GOV-018` remained unchanged. This was a verification-evidence applicability correction within the existing ENG-005 Task Packet and lock.
 
 ### Required next gates
 
-The Task Packet Verification Contract now requires malformed or missing exact-target no-write evidence, non-current exact-target and lineage controls, and explicitly marks ambiguous-target runtime evidence as not applicable at this service boundary. It preserves the global ambiguity invariant as upstream `ENG-010` evidence. The exact current candidate requires a fresh full deterministic run under that corrected contract. If it passes, a fresh full independent semantic/data and persistence-boundary review remains required before Controller closure. No Builder, Verifier, or Reviewer may mark ENG-005 `DONE` from this clarification alone.
+The Task Packet Verification Contract was updated to require malformed or missing exact-target no-write evidence and non-current exact-target and lineage controls, while explicitly marking ambiguous-target runtime evidence as not applicable at this service boundary. The candidate was required to pass fresh full deterministic verification and fresh full independent review before Controller closure.
 
-## ENG-005 revision-2 IR-F001 Controller disposition — 2026-08-14
+## Historical ENG-005 revision-2 IR-F001 Controller disposition — 2026-08-14 (superseded)
 
-**Disposition:** `ENG-005 IR-F001 CONTROLLER: BOUNDED_REPAIR_AUTHORIZED`
+> [!NOTE]
+> **Historical disposition:** This section records historical 2026-08-14 IR-F001 bounded repair authority. It was consumed by subsequent repair candidates (IR-F002 through IR-F005) leading to final accepted candidate `81b023deb2b1a61630a2c8cb3aaee22050182bb8`.
 
-The Controller authority before this disposition is `0dc8fd86b4e7e5761c51529ada2ce56e771dc186`. Fresh full deterministic verification returned `ENG-005 REV2 POST-CONTRACT VERIFICATION: PASS` for candidate `239535a075b7b10626fc1f1adf9687daf08b0088`, tree `d669c213f173711b5f064897d016b9189ac0ce7a`, and canonical full seven-file aggregate `939cdae244aa44252ed6d12031874d406e3b5009955e3fc9e34f339140eed15a`. Fresh full independent semantic/data and persistence-boundary review then returned `ENG-005 REVIEW: NEEDS FIX`. The deterministic pass remains exact candidate-scoped evidence; the review rejection makes the candidate failed-review provenance only and prohibits Controller closure.
+**Historical disposition:** `ENG-005 IR-F001 CONTROLLER: BOUNDED_REPAIR_AUTHORIZED (superseded)`
+
+The Controller authority before this disposition was `0dc8fd86b4e7e5761c51529ada2ce56e771dc186`. Fresh full deterministic verification returned `ENG-005 REV2 POST-CONTRACT VERIFICATION: PASS` for candidate `239535a075b7b10626fc1f1adf9687daf08b0088`, tree `d669c213f173711b5f064897d016b9189ac0ce7a`, and canonical full seven-file aggregate `939cdae244aa44252ed6d12031874d406e3b5009955e3fc9e34f339140eed15a`. Fresh full independent semantic/data and persistence-boundary review then returned `ENG-005 REVIEW: NEEDS FIX`. The deterministic pass remained exact candidate-scoped evidence; the review rejection made the candidate failed-review provenance only and prohibited Controller closure.
 
 ### Finding, classification, and authority
 
-`ENG-005-REV2-IR-F001` is **BLOCKING — WORK_PRODUCT_DEFECT**, not an evidence gap. In `src/application/services/knowledgeProvenance/knowledgeProvenanceService.ts`, the finite guard rejects `Authorization: Bearer tokenonly123` but the bare-Bearer branch accepts `Bearer tokenonly123` because it requires punctuation in the token. The reviewed bypass reaches normal Knowledge persistence semantics for both capture and correction, so actual authentication material can be durably accepted.
+`ENG-005-REV2-IR-F001` was historically **BLOCKING — WORK_PRODUCT_DEFECT** at discovery for candidate `239535a075b7b10626fc1f1adf9687daf08b0088`. In `src/application/services/knowledgeProvenance/knowledgeProvenanceService.ts`, the finite guard rejected `Authorization: Bearer tokenonly123` but the bare-Bearer branch accepted `Bearer tokenonly123` because it required punctuation in the token. The reviewed bypass reached normal Knowledge persistence semantics for both capture and correction, so actual authentication material could be durably accepted. This finding was subsequently `CLOSED` by candidate `180bd7a17569f33a797a0eb95bfce8e02f2efc82`.
 
-This violates Task Packet revision-2 invariant 11 and Verification Contract check 8, `DATA-001`, and `PI-DATA-005`. `ENG-005-F001` remains historical closed provenance for the finite-guard boundary. `ENG-005-REV2-F002` remains closed candidate-scoped history for the distinct false-positive boundary: `Authorization: Bearer tokenonly123` and synthetic Bearer material remained prohibited while benign explanatory Bearer prose was incorrectly rejected. IR-F001 neither relabels nor reopens F002; it records a newly exposed false-negative bypass in the bare-Bearer branch.
+This violated Task Packet revision-2 invariant 11 and Verification Contract check 8, `DATA-001`, and `PI-DATA-005`. `ENG-005-F001` remains historical closed provenance for the finite-guard boundary. `ENG-005-REV2-F002` remains closed candidate-scoped history for the distinct false-positive boundary.
 
-`GOV-018` authorizes the smallest correction wholly within the existing ENG-005 source/test roots. It enforces approved data-control semantics without changing Product, Domain, Runtime Architecture, persistence, API, service, or security authority; **no Human Reserved disposition is required**.
+`GOV-018` authorized the smallest correction wholly within the existing ENG-005 source/test roots without a Human Reserved disposition.
 
-### Bounded repair and evidence contract
+### Historical bounded repair and evidence contract (consumed)
 
-The next Builder may modify only `src/application/services/knowledgeProvenance/**`, `tests/application/services/knowledgeProvenance/**`, and `tests/integration/d1/knowledgeProvenance/**`. The repair must make the finite, deterministic, service-local Bearer discriminator reject canonical bare opaque Bearer material such as `Bearer tokenonly123` without treating punctuation as the criterion, while allowing `Bearer authentication is documented here without any token material.` where otherwise valid. It must not use arbitrary English-word allowlists, generalized DLP, entropy scanning, vendor-token catalogs, external secret scanning, ML/NLP classification, a security subsystem, persistence/migration change, or a new API.
+The assigned Builder was authorized to modify only `src/application/services/knowledgeProvenance/**`, `tests/application/services/knowledgeProvenance/**`, and `tests/integration/d1/knowledgeProvenance/**`. The repair was required to make the finite, deterministic, service-local Bearer discriminator reject canonical bare opaque Bearer material such as `Bearer tokenonly123` without treating punctuation as the criterion, while allowing `Bearer authentication is documented here without any token material.` where otherwise valid.
 
-Committed deterministic evidence must prove: bare `Bearer tokenonly123` capture is prohibited with no Knowledge and no accepted receipt; the same correction content is prohibited with its eligible predecessor still current, no successor, and no accepted receipt; `Authorization: Bearer tokenonly123` and an existing punctuated synthetic bare-Bearer token remain prohibited; and the benign explanatory Bearer text remains eligible. It must regress the complete finite eligibility boundary: private-key material, credential assignment, password/auth-secret material, access/auth-token material, Authorization and bare Bearer material, benign password/access-token/Bearer prose, capture/correction parity, and caller self-classification resistance.
+Committed deterministic evidence was required to prove: bare `Bearer tokenonly123` capture is prohibited with no Knowledge and no accepted receipt; the same correction content is prohibited with its eligible predecessor still current, no successor, and no accepted receipt; `Authorization: Bearer tokenonly123` and an existing punctuated synthetic bare-Bearer token remain prohibited; and the benign explanatory Bearer text remains eligible.
 
-The reconciliation remains intact: `correct` receives one exact prior snapshot; malformed prior is malformed target rather than ambiguity; ambiguity belongs upstream to planned `ENG-010`; canonical same-write retry is `already-committed`; a changed semantic write under the same operation ID is `operation-id-conflict`; malformed prior is not a retry class. No ENG-010 implementation is authorized.
+The reconciliation remained intact: `correct` receives one exact prior snapshot; malformed prior is malformed target rather than ambiguity; ambiguity belongs upstream to planned `ENG-010`.
 
-ENG-003 accepted aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`, ENG-004 accepted aggregate `6be8bc2b4d58cd1a0e9be7ea6a3762dafee0aa5a26796bb8e97214e48c1725c2`, and migration `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99` remain unchanged. A repair must produce a new candidate commit, tree, repair-delta identity, full seven-file manifest, and canonical aggregate. Any materially distinct production semantic defect discovered during repair stops work as `BLOCKED — ADDITIONAL_PRODUCTION_DEFECT_DISCOVERED` and returns to the Controller.
+ENG-003 accepted aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`, ENG-004 accepted aggregate `6be8bc2b4d58cd1a0e9be7ea6a3762dafee0aa5a26796bb8e97214e48c1725c2`, and migration `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99` remained unchanged.
 
-Because production code changes after a full semantic review finding, the replacement candidate requires fresh **full** deterministic verification followed, if it passes, by fresh **full** independent semantic/data and persistence-boundary review. Targeted gates and the prior PASS cannot close the task. ENG-005 remains not `DONE`; ENG-006 and later stay undispatched.
+Because production code changed after a full semantic review finding, the replacement candidate required fresh **full** deterministic verification followed, if it passed, by fresh **full** independent semantic/data and persistence-boundary review. That sequence proceeded through repair candidates `180bd7a17569f33a797a0eb95bfce8e02f2efc82`, `91c15266c5ca8c26825aa74dd1ffc3ad58cb3c90`, `1a4629095b17ceb81a8e32694ba8eca537ef7b58`, `3f8a3d743f5b71023cb6609ebd32f33e00aa69f0`, and reached full closure on final accepted candidate `81b023deb2b1a61630a2c8cb3aaee22050182bb8`. `ENG-005` is `DONE`; `ENG-006` and later stay undispatched.

@@ -4,7 +4,7 @@
 
 **Lifecycle status:** ACTIVE
 
-**Last updated:** 2026-08-14
+**Last updated:** 2026-08-15
 
 **Decision owner:** `hdangprod`
 
@@ -28,7 +28,7 @@
 - **G7 — Engineering-Entry Readiness:** APPROVED BY HUMAN
 - **Generation 2 Foundation Program:** COMPLETE
 - **Runtime Architecture Phase:** COMPLETE — Runtime Architecture revision 1 approved by human through `GOV-017`.
-- **Engineering Phase:** AUTHORIZED BY HUMAN through `GOV-018`; Engineering delivery is active with `ENG-001`, `ENG-002`, `ENG-003` revision 2, `ENG-004`, and `ENG-008` complete; `ENG-005` is ready for its bounded `ENG-005-REV2-IR-F001` repair after independent review rejected the exact candidate; and no task Running.
+- **Engineering Phase:** AUTHORIZED BY HUMAN through `GOV-018`; Engineering delivery is active with `ENG-001`, `ENG-002`, `ENG-003` revision 2, `ENG-004`, `ENG-005`, and `ENG-008` complete; and no task Running.
 - **Engineering work:** AUTHORIZED only within `GOV-018`, the approved Product Foundation and Runtime Architecture, the Delivery Contract, and a valid Ready Task Packet.
 - **Runtime implementation:** AUTHORIZED within that bounded Engineering scope; no implementation task is `RUNNING`.
 - **Production deployment and paid-service activation:** NOT AUTHORIZED (PROHIBITED)
@@ -74,7 +74,7 @@
 - **Runtime Architecture baseline:** [Liam v1 Runtime Architecture Baseline, revision 1](../architecture/RUNTIME_ARCHITECTURE.md) is `CANONICAL / APPROVED` through human disposition `GOV-017` by `github:hdangprod` on 2026-08-09. The original `ARCHITECTURE REVIEW: NEEDS FIX` findings `AR-F001` and `AR-F002` were repaired; `ARCHITECTURE TARGETED RECHECK: PASS` resolved both. Approval does not authorize engineering.
 - **Engineering Phase authorization:** `GOV-018` is APPROVED by `github:hdangprod` on 2026-08-09. It separately authorizes implementation of the approved Liam v1 Product Foundation and Runtime Architecture under Delivery Contract revision 1 while preserving product, architecture, production, paid-service, security, destructive-action, and control-plane Human Reserved boundaries.
 - **Engineering readiness and plan:** [Engineering Plan revision 1](ENGINEERING_PLAN.md) records `ENGINEERING DoR: PASS`, the implementation obligations and Task DAG, exact evidence rules, concurrency boundaries, and the first execution wave. It is `OPERATIONAL / ACTIVE` and cannot expand `GOV-018` or any approved product or architecture authority.
-- **Engineering task state:** `ENG-001`, `ENG-002`, `ENG-003`, `ENG-004`, and `ENG-008` are `DONE`. ENG-003 revision-1 candidate `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6`, its PASS/GREEN evidence, and closed `ENG-003-F001` / `ENG-003-F001-R1` history remain exact historical evidence. ENG-003 revision 2 is accepted and path-scoped manifested on aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`, closing `ENG-003-R2-V001` and `ENG-003-R2-F001` without changing the migration (`adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`). ENG-004 is accepted and path-scoped manifested on final aggregate `6be8bc2b4d58cd1a0e9be7ea6a3762dafee0aa5a26796bb8e97214e48c1725c2`; its original aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431`, recovery commit `f8e7d6a08361a88a7f146b76e1599bb4daa71150`, F003 repair, and F003-R1 repair history are retained in its Delivery Record. `ENG-004-F001`, `ENG-004-F002`, `ENG-004-F003`, and `ENG-004-F003-R1` are closed; final deterministic evidence is PASS and full review is GREEN. ENG-005 is `READY — BOUNDED_REPAIR_AUTHORIZED` under Task Packet revision 2 after deterministic PASS but full independent review `NEEDS FIX` for candidate `239535a075b7b10626fc1f1adf9687daf08b0088` on `ENG-005-REV2-IR-F001`, a bare-Bearer authentication-material bypass. The reviewed candidate is failed-review provenance only; the finite in-lock repair must produce new bytes, then pass fresh full deterministic verification and independent review. Exact-target ambiguity remains upstream at planned `ENG-010`; historical aggregate `60855c6e6220d691ffd46d43a0ec12eb259209a616d2877625517e84e9fe40e3` and closed `ENG-005-F001` remain provenance only. No task is Running. `ENG-009` remains `PROPOSED` pending its separate Task Packet and task-level DoR.
+- **Engineering task state:** `ENG-001`, `ENG-002`, `ENG-003`, `ENG-004`, `ENG-005`, and `ENG-008` are `DONE`. ENG-003 revision-1 candidate `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6`, its PASS/GREEN evidence, and closed `ENG-003-F001` / `ENG-003-F001-R1` history remain exact historical evidence. ENG-003 revision 2 is accepted and path-scoped manifested on aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`, closing `ENG-003-R2-V001` and `ENG-003-R2-F001` without changing the migration (`adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`). ENG-004 is accepted and path-scoped manifested on final aggregate `6be8bc2b4d58cd1a0e9be7ea6a3762dafee0aa5a26796bb8e97214e48c1725c2`; its original aggregate `a795e4a55ac07b02875fbefff8638ec6c003d56cc32817f414254843fbb97431`, recovery commit `f8e7d6a08361a88a7f146b76e1599bb4daa71150`, F003 repair, and F003-R1 repair history are retained in its Delivery Record. `ENG-004-F001`, `ENG-004-F002`, `ENG-004-F003`, and `ENG-004-F003-R1` are closed; final deterministic evidence is PASS and full review is GREEN. ENG-005 is accepted and path-scoped manifested on final aggregate `333f27f33f5725751a3cb48bbd0009253faab26282e218883b6393c3d3ae90f0`; historical finding `ENG-005-F001`, verification contract reconciliation `ENG-005-REV2-V001`, false-positive repair `ENG-005-REV2-F002`, and review findings `ENG-005-REV2-IR-F001` through `ENG-005-REV2-IR-F005` are closed; final deterministic evidence is PASS and full review is GREEN. No task is Running. `ENG-006` and `ENG-009` remain `PROPOSED` pending their separate Task Packets and task-level DoR evaluations.
 
 ## Authorized work
 
@@ -82,11 +82,11 @@ The Generation 2 Foundation Program is complete through human G7 disposition `GO
 
 This snapshot reflects authorization recorded in approved governance artifacts; it does not create, extend, or approve authorization.
 
-**Current stage state:** Generation 2 Foundation Program — COMPLETE; Runtime Architecture Phase — COMPLETE; Engineering Phase — AUTHORIZED; Engineering planning — ACTIVE; Builder execution — `ENG-001`, `ENG-002`, `ENG-003` revision 2, `ENG-004`, and `ENG-008` COMPLETE; `ENG-005` READY — BOUNDED_REPAIR_AUTHORIZED for `ENG-005-REV2-IR-F001`; no task RUNNING
+**Current stage state:** Generation 2 Foundation Program — COMPLETE; Runtime Architecture Phase — COMPLETE; Engineering Phase — AUTHORIZED; Engineering planning — ACTIVE; Builder execution — `ENG-001`, `ENG-002`, `ENG-003` revision 2, `ENG-004`, `ENG-005`, and `ENG-008` COMPLETE; no task RUNNING
 
 **Current Engineering authority:** `GOV-018` — APPROVED BY HUMAN on 2026-08-09.
 **Engineering gate:** None created or implied. Task readiness and completion are governed by Delivery Contract revision 1 and do not approve product, architecture, production release, or another gate.
-**Engineering Definition of Ready:** PASS for bounded implementation planning. ENG-003 Task Packet revision 2 and ENG-004 Task Packet revision 2 are complete and Controller-closed. ENG-005 Task Packet revision 2 is `READY — BOUNDED_REPAIR_AUTHORIZED`: reviewed candidate `239535a075b7b10626fc1f1adf9687daf08b0088` failed full independent review on the finite bare-Bearer bypass, and only its service-local repair/evidence inside the established lock is ready. The global ambiguous-target clarification invariant remains assigned upstream to planned `ENG-010`. `ENG-009` requires its own separate Task Packet and task-level DoR re-evaluation.
+**Engineering Definition of Ready:** PASS for bounded implementation planning. ENG-003 Task Packet revision 2, ENG-004 Task Packet revision 2, and ENG-005 Task Packet revision 2 are complete and Controller-closed. `ENG-006` and `ENG-009` require their own separate Task Packets and task-level DoR evaluations.
 
 - Product Foundation revision 1 approved through `GOV-011` — satisfied.
 - Delivery Contract revision 1 approved through `GOV-013` — satisfied.
@@ -98,7 +98,7 @@ This snapshot reflects authorization recorded in approved governance artifacts; 
 
 **Foundation gates:** C1–C7 are COMPLETE; G1–G7 are APPROVED BY HUMAN. No Foundation gate remains pending.
 
-**Next executable work:** A Deterministic Verifier may run the clarified full [`ENG-005`](tasks/ENG-005-knowledge-provenance-slice.md) revision-2 contract against exact candidate `1d58b114ceaeed370e5f2fb8084660f7bd106385`. It must not claim historical-byte recovery or treat malformed input as ambiguity evidence; a passing run still requires fresh full independent review before Controller closure. `ENG-009` still needs a separate planning pass.
+**Next executable work:** Author and review Task Packets and Definition of Ready evaluations for downstream tasks (`ENG-006`, `ENG-009`) whose implementation predecessors are now complete. No implementation task is dispatched without an approved Ready Task Packet.
 
 ## Explicit prohibitions
 
