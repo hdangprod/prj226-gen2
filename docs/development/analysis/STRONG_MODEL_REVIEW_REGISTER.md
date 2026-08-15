@@ -6,6 +6,16 @@
 **Last updated:** 2026-08-15
 **Purpose:** Comprehensive register of unresolved, inferred, or disputed engineering design issues requiring stronger-model adjudication before task dispatch.
 
+**ENG-006 Planning Status:**
+- Task Packet Promotion Review: `APPROVED` ([`ENG-006_TASK_PACKET_CONTROLLER_REVIEW_2026-08-15.md`](ENG-006_TASK_PACKET_CONTROLLER_REVIEW_2026-08-15.md))
+- Canonical Task Packet: [`docs/development/tasks/ENG-006-direct-sql-retrieval.md`](../tasks/ENG-006-direct-sql-retrieval.md) (`READY / NOT DISPATCHED`)
+- Formal Task-Level DoR: `PASS` ([`ENG-006_FORMAL_DoR_2026-08-15.md`](ENG-006_FORMAL_DoR_2026-08-15.md))
+- Unresolved P0 Issues: `NONE`
+- Human Reserved Boundary: `NOT REQUIRED`
+- Builder Dispatch Eligibility: `YES, ONE BOUNDED BUILDER AUTHORIZED UPON READY COMMIT`
+- Current Builder: `NONE (NOT YET DISPATCHED)`
+- Implementation Status: `NOT STARTED`
+
 ---
 
 ## Summary Register
