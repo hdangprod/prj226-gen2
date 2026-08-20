@@ -1,17 +1,29 @@
-import type { D1DatabaseLike, D1PreparedStatement, D1RunResult } from "../../../src/infrastructure/d1/d1Types";
+import type {
+  D1DatabaseLike,
+  D1PreparedStatement as LocalD1PreparedStatement,
+  D1ReadAllResult,
+  D1RunResult,
+} from "../../../src/infrastructure/d1/d1Types";
+
+export type AssertAssignable<Expected, Actual extends Expected> = Actual;
+export type ProviderD1DatabaseSatisfiesLocalContract = AssertAssignable<D1DatabaseLike, D1Database>;
+export type ProviderD1PreparedStatementSatisfiesLocalContract = AssertAssignable<
+  LocalD1PreparedStatement,
+  D1PreparedStatement
+>;
 
 export interface RecordedStatement {
   readonly query: string;
   readonly bindings: readonly unknown[];
 }
 
-class FakeStatement implements D1PreparedStatement {
+class FakeStatement implements LocalD1PreparedStatement {
   constructor(
     private readonly database: FakeD1,
     readonly query: string,
     readonly bindings: readonly unknown[] = [],
   ) {}
-  bind(...values: readonly unknown[]): D1PreparedStatement {
+  bind(...values: readonly unknown[]): LocalD1PreparedStatement {
     return new FakeStatement(this.database, this.query, values);
   }
   async first<T = Record<string, unknown>>(): Promise<T | null> {
@@ -21,6 +33,82 @@ class FakeStatement implements D1PreparedStatement {
     const fingerprint = this.database.receipts.get(String(this.bindings[0]));
     return fingerprint === undefined ? null : ({ fingerprint } as T);
   }
+  async all<T = Record<string, unknown>>(): Promise<D1ReadAllResult<T>> {
+    const query = this.query
+      .replace(/^[ \t\n\r\f]+|[ \t\n\r\f]+$/g, "")
+      .replace(/[ \t\n\r\f]+/g, " ");
+    const bindings = this.stringBindingsFor(query);
+    let results: readonly Record<string, unknown>[];
+
+    switch (query) {
+      case "SELECT id, intended_outcome, state FROM projects ORDER BY id ASC":
+        results = [...this.database.projects.entries()]
+          .map(([id, project]) => ({ id, intended_outcome: project.intendedOutcome, state: project.state }))
+          .sort(compareById);
+        break;
+      case "SELECT id, intended_outcome, state FROM projects WHERE state = ? ORDER BY id ASC":
+        results = [...this.database.projects.entries()]
+          .filter(([, project]) => project.state === bindings[0])
+          .map(([id, project]) => ({ id, intended_outcome: project.intendedOutcome, state: project.state }))
+          .sort(compareById);
+        break;
+      case "SELECT id, project_id, description, state FROM actions WHERE project_id = ? ORDER BY id ASC":
+        results = [...this.database.actions.entries()]
+          .filter(([, action]) => action.projectId === bindings[0])
+          .map(([id, action]) => ({ id, project_id: action.projectId, description: action.description, state: action.state }))
+          .sort(compareById);
+        break;
+      case "SELECT fact FROM accepted_context_facts WHERE project_id = ? ORDER BY ordinal ASC":
+        results = (this.database.contextFacts.get(bindings[0]) ?? []).map((fact) => ({ fact }));
+        break;
+      case "SELECT id, project_id, action_id, statement, standing, supersedes_id FROM accepted_progress WHERE project_id = ? AND standing = 'current' ORDER BY id ASC":
+        results = [...this.database.progress.entries()]
+          .filter(([, progress]) => progress.projectId === bindings[0] && progress.standing === "current")
+          .map(([id, progress]) => ({ id, project_id: progress.projectId, action_id: progress.actionId, statement: progress.statement, standing: progress.standing, supersedes_id: progress.supersedesId }))
+          .sort(compareById);
+        break;
+      case "SELECT id, originating_project_id, content, standing, supersedes_id, supersession_chain FROM knowledge_items WHERE originating_project_id = ? AND standing = 'current' ORDER BY id ASC":
+        results = this.currentKnowledge((knowledge) => knowledge.originatingProjectId === bindings[0]);
+        break;
+      case "SELECT id, originating_project_id, content, standing, supersedes_id, supersession_chain FROM knowledge_items WHERE standing = 'current' ORDER BY id ASC":
+        results = this.currentKnowledge(() => true);
+        break;
+      case "SELECT id, originating_project_id, content, standing, supersedes_id, supersession_chain FROM knowledge_items WHERE standing = 'current' AND originating_project_id <> ? ORDER BY id ASC":
+        results = this.currentKnowledge((knowledge) => knowledge.originatingProjectId !== bindings[0]);
+        break;
+      default:
+        throw new Error(`unsupported FakeD1 collection query: ${query}`);
+    }
+
+    return { results: results as readonly T[] };
+  }
+
+  private stringBindingsFor(query: string): readonly string[] {
+    const expectedCount = query.includes("?") ? 1 : 0;
+    if (this.bindings.length !== expectedCount) {
+      throw new Error(`invalid FakeD1 collection query binding count: expected ${expectedCount}, received ${this.bindings.length}`);
+    }
+    if (this.bindings.some((binding) => typeof binding !== "string")) {
+      throw new Error("invalid FakeD1 collection query binding type: expected string");
+    }
+    return this.bindings as readonly string[];
+  }
+
+  private currentKnowledge(
+    predicate: (knowledge: { readonly originatingProjectId: string }) => boolean,
+  ): readonly Record<string, unknown>[] {
+    return [...this.database.knowledge.entries()]
+      .filter(([, knowledge]) => knowledge.standing === "current" && predicate(knowledge))
+      .map(([id, knowledge]) => ({ id, originating_project_id: knowledge.originatingProjectId, content: knowledge.content, standing: knowledge.standing, supersedes_id: knowledge.supersedesId, supersession_chain: knowledge.supersessionChain }))
+      .sort(compareById);
+  }
+}
+
+function compareById(
+  left: Readonly<Record<"id", string>>,
+  right: Readonly<Record<"id", string>>,
+): number {
+  return left.id < right.id ? -1 : left.id > right.id ? 1 : 0;
 }
 
 export class FakeD1 implements D1DatabaseLike {
@@ -36,11 +124,11 @@ export class FakeD1 implements D1DatabaseLike {
   receiptLookupOverride: { readonly enabled: boolean; readonly value: unknown } | undefined;
   partialResult = false;
 
-  prepare(query: string): D1PreparedStatement {
+  prepare(query: string): LocalD1PreparedStatement {
     return new FakeStatement(this, query);
   }
 
-  async batch(statements: readonly D1PreparedStatement[]): Promise<readonly D1RunResult[]> {
+  async batch(statements: readonly LocalD1PreparedStatement[]): Promise<readonly D1RunResult[]> {
     const recorded = statements as readonly FakeStatement[];
     this.batches.push(recorded.map(({ query, bindings }) => ({ query, bindings })));
     if (this.failBatch !== undefined) throw this.failBatch;
