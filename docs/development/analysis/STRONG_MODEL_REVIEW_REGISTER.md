@@ -6,15 +6,15 @@
 **Last updated:** 2026-08-15
 **Purpose:** Comprehensive register of unresolved, inferred, or disputed engineering design issues requiring stronger-model adjudication before task dispatch.
 
-**ENG-006 Planning Status:**
-- Task Packet Promotion Review: `APPROVED` ([`ENG-006_TASK_PACKET_CONTROLLER_REVIEW_2026-08-15.md`](ENG-006_TASK_PACKET_CONTROLLER_REVIEW_2026-08-15.md))
-- Canonical Task Packet: [`docs/development/tasks/ENG-006-direct-sql-retrieval.md`](../tasks/ENG-006-direct-sql-retrieval.md) (`READY / NOT DISPATCHED`)
-- Formal Task-Level DoR: `PASS` ([`ENG-006_FORMAL_DoR_2026-08-15.md`](ENG-006_FORMAL_DoR_2026-08-15.md))
-- Unresolved P0 Issues: `NONE`
-- Human Reserved Boundary: `NOT REQUIRED`
-- Builder Dispatch Eligibility: `YES, ONE BOUNDED BUILDER AUTHORIZED UPON READY COMMIT`
-- Current Builder: `NONE (NOT YET DISPATCHED)`
-- Implementation Status: `NOT STARTED`
+**ENG-006 Lifecycle Status:**
+- Candidate Evaluation (2026-08-15): Commit `7b7db0d98660f6562f8e9738445be725fc65988c` -> `NEEDS FIX`
+- Controller Disposition: [`ENG-006_CONTROLLER_FINDING_DISPOSITION_2026-08-15.md`](ENG-006_CONTROLLER_FINDING_DISPOSITION_2026-08-15.md) (R001-R004 ACCEPT, R005 DEFER)
+- Root Blocker: `ENG-006-R004` (Upstream D1 collection-read capability gap in `src/infrastructure/d1/d1Types.ts`)
+- Upstream Action: `ENG-003` Revision 3 Targeted Reopen Promoted ([`docs/development/tasks/ENG-003-d1-authority-foundation.md`](../tasks/ENG-003-d1-authority-foundation.md), Controller Review: [`ENG-003_REV3_FINAL_TARGETED_CONTROLLER_REVIEW_2026-08-15.md`](ENG-003_REV3_FINAL_TARGETED_CONTROLLER_REVIEW_2026-08-15.md))
+- Implementation Status: `REPAIR BLOCKED ON UPSTREAM BASELINE (ENG-003 REV3)`
+- Candidate Status: `FROZEN (7b7db0d98660f6562f8e9738445be725fc65988c)`
+- Builder Dispatch Eligibility: `NO (UNAUTHORIZED PENDING UPSTREAM ACCEPTANCE)`
+- Current Builder: `NONE`
 
 ---
 
@@ -32,6 +32,7 @@
 | `REG-006-08` | `ENG-006` | **P1** | Domain Semantics | Historical / Superseded Knowledge Retrieval Semantics | `RESOLVED` |
 | `REG-006-09` | `ENG-006` | **P0** | Schema & Persistence | Cross-Project Knowledge Reference Persistence vs Computation | `RESOLVED` |
 | `REG-006-10` | `ENG-006` | **P0** | Task Boundary | Context Selection and Truncation (≤32 item limit) Ownership | `RESOLVED` |
+| `REG-006-11` | `ENG-006` / `ENG-010` | **P2** | Task Boundary / Downstream | Parent Project Existence on Empty Child Collection (`R005`) | `DEFERRED TO ENG-010` |
 | `REG-009-01` | `ENG-009` | **P1** | Provider Binding | Workers AI Provider/Model Configuration & Binding Assumptions | `UNRESOLVED` |
 | `REG-009-02` | `ENG-009` | **P1** | Provider Adapter | Prompt & System Message Construction Ownership | `UNRESOLVED` |
 | `REG-009-03` | `ENG-009` | **P1** | Model Invocation | Tool Calling vs JSON Structured Output Extraction | `UNRESOLVED` |
@@ -297,6 +298,29 @@ Applying `LIMIT 32` in SQL causes arbitrary data omission before the interaction
 
 Final Disposition:
 RESOLVED — ENG-006 returns full query results; ENG-010 owns interaction-aware selection and truncation within the ≤32 limit. See ENG-006_P0_ADJUDICATION_2026-08-15.md (P0-002).
+```
+
+```
+======================================================================
+ID: REG-006-11
+Task: ENG-006 / ENG-010
+Priority: P2
+Category: Task Boundary / Downstream
+======================================================================
+Question:
+When querying child collections (actions, facts, progress, knowledge) for a non-existent ProjectId, should ENG-006 return not-found or found: []?
+
+Current Evidence:
+- ENG-006 review finding R005 noted that SQL queries filtered by project_id return 0 rows ({ kind: "found", value: [] }) even when the parent Project does not exist in projects table.
+- RUNTIME_ARCHITECTURE.md ARC-005 specifies direct SQL queries without redundant multi-query joins or artificial parent lookups.
+- ENG-010 owns conversational interaction and context resumption orchestration.
+
+Adjudication & Deferred Downstream Constraint:
+RESOLVED — DEFERRED TO ENG-010.
+Returning { kind: "found", value: [] } is the truthful result of the collection query.
+ENG-010 must not assume that an empty child collection proves the parent project exists.
+When Project existence matters, ENG-010 must explicitly establish parent existence via getProject(projectId) before interpreting child collections.
+See ENG-006_CONTROLLER_FINDING_DISPOSITION_2026-08-15.md (R005).
 ```
 
 ---
