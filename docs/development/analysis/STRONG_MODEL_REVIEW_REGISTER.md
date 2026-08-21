@@ -3,17 +3,17 @@
 **Artifact class:** OPERATIONAL / REGISTER
 **Authority:** NON-CANONICAL
 **Lifecycle:** ACTIVE
-**Last updated:** 2026-08-15
+**Last updated:** 2026-08-21
 **Purpose:** Comprehensive register of unresolved, inferred, or disputed engineering design issues requiring stronger-model adjudication before task dispatch.
 
 **ENG-006 Lifecycle Status:**
 - Candidate Evaluation (2026-08-15): Commit `7b7db0d98660f6562f8e9738445be725fc65988c` -> `NEEDS FIX`
 - Controller Disposition: [`ENG-006_CONTROLLER_FINDING_DISPOSITION_2026-08-15.md`](ENG-006_CONTROLLER_FINDING_DISPOSITION_2026-08-15.md) (R001-R004 ACCEPT, R005 DEFER)
-- Root Blocker: `ENG-006-R004` (Upstream D1 collection-read capability gap in `src/infrastructure/d1/d1Types.ts`)
-- Upstream Action: `ENG-003` Revision 3 Targeted Reopen Promoted ([`docs/development/tasks/ENG-003-d1-authority-foundation.md`](../tasks/ENG-003-d1-authority-foundation.md), Controller Review: [`ENG-003_REV3_FINAL_TARGETED_CONTROLLER_REVIEW_2026-08-15.md`](ENG-003_REV3_FINAL_TARGETED_CONTROLLER_REVIEW_2026-08-15.md))
-- Implementation Status: `REPAIR BLOCKED ON UPSTREAM BASELINE (ENG-003 REV3)`
+- Root Blocker: `ENG-006-R004` — `CLOSED AT UPSTREAM ENG-003 LEVEL` by accepted `ENG-003` Revision 3 candidate `5276481824e43d23345799c39efaa72e51235877`
+- Upstream Action: `ENG-003` Revision 3 `ACCEPTED`; `ENG-003` `DONE` ([Controller Closure](ENG-003_REV3_CONTROLLER_CLOSURE_2026-08-21.md))
+- Implementation Status: `REPAIR UNBLOCKED AT UPSTREAM CAPABILITY LEVEL / NOT DISPATCHED / NOT ACCEPTED`
 - Candidate Status: `FROZEN (7b7db0d98660f6562f8e9738445be725fc65988c)`
-- Builder Dispatch Eligibility: `NO (UNAUTHORIZED PENDING UPSTREAM ACCEPTANCE)`
+- Builder Dispatch Eligibility: `NO (NO ENG-006 REPAIR BUILDER AUTHORIZED)`
 - Current Builder: `NONE`
 
 ---
@@ -521,3 +521,13 @@ Maintains strict task isolation and prevents non-deterministic network/quota fai
 Final Disposition:
 UNRESOLVED (Strong-model review confirms: LIVE CALLS PROHIBITED IN ENG-009; RESERVED FOR ENG-013)
 ```
+
+---
+
+## ENG-003 Revision-3 governance closure chronology — 2026-08-21
+
+- Prior deterministic verification failures and semantic review findings remain preserved in this register and their exact review records.
+- The accepted Revision-3 successor sequence concluded with final deterministic `PASS`, final semantic `GREEN`, and Controller Closure `APPROVE` for implementation commit `5276481824e43d23345799c39efaa72e51235877`.
+- Failed governance closure candidate `736bb4f160bdf021d9aabc01acafaeafc8367ee6` then received governance verification finding `GCV-001`: `ACCEPT`, `BLOCKING`, `CURRENT CONTRADICTION — stale executable Builder authority`.
+- Controller disposition: `ACCEPT`. The candidate is frozen, rejected for canonical integration, and retained only as historical evidence.
+- Fresh governance closure successor: pending independent governance closure verification. It records `GCV-001` as `CLOSED BY GOVERNANCE SUCCESSOR REPAIR` without relabeling any prior reviewer or model provenance.

@@ -6,9 +6,9 @@
 
 **Task ID:** `ENG-003`
 
-**Task Packet revision:** 2 (reopened repair); revision 1 remains the completed historical baseline below
+**Task Packet revision:** 3; revisions 1 and 2 remain completed historical baselines below
 
-**Current lifecycle state:** `DONE` — revision 2 accepted and manifested after the bounded upstream repair of `ENG-004-F003`
+**Current lifecycle state:** `DONE` — revision 3 accepted after the targeted D1 collection-read capability reopen
 
 **Authorization:** `GOV-018`
 
@@ -16,7 +16,37 @@
 
 **Task Packet:** [ENG-003 — D1 Authority Foundation](../tasks/ENG-003-d1-authority-foundation.md)
 
-**Recorded:** 2026-08-13
+**Recorded:** 2026-08-21
+
+## Revision-3 Controller closure — 2026-08-21
+
+Controller Final Closure approved the targeted Revision-3 implementation:
+
+| Identity | Value |
+| --- | --- |
+| Accepted implementation commit | `5276481824e43d23345799c39efaa72e51235877` |
+| Accepted implementation tree | `0ea10d0400a5439af60c72ce943b7504e4173674` |
+| Accepted parent | `6fff52a09b496f3eb642108c00ce0deceda5a036` |
+| Accepted aggregate SHA-256 | `a5bb90a62af050b2cc7bcf1beecac072b3927b45d91178e65564935d7420c156` |
+
+| SHA-256 | Accepted Revision-3 path |
+| --- | --- |
+| `4b41ee690056ae814158020d3aaea873694faeb42ccd6ee4570aef9ec30bdd25` | `src/infrastructure/d1/d1Types.ts` |
+| `a5d04c9cb20516727c2c763af139c79ec017e6dcf75eb6f4180bb1bfa7d0bc55` | `tests/infrastructure/d1/fakeD1.ts` |
+
+The migration remains byte-identical at `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`. `ENG-003-R3-R001`, `ENG-003-R3-R002`, and `ENG-003-R3-S2-R001` are `CLOSED`. `ENG-006-R004` is `CLOSED AT UPSTREAM ENG-003 LEVEL`.
+
+`ENG-003 REVISION 3: ACCEPTED`
+
+`ENG-003: DONE`
+
+`GCV-001: CLOSED BY GOVERNANCE SUCCESSOR REPAIR`
+
+`ENG-006: REPAIR UNBLOCKED / NOT DISPATCHED / NOT ACCEPTED`
+
+`ENG-006-R001`, `ENG-006-R002`, and `ENG-006-R003`: `OPEN FOR DOWNSTREAM REPAIR`; `ENG-006-R005`: `DEFERRED TO ENG-010`. Current Builder: `NONE`. `ENG-009` remains `PROPOSED / NOT DISPATCHED`. No Human Reserved decision is required.
+
+The accepted implementation was not changed by this closure. Historical/rejected candidates remain historical evidence only, including failed `ENG-006` candidate `7b7db0d98660f6562f8e9738445be725fc65988c` and failed governance closure candidate `736bb4f160bdf021d9aabc01acafaeafc8367ee6`, which is rejected for canonical integration because `GCV-001` found stale executable Builder authority.
 
 ## Revision-2 Controller closure — 2026-08-13
 

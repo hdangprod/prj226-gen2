@@ -1,36 +1,44 @@
 # ENG-003 — D1 Authority Foundation
 
 **Artifact class:** OPERATIONAL / TASK PACKET
-**Lifecycle status:** READY — NOT DISPATCHED
+**Lifecycle status:** DONE — REVISION 3 ACCEPTED
 **Task Packet revision:** 3
-**Task-level DoR:** PASS
-**Builder authorization:** ONE BOUNDED BUILDER AUTHORIZED FOR DISPATCH AFTER GOVERNANCE PROMOTION COMMIT
-**Current Builder:** NONE (NOT YET DISPATCHED)
-**Implementation status:** NOT STARTED
+**Historical Task-level DoR:** PASS — CONSUMED
+**Execution Authority:** CONSUMED / NON-OPERATIVE
+**Current Builder:** NONE
+**Implementation status:** ACCEPTED
 **Human Reserved:** NOT REQUIRED
 **Reopen Trigger:** `ENG-006-R004` (Upstream D1 Collection-Read Capability Gap)
 **Historical Baseline:** Revision 2 accepted on aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`; revision 1 accepted on candidate `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6`
 **Authorization:** `GOV-018`
 **Governing contract:** [PRJ226 Generation 2 Delivery Contract](../../../development/DELIVERY_CONTRACT.md) revision 1
 **Controller Review:** [`docs/development/analysis/ENG-003_REV3_FINAL_TARGETED_CONTROLLER_REVIEW_2026-08-15.md`](../analysis/ENG-003_REV3_FINAL_TARGETED_CONTROLLER_REVIEW_2026-08-15.md)
-**Date:** 2026-08-15
+**Controller Closure:** [`ENG-003_REV3_CONTROLLER_CLOSURE_2026-08-21.md`](../analysis/ENG-003_REV3_CONTROLLER_CLOSURE_2026-08-21.md)
+**Date:** 2026-08-21
 
 ---
 
 > [!NOTE]
-> **GOVERNANCE NOTICE: REVISION 3 TARGETED REOPEN (READY — NOT DISPATCHED)**
+> **GOVERNANCE NOTICE: REVISION 3 TARGETED REOPEN CLOSED (ACCEPTED)**
 >
-> This Task Packet is promoted to **Revision 3** following Final Targeted Controller Review approval ([`ENG-003_REV3_FINAL_TARGETED_CONTROLLER_REVIEW_2026-08-15.md`](../analysis/ENG-003_REV3_FINAL_TARGETED_CONTROLLER_REVIEW_2026-08-15.md)) in response to root blocker `ENG-006-R004`.
+> Revision 3 is accepted on candidate `5276481824e43d23345799c39efaa72e51235877`, tree `0ea10d0400a5439af60c72ce943b7504e4173674`, and aggregate `a5bb90a62af050b2cc7bcf1beecac072b3927b45d91178e65564935d7420c156` following Controller Final Closure ([`ENG-003_REV3_CONTROLLER_CLOSURE_2026-08-21.md`](../analysis/ENG-003_REV3_CONTROLLER_CLOSURE_2026-08-21.md)).
 >
-> - **Task-level Definition of Ready: PASS.**
-> - **BUILDER AUTHORIZATION: ONE BOUNDED BUILDER AUTHORIZED FOR DISPATCH AFTER GOVERNANCE PROMOTION COMMIT.**
-> - **CURRENT BUILDER: NONE (NOT YET DISPATCHED).**
-> - **IMPLEMENTATION STATUS: NOT STARTED.**
-> - **BUILDER BASE COMMIT: NOT YET ASSIGNED (Will be assigned to the governance promotion commit created after this operation; commit `24b6b2c27f4cce33e5d3d38501e53a569e85d199` is historical governance ancestry only).**
+> - **ENG-003 REVISION 3: ACCEPTED.**
+> - **ENG-003: DONE.**
+> - **CURRENT BUILDER: NONE.**
+> - **EXECUTION AUTHORITY: CONSUMED / NON-OPERATIVE.**
 >
-> Downstream task `ENG-006` remains **BLOCKED** on upstream `ENG-003` Revision 3 acceptance.
+> No further `ENG-003` Builder, repair Builder, reconstruction Builder, or implementation execution is authorized.
+>
+> `ENG-006` repair is **UNBLOCKED AT UPSTREAM CAPABILITY LEVEL**, but is **NOT DISPATCHED** and **NOT ACCEPTED**. No `ENG-006` repair Builder is authorized.
 
 ---
+
+## Historical Revision 3 Execution Contract
+
+**Status:** `EXECUTED / CONSUMED / NON-OPERATIVE`
+
+The following instructions governed the accepted Revision 3 execution. They are retained only for provenance and no longer authorize Builder dispatch, repair, reconstruction, or implementation. All imperative Builder wording below is historical and non-operative.
 
 ## 1. Task ID
 
@@ -45,7 +53,7 @@ Expose solely the minimal accepted collection-read capability required by `ENG-0
 ### Revision History
 - **Revision 1:** Established initial authoritative persistence port and D1 adapter (`DONE`, candidate `e8f3792925ad45905a72938c6602f860df3ff6173325944e77f9ff2c8642caf6`).
 - **Revision 2:** Reopened for lifecycle-transition state checks and fabricated-snapshot defenses (`DONE`, aggregate `183d97eeb8f1f1d9a718d40ceba03071c79432132ae9febeb851ed163301a685`).
-- **Revision 3:** Targeted reopen for D1 collection-read capability (`all<T>()` and `D1ReadAllResult<T>`) triggered by `ENG-006-R004` (`READY / NOT DISPATCHED`).
+- **Revision 3:** Targeted reopen for D1 collection-read capability (`all<T>()` and `D1ReadAllResult<T>`) triggered by `ENG-006-R004` (`ACCEPTED`; candidate `5276481824e43d23345799c39efaa72e51235877`, aggregate `a5bb90a62af050b2cc7bcf1beecac072b3927b45d91178e65564935d7420c156`).
 
 ---
 
@@ -70,7 +78,7 @@ Expose solely the minimal accepted collection-read capability required by `ENG-0
 
 ## 5. Strict Two-File Write Lock
 
-The future Revision 3 Builder receives exclusive write ownership of **ONLY**:
+The Revision 3 Builder was granted exclusive write ownership of **ONLY**:
 
 1. `src/infrastructure/d1/d1Types.ts`
 2. `tests/infrastructure/d1/fakeD1.ts`
@@ -149,7 +157,7 @@ export interface D1DatabaseLike {
 
 | Check | Requirement / Target |
 |---|---|
-| **Base Authority** | Assigned to the new governance promotion commit |
+| **Base Authority** | The governance promotion commit that existed at execution |
 | **File Scope** | Diff must touch **only** `src/infrastructure/d1/d1Types.ts` and `tests/infrastructure/d1/fakeD1.ts` |
 | **Pre-Repair `d1Types.ts` SHA-256** | `811978f5272fc55232fbaf0e76693310984769979d4810939c793024663feb78` |
 | **Migration Integrity** | `migrations/0001_authoritative_state.sql` remains byte-identical (`adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`) |
@@ -191,7 +199,7 @@ The change is strictly additive on the repository-local typing abstraction and c
 ## 12. Assignment & Execution Roles
 
 - **Planner / Controller:** Authority, review adjudication, locks, and governance promotion.
-- **Builder:** One Standard Delivery writer with TypeScript/D1 capability (authorized for dispatch after governance promotion commit exists).
+- **Builder:** One Standard Delivery writer with TypeScript/D1 capability was authorized for dispatch after the governance promotion commit existed. That authority was consumed by the accepted Revision 3 execution and is no longer operative.
 - **Verifier:** Deterministic Execution, read-only.
 - **Reviewer:** Independent Strong Semantic Reviewer.
 - **Write Lock:** Strictly `src/infrastructure/d1/d1Types.ts` and `tests/infrastructure/d1/fakeD1.ts`.
@@ -207,4 +215,4 @@ The change is strictly additive on the repository-local typing abstraction and c
 | Exact write ownership sufficient and collision-controlled | Strictly two files; all other paths protected | **PASS** |
 | Human Reserved decision required | Evaluated in Section 4; no human reserved boundary crossed | **PASS (NOT REQUIRED)** |
 
-**Task-level Definition of Ready:** `PASS`. One bounded Builder is eligible for authorization upon creation of the governance promotion commit.
+**Historical Task-level Definition of Ready:** `PASS`. The bounded Builder authority was consumed by the accepted Revision 3 execution and is no longer operative.
