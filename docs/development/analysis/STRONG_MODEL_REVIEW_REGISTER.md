@@ -3,7 +3,7 @@
 **Artifact class:** OPERATIONAL / REGISTER
 **Authority:** NON-CANONICAL
 **Lifecycle:** ACTIVE
-**Last updated:** 2026-08-21
+**Last updated:** 2026-08-23
 **Purpose:** Comprehensive register of unresolved, inferred, or disputed engineering design issues requiring stronger-model adjudication before task dispatch.
 
 **ENG-006 Lifecycle Status:**
@@ -11,9 +11,14 @@
 - Controller Disposition: [`ENG-006_CONTROLLER_FINDING_DISPOSITION_2026-08-15.md`](ENG-006_CONTROLLER_FINDING_DISPOSITION_2026-08-15.md) (R001-R004 ACCEPT, R005 DEFER)
 - Root Blocker: `ENG-006-R004` — `CLOSED AT UPSTREAM ENG-003 LEVEL` by accepted `ENG-003` Revision 3 candidate `5276481824e43d23345799c39efaa72e51235877`
 - Upstream Action: `ENG-003` Revision 3 `ACCEPTED`; `ENG-003` `DONE` ([Controller Closure](ENG-003_REV3_CONTROLLER_CLOSURE_2026-08-21.md))
-- Implementation Status: `REPAIR UNBLOCKED AT UPSTREAM CAPABILITY LEVEL / NOT DISPATCHED / NOT ACCEPTED`
-- Candidate Status: `FROZEN (7b7db0d98660f6562f8e9738445be725fc65988c)`
-- Builder Dispatch Eligibility: `NO (NO ENG-006 REPAIR BUILDER AUTHORIZED)`
+- Repair Rev1 Candidate: Commit `a94d2cd2714849e7be59fd464f85330f98d127b4`, tree `6d4a20cb745b811724a8837e495ab3a19c32285b`, aggregate `5427769010520ef1c992d201e42b341204c621a3d4ed7f84ce60eae71adcccda`
+- Repair Rev1 Verification: `PASS`
+- Repair Rev1 Semantic Review: `GREEN`
+- Controller Final Closure: `APPROVE` ([Controller Closure](ENG-006_REPAIR_REV1_CONTROLLER_CLOSURE_2026-08-23.md))
+- Implementation Status: `ENG-006 REPAIR REV1 ACCEPTED / ENG-006 DONE`
+- Finding Status: `R001 CLOSED`; `R002 CLOSED`; `R003 CLOSED`; `R004 CLOSED AT UPSTREAM ENG-003 LEVEL`; `R005 DEFERRED TO ENG-010`
+- Historical Failed Candidate: `FROZEN / UNACCEPTED (7b7db0d98660f6562f8e9738445be725fc65988c)`
+- Builder Dispatch Eligibility: `NO (EXECUTION AUTHORITY CONSUMED / NON-OPERATIVE)`
 - Current Builder: `NONE`
 
 ---
@@ -531,3 +536,13 @@ UNRESOLVED (Strong-model review confirms: LIVE CALLS PROHIBITED IN ENG-009; RESE
 - Failed governance closure candidate `736bb4f160bdf021d9aabc01acafaeafc8367ee6` then received governance verification finding `GCV-001`: `ACCEPT`, `BLOCKING`, `CURRENT CONTRADICTION — stale executable Builder authority`.
 - Controller disposition: `ACCEPT`. The candidate is frozen, rejected for canonical integration, and retained only as historical evidence.
 - Fresh governance closure successor: pending independent governance closure verification. It records `GCV-001` as `CLOSED BY GOVERNANCE SUCCESSOR REPAIR` without relabeling any prior reviewer or model provenance.
+
+## ENG-006 Repair Rev1 closure chronology — 2026-08-23
+
+- Initial candidate `7b7db0d98660f6562f8e9738445be725fc65988c` passed its candidate-scoped deterministic verification but received semantic review `NEEDS FIX`; it remains frozen, unaccepted historical evidence.
+- `ENG-006-R004` identified the upstream D1 collection-read capability gap. Accepted `ENG-003` Revision 3 closed R004 at the upstream ENG-003 level without altering the downstream findings.
+- Fresh Repair Rev1 Builder candidate `a94d2cd2714849e7be59fd464f85330f98d127b4`, tree `6d4a20cb745b811724a8837e495ab3a19c32285b`, and aggregate `5427769010520ef1c992d201e42b341204c621a3d4ed7f84ce60eae71adcccda` was produced on accepted parent `f2ccb1c7c93d74124bba900065f4d08b781e7e8a`.
+- Independent deterministic verification returned `ENG-006 REPAIR VERIFICATION: PASS` for the exact candidate.
+- Independent semantic review returned `ENG-006 REPAIR REVIEW: GREEN` with zero blocking findings. No reviewer or model provenance is relabeled, and no Opus review is claimed.
+- Controller Final Closure returned `APPROVE`; R001–R003 are closed, R004 remains closed upstream, R005 remains deferred to ENG-010, Repair Rev1 is accepted, and ENG-006 is done.
+- The docs-only governance closure candidate is pending independent governance closure verification. Canonical integration and push have not been performed.

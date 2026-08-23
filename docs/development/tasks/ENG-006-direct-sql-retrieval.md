@@ -1,33 +1,41 @@
 # ENG-006 — Direct-SQL Retrieval and Accepted-Context Resumption
 
 **Artifact class:** OPERATIONAL / TASK PACKET
-**Lifecycle status:** READY — NOT DISPATCHED
-**Task-level DoR:** PASS
-**Builder authorization:** ONE BOUNDED BUILDER AUTHORIZED FOR DISPATCH
-**Current Builder:** NONE (NOT YET DISPATCHED)
-**Implementation status:** NOT STARTED
+**Lifecycle status:** DONE — REPAIR REV1 ACCEPTED
+**Historical Task-level DoR:** PASS — CONSUMED
+**Execution Authority:** CONSUMED / NON-OPERATIVE
+**Current Builder:** NONE
+**Implementation status:** ACCEPTED
 **Human Reserved:** NOT REQUIRED
 **Formal DoR Evidence:** [`docs/development/analysis/ENG-006_FORMAL_DoR_2026-08-15.md`](../analysis/ENG-006_FORMAL_DoR_2026-08-15.md)
 **Authorization:** `GOV-018`
 **Governing contract:** `development/DELIVERY_CONTRACT.md` revision 1
 **Decision owner:** `github:hdangprod`
-**Date:** 2026-08-15
+**Controller Closure:** [`ENG-006_REPAIR_REV1_CONTROLLER_CLOSURE_2026-08-23.md`](../analysis/ENG-006_REPAIR_REV1_CONTROLLER_CLOSURE_2026-08-23.md)
+**Accepted implementation:** `a94d2cd2714849e7be59fd464f85330f98d127b4`
+**Date:** 2026-08-23
 
 ---
 
 > [!NOTE]
-> **GOVERNANCE NOTICE: READY — NOT DISPATCHED**
+> **GOVERNANCE NOTICE: ENG-006 REPAIR REV1 ACCEPTED; ENG-006 DONE**
 >
-> This is a **canonical Task Packet** evaluated and marked `READY` following Controller review ([`ENG-006_TASK_PACKET_CONTROLLER_REVIEW_2026-08-15.md`](../analysis/ENG-006_TASK_PACKET_CONTROLLER_REVIEW_2026-08-15.md)) and formal Definition of Ready evaluation ([`ENG-006_FORMAL_DoR_2026-08-15.md`](../analysis/ENG-006_FORMAL_DoR_2026-08-15.md)).
+> Controller Final Closure accepted Repair Rev1 implementation commit `a94d2cd2714849e7be59fd464f85330f98d127b4`, tree `6d4a20cb745b811724a8837e495ab3a19c32285b`, and aggregate `5427769010520ef1c992d201e42b341204c621a3d4ed7f84ce60eae71adcccda`.
 >
-> **Task-level Definition of Ready: PASS.**
-> **BUILDER AUTHORIZATION: ONE BOUNDED BUILDER AUTHORIZED FOR DISPATCH.**
-> **CURRENT BUILDER: NONE (NOT YET DISPATCHED).**
-> **IMPLEMENTATION STATUS: NOT STARTED.**
+> - **ENG-006 REPAIR REV1: ACCEPTED.**
+> - **ENG-006: DONE.**
+> - **CURRENT BUILDER: NONE.**
+> - **EXECUTION AUTHORITY: CONSUMED / NON-OPERATIVE.**
 >
-> Builder execution becomes operationally dispatchable only after this READY governance state is committed to the canonical branch.
+> No further `ENG-006` Builder, repair Builder, reconstruction Builder, or implementation execution is authorized. The accepted implementation is not yet integrated into the canonical branch.
 
 ---
+
+## Historical ENG-006 Repair Rev1 Execution Contract
+
+**Status:** `HISTORICAL / EXECUTED / CONSUMED / NON-OPERATIVE`
+
+The following instructions governed the accepted ENG-006 Repair Rev1 Builder execution. They are retained only for provenance and no longer authorize dispatch, repair, reconstruction, or further implementation. All imperative Builder wording below is historical and non-operative.
 
 ## 1. Task ID
 
@@ -375,12 +383,12 @@ The task is `DONE` only when all of the following conditions are satisfied:
 
 ---
 
-## 20. Planning Status
+## 20. Historical Planning and Dispatch Status
 
 ```text
-TASK PACKET STATUS: READY — NOT DISPATCHED
-TASK-LEVEL DoR: PASS (docs/development/analysis/ENG-006_FORMAL_DoR_2026-08-15.md)
-BUILDER AUTHORIZATION: ONE BOUNDED BUILDER AUTHORIZED FOR DISPATCH
-CURRENT BUILDER: NONE (NOT YET DISPATCHED)
-IMPLEMENTATION STATUS: NOT STARTED
+HISTORICAL TASK PACKET STATUS: READY — EXECUTED / CONSUMED / NON-OPERATIVE
+HISTORICAL TASK-LEVEL DoR: PASS (docs/development/analysis/ENG-006_FORMAL_DoR_2026-08-15.md)
+EXECUTION AUTHORITY: CONSUMED / NON-OPERATIVE
+CURRENT BUILDER: NONE
+IMPLEMENTATION STATUS: ACCEPTED / DONE
 ```

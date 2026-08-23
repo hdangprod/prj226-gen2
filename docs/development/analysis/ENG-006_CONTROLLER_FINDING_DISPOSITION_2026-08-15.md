@@ -1,13 +1,17 @@
 # ENG-006 Controller Finding Disposition
 
 **Artifact class:** OPERATIONAL / CONTROLLER RECORD
-**Lifecycle:** ACTIVE REPAIR CYCLE
+**Lifecycle status:** SUPERSEDED
+**Record role:** HISTORICAL FINDING DISPOSITION
 **Date:** 2026-08-15
 **Failed candidate:** `7b7db0d98660f6562f8e9738445be725fc65988c`
 **Deterministic verification:** PASS
 **Semantic review:** NEEDS FIX
 **Closure:** BLOCKED
 **Human Reserved:** NOT REQUIRED
+
+> [!NOTE]
+> This record preserves the Controller disposition of the failed initial candidate. Its repair directions and next steps are historical, consumed, and non-operative. ENG-006 Repair Rev1 was subsequently accepted and ENG-006 closed through [`ENG-006_REPAIR_REV1_CONTROLLER_CLOSURE_2026-08-23.md`](ENG-006_REPAIR_REV1_CONTROLLER_CLOSURE_2026-08-23.md). The failed candidate remains frozen and unaccepted.
 
 ---
 

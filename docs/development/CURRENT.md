@@ -4,7 +4,7 @@
 
 **Lifecycle status:** ACTIVE
 
-**Last updated:** 2026-08-21
+**Last updated:** 2026-08-23
 
 **Decision owner:** `hdangprod`
 
@@ -28,7 +28,7 @@
 - **G7 — Engineering-Entry Readiness:** APPROVED BY HUMAN
 - **Generation 2 Foundation Program:** COMPLETE
 - **Runtime Architecture Phase:** COMPLETE — Runtime Architecture revision 1 approved by human through `GOV-017`.
-- **Engineering Phase:** AUTHORIZED BY HUMAN through `GOV-018`; Engineering delivery is active with `ENG-001`, `ENG-002`, `ENG-003` revision 3, `ENG-004`, `ENG-005`, and `ENG-008` complete; `ENG-003` revision 3 `ACCEPTED` and `ENG-003` `DONE`; `GCV-001` is `CLOSED BY GOVERNANCE SUCCESSOR REPAIR`; `ENG-006` repair is `UNBLOCKED AT UPSTREAM CAPABILITY LEVEL / NOT DISPATCHED / NOT ACCEPTED` (failed candidate `7b7db0d98660f6562f8e9738445be725fc65988c` frozen); Current Builder: `NONE`; and no task Running.
+- **Engineering Phase:** AUTHORIZED BY HUMAN through `GOV-018`; Engineering delivery is active with `ENG-001`, `ENG-002`, `ENG-003` revision 3, `ENG-004`, `ENG-005`, `ENG-006`, and `ENG-008` complete. `ENG-006` Repair Rev1 is `ACCEPTED` and `ENG-006` is `DONE` on accepted implementation `a94d2cd2714849e7be59fd464f85330f98d127b4`; Current Builder: `NONE`; no task is Running. The accepted implementation is not yet integrated into the canonical branch, which remains at `f2ccb1c7c93d74124bba900065f4d08b781e7e8a` pending later integration.
 - **Engineering work:** AUTHORIZED only within `GOV-018`, the approved Product Foundation and Runtime Architecture, the Delivery Contract, and a valid Ready Task Packet.
 - **Runtime implementation:** AUTHORIZED within that bounded Engineering scope; no implementation task is `RUNNING`.
 - **Production deployment and paid-service activation:** NOT AUTHORIZED (PROHIBITED)
@@ -74,7 +74,7 @@
 - **Runtime Architecture baseline:** [Liam v1 Runtime Architecture Baseline, revision 1](../architecture/RUNTIME_ARCHITECTURE.md) is `CANONICAL / APPROVED` through human disposition `GOV-017` by `github:hdangprod` on 2026-08-09. The original `ARCHITECTURE REVIEW: NEEDS FIX` findings `AR-F001` and `AR-F002` were repaired; `ARCHITECTURE TARGETED RECHECK: PASS` resolved both. Approval does not authorize engineering.
 - **Engineering Phase authorization:** `GOV-018` is APPROVED by `github:hdangprod` on 2026-08-09. It separately authorizes implementation of the approved Liam v1 Product Foundation and Runtime Architecture under Delivery Contract revision 1 while preserving product, architecture, production, paid-service, security, destructive-action, and control-plane Human Reserved boundaries.
 - **Engineering readiness and plan:** [Engineering Plan revision 1](ENGINEERING_PLAN.md) records `ENGINEERING DoR: PASS`, the implementation obligations and Task DAG, exact evidence rules, concurrency boundaries, and the first execution wave. It is `OPERATIONAL / ACTIVE` and cannot expand `GOV-018` or any approved product or architecture authority.
-- **Engineering task state:** `ENG-001`, `ENG-002`, `ENG-003`, `ENG-004`, `ENG-005`, and `ENG-008` are `DONE`. ENG-003 revision-1 and revision-2 accepted history remains durable. ENG-003 revision 3 is `ACCEPTED` on commit `5276481824e43d23345799c39efaa72e51235877`, tree `0ea10d0400a5439af60c72ce943b7504e4173674`, and aggregate `a5bb90a62af050b2cc7bcf1beecac072b3927b45d91178e65564935d7420c156`; `ENG-003-R3-R001`, `ENG-003-R3-R002`, and `ENG-003-R3-S2-R001` are `CLOSED`; `GCV-001` is `CLOSED BY GOVERNANCE SUCCESSOR REPAIR`. `ENG-006-R004` is `CLOSED AT UPSTREAM ENG-003 LEVEL`; `ENG-006` repair is `UNBLOCKED AT UPSTREAM CAPABILITY LEVEL / NOT DISPATCHED / NOT ACCEPTED`, with `R001`–`R003` open for downstream repair and `R005` deferred to `ENG-010`. No ENG-006 repair Builder is authorized; Current Builder is `NONE`. `ENG-009` remains `PROPOSED / NOT DISPATCHED` pending its separate Task Packet and task-level DoR evaluation.
+- **Engineering task state:** `ENG-001`, `ENG-002`, `ENG-003`, `ENG-004`, `ENG-005`, `ENG-006`, and `ENG-008` are `DONE`. ENG-003 revision-1 and revision-2 accepted history remains durable. ENG-003 revision 3 is `ACCEPTED` on commit `5276481824e43d23345799c39efaa72e51235877`, tree `0ea10d0400a5439af60c72ce943b7504e4173674`, and aggregate `a5bb90a62af050b2cc7bcf1beecac072b3927b45d91178e65564935d7420c156`; `ENG-003-R3-R001`, `ENG-003-R3-R002`, and `ENG-003-R3-S2-R001` are `CLOSED`; `GCV-001` is `CLOSED BY GOVERNANCE SUCCESSOR REPAIR`. `ENG-006` Repair Rev1 is `ACCEPTED` on commit `a94d2cd2714849e7be59fd464f85330f98d127b4`, tree `6d4a20cb745b811724a8837e495ab3a19c32285b`, and aggregate `5427769010520ef1c992d201e42b341204c621a3d4ed7f84ce60eae71adcccda`; `ENG-006-R001`, `ENG-006-R002`, and `ENG-006-R003` are `CLOSED`; `ENG-006-R004` is `CLOSED AT UPSTREAM ENG-003 LEVEL`; and `ENG-006-R005` is `DEFERRED TO ENG-010`. Current Builder is `NONE`. Historical candidate `7b7db0d98660f6562f8e9738445be725fc65988c` remains `FROZEN / UNACCEPTED`. `ENG-009` remains `PROPOSED / NOT DISPATCHED` pending its separate Task Packet and task-level DoR evaluation.
 
 ## Authorized work
 
@@ -82,11 +82,11 @@ The Generation 2 Foundation Program is complete through human G7 disposition `GO
 
 This snapshot reflects authorization recorded in approved governance artifacts; it does not create, extend, or approve authorization.
 
-**Current stage state:** Generation 2 Foundation Program — COMPLETE; Runtime Architecture Phase — COMPLETE; Engineering Phase — AUTHORIZED; Engineering planning — ACTIVE; Builder execution — `ENG-001`, `ENG-002`, `ENG-003`, `ENG-004`, `ENG-005`, and `ENG-008` COMPLETE; `ENG-003` revision 3 `ACCEPTED`; `GCV-001` `CLOSED BY GOVERNANCE SUCCESSOR REPAIR`; `ENG-006` repair `UNBLOCKED AT UPSTREAM CAPABILITY LEVEL / NOT DISPATCHED / NOT ACCEPTED` (candidate `7b7db0d9...` FROZEN); Current Builder `NONE`; no task RUNNING
+**Current stage state:** Generation 2 Foundation Program — COMPLETE; Runtime Architecture Phase — COMPLETE; Engineering Phase — AUTHORIZED; Engineering planning — ACTIVE; Builder execution — `ENG-001`, `ENG-002`, `ENG-003`, `ENG-004`, `ENG-005`, `ENG-006`, and `ENG-008` COMPLETE; `ENG-003` revision 3 `ACCEPTED`; `GCV-001` `CLOSED BY GOVERNANCE SUCCESSOR REPAIR`; `ENG-006` Repair Rev1 `ACCEPTED`; `ENG-006` `DONE`; Current Builder `NONE`; no task RUNNING; canonical integration of accepted ENG-006 implementation not yet performed
 
 **Current Engineering authority:** `GOV-018` — APPROVED BY HUMAN on 2026-08-09.
 **Engineering gate:** None created or implied. Task readiness and completion are governed by Delivery Contract revision 1 and do not approve product, architecture, production release, or another gate.
-**Engineering Definition of Ready:** PASS for bounded implementation planning. `ENG-003` Task Packet revision 3 is `ACCEPTED` and `ENG-003` is `DONE` ([Controller Closure](analysis/ENG-003_REV3_CONTROLLER_CLOSURE_2026-08-21.md)); its execution authority is consumed and non-operative. `ENG-004` Task Packet revision 2 and `ENG-005` Task Packet revision 2 are complete and Controller-closed. `ENG-006` repair is `UNBLOCKED AT UPSTREAM CAPABILITY LEVEL`, but remains `NOT DISPATCHED` and `NOT ACCEPTED`. `ENG-009` requires its own separate Task Packet and task-level DoR evaluation.
+**Engineering Definition of Ready:** PASS for bounded implementation planning. `ENG-003` Task Packet revision 3 is `ACCEPTED` and `ENG-003` is `DONE` ([Controller Closure](analysis/ENG-003_REV3_CONTROLLER_CLOSURE_2026-08-21.md)); its execution authority is consumed and non-operative. `ENG-004` Task Packet revision 2 and `ENG-005` Task Packet revision 2 are complete and Controller-closed. `ENG-006` Repair Rev1 is `ACCEPTED` and `ENG-006` is `DONE` ([Controller Closure](analysis/ENG-006_REPAIR_REV1_CONTROLLER_CLOSURE_2026-08-23.md)); its execution authority is consumed and non-operative. `ENG-009` requires its own separate Task Packet and task-level DoR evaluation.
 
 - Product Foundation revision 1 approved through `GOV-011` — satisfied.
 - Delivery Contract revision 1 approved through `GOV-013` — satisfied.
@@ -98,7 +98,7 @@ This snapshot reflects authorization recorded in approved governance artifacts; 
 
 **Foundation gates:** C1–C7 are COMPLETE; G1–G7 are APPROVED BY HUMAN. No Foundation gate remains pending.
 
-**Next executable work:** No Builder is currently running. `ENG-006` repair is unblocked at upstream capability level, but no repair Builder is authorized yet; it remains `NOT DISPATCHED` and `NOT ACCEPTED`. `ENG-009` remains `PROPOSED / NOT DISPATCHED` and requires its own Task Packet and Definition of Ready evaluation. No implementation task is dispatched without an approved Ready Task Packet. `ENG-010` remains `PLANNED / NOT IMPLEMENTED`.
+**Next executable work:** No Builder is currently running. `ENG-006` is `DONE`; no further ENG-006 Builder, repair Builder, reconstruction Builder, or implementation authority is active. `ENG-009` remains `PROPOSED / NOT DISPATCHED` and requires its own Task Packet and Definition of Ready evaluation. No implementation task is dispatched without an approved Ready Task Packet. `ENG-010` remains `PLANNED / NOT IMPLEMENTED`; `ENG-006-R005` remains deferred to it and creates no ENG-010 dispatch authority.
 
 ## Explicit prohibitions
 
