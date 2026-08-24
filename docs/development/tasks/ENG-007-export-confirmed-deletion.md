@@ -4,13 +4,13 @@
 
 **Lifecycle status:** PROPOSED / NOT DISPATCHED
 
-**Task Packet revision:** 2
+**Task Packet revision:** 3
 
-**Controller planning revision:** 2
+**Controller planning revision:** 3
 
-**Task Packet state:** PREPARED FOR FORMAL DoR RECHECK
+**Task Packet state:** PREPARED FOR NARROW INDEPENDENT DoR RECHECK (REPAIR 1)
 
-**Formal DoR:** NOT YET RUN
+**Formal DoR:** NOT YET RUN (RECHECK REQUIRED)
 
 **Ready:** NO
 
@@ -18,24 +18,28 @@
 
 **Builder dispatch:** NOT PERFORMED
 
-**Implementation:** NOT STARTED
+**Implementation:** BLOCKED PENDING REPAIRED READY AUTHORITY
 
 **Authorization:** `GOV-018`
 
 **Canonical Task Packet contract:** [Delivery Contract revision 1, Task Packet](../../../development/DELIVERY_CONTRACT.md#task-packet)
 
-**Planning authority base commit:** `07fa67ccdb44972c18b858ab50f78f93ac6f9ca6`
+**Planning authority base commit:** `37372d37f69ae9a9f72a180ad48384a83ae3c655`
 
-**Planning authority base tree:** `995bd5ddff38e5d0f8929be231ac37057c559e89`
+**Planning authority base tree:** `2b7523b2fc858db3da88e69e3081206fdfd3d928`
 
 **Planning revision 1:** `d7a6c0cf9d824e5f65e1eb5cc30144a063249fe4` — `FROZEN / UNACCEPTED / FAILED FORMAL DoR / HISTORICAL`
+
+**Planning revision 2 (failed candidate):** `2acc99a5e75ba58ea4df53d6705ae5d44fe5bad8` — `FROZEN / UNACCEPTED / FAILED FORMAL DoR REVISION 2 / HISTORICAL`
+
+**Implementation candidate 1 (failed candidate):** `e73bcd19d5ec9b4f2f939abcb8a4c807691198b7` — `FROZEN / UNACCEPTED / FAILED DETERMINISTIC VERIFICATION / HISTORICAL ONLY`
 
 **Human Reserved decision authority:** ENG-007 HUMAN RESERVED — EXPORT / DELETION SEMANTICS DISPOSITION, approved by `github:hdangprod`, decision status APPROVED
 
 **Prepared:** 2026-08-25
 
 > [!IMPORTANT]
-> This is a **fresh** Planning Revision 2 repaired successor created from the current canonical authority. Planning Revision 1 and failed Revision 2 candidate `2acc99a5e75ba58ea4df53d6705ae5d44fe5bad8` are frozen historical evidence; they are not used as successor ancestry. This packet is a planning candidate for a later independent Formal Definition of Ready recheck. Dependency completion does not make the task Ready, no Builder is assigned, and no implementation authority is active.
+> This is a **fresh** Planning Revision 3 repaired successor created from the current canonical authority (`37372d37f69ae9a9f72a180ad48384a83ae3c655`). Prior planning revisions and failed Implementation Candidate `e73bcd19d5ec9b4f2f939abcb8a4c807691198b7` are frozen historical evidence; they are not used as successor ancestry. This packet is a planning candidate for a narrow independent Formal Definition of Ready recheck following resolution of `ENG-007-DV-R001` and `ENG-007-DV-R002`. Dependency completion does not make the task Ready, no Builder is assigned, and no implementation authority is active.
 
 ## Task ID
 
@@ -99,27 +103,47 @@ ENG-007 receives an already exact `DeletionScope` and accepted authorization. It
 
 ## Controlled upstream extension
 
-ENG-007 is explicitly authorized by the Human Reserved decision `HR-DELETE-001` and `HR-DELETE-003` to extend the accepted ENG-002 `DeletionScope` type with exactly:
+ENG-007 is explicitly authorized by the Human Reserved decision `HR-DELETE-001` and `HR-DELETE-003` and the `ENG-007-DV-R001` finding disposition to extend the accepted ENG-002 `DeletionScope` contract so that exact Knowledge Lineage membership is structurally part of `DeletionScope` itself.
+
+The repaired `DeletionScope` contract becomes a discriminated union:
 
 ```ts
-"knowledge-lineage"
+export type DeletionScope =
+  | {
+      readonly targetKind: "knowledge-lineage";
+      readonly targetId: string;
+      readonly effect: "remove-retained-user-data";
+      readonly lineageMembers: readonly string[];
+    }
+  | {
+      readonly targetKind:
+        | "project"
+        | "action"
+        | "knowledge-item"
+        | "accepted-project-context"
+        | "accepted-progress";
+      readonly targetId: string;
+      readonly effect: "remove-retained-user-data";
+    };
 ```
 
-as a new `targetKind` discriminator.
+### deletionScopeKey repair
 
-The existing `DeletionScope` interface becomes:
+The previous "algorithm unchanged" constraint is superseded ONLY as necessary to implement the already-approved exact-confirmed-membership semantics.
 
-```ts
-export interface DeletionScope {
-  readonly targetKind: "project" | "action" | "knowledge-item" | "knowledge-lineage" | "accepted-project-context" | "accepted-progress";
-  readonly targetId: string;
-  readonly effect: "remove-retained-user-data";
-}
-```
+- For non-lineage scopes (`project`, `action`, `knowledge-item`, `accepted-project-context`, `accepted-progress`): preserve existing key behavior: `JSON.stringify([scope.targetKind, scope.targetId, scope.effect])`.
+- For `knowledge-lineage`: the key MUST additionally bind the exact ordered lineage membership: `JSON.stringify([scope.targetKind, scope.targetId, scope.effect, scope.lineageMembers])`.
 
-No other Human Control semantic redesign is authorized. The existing `deletionScopeKey` function is already generic over `scope.targetKind`, `scope.targetId`, and `scope.effect`; its algorithm MUST remain unchanged. A mechanical change is authorized only if compilation proves an exhaustive branch must be updated, and identical key semantics must be preserved.
+Different membership under the same root MUST produce a different scope key:
+`K1 + [K1, K2, K3]` != `K1 + [K1, K2, K3, K4]`.
 
-This does not reopen `ENG-002`. It is an explicitly Human-authorized downstream extension of an accepted shared contract.
+### Human Control binding invariant
+
+Direction evidence and confirmation evidence must both correspond to the SAME exact `DeletionScope` (including `lineageMembers`).
+- Direction scope `K1 + [K1, K2, K3]` with confirmation scope `K1 + [K1, K2, K3, K4]` cannot produce valid authorization (`authorizeConfirmedDeletion` fails).
+- Authorization created for `K1 + [K1, K2, K3]` cannot validate mutation using `K1 + [K1, K2, K3, K4]`; `MutationGate.validateDeletion` rejects before persistence.
+
+This does not reopen `ENG-002`. It is an explicitly authorized downstream repair of the accepted shared contract.
 
 ## Minimal public application surface
 
@@ -141,13 +165,14 @@ export interface ConfirmedDeletionCommand {
   readonly operationId: PersistenceOperationId;
   readonly scope: DeletionScope;
   readonly authorization: ConfirmedDeletionAuthorization;
-  readonly confirmedLineageMembers?: readonly string[];
 }
 ```
 
+The command contains no separate `confirmedLineageMembers` property. Exact lineage membership is structurally bound within `scope.lineageMembers`, providing a **Single Source of Truth** that cannot diverge from Human Control authorization evidence.
+
 The command contains no caller-supplied interaction ID, confirmation flag, confirmation string, model result, arbitrary payload, or ambiguous selector. `operationId` is an idempotency identity, not evidence of human authorization.
 
-`confirmedLineageMembers` is REQUIRED when `scope.targetKind` is `"knowledge-lineage"` and MUST NOT be present for any other scope kind. It contains the deterministic ordered list of Knowledge Item IDs `[root, ..., current]` constituting the exact authoritative lineage at confirmation time. Together with the canonical `targetId` (root Knowledge Item ID), it forms the confirmed Knowledge Lineage deletion scope.
+For `scope.targetKind === "knowledge-lineage"`, `scope.lineageMembers` contains the deterministic ordered list of Knowledge Item IDs `[root, ..., current]` constituting the exact authoritative lineage at confirmation time. Together with the canonical `targetId` (root Knowledge Item ID), it forms the confirmed Knowledge Lineage deletion scope.
 
 ## Authoritative export contract
 
@@ -282,11 +307,11 @@ A Knowledge Item that has **no predecessor** (`supersedesId` is null) **and** **
 
 If a Knowledge Item participates in a retained supersession lineage (it has a predecessor, or a successor, or both), individual `knowledge-item` deletion MUST fail with `scope-conflict` and delete nothing. Direct deletion of an individual Knowledge Item that participates in such a lineage MUST NOT break the lineage.
 
-### Knowledge Lineage canonical identity
+### Knowledge Lineage canonical identity and exact scope structure
 
-For `targetKind: "knowledge-lineage"`, the canonical `targetId` MUST be the ID of the **root / oldest** Knowledge Item in the retained linear supersession lineage.
+For `targetKind: "knowledge-lineage"`, the canonical `targetId` MUST be the ID of the **root / oldest** Knowledge Item in the retained linear supersession lineage, and `lineageMembers` MUST contain the exact deterministic ordered member IDs `[root, ..., current]`.
 
-If the user or upstream application starts from any other member of the lineage, the application must first resolve the authoritative lineage and canonicalize the scope to its root Knowledge Item ID BEFORE Human Control deletion-direction or deletion-confirmation evidence is issued.
+If the user or upstream application starts from any other member of the lineage, the application must first resolve the authoritative lineage and canonicalize the scope to its root Knowledge Item ID and exact member list BEFORE Human Control deletion-direction or deletion-confirmation evidence is issued.
 
 Example:
 
@@ -294,32 +319,38 @@ Example:
 K1 ← K2 ← K3
 
 Regardless of whether selection starts from K1, K2, or K3:
-  targetKind = "knowledge-lineage"
-  targetId   = K1
+  targetKind     = "knowledge-lineage"
+  targetId       = "K1"
+  lineageMembers = ["K1", "K2", "K3"]
 ```
 
 One logical destructive lineage scope must have one stable canonical identity for: exact-scope Human Control; two-interaction confirmation matching; operation-id/scope matching; persistence receipt semantics; and deterministic retry behavior. The current/latest node is NOT used as canonical `targetId` because that identity changes when the lineage receives a successor.
 
-### Confirmed lineage-membership anti-expansion invariant
+### Confirmed lineage-membership anti-expansion invariant and two defense layers
 
-Canonical root identity alone is insufficient to authorize deleting members that did not belong to the lineage when deletion was confirmed.
+Canonical root identity alone is insufficient to authorize deleting members that did not belong to the lineage when deletion was confirmed. Exact lineage membership is structurally bound within `DeletionScope.lineageMembers`.
 
-At confirmation time, the upstream application (later `ENG-010`) must capture the deterministic ordered set of Knowledge Item IDs belonging to the exact authoritative lineage being confirmed and supply them as `confirmedLineageMembers` in the `ConfirmedDeletionCommand`.
+The system enforces **two distinct defense layers**:
 
-Required invariant:
+#### Layer 1 — Human Authorization Binding (pre-persistence)
 
-```text
-CANONICAL ROOT ID  +  CONFIRMED EXACT MEMBER SET  =  confirmed Knowledge Lineage deletion scope
-```
+Human Control direction evidence, confirmation evidence, and confirmed deletion authorization bind the exact `DeletionScope` including its `lineageMembers`.
 
-Before destructive execution, the ENG-007 service MUST:
+- If direction was obtained for `K1 + [K1, K2, K3]` but confirmation is attempted for `K1 + [K1, K2, K3, K4]`, confirmation authorization fails.
+- If valid authorization exists for `K1 + [K1, K2, K3]`, attempting `MutationGate.validateDeletion(authorization, attemptedScope)` with `K1 + [K1, K2, K3, K4]` is rejected before any persistence read or delete.
+- Reusing an old authorization to substitute an expanded lineage list is impossible because `MutationGate` verifies exact scope equality (including `lineageMembers`).
 
-1. resolve the authoritative lineage again from the confirmed root;
-2. reconstruct its exact ordered member IDs;
-3. compare them with the confirmed membership snapshot; and
-4. proceed only on exact equality.
+#### Layer 2 — Execution-Time Anti-Expansion (authoritative D1 state check)
 
-If the lineage changed after confirmation — including a newly-added successor — the service MUST return `scope-conflict` and:
+Before destructive execution, the persistence adapter MUST:
+
+1. verify deterministic structural validity of `scope.lineageMembers` (non-empty, `lineageMembers[0] === targetId`, no duplicate IDs, deterministic ordering);
+2. resolve the authoritative lineage from the confirmed root in D1;
+3. reconstruct its exact ordered member IDs;
+4. compare them with `scope.lineageMembers`; and
+5. proceed only on exact equality.
+
+If the lineage in D1 changed after confirmation — including a newly-added successor (`K4`) — the service MUST return `scope-conflict` and:
 
 - delete nothing;
 - write no deletion receipt;
@@ -327,7 +358,7 @@ If the lineage changed after confirmation — including a newly-added successor 
 - not automatically repair; and
 - require a new destructive confirmation flow.
 
-This is an engineering enforcement of the already-approved exact-scope Human Control semantics. It does not create a new Human Reserved product decision.
+Neither layer substitutes for the other.
 
 ### Lineage deletion behavior
 
@@ -364,9 +395,9 @@ Each deletion uses one D1 `batch` containing:
 Each lineage deletion uses one D1 `batch` containing:
 
 1. one ordered `DELETE` statement per confirmed lineage member, in deterministic FK-safe order; and
-2. one insert into the existing `persistence_operations` table with a task-namespaced canonical fingerprint that includes both the canonical root `targetId` and the exact confirmed lineage member set.
+2. one insert into the existing `persistence_operations` table with a task-namespaced canonical fingerprint that includes `targetKind`, the canonical root `targetId`, `effect`, and `scope.lineageMembers`.
 
-The receipt fingerprint for Knowledge Lineage MUST include the confirmed membership set so that a retry with the same operation ID but a different lineage state is detected as an `operation-id-conflict` (different fingerprint).
+The receipt fingerprint for Knowledge Lineage MUST bind `scope.lineageMembers` so that a retry with the same operation ID but a different lineage state is detected as an `operation-id-conflict` (different fingerprint).
 
 ### Atomicity
 
@@ -415,12 +446,12 @@ export type ConfirmedDeletionResult =
 
 ### Rules
 
-1. The application validates the authorization against the exact scope before any read, delete, receipt lookup, or batch.
-2. For `knowledge-lineage` scopes, `confirmedLineageMembers` is required. If absent or empty, the command is rejected as `deletion-rejected`.
+1. The application validates the authorization against the exact scope (`MutationGate.validateDeletion(command.authorization, command.scope)`) before any read, delete, receipt lookup, or batch.
+2. For `knowledge-lineage` scopes, `scope.lineageMembers` is structurally validated before persistence: it must be present, non-empty, with `lineageMembers[0] === targetId`, no duplicate IDs, and deterministic order. If invalid, the command is rejected as `deletion-rejected`.
 3. A new operation ID with a present target may return `deleted` only after the atomic delete/receipt decision and successful authoritative absence verification.
-4. For Knowledge Lineage: before executing, re-resolve the authoritative lineage from the root and compare against `confirmedLineageMembers`. If they differ, return non-retryable `scope-conflict`.
-5. Exact retry with the same operation ID and exact canonical scope returns `already-deleted` when the matching durable receipt establishes the prior atomic delete. It performs no second deletion.
-6. Reuse of the operation ID for a different scope returns non-retryable `operation-id-conflict` and performs no deletion.
+4. For Knowledge Lineage: before executing, re-resolve the authoritative lineage from the root and compare against `scope.lineageMembers`. If they differ (e.g. lineage modified or expanded), return non-retryable `scope-conflict`.
+5. Exact retry with the same operation ID and exact canonical scope (including `lineageMembers`) returns `already-deleted` when the matching durable receipt establishes the prior atomic delete. It performs no second deletion.
+6. Reuse of the operation ID for a different scope (including different `lineageMembers`) returns non-retryable `operation-id-conflict` and performs no deletion.
 7. A target absent under a new operation ID returns `not-found`, creates no receipt, and is not represented as a newly accepted deletion.
 8. An already-deleted target retried under a different operation ID is `not-found`; only the original matching receipt establishes `already-deleted`.
 9. FK/trigger/constraint refusal with no matching receipt returns non-retryable `scope-conflict`. No raw SQL or provider error is exposed.
@@ -588,7 +619,7 @@ The task cannot be promoted or continued until Controller disposition and renewe
 | `E12` | Sensitive-domain accepted content | Included without model-egress or capture-regex filtering |
 | `E13` | Export execution inspection | One prepared read boundary, zero batch/write/receipt/provider calls |
 
-### Destructive Human Control
+### Destructive Human Control and Scope Binding
 
 | Case | Required evidence | Pass condition |
 | --- | --- | --- |
@@ -603,6 +634,12 @@ The task cannot be promoted or continued until Controller disposition and renewe
 | `D09` | Fabricated evidence/authorization, boolean, string, serialized claim | Rejected |
 | `D19` | Intent text says delete without accepted authorization | Zero delete |
 | `D20` | Model/advisory/proposal result presented as authority | Zero delete |
+| `HC-BIND-01` | Direction `K1 + [K1,K2,K3]`, Confirmation `K1 + [K1,K2,K3,K4]` | `authorizeConfirmedDeletion` fails; rejected |
+| `HC-BIND-02` | Valid authorization `K1 + [K1,K2,K3]`, attempt `MutationGate.validateDeletion` with `K1 + [K1,K2,K3,K4]` | Rejected BEFORE persistence |
+| `HC-BIND-03` | Valid authorization `K1 + [K1,K2,K3]`, D1 later becomes `[K1,K2,K3,K4]`, execution uses original authorized scope | `scope-conflict`; zero delete; zero receipt |
+| `HC-BIND-04` | Reuse old authorization `K1 + [K1,K2,K3]` but attempt to substitute `[K1,K2,K3,K4]` in command scope | Rejected by Human Control / MutationGate before persistence (DV-R001 regression) |
+| `HC-BIND-05` | Same root and same exact member values represented by independent immutable array instances | Same deterministic scope identity and scope key (value-based) |
+| `HC-BIND-06` | Membership mutation after evidence creation attempted via JavaScript array aliasing | Authorization snapshot cannot be widened; mutation does not affect validated scope |
 
 ### Deletion durability, scope, and retry
 
@@ -636,7 +673,7 @@ The task cannot be promoted or continued until Controller disposition and renewe
 | `L04` | Knowledge Lineage deletion with D1 FK ordering | Genuine local D1 proves the selected deletion order |
 | `L05` | Knowledge Lineage membership changed after confirmation | `scope-conflict`; nothing deleted; no receipt |
 | `L06` | Knowledge Lineage with newly-added successor after confirmation | `scope-conflict`; no silent expansion |
-| `L07` | Knowledge Lineage `confirmedLineageMembers` missing or empty | `deletion-rejected` |
+| `L07` | Knowledge Lineage `scope.lineageMembers` missing, empty, or structurally invalid | `deletion-rejected` |
 | `L08` | Knowledge Lineage exact retry (same op ID, same scope, same members) | `already-deleted`; one receipt; no second deletion |
 | `L09` | Knowledge Lineage op ID reused with different members/root | `operation-id-conflict` |
 | `L10` | Knowledge Lineage with external dependency preventing deletion | `scope-conflict`; nothing deleted |
@@ -678,7 +715,7 @@ A JavaScript fake is never the sole proof for destructive semantics, FK behavior
 
 Root `npm test` is not the complete repository regression surface. Every applicable canonical task-local/config-scoped suite must execute explicitly because root `npm test` covers only the root configuration (`tests/foundation/**/*.test.ts`).
 
-The canonical authority base (`07fa67ccdb44972c18b858ab50f78f93ac6f9ca6`) contains these eleven Vitest configurations:
+The canonical authority base (`37372d37f69ae9a9f72a180ad48384a83ae3c655`) contains these eleven Vitest configurations:
 
 1. `vitest.config.ts` (root foundation smoke configuration)
 2. `tests/domain/vitest.config.ts`
@@ -743,9 +780,9 @@ The verifier must prove:
 
 The controlled upstream extension requires the following Human Control evidence in the authorized test paths:
 
-1. `knowledge-lineage` is a valid `DeletionScope` `targetKind`.
-2. Two distinct trusted interactions for the same canonical lineage scope may produce valid confirmed deletion authorization.
-3. A confirmation for one canonical lineage root cannot authorize another root.
+1. `knowledge-lineage` is a valid `DeletionScope` `targetKind` with `lineageMembers: readonly string[]`.
+2. Two distinct trusted interactions for the same canonical lineage scope (including `lineageMembers`) produce valid confirmed deletion authorization.
+3. A confirmation for one canonical lineage root or member set cannot authorize another root or member set.
 4. `knowledge-item` and `knowledge-lineage` are distinct scopes even when their `targetId` strings are equal.
 5. Ordinary authorization cannot substitute for confirmed deletion authority.
 6. Existing foreign-runtime, fabricated-evidence, and same-interaction protections remain unchanged.
@@ -756,7 +793,7 @@ The controlled upstream extension requires the following Human Control evidence 
 2. Export returns the complete retained accepted-state document per `HR-EXPORT-001` with stable ordering and full Progress/Knowledge history, or a truthful failure with no partial document.
 3. All six accepted deletion scopes map to only their exact rows; no cascade or bulk user-state deletion exists.
 4. Knowledge Item deletion of lineage participants fails with `scope-conflict`.
-5. Knowledge Lineage deletion verifies confirmed membership, deletes atomically in FK-safe order, and fails with `scope-conflict` on membership change or external dependency.
+5. Knowledge Lineage deletion verifies confirmed membership against authoritative D1, deletes atomically in FK-safe order, and fails with `scope-conflict` on membership change or external dependency.
 6. No persistence access occurs before exact scope-matching `MutationGate.validateDeletion` succeeds.
 7. D1 atomically commits the exact deletion and namespaced receipt, and accepted success is returned only after authoritative absence evidence.
 8. Exact retry, new-ID missing target, conflicting operation ID, FK scope conflict, durability-inconsistency, persistence failure, receipt failure, and post-verification failure match the contract above.
@@ -765,7 +802,7 @@ The controlled upstream extension requires the following Human Control evidence 
 11. Every evidence case and every canonical/future Vitest configuration passes with genuine local D1 destructive evidence.
 12. Builder evidence is complete, exact-candidate deterministic verification returns `ENG-007 VERIFICATION: PASS`, and independent semantic review returns `ENG-007 REVIEW: GREEN` on the same immutable candidate.
 13. All blocking findings are closed with required rechecks, Controller acceptance is recorded, and a distinct Delivery Record makes completion reconstructible.
-14. The controlled upstream Human Control extension evidence passes.
+14. The controlled upstream Human Control extension evidence passes, including `HC-BIND-01` through `HC-BIND-06`.
 
 ## Builder isolation and evidence contract
 
@@ -786,7 +823,7 @@ The Builder Delivery Record input must include:
 3. exact candidate parent and direct-ancestry proof;
 4. exact changed-path list;
 5. per-file SHA-256 manifest;
-6. path-sorted aggregate SHA-256;
+6. path-sorted aggregate SHA-256 (sorted by repository path using `LC_ALL=C`);
 7. migration SHA-256 before and after;
 8. startup and final clean status;
 9. all deterministic command outputs and genuine local D1 outputs;
@@ -799,7 +836,7 @@ The Builder Delivery Record input must include:
 
 ### Deterministic Verifier
 
-The Verifier is read-only, independent of the Builder worktree, and cannot repair. It independently verifies commit/tree/parent/direct ancestry, exact write scope, per-file and aggregate hashes, migration immutability, all required suites, local D1 destructive evidence, Human Control cases (including Knowledge Lineage extension evidence), post-delete truthfulness, exact staging, and worktree cleanliness.
+The Verifier is read-only, independent of the Builder worktree, and cannot repair. It independently verifies commit/tree/parent/direct ancestry, exact write scope, per-file and aggregate hashes (path-sorted), migration immutability, all required suites, local D1 destructive evidence, Human Control cases (including Knowledge Lineage extension evidence and `HC-BIND-01`..`06`), post-delete truthfulness, exact staging, and worktree cleanliness.
 
 Required disposition:
 
@@ -857,6 +894,24 @@ Stop and prepare a Human Reserved Decision Packet if implementation would requir
 
 ## Prior findings and disposition
 
+### ENG-007-DV-R001 — Human Control binding defect / Scope expansion
+
+**Status:** `ACCEPTED / BLOCKING / READY CONTRACT REPAIR APPLIED / AWAITING INDEPENDENT RECHECK`
+
+The first implementation candidate revealed an internal contract defect in the READY Task Packet: Human Control authorization bound only `targetKind`, `targetId`, and `effect`, while exact lineage membership was supplied separately through `confirmedLineageMembers`. This allowed stale authorization for `K1 <- K2 <- K3` to be reused after the lineage expanded to `K1 <- K2 <- K3 <- K4` if the caller substituted the expanded list. Resolved in Revision 3 by making exact lineage membership structurally part of `DeletionScope.lineageMembers`, repairing `deletionScopeKey` to bind `lineageMembers`, establishing `MutationGate` pre-persistence validation, and enforcing two distinct defense layers.
+
+### ENG-007-DV-R002 — Builder delivery evidence aggregate defect
+
+**Status:** `ACCEPTED / NON-BLOCKING`
+
+The first Builder sorted manifest lines by digest rather than repository path, leading to an aggregate digest mismatch. Clarified in Revision 3: aggregate calculation must sort by repository path using `LC_ALL=C`.
+
+### Implementation Candidate 1 (failed candidate)
+
+**Status:** `FROZEN / UNACCEPTED / FAILED DETERMINISTIC VERIFICATION / HISTORICAL ONLY`
+
+Commit `e73bcd19d5ec9b4f2f939abcb8a4c807691198b7`, tree `dd9c5db94e3899fec5469afad884b9d461150ada`, parent `37372d37f69ae9a9f72a180ad48384a83ae3c655`. Must not be amended, rebased, merged, or cherry-picked.
+
 ### ENG-007-DOR-R001 — Export population
 
 **Status:** `RESOLVED BY HUMAN RESERVED AUTHORITY`
@@ -879,7 +934,7 @@ The retry invariant when a matching receipt exists but the target is still autho
 
 **Status:** `ACCEPTED / NARROW PLANNING REPAIR APPLIED`
 
-The failed Revision 2 candidate omitted `tests/infrastructure/adapters/model/vitest.config.ts` (the canonical ENG-009 suite) from the canonical base config inventory and from the required verification commands, omitted `npm run smoke`, and used `npx wrangler d1 migrations apply liam-db --local` instead of `npm run migrate:local`. Resolved in this repair successor by explicitly enumerating all 11 canonical base configs (plus 3 future task-owned configs for 14 total), adding `npm run smoke`, and using `npm run migrate:local`.
+The failed Revision 2 candidate omitted `tests/infrastructure/adapters/model/vitest.config.ts` (the canonical ENG-009 suite) from the canonical base config inventory and from the required verification commands, omitted `npm run smoke`, and used `npx wrangler d1 migrations apply liam-db --local` instead of `npm run migrate:local`. Resolved by explicitly enumerating all 11 canonical base configs (plus 3 future task-owned configs for 14 total), adding `npm run smoke`, and using `npm run migrate:local`.
 
 ### Planning Revision 1
 
@@ -912,13 +967,13 @@ Implementation must stop on:
 
 ```text
 ENG-007:
-PROPOSED / NOT DISPATCHED
+READY CONTRACT REPAIR
 
 TASK PACKET:
-REVISION 2 — PREPARED FOR FORMAL DoR RECHECK
+REVISION 3 — PREPARED FOR NARROW INDEPENDENT DoR RECHECK (REPAIR 1)
 
 FORMAL DoR:
-NOT YET RUN
+NOT YET RUN (RECHECK REQUIRED)
 
 READY:
 NO
@@ -930,5 +985,5 @@ BUILDER DISPATCH:
 NOT PERFORMED
 
 IMPLEMENTATION:
-NOT STARTED
+BLOCKED PENDING REPAIRED READY AUTHORITY
 ```
