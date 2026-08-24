@@ -8,7 +8,7 @@
 
 **Controller planning revision:** 2
 
-**Current task state:** `READY / NOT DISPATCHED`
+**Current task state:** `READY / CANONICALIZED / POST-INTEGRATION VERIFIED / NOT DISPATCHED`
 
 **Planning revision 1:** `FROZEN / UNACCEPTED / FAILED FORMAL DoR / HISTORICAL / NON-OPERATIVE`
 
@@ -16,7 +16,9 @@
 
 **Formal DoR revision 2:** `PASS`
 
-**READY:** `YES`
+**READY:** `YES — CANONICAL AND POST-INTEGRATION VERIFIED`
+
+**Post-integration canonical verification:** `PASS` — [persisted verification record](../analysis/ENG-009_POST_INTEGRATION_READY_CANONICAL_VERIFICATION_2026-08-24.md)
 
 **Current Builder:** `NONE`
 
@@ -28,17 +30,23 @@
 
 **Authorization:** `GOV-018`
 
-**Canonical authority base commit:** `2bdad043dce96d906a331f2ab7ae42d1ea590068`
+**Pre-READY canonical authority base commit:** `2bdad043dce96d906a331f2ab7ae42d1ea590068`
 
-**Canonical authority base tree:** `6db40000c9990a2dac5e6a2f2b7a899c93cde226`
+**Pre-READY canonical authority base tree:** `6db40000c9990a2dac5e6a2f2b7a899c93cde226`
+
+**READY execution base commit:** `b4e8b34ecd66372f07e02e9f4a2c61b4cbf310f3`
+
+**READY execution base tree:** `f9902fef47104c5891dcc8fcad310f0d69ac7eed`
 
 **Governing contract:** [Delivery Contract revision 1](../../../development/DELIVERY_CONTRACT.md)
 
-> Planning Revision 2 passed independent Formal DoR and is accepted for READY
-> authority. This READY governance candidate grants no Builder execution,
-> dispatch, canonical-branch update, production action, or push authority.
-> Ready status means only that a later explicit Controller dispatch may occur
-> after independent READY-governance verification and canonical integration.
+> Historical pre-integration state: Planning Revision 2 passed independent
+> Formal DoR and was accepted for READY authority. The READY governance candidate
+> was subsequently integrated at the immutable READY execution base above, and
+> independent post-integration verification reported `PASS`. This governance
+> record does not dispatch a Builder, update the execution base, authorize a
+> production action, or authorize a push. A later explicit Controller dispatch
+> remains required.
 
 ## Task ID and objective
 
@@ -80,13 +88,14 @@ failure. All implementation and acceptance evidence is offline and deterministic
 | `ENG-008` | `DONE`; accepted manifest exact | `SATISFIED` |
 | ENG-008 port change | Not required or authorized | `SATISFIED` |
 | Formal DoR on this revision | Independent PASS required before dispatch | `PASS` — [formal evidence](../analysis/ENG-009_FORMAL_DoR_REV2_2026-08-24.md) |
-| Canonical READY governance commit | Must exist before Builder startup | `READY GOVERNANCE CANDIDATE ONLY — NOT YET CANONICALIZED` |
+| Canonical READY governance commit | Must exist before Builder startup | `CANONICALIZED / POST-INTEGRATION VERIFIED` at `b4e8b34ecd66372f07e02e9f4a2c61b4cbf310f3` |
 | Builder assignment | Only after canonical READY authority | `NONE` |
 
 Implementation predecessors are complete and independent Formal DoR Revision 2
-is `PASS`. ENG-009 is `READY / NOT DISPATCHED` only in this governance
-candidate; its future Builder still requires independent candidate verification,
-canonical integration, post-integration verification, and explicit dispatch.
+is `PASS`. Independent post-integration verification established that the READY
+governance was canonicalized at `b4e8b34ecd66372f07e02e9f4a2c61b4cbf310f3`.
+ENG-009 is `READY / CANONICALIZED / POST-INTEGRATION VERIFIED / NOT DISPATCHED`;
+its future Builder still requires explicit Controller dispatch.
 
 ## Accepted ENG-008 contract — immutable upstream surface
 
@@ -595,8 +604,8 @@ path is needed, stop for Controller re-adjudication.
 ## Definition of Done
 
 ENG-009 can reach `DONE` only when all Delivery Contract conditions and all of
-the following hold for one exact candidate whose parent is the future canonical
-READY governance commit:
+the following hold for one exact candidate whose parent is the immutable READY
+execution base `b4e8b34ecd66372f07e02e9f4a2c61b4cbf310f3`:
 
 1. the accepted ENG-008 contract and manifest remain unchanged;
 2. exactly the five locked paths differ from the READY base;
@@ -772,7 +781,8 @@ inspection, or independent review.
 
 ## Future Builder startup and isolation contract
 
-No Builder starts until a canonical READY governance commit exists. The future
+No Builder starts until explicit Controller dispatch. The canonical READY
+governance commit is `b4e8b34ecd66372f07e02e9f4a2c61b4cbf310f3`; the future
 Builder must:
 
 1. use a fresh isolated worktree created directly from that exact READY commit;
@@ -795,7 +805,7 @@ The Builder Delivery Record must include:
 - worktree path and branch;
 - exact READY base commit and tree;
 - candidate commit and tree;
-- candidate parent equal to the future canonical READY governance commit;
+- candidate parent equal to `b4e8b34ecd66372f07e02e9f4a2c61b4cbf310f3`;
 - commit count from READY base and single-parent/no-merge proof;
 - exact changed paths and production/test classification;
 - per-file SHA-256 and a path-sorted newline-terminated aggregate manifest;
@@ -845,26 +855,33 @@ Independent Formal DoR Revision 2 confirmed these closures against the exact
 Revision 2 candidate. They remain bound to the planning identity recorded in
 the [formal evidence](../analysis/ENG-009_FORMAL_DoR_REV2_2026-08-24.md).
 
-## READY governance handoff
+## READY governance lifecycle and handoff
 
-The next role must independently verify the READY governance candidate, its
-exact parentage, Formal DoR binding, lifecycle state, and preservation of the
-unchanged implementation contract. No Builder assignment or implementation
-occurs before that verification, canonical integration, post-integration
-verification, and explicit Controller dispatch.
+Historical pre-integration wording in this packet described the candidate before
+its canonical fast-forward. Independent post-integration verification later
+reported `PASS` for the exact READY execution base
+`b4e8b34ecd66372f07e02e9f4a2c61b4cbf310f3`, tree
+`f9902fef47104c5891dcc8fcad310f0d69ac7eed`; the durable record preserves that
+established result without claiming the recorder performed the verification.
 
-Until READY governance is independently verified, canonicalized, and explicitly
-dispatched:
+The next role is the ENG-009 Builder Dispatch Controller. It must independently
+reconfirm the current canonical state and issue explicit dispatch before any
+Builder assignment or implementation.
+
+Current state:
 
 ```text
-ENG-009: READY / NOT DISPATCHED
+ENG-009: READY / CANONICALIZED / POST-INTEGRATION VERIFIED / NOT DISPATCHED
 TASK PACKET: REVISION 2 / DoR-QUALIFIED / ACCEPTED FOR READY AUTHORITY
 FORMAL DoR REVISION 2: PASS
-READY: YES — IN READY GOVERNANCE CANDIDATE / NOT YET CANONICALIZED
+POST-INTEGRATION CANONICAL VERIFICATION: PASS
+READY: YES — CANONICAL AND POST-INTEGRATION VERIFIED
+READY EXECUTION BASE: b4e8b34ecd66372f07e02e9f4a2c61b4cbf310f3
+READY EXECUTION BASE TREE: f9902fef47104c5891dcc8fcad310f0d69ac7eed
 CURRENT BUILDER: NONE
 BUILDER DISPATCH: NOT PERFORMED
 IMPLEMENTATION: NOT STARTED
-BUILDER: NOT YET AUTHORIZED FOR EXECUTION
-CANONICAL BRANCH: NOT UPDATED BY THIS READY GOVERNANCE CANDIDATE
+BUILDER: NOT AUTHORIZED UNTIL EXPLICIT CONTROLLER DISPATCH
+CANONICAL GOVERNANCE HEAD MAY ADVANCE WITHOUT CHANGING READY EXECUTION BASE
 PUSH: NOT AUTHORIZED
 ```
