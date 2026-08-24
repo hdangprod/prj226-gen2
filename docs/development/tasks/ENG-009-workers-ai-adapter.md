@@ -8,17 +8,23 @@
 
 **Controller planning revision:** 2
 
-**Current task state:** `PROPOSED / NOT DISPATCHED`
+**Current task state:** `READY / NOT DISPATCHED`
 
-**Planning revision 1:** `FAILED FORMAL DoR / SUPERSEDED FOR PLANNING PURPOSES / NON-OPERATIVE`
+**Planning revision 1:** `FROZEN / UNACCEPTED / FAILED FORMAL DoR / HISTORICAL / NON-OPERATIVE`
 
-**Planning revision 2:** `READY FOR FORMAL DoR REVIEW`
+**Planning revision 2:** `DoR-QUALIFIED / ACCEPTED FOR READY AUTHORITY`
 
-**Formal DoR:** `NOT YET RUN AGAINST REVISION 2`
+**Formal DoR revision 2:** `PASS`
 
-**READY:** `NO`
+**READY:** `YES`
 
 **Current Builder:** `NONE`
+
+**Builder dispatch:** `NOT PERFORMED`
+
+**Implementation:** `NOT STARTED`
+
+**Formal DoR evidence:** [ENG-009 Formal Definition of Ready Evaluation — Revision 2](../analysis/ENG-009_FORMAL_DoR_REV2_2026-08-24.md)
 
 **Authorization:** `GOV-018`
 
@@ -28,10 +34,11 @@
 
 **Governing contract:** [Delivery Contract revision 1](../../../development/DELIVERY_CONTRACT.md)
 
-> This is a Planning Revision 2 candidate. It incorporates the accepted
-> dispositions of `ENG-009-DOR-R001` through `ENG-009-DOR-R008`; only a fresh
-> independent Formal DoR may confirm them. It grants no Builder execution,
+> Planning Revision 2 passed independent Formal DoR and is accepted for READY
+> authority. This READY governance candidate grants no Builder execution,
 > dispatch, canonical-branch update, production action, or push authority.
+> Ready status means only that a later explicit Controller dispatch may occur
+> after independent READY-governance verification and canonical integration.
 
 ## Task ID and objective
 
@@ -72,12 +79,14 @@ failure. All implementation and acceptance evidence is offline and deterministic
 | `ENG-001` | `DONE` | `SATISFIED` |
 | `ENG-008` | `DONE`; accepted manifest exact | `SATISFIED` |
 | ENG-008 port change | Not required or authorized | `SATISFIED` |
-| Formal DoR on this revision | Independent PASS required before dispatch | `NOT YET RUN` |
-| Canonical READY governance commit | Must exist before Builder startup | `DOES NOT YET EXIST` |
+| Formal DoR on this revision | Independent PASS required before dispatch | `PASS` — [formal evidence](../analysis/ENG-009_FORMAL_DoR_REV2_2026-08-24.md) |
+| Canonical READY governance commit | Must exist before Builder startup | `READY GOVERNANCE CANDIDATE ONLY — NOT YET CANONICALIZED` |
 | Builder assignment | Only after canonical READY authority | `NONE` |
 
-Implementation predecessors are complete, but ENG-009 remains `PROPOSED` because
-this Revision 2 candidate has not received a fresh independent Formal DoR.
+Implementation predecessors are complete and independent Formal DoR Revision 2
+is `PASS`. ENG-009 is `READY / NOT DISPATCHED` only in this governance
+candidate; its future Builder still requires independent candidate verification,
+canonical integration, post-integration verification, and explicit dispatch.
 
 ## Accepted ENG-008 contract — immutable upstream surface
 
@@ -823,35 +832,39 @@ does not prove live Workers AI compatibility; ENG-013 owns that evidence.
 
 | Formal DoR finding | Revision 2 response | Planning status |
 | --- | --- | --- |
-| `ENG-009-DOR-R001` | Correct current baseline to `2bdad043...` and record ENG-006 as accepted, governance-closed, canonicalized, and post-integration verified | `PLANNING REPAIR INCORPORATED` |
-| `ENG-009-DOR-R002` | Define exact two-argument invocation, deterministic payload, one tool, complete schema, direct own `tool_calls` response, and reconstruction | `PLANNING REPAIR INCORPORATED` |
-| `ENG-009-DOR-R003` | Define configuration/status/name/unknown precedence, exact mappings, and exact static messages without a refusal discriminator | `PLANNING REPAIR INCORPORATED` |
-| `ENG-009-DOR-R004` | Establish exact five-path lock including task-local Vitest configuration | `PLANNING REPAIR INCORPORATED` |
-| `ENG-009-DOR-R005` | Enumerate targeted command and all current canonical regression configurations and gates | `PLANNING REPAIR INCORPORATED` |
-| `ENG-009-DOR-R006` | Require a fresh isolated Builder worktree from the future canonical READY commit and explicit staging | `PLANNING REPAIR INCORPORATED` |
-| `ENG-009-DOR-R007` | Require exact parent/commit/tree/path/hash evidence and final tracked/index/untracked cleanliness | `PLANNING REPAIR INCORPORATED` |
-| `ENG-009-DOR-R008` | Require consumed-property single-read snapshots and explicit `T1`–`T6` TOCTOU evidence | `PLANNING REPAIR INCORPORATED` |
+| `ENG-009-DOR-R001` | Correct current baseline to `2bdad043...` and record ENG-006 as accepted, governance-closed, canonicalized, and post-integration verified | `CLOSED BY INDEPENDENT FORMAL DoR REVISION 2` |
+| `ENG-009-DOR-R002` | Define exact two-argument invocation, deterministic payload, one tool, complete schema, direct own `tool_calls` response, and reconstruction | `CLOSED BY INDEPENDENT FORMAL DoR REVISION 2` |
+| `ENG-009-DOR-R003` | Define configuration/status/name/unknown precedence, exact mappings, and exact static messages without a refusal discriminator | `CLOSED BY INDEPENDENT FORMAL DoR REVISION 2` |
+| `ENG-009-DOR-R004` | Establish exact five-path lock including task-local Vitest configuration | `CLOSED BY INDEPENDENT FORMAL DoR REVISION 2` |
+| `ENG-009-DOR-R005` | Enumerate targeted command and all current canonical regression configurations and gates | `CLOSED BY INDEPENDENT FORMAL DoR REVISION 2` |
+| `ENG-009-DOR-R006` | Require a fresh isolated Builder worktree from the future canonical READY commit and explicit staging | `CLOSED BY INDEPENDENT FORMAL DoR REVISION 2` |
+| `ENG-009-DOR-R007` | Require exact parent/commit/tree/path/hash evidence and final tracked/index/untracked cleanliness | `CLOSED BY INDEPENDENT FORMAL DoR REVISION 2` |
+| `ENG-009-DOR-R008` | Require consumed-property single-read snapshots and explicit `T1`–`T6` TOCTOU evidence | `CLOSED BY INDEPENDENT FORMAL DoR REVISION 2` |
 
-These rows do not claim a finding is closed. Only the fresh independent Formal DoR
-may confirm closure against this exact Revision 2 candidate.
+Independent Formal DoR Revision 2 confirmed these closures against the exact
+Revision 2 candidate. They remain bound to the planning identity recorded in
+the [formal evidence](../analysis/ENG-009_FORMAL_DoR_REV2_2026-08-24.md).
 
-## Formal DoR handoff
+## READY governance handoff
 
-The next role must independently verify exact authority, schema completeness,
-response and failure contracts, the five-path lock, test discovery feasibility,
-all current regression configurations, single-read/TOCTOU obligations,
-F/HP dispositions, ENG-008 immutability, downstream ownership, Builder startup and
-evidence controls, and Human Reserved status.
+The next role must independently verify the READY governance candidate, its
+exact parentage, Formal DoR binding, lifecycle state, and preservation of the
+unchanged implementation contract. No Builder assignment or implementation
+occurs before that verification, canonical integration, post-integration
+verification, and explicit Controller dispatch.
 
-Until that review is durably recorded:
+Until READY governance is independently verified, canonicalized, and explicitly
+dispatched:
 
 ```text
-ENG-009: PROPOSED / NOT DISPATCHED
-TASK PACKET: REVISION 2 / READY FOR FORMAL DoR REVIEW
-FORMAL DoR: NOT YET RUN AGAINST REVISION 2
-READY: NO
+ENG-009: READY / NOT DISPATCHED
+TASK PACKET: REVISION 2 / DoR-QUALIFIED / ACCEPTED FOR READY AUTHORITY
+FORMAL DoR REVISION 2: PASS
+READY: YES — IN READY GOVERNANCE CANDIDATE / NOT YET CANONICALIZED
 CURRENT BUILDER: NONE
-BUILDER: NOT AUTHORIZED
-CANONICAL BRANCH: NOT UPDATED BY THIS PLANNING REVISION
+BUILDER DISPATCH: NOT PERFORMED
+IMPLEMENTATION: NOT STARTED
+BUILDER: NOT YET AUTHORIZED FOR EXECUTION
+CANONICAL BRANCH: NOT UPDATED BY THIS READY GOVERNANCE CANDIDATE
 PUSH: NOT AUTHORIZED
 ```
