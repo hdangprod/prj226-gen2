@@ -8,17 +8,25 @@
 
 **Controller planning revision:** 1
 
-**Current task state:** `READY / PROPOSED FOR DISPATCH`
+**Current task state:** `READY / DISPATCHED / NOT YET IMPLEMENTED`
 
 **Formal DoR revision 1:** `PASS`
 
 **READY:** `YES`
 
-**Current Builder:** `NONE`
+**Builder dispatch:** `AUTHORIZED / DURABLY RECORDED`
 
-**Builder dispatch:** `NOT PERFORMED`
+**Current Builder:** `ENG-010 BUILDER`
 
-**Implementation:** `NOT STARTED`
+**Planned branch:** `eng-010-builder`
+
+**Planned worktree:** `/private/tmp/prj226-eng010-builder`
+
+**Builder authority:** `ACTIVE / BOUNDED TO EXACT 11-PATH LOCK`
+
+**Implementation:** `NOT YET STARTED`
+
+**Human Reserved:** `NOT REQUIRED`
 
 **Formal DoR evidence:** [ENG-010 Formal Definition of Ready Evaluation — Revision 1](../analysis/ENG-010_FORMAL_DoR_REV1_2026-08-26.md)
 

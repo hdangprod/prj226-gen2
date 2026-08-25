@@ -10,10 +10,15 @@
 - Task Packet: [ENG-010 Task Packet Revision 1](../tasks/ENG-010-text-interaction-human-control-orchestration.md)
 - Formal DoR Result: `PASS` ([Formal DoR Revision 1](ENG-010_FORMAL_DoR_REV1_2026-08-26.md))
 - Finding Status: `ENG-010-DOR-R001 INVALID / RETRACTED`; `ENG-010-DOR-R002` through `R006 CLOSED`
-- Task State: `READY / NOT DISPATCHED / NOT IMPLEMENTED`
+- Task State: `READY / DISPATCHED / NOT YET IMPLEMENTED`
 - Delivery Record: [ENG-010 Delivery Record](../delivery/ENG-010-text-interaction-human-control-orchestration.md)
-- Builder Dispatch Eligibility: `YES (AWAITING EXPLICIT CONTROLLER DISPATCH)`
-- Current Builder: `NONE`
+- Dispatch Status: `AUTHORIZED / DURABLY RECORDED`
+- Current Builder: `ENG-010 BUILDER`
+- Planned Branch: `eng-010-builder`
+- Planned Worktree: `/private/tmp/prj226-eng010-builder`
+- Builder Authority: `ACTIVE / BOUNDED TO EXACT 11-PATH LOCK`
+- Implementation State: `NOT YET STARTED`
+- Human Reserved: `NOT REQUIRED`
 
 **ENG-009 Lifecycle Status:**
 - Implementation Candidate: Commit `b8c5b15173efcee723a4cd543e92ec47e542d688`

@@ -2,21 +2,29 @@
 
 **Artifact class:** OPERATIONAL
 
-**Lifecycle status:** ACTIVE / PLANNING READY
+**Lifecycle status:** ACTIVE / DISPATCHED
 
 **Task ID:** `ENG-010`
 
 **Task Packet:** [ENG-010 — Text Interaction and Human-Control Orchestration](../tasks/ENG-010-text-interaction-human-control-orchestration.md) (Revision 1)
 
-**Current lifecycle state:** `READY / NOT DISPATCHED / NOT IMPLEMENTED`
+**Current lifecycle state:** `READY / DISPATCHED / NOT YET IMPLEMENTED`
 
 **Formal DoR result:** `PASS` (Revision 1)
 
-**Current Builder:** `NONE`
+**Builder dispatch:** `AUTHORIZED / DURABLY RECORDED`
 
-**Builder dispatch:** `NOT PERFORMED`
+**Current Builder:** `ENG-010 BUILDER`
 
-**Implementation state:** `NOT STARTED`
+**Planned branch:** `eng-010-builder`
+
+**Planned worktree:** `/private/tmp/prj226-eng010-builder`
+
+**Builder authority:** `ACTIVE / BOUNDED TO EXACT 11-PATH LOCK`
+
+**Implementation state:** `NOT YET STARTED`
+
+**Human Reserved:** `NOT REQUIRED`
 
 **Authorization:** `GOV-018`
 
@@ -54,7 +62,12 @@ Prior review finding `ENG-010-DOR-R001` has been dispositioned as `INVALID / RET
 ## Execution status
 
 - **READY:** `YES`
-- **Builder:** `NONE`
-- **Dispatch:** `NOT DISPATCHED`
-- **Implementation:** `NOT STARTED`
-- **Next required step:** `ENG-010 CONTROLLER — DURABLE BUILDER DISPATCH`
+- **Formal DoR:** `PASS`
+- **Dispatch:** `AUTHORIZED / DURABLY RECORDED`
+- **Current Builder:** `ENG-010 BUILDER`
+- **Builder branch:** `eng-010-builder`
+- **Builder worktree:** `/private/tmp/prj226-eng010-builder`
+- **Builder authority:** `ACTIVE / BOUNDED TO EXACT 11-PATH LOCK`
+- **Implementation:** `NOT YET STARTED`
+- **Human Reserved:** `NOT REQUIRED`
+- **Next required role:** `ENG-010 BUILDER`
