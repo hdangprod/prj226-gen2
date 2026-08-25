@@ -3,8 +3,20 @@
 **Artifact class:** OPERATIONAL / REGISTER
 **Authority:** NON-CANONICAL
 **Lifecycle:** ACTIVE
-**Last updated:** 2026-08-23
+**Last updated:** 2026-08-25
 **Purpose:** Comprehensive register of unresolved, inferred, or disputed engineering design issues requiring stronger-model adjudication before task dispatch.
+
+**ENG-007 Lifecycle Status:**
+- Repair 6 Candidate: Commit `e6b5f271d308fbac7e48667943005758efaf6d8b`, tree `d8bd1c0c0a920e94ce929b40362d5f042939b101`, aggregate `773ac643145308ab285767ee77451f6512bfe26f5415eb7c05370e93a990a195`
+- Deterministic Verification: `PASS` (420 / 420 test executions across all 14 configs)
+- Semantic Review: `GREEN`
+- Finding Status: `SR-R001 CLOSED`; `SR-R002-R1 CLOSED`; `SR-R002-R2 CLOSED`; `SR-R003 CLOSED`; `DV-R001 CLOSED`; `DV-R002 CLOSED`
+- Controller Final Closure: `APPROVE` ([Controller Closure](ENG-007_REPAIR6_CONTROLLER_CLOSURE_2026-08-25.md))
+- Implementation Status: `ENG-007 REPAIR 6 ACCEPTED / ENG-007 DONE / CANONICALIZED`
+- Canonical Integration: `CANONICALIZED / FF-ONLY INTEGRATED`
+- Historical Failed Candidates: `FROZEN / UNACCEPTED` (Candidates 1–6)
+- Builder Dispatch Eligibility: `NO (EXECUTION AUTHORITY CONSUMED / NON-OPERATIVE)`
+- Current Builder: `NONE`
 
 **ENG-006 Lifecycle Status:**
 - Candidate Evaluation (2026-08-15): Commit `7b7db0d98660f6562f8e9738445be725fc65988c` -> `NEEDS FIX`
@@ -546,3 +558,13 @@ UNRESOLVED (Strong-model review confirms: LIVE CALLS PROHIBITED IN ENG-009; RESE
 - Independent semantic review returned `ENG-006 REPAIR REVIEW: GREEN` with zero blocking findings. No reviewer or model provenance is relabeled, and no Opus review is claimed.
 - Controller Final Closure returned `APPROVE`; R001–R003 are closed, R004 remains closed upstream, R005 remains deferred to ENG-010, Repair Rev1 is accepted, and ENG-006 is done.
 - The docs-only governance closure candidate is pending independent governance closure verification. Canonical integration and push have not been performed.
+
+## ENG-007 Repair 6 closure chronology — 2026-08-25
+
+- Historical failed candidates 1 through 6 (`e73bcd19...`, `b55d29cb...`, `514c68e5...`, `4bb8347b...`, `f1264737...`, `d6596fc5...`) remain frozen historical evidence.
+- Repair 6 Builder candidate `e6b5f271d308fbac7e48667943005758efaf6d8b`, tree `d8bd1c0c0a920e94ce929b40362d5f042939b101`, and aggregate `773ac643145308ab285767ee77451f6512bfe26f5415eb7c05370e93a990a195` was produced directly from dispatch base commit `3d1fe482e0a8af2a1aa0d12c75fe0fee26c614a6`.
+- Independent deterministic verification returned `ENG-007 REPAIR 6 DETERMINISTIC VERIFICATION: PASS` (420 / 420 test executions across all 14 configs).
+- Independent semantic review returned `ENG-007 REPAIR 6 SEMANTIC REVIEW: GREEN`, confirming `ENG-007-SR-R002-R2` is semantically repaired.
+- Controller Final Closure returned `APPROVE`; `ENG-007-SR-R001`, `ENG-007-SR-R002-R1`, `ENG-007-SR-R002-R2`, and `ENG-007-SR-R003` are closed; Repair 6 candidate is accepted; ENG-007 is `DONE`.
+- Canonical branch `foundation/product-foundation` fast-forwarded to accepted candidate `e6b5f271d308fbac7e48667943005758efaf6d8b`.
+- Current Builder is `NONE`; implementation authority is consumed and non-operative.

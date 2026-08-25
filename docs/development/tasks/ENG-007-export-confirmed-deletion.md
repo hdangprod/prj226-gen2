@@ -2,23 +2,23 @@
 
 **Artifact class:** OPERATIONAL / TASK PACKET
 
-**Lifecycle status:** READY / DISPATCHED TO BUILDER REPAIR 6
+**Lifecycle status:** DONE / ACCEPTED
 
 **Task Packet revision:** 3
 
 **Controller planning revision:** 3
 
-**Task Packet state:** READY — FORMAL DoR PASS (REPAIR 1 RECHECK VERIFIED)
+**Task Packet state:** ACCEPTED / DONE
 
 **Formal DoR:** PASS (INDEPENDENT RECHECK VERIFIED)
 
 **Ready:** YES
 
-**Current Builder:** ENG-007 BUILDER REPAIR 6
+**Current Builder:** NONE
 
-**Builder dispatch:** AUTHORIZED / DURABLY RECORDED
+**Builder dispatch:** CONSUMED / NON-OPERATIVE
 
-**Implementation:** NOT YET STARTED
+**Implementation:** COMPLETE / ACCEPTED
 
 **Authorization:** `GOV-018`
 
@@ -924,7 +924,7 @@ The durable delivery authority was recorded in repository state on commit `38bef
 
 ### ENG-007-SR-R002 — Malformed scope coercion / identity serialization
 
-**Status:** `OPEN (SUB-FINDING ENG-007-SR-R002-R2 ASSIGNED TO BUILDER REPAIR 6)`
+**Status:** `CLOSED`
 
 ### ENG-007-SR-R002-R1 — Human Control malformed identity key serialization
 
@@ -937,13 +937,13 @@ The durable delivery authority was recorded in repository state on commit `38bef
 
 ### ENG-007-SR-R002-R2 — Hostile-Proxy error boundary / malformed lineage scope
 
-**Status:** `ACCEPTED / BLOCKING / ASSIGNED TO BUILDER REPAIR 6`
+**Status:** `CLOSED`
 
 - **Severity:** `BLOCKING`
 - **Classification:** `WORK_PRODUCT_DEFECT / HOSTILE-PROXY ERROR BOUNDARY / MALFORMED LINEAGE SCOPE`
 - **Root cause:** The shared deletion-scope validator performs runtime inspection of caller-controlled lineage input outside its bounded exception path. In particular, `Array.isArray(rawLineageMembers)` can throw for a revoked Proxy, and reading `rawLineageMembers.length` can throw for an Array Proxy. Because `exportDeletionService` calls the validator outside a defensive catch, raw exceptions can escape through both Human Control classification and `deleteConfirmed` instead of producing bounded invalid-scope / deletion-rejected outcomes.
 - **Repair requirement:** Every runtime inspection required to establish lineage-scope validity must occur inside a bounded exception path, including `Array.isArray`, length capture, indexed member access, duplicate/member validation, revoked Proxy behavior, and throwing Array Proxy traps. Human Control must return bounded unresolved / `invalid-deletion-scope`; the service must return `deletion-rejected`; persistence must receive zero calls; and no raw exception may escape.
-- **Regression boundary:** Preserve Repair 5 protections for object/`toJSON` substitution, non-authoritative `toJSON`/`toString`/`valueOf`/`Symbol.toPrimitive` hooks, String-wrapper rejection, single-read authority capture, fresh primitive-only immutable snapshots, safe direction/confirmation/authorization/MutationGate behavior, and prevention of authority resurrection through primitive substitution.
+- **Closure evidence:** Repair 6 candidate `e6b5f271d308fbac7e48667943005758efaf6d8b`, tree `d8bd1c0c0a920e94ce929b40362d5f042939b101`, aggregate `773ac643145308ab285767ee77451f6512bfe26f5415eb7c05370e93a990a195`, passed fresh independent deterministic verification (`PASS`, 420 / 420 test executions across all 14 configs) and fresh independent semantic / data-boundary review (`GREEN`). Closed by Controller.
 
 ### ENG-007-SR-R003 — Missing receipt re-resolution on late receipt appearance
 
@@ -985,7 +985,13 @@ Commit `f12647374bef083b01b7289f823faa7d8625c733`, tree `907a934e9e5e5fb2727530c
 
 **Status:** `FROZEN / UNACCEPTED / FAILED FINAL SEMANTIC RE-REVIEW / HISTORICAL ONLY`
 
-Commit `d6596fc587fab55f4e9b49d4c9a40e041455440d`, tree `96629f4f114725f1ee0f0345259ef7320ceedd60`, parent `c9b06b3e006188ebb7d1fd4ff21f851dc46fe327`. Deterministic verification passed, but final semantic/data-boundary review returned findings. It must not be amended, rebased, merged, cherry-picked, or used as Repair 6 ancestry. Builder Repair 6 may inspect it read-only and manually reconstruct within the exact write lock.
+Commit `d6596fc587fab55f4e9b49d4c9a40e041455440d`, tree `96629f4f114725f1ee0f0345259ef7320ceedd60`, parent `c9b06b3e006188ebb7d1fd4ff21f851dc46fe327`. Deterministic verification passed, but final semantic/data-boundary review returned findings. It must not be amended, rebased, merged, cherry-picked, or used as Repair 6 ancestry.
+
+### Implementation Candidate 7 (Repair 6 candidate)
+
+**Status:** `ACCEPTED / CANONICALIZED`
+
+Commit `e6b5f271d308fbac7e48667943005758efaf6d8b`, tree `d8bd1c0c0a920e94ce929b40362d5f042939b101`, parent `3d1fe482e0a8af2a1aa0d12c75fe0fee26c614a6`, aggregate `773ac643145308ab285767ee77451f6512bfe26f5415eb7c05370e93a990a195`. Deterministic verification passed with `PASS` (420 / 420 test executions across all 14 configs); semantic review passed with `GREEN`. Accepted and integrated into canonical ancestry.
 
 ### ENG-007-DOR-R001 — Export population
 
@@ -1025,40 +1031,35 @@ Commit `2acc99a5e75ba58ea4df53d6705ae5d44fe5bad8`. Do not amend it. Do not use i
 
 ## Stop conditions and unresolved blockers
 
-The Controller disposition found no authority blocker to Repair 6 dispatch. Formal DoR remains `PASS`; the next required role is `ENG-007 BUILDER REPAIR 6`.
-
-Implementation must stop on:
-
-- inability to prove D1 delete/receipt atomicity with genuine local D1;
-- inability to prove FK-safe Knowledge Lineage deletion ordering with genuine local D1;
-- a required change to an accepted upstream file or migration beyond the authorized `humanControl.ts` extension;
-- a scope not exactly representable by the six accepted deletion scopes;
-- a need for cascade, whole-user-state deletion, restore/undo, or new persistent deletion state;
-- a lineage anti-expansion check that requires schema or migration changes;
-- authority conflict or a material security decision; or
-- any unrelated worktree change.
+The Controller disposition found no authority blocker. All findings are closed. Repair 6 implementation candidate is accepted.
 
 ## Current disposition
 
 ```text
 ENG-007:
-READY / DURABLY RECORDED
+DONE / ACCEPTED
 
 TASK PACKET:
 REVISION 3 — ACCEPTED
 
+REPAIR 6 CANDIDATE:
+e6b5f271d308fbac7e48667943005758efaf6d8b — ACCEPTED
+
 FORMAL DoR:
 PASS (INDEPENDENT RECHECK VERIFIED)
 
-READY:
-YES
+DETERMINISTIC VERIFICATION:
+PASS
+
+SEMANTIC REVIEW:
+GREEN
 
 CURRENT BUILDER:
-ENG-007 BUILDER REPAIR 6
+NONE
 
 BUILDER DISPATCH:
-AUTHORIZED / DURABLY RECORDED
+CONSUMED / NON-OPERATIVE
 
-IMPLEMENTATION:
-NOT YET STARTED
+HUMAN RESERVED:
+NOT REQUIRED
 ```
