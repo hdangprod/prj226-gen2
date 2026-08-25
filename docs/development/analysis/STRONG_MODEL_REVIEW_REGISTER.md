@@ -3,8 +3,26 @@
 **Artifact class:** OPERATIONAL / REGISTER
 **Authority:** NON-CANONICAL
 **Lifecycle:** ACTIVE
-**Last updated:** 2026-08-25
+**Last updated:** 2026-08-26
 **Purpose:** Comprehensive register of unresolved, inferred, or disputed engineering design issues requiring stronger-model adjudication before task dispatch.
+
+**ENG-010 Lifecycle Status:**
+- Task Packet: [ENG-010 Task Packet Revision 1](../tasks/ENG-010-text-interaction-human-control-orchestration.md)
+- Formal DoR Result: `PASS` ([Formal DoR Revision 1](ENG-010_FORMAL_DoR_REV1_2026-08-26.md))
+- Finding Status: `ENG-010-DOR-R001 INVALID / RETRACTED`; `ENG-010-DOR-R002` through `R006 CLOSED`
+- Task State: `READY / NOT DISPATCHED / NOT IMPLEMENTED`
+- Delivery Record: [ENG-010 Delivery Record](../delivery/ENG-010-text-interaction-human-control-orchestration.md)
+- Builder Dispatch Eligibility: `YES (AWAITING EXPLICIT CONTROLLER DISPATCH)`
+- Current Builder: `NONE`
+
+**ENG-009 Lifecycle Status:**
+- Implementation Candidate: Commit `b8c5b15173efcee723a4cd543e92ec47e542d688`
+- Canonical Integration: Merge commit `07fa67ccdb44972c18b858ab50f78f93ac6f9ca6`
+- Deterministic Verification: `PASS` (43 / 43 tests passing)
+- Delivery Record: [ENG-009 Delivery Record](../delivery/ENG-009-workers-ai-adapter.md)
+- Implementation Status: `DONE / ACCEPTED / CANONICALIZED`
+- Builder Dispatch Eligibility: `NO (EXECUTION AUTHORITY CONSUMED / NON-OPERATIVE)`
+- Current Builder: `NONE`
 
 **ENG-007 Lifecycle Status:**
 - Repair 6 Candidate: Commit `e6b5f271d308fbac7e48667943005758efaf6d8b`, tree `d8bd1c0c0a920e94ce929b40362d5f042939b101`, aggregate `773ac643145308ab285767ee77451f6512bfe26f5415eb7c05370e93a990a195`
@@ -49,15 +67,15 @@
 | `REG-006-08` | `ENG-006` | **P1** | Domain Semantics | Historical / Superseded Knowledge Retrieval Semantics | `RESOLVED` |
 | `REG-006-09` | `ENG-006` | **P0** | Schema & Persistence | Cross-Project Knowledge Reference Persistence vs Computation | `RESOLVED` |
 | `REG-006-10` | `ENG-006` | **P0** | Task Boundary | Context Selection and Truncation (≤32 item limit) Ownership | `RESOLVED` |
-| `REG-006-11` | `ENG-006` / `ENG-010` | **P2** | Task Boundary / Downstream | Parent Project Existence on Empty Child Collection (`R005`) | `DEFERRED TO ENG-010` |
-| `REG-009-01` | `ENG-009` | **P1** | Provider Binding | Workers AI Provider/Model Configuration & Binding Assumptions | `UNRESOLVED` |
-| `REG-009-02` | `ENG-009` | **P1** | Provider Adapter | Prompt & System Message Construction Ownership | `UNRESOLVED` |
-| `REG-009-03` | `ENG-009` | **P1** | Model Invocation | Tool Calling vs JSON Structured Output Extraction | `UNRESOLVED` |
-| `REG-009-04` | `ENG-009` | **P1** | Response Parsing | Output Parsing: Structured JSON vs Markdown Syntax Trees | `UNRESOLVED` |
-| `REG-009-05` | `ENG-009` | **P0** | Error Normalization | Mapping Workers AI Errors to `ModelFailureCategory` | `UNRESOLVED` |
-| `REG-009-06` | `ENG-009` | **P1** | Reliability | Provider Failure Retryability Semantics | `UNRESOLVED` |
-| `REG-009-07` | `ENG-009` | **P1** | Architecture / Types | Configuration & Environment Binding Isolation | `UNRESOLVED` |
-| `REG-009-08` | `ENG-009` | **P0** | Governance / Testing | ENG-009 (Mocked) vs ENG-013 (Live Qualification) Boundary | `UNRESOLVED` |
+| `REG-006-11` | `ENG-006` / `ENG-010` | **P2** | Task Boundary / Downstream | Parent Project Existence on Empty Child Collection (`R005`) | `BOUND IN ENG-010` |
+| `REG-009-01` | `ENG-009` | **P1** | Provider Binding | Workers AI Provider/Model Configuration & Binding Assumptions | `RESOLVED` |
+| `REG-009-02` | `ENG-009` | **P1** | Provider Adapter | Prompt & System Message Construction Ownership | `RESOLVED` |
+| `REG-009-03` | `ENG-009` | **P1** | Model Invocation | Tool Calling vs JSON Structured Output Extraction | `RESOLVED` |
+| `REG-009-04` | `ENG-009` | **P1** | Response Parsing | Output Parsing: Structured JSON vs Markdown Syntax Trees | `RESOLVED` |
+| `REG-009-05` | `ENG-009` | **P0** | Error Normalization | Mapping Workers AI Errors to `ModelFailureCategory` | `RESOLVED` |
+| `REG-009-06` | `ENG-009` | **P1** | Reliability | Provider Failure Retryability Semantics | `RESOLVED` |
+| `REG-009-07` | `ENG-009` | **P1** | Architecture / Types | Configuration & Environment Binding Isolation | `RESOLVED` |
+| `REG-009-08` | `ENG-009` | **P0** | Governance / Testing | ENG-009 (Mocked) vs ENG-013 (Live Qualification) Boundary | `RESOLVED` |
 
 ---
 

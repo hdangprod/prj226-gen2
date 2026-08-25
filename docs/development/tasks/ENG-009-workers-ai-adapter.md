@@ -8,7 +8,7 @@
 
 **Controller planning revision:** 2
 
-**Current task state:** `READY / CANONICALIZED / POST-INTEGRATION VERIFIED / NOT DISPATCHED`
+**Current task state:** `DONE / ACCEPTED / CANONICALIZED`
 
 **Planning revision 1:** `FROZEN / UNACCEPTED / FAILED FORMAL DoR / HISTORICAL / NON-OPERATIVE`
 
@@ -18,13 +18,17 @@
 
 **READY:** `YES — CANONICAL AND POST-INTEGRATION VERIFIED`
 
-**Post-integration canonical verification:** `PASS` — [persisted verification record](../analysis/ENG-009_POST_INTEGRATION_READY_CANONICAL_VERIFICATION_2026-08-24.md)
+**Accepted implementation commit:** `b8c5b15173efcee723a4cd543e92ec47e542d688`
+
+**Canonical integration merge commit:** `07fa67ccdb44972c18b858ab50f78f93ac6f9ca6`
+
+**Delivery Record:** [ENG-009 Workers AI Adapter Delivery Record](../delivery/ENG-009-workers-ai-adapter.md)
 
 **Current Builder:** `NONE`
 
-**Builder dispatch:** `NOT PERFORMED`
+**Builder execution:** `COMPLETE / ACCEPTED`
 
-**Implementation:** `NOT STARTED`
+**Implementation:** `COMPLETE / ACCEPTED / CANONICALIZED`
 
 **Formal DoR evidence:** [ENG-009 Formal Definition of Ready Evaluation — Revision 2](../analysis/ENG-009_FORMAL_DoR_REV2_2026-08-24.md)
 
@@ -40,13 +44,10 @@
 
 **Governing contract:** [Delivery Contract revision 1](../../../development/DELIVERY_CONTRACT.md)
 
-> Historical pre-integration state: Planning Revision 2 passed independent
-> Formal DoR and was accepted for READY authority. The READY governance candidate
-> was subsequently integrated at the immutable READY execution base above, and
-> independent post-integration verification reported `PASS`. This governance
-> record does not dispatch a Builder, update the execution base, authorize a
-> production action, or authorize a push. A later explicit Controller dispatch
-> remains required.
+> Delivery outcome: Implementation candidate `b8c5b15173efcee723a4cd543e92ec47e542d688`
+> was accepted and merged to canonical `foundation/product-foundation` at
+> commit `07fa67ccdb44972c18b858ab50f78f93ac6f9ca6`. Deterministic adapter
+> test suite (43/43 passing) and root regression suite passed. ENG-009 is `DONE / ACCEPTED`.
 
 ## Task ID and objective
 
