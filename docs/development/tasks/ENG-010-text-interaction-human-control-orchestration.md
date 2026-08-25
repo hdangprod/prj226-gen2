@@ -8,7 +8,7 @@
 
 **Controller planning revision:** 1
 
-**Current task state:** `REPAIR 1 DISPATCHED / NOT YET IMPLEMENTED`
+**Current task state:** `REPAIR 2 DISPATCHED / NOT YET IMPLEMENTED`
 
 **Formal DoR revision 1:** `PASS`
 
@@ -18,13 +18,19 @@
 
 **Deterministic finding:** `ENG-010-DV-R001` — BLOCKING / ACCEPTED ([Finding Disposition](../analysis/ENG-010_DV_FINDING_DISPOSITION_2026-08-26.md))
 
-**Builder dispatch:** `REPAIR 1 AUTHORIZED / DURABLY RECORDED`
+**Repair 1 candidate:** `495f142fa28bebd3be47518fdd7a3b919ea0fcc1` — FROZEN / UNACCEPTED / HISTORICAL PROVENANCE ONLY
 
-**Current Builder:** `ENG-010 REPAIR 1 BUILDER`
+**Repair 1 deterministic verification:** `PASS`
 
-**Planned branch:** `eng-010-builder-repair-1`
+**Repair 1 semantic review:** `FINDINGS` — `ENG-010-R1-SR-R001` through `ENG-010-R1-SR-R005` ACCEPTED / BLOCKING ([Semantic Finding Disposition](../analysis/ENG-010_R1_SEMANTIC_FINDING_DISPOSITION_2026-08-26.md))
 
-**Planned worktree:** `/private/tmp/prj226-eng010-builder-repair-1`
+**Builder dispatch:** `REPAIR 2 AUTHORIZED / DURABLY RECORDED`
+
+**Current Builder:** `ENG-010 REPAIR 2 BUILDER`
+
+**Planned branch:** `eng-010-builder-repair-2`
+
+**Planned worktree:** `/private/tmp/prj226-eng010-builder-repair-2`
 
 **Builder authority:** `ACTIVE / BOUNDED TO EXACT 11-PATH LOCK`
 
@@ -300,6 +306,22 @@ ENG-010 reaches `DONE` when all of the following conditions are satisfied:
 10. Builder-independent semantic review is `GREEN`;
 11. Delivery Record is durably finalized;
 12. Repository remains clean with untracked analysis evidence intact.
+
+## Repair 2 dispatch supplement
+
+Task Packet Revision 1 remains operative. No Revision 2 is required because the five accepted Repair 1 semantic findings are implementation defects against authority already bound by this packet and accepted predecessor contracts. The exact 11-path write lock remains sufficient and unchanged.
+
+Repair 2 is authorized with exactly these objectives:
+
+1. `R2-O1` — bind mutation and deletion authority to genuine observed user-interaction evidence; no synthesized fallback authority;
+2. `R2-O2` — implement bounded deterministic interaction-specific relevance using interaction text, Project context, and explicit Action focus before the item cap;
+3. `R2-O3` — qualify materially relevant cross-Project Knowledge through accepted reference/reuse semantics while preserving origin and uncertainty;
+4. `R2-O4` — resolve and pass the owning same-Project Action for Action-linked Progress correction, failing closed otherwise; and
+5. `R2-O5` — apply the finite DATA-001 authentication-material prohibition to Project outcome, Action description, Context Facts, Progress, and Progress-correction capture without generalized DLP.
+
+The additional deterministic evidence contract is `R2-TC-01` through `R2-TC-18` in the [Repair 1 Semantic Finding Disposition](../analysis/ENG-010_R1_SEMANTIC_FINDING_DISPOSITION_2026-08-26.md). Repair 2 must preserve the original `TC-01` through `TC-27`, Repair-1 payload regressions, `ENG-010-DV-R001` closure, all accepted upstream behavior, migration immutability, and the full regression command matrix.
+
+Repair 2 must be recreated directly from the Repair 2 governance dispatch commit. Neither failed Candidate 1 nor Repair 1 may be parent, ancestor, merge, rebase, cherry-pick, or copied implementation ancestry. The fresh Builder identity is `eng-010-builder-repair-2` at `/private/tmp/prj226-eng010-builder-repair-2`.
 
 ## Human Reserved authority disposition
 
