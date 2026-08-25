@@ -8,7 +8,7 @@
 
 **Task Packet:** [ENG-007 — Export and Confirmed Deletion](../tasks/ENG-007-export-confirmed-deletion.md) (Revision 3, associated with `c056ba1f01cf05dfc57800a58bd49bfe3c730403`)
 
-**Current lifecycle state:** `READY / DISPATCHED TO BUILDER REPAIR 5`
+**Current lifecycle state:** `READY / DISPATCHED TO BUILDER REPAIR 6`
 
 **Authorization:** `GOV-018`
 
@@ -18,21 +18,22 @@
 
 ## Controller delivery adjudication & durable authority repair
 
-This Delivery Record establishes the durable repository record of delivery authority for `ENG-007` following semantic review finding `ENG-007-SR-R002-R1` and disposition of Repair 4 candidate `f12647374bef083b01b7289f823faa7d8625c733`.
+This Delivery Record establishes the durable repository record of delivery authority for `ENG-007` following final semantic/data-boundary review finding `ENG-007-SR-R002-R2` and disposition of Repair 5 candidate `d6596fc587fab55f4e9b49d4c9a40e041455440d`.
 
 The Controller adjudicates the findings and lifecycle state as follows:
 
 1. **`ENG-007-SR-R001` (Authority / Delivery Governance):** `CLOSED`. Repaired and durably recorded on commit `38befee569dcc91b6bd62226d4615336abccb602`. Closed for current lifecycle; must not regress.
-2. **`ENG-007-SR-R002` (Malformed scope coercion / identity serialization):** `OPEN (SUB-FINDING ENG-007-SR-R002-R1 ASSIGNED TO BUILDER REPAIR 5)`.
-3. **`ENG-007-SR-R002-R1` (Human Control malformed identity key serialization):** `ACCEPTED / BLOCKING / ASSIGNED TO BUILDER REPAIR 5`.
+2. **`ENG-007-SR-R002` (Malformed scope coercion / identity serialization):** `OPEN (SUB-FINDING ENG-007-SR-R002-R2 ASSIGNED TO BUILDER REPAIR 6)`.
+3. **`ENG-007-SR-R002-R1` (Human Control malformed identity key serialization):** `CLOSED`. Repair 5 successfully closed the original malformed-identity serialization / `toJSON` substitution exploit. Closed for current lifecycle; must not regress.
+4. **`ENG-007-SR-R002-R2` (Hostile-Proxy error boundary / malformed lineage scope):** `ACCEPTED / BLOCKING / ASSIGNED TO BUILDER REPAIR 6`.
    - **Severity:** `BLOCKING`
-   - **Classification:** `WORK_PRODUCT_DEFECT / HUMAN-CONTROL DATA-BOUNDARY / MALFORMED IDENTITY SERIALIZATION`
-   - **Root cause:** HumanControl deletion identity key generation uses `JSON.stringify` against raw caller-controlled scope values before strict primitive validation. Attacker-controlled `toJSON()` can therefore transform malformed `targetId` object or malformed `lineageMembers` member object into an apparently valid primitive identity during direction / confirmation / authorization key generation. Later replacing the raw object with the corresponding primitive lets the real MutationGate accept the previously minted authorization.
-   - **Repair requirement:** Human Control must strictly validate and capture destructive scope identity BEFORE key serialization or evidence creation.
-4. **`ENG-007-SR-R003` (Missing receipt re-resolution on late receipt appearance):** `CLOSED`. Semantic re-review confirmed receipt re-resolution across all 6 deletion scopes via `resolveAfterObservedAbsence` upon target pre-read absence is verified and without remaining blocker in receipt reconciliation, R003, D1 atomicity, lineage deletion, non-cascade, export, deterministic ordering, error normalization, DATA-001, or ENG-010/013. Closed for current lifecycle; must not regress.
-5. **`ENG-007-DV-R001` (Lineage scope binding defect):** `ACCEPTED / BLOCKING / CLOSED BY REVISION 3 DoR RECHECK`. Resolved in Task Packet Revision 3 by binding `lineageMembers` structurally into `DeletionScope` and `MutationGate`.
-6. **`ENG-007-DV-R002` (Manifest digest sort ordering):** `ACCEPTED / NON-BLOCKING / DISPOSITIONED`. Standardized on `LC_ALL=C` path sorting.
-7. **`ENG-007-DOR-R001` through `DOR-R003`, `DOR2-R001`:** `RESOLVED / CLOSED`.
+   - **Classification:** `WORK_PRODUCT_DEFECT / HOSTILE-PROXY ERROR BOUNDARY / MALFORMED LINEAGE SCOPE`
+   - **Root cause:** The shared deletion-scope validator performs runtime inspection of caller-controlled lineage input outside its bounded exception path. `Array.isArray(rawLineageMembers)` can throw for a revoked Proxy, and reading `rawLineageMembers.length` can throw for an Array Proxy. Since `exportDeletionService` calls the validator outside a defensive catch, raw exceptions can escape through both Human Control classification and `deleteConfirmed`.
+   - **Repair requirement:** Bound every runtime inspection needed for lineage-scope validity, including array identification, length capture, indexed access, duplicate/member validation, revoked Proxy behavior, and throwing Array Proxy traps. Human Control must produce bounded unresolved / `invalid-deletion-scope`; the service must produce `deletion-rejected`; persistence must receive zero calls; no raw exception may escape. Preserve all Repair 5 protections.
+5. **`ENG-007-SR-R003` (Missing receipt re-resolution on late receipt appearance):** `CLOSED`. Semantic re-review confirmed receipt re-resolution across all 6 deletion scopes via `resolveAfterObservedAbsence` upon target pre-read absence is verified and without remaining blocker in receipt reconciliation, R003, D1 atomicity, lineage deletion, non-cascade, export, deterministic ordering, error normalization, DATA-001, or ENG-010/013. Closed for current lifecycle; must not regress.
+6. **`ENG-007-DV-R001` (Lineage scope binding defect):** `ACCEPTED / BLOCKING / CLOSED BY REVISION 3 DoR RECHECK`. Resolved in Task Packet Revision 3 by binding `lineageMembers` structurally into `DeletionScope` and `MutationGate`.
+7. **`ENG-007-DV-R002` (Manifest digest sort ordering):** `ACCEPTED / NON-BLOCKING / DISPOSITIONED`. Standardized on `LC_ALL=C` path sorting.
+8. **`ENG-007-DOR-R001` through `DOR-R003`, `DOR2-R001`:** `RESOLVED / CLOSED`.
 
 ## Formal DoR provenance and verification
 
@@ -51,18 +52,18 @@ The independent Formal DoR confirmed that Task Packet Revision 3 satisfies all D
 
 ## READY transition and Builder dispatch authority
 
-The Controller durably promotes `ENG-007` to `READY` and issues Builder dispatch authority for Builder Repair 5:
+The Controller preserves `ENG-007` at `READY` and issues Builder dispatch authority for Builder Repair 6 without reopening Formal DoR or Human Reserved decisions:
 
-- **Current lifecycle state:** `READY / DISPATCHED TO BUILDER REPAIR 5`
-- **Assigned Builder:** `ENG-007 BUILDER REPAIR 5`
+- **Current lifecycle state:** `READY / DISPATCHED TO BUILDER REPAIR 6`
+- **Assigned Builder:** `ENG-007 BUILDER REPAIR 6`
 - **Capability profile:** `Standard Delivery`
-- **Planned branch:** `eng-007-builder-repair-5`
-- **Planned worktree:** `/private/tmp/prj226-eng007-builder-repair-5`
+- **Planned branch:** `eng-007-builder-repair-6`
+- **Planned worktree:** `/private/tmp/prj226-eng007-builder-repair-6`
 - **Dispatch state:** `AUTHORIZED / DURABLY RECORDED`
 - **Implementation state:** `NOT YET STARTED`
-- **Repair purpose:** Resolve blocking finding `ENG-007-SR-R002-R1` only; preserve closures of `SR-R001` and `SR-R003` without regression
+- **Repair purpose:** Resolve blocking finding `ENG-007-SR-R002-R2` only; preserve closures of `SR-R001`, `SR-R002-R1`, and `SR-R003` without regression
 
-Builder Repair 5 must execute strictly within the assigned branch and worktree, bound by the 15-path write lock below, starting directly from the new durable dispatch base commit. Reconstruction from prior frozen candidates must be manual/read-only; no cherry-picking, rebasing, or merging from failed candidates is permitted.
+Builder Repair 6 must execute strictly within the assigned branch and worktree, bound by the 15-path write lock below, starting directly from this new durable dispatch commit. Repair 5 may be inspected read-only; reconstruction from frozen candidates must be manual, and no cherry-picking, rebasing, or merging from failed candidates is permitted.
 
 ## Authorized write lock (15 paths)
 
@@ -100,6 +101,7 @@ The following prior candidates are frozen historical evidence and must not be us
 | Repair 2 candidate | `514c68e5eaf4f140e1b978a7160c5c7a16343a9d` | `FROZEN / UNACCEPTED / HISTORICAL ONLY` |
 | Repair 3 candidate | `4bb8347bd92a1533770b4c04de8c2738f7fcd20c` (tree `05cae77cd08d56231f096c243686cdf824f76d84`) | `FROZEN / UNACCEPTED / FAILED SEMANTIC RE-REVIEW / HISTORICAL ONLY` |
 | Repair 4 candidate | `f12647374bef083b01b7289f823faa7d8625c733` (tree `907a934e9e5e5fb2727530ce6b07b83d8184a37e`) | `FROZEN / UNACCEPTED / FAILED SEMANTIC RE-REVIEW / HISTORICAL ONLY` |
+| Repair 5 candidate | `d6596fc587fab55f4e9b49d4c9a40e041455440d` (tree `96629f4f114725f1ee0f0345259ef7320ceedd60`) | `FROZEN / UNACCEPTED / FAILED FINAL SEMANTIC RE-REVIEW / HISTORICAL ONLY` |
 
 ## Human Reserved authority disposition
 
@@ -107,6 +109,6 @@ No open Human Reserved decision exists for `ENG-007`. `HR-EXPORT-001`, `HR-EXPOR
 
 ## Next required role
 
-- **Next required role:** `ENG-007 BUILDER REPAIR 5`
-- **Builder execution:** Assigned in durable record; provisioned in `/private/tmp/prj226-eng007-builder-repair-5` from new durable dispatch base commit; stop before implementation.
+- **Next required role:** `ENG-007 BUILDER REPAIR 6`
+- **Builder execution:** Assigned in durable record; provision in `/private/tmp/prj226-eng007-builder-repair-6` directly from this new durable dispatch commit; stop before implementation.
 - **Push:** NOT AUTHORIZED.
