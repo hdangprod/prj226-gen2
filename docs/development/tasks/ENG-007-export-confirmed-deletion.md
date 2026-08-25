@@ -2,23 +2,23 @@
 
 **Artifact class:** OPERATIONAL / TASK PACKET
 
-**Lifecycle status:** PROPOSED / NOT DISPATCHED
+**Lifecycle status:** READY / DISPATCHED TO BUILDER REPAIR 4
 
 **Task Packet revision:** 3
 
 **Controller planning revision:** 3
 
-**Task Packet state:** PREPARED FOR NARROW INDEPENDENT DoR RECHECK (REPAIR 1)
+**Task Packet state:** READY — FORMAL DoR PASS (REPAIR 1 RECHECK VERIFIED)
 
-**Formal DoR:** NOT YET RUN (RECHECK REQUIRED)
+**Formal DoR:** PASS (INDEPENDENT RECHECK VERIFIED)
 
-**Ready:** NO
+**Ready:** YES
 
-**Current Builder:** NONE
+**Current Builder:** ENG-007 BUILDER REPAIR 4
 
-**Builder dispatch:** NOT PERFORMED
+**Builder dispatch:** AUTHORIZED / DURABLY RECORDED
 
-**Implementation:** BLOCKED PENDING REPAIRED READY AUTHORITY
+**Implementation:** NOT YET STARTED (BLOCKED PENDING NARROW DURABLE-AUTHORITY VERIFICATION)
 
 **Authorization:** `GOV-018`
 
@@ -32,14 +32,28 @@
 
 **Planning revision 2 (failed candidate):** `2acc99a5e75ba58ea4df53d6705ae5d44fe5bad8` — `FROZEN / UNACCEPTED / FAILED FORMAL DoR REVISION 2 / HISTORICAL`
 
+**Planning revision 3:** `c056ba1f01cf05dfc57800a58bd49bfe3c730403` — `ACCEPTED / READY AUTHORITY / FORMAL DoR PASS`
+
 **Implementation candidate 1 (failed candidate):** `e73bcd19d5ec9b4f2f939abcb8a4c807691198b7` — `FROZEN / UNACCEPTED / FAILED DETERMINISTIC VERIFICATION / HISTORICAL ONLY`
+
+**Implementation candidate 2 (failed repair 1):** `b55d29cb77ae6acd2a8da37406aa47993c0d01e2` — `FROZEN / UNACCEPTED / HISTORICAL ONLY`
+
+**Implementation candidate 3 (failed repair 2):** `514c68e5eaf4f140e1b978a7160c5c7a16343a9d` — `FROZEN / UNACCEPTED / HISTORICAL ONLY`
+
+**Implementation candidate 4 (failed repair 3):** `4bb8347bd92a1533770b4c04de8c2738f7fcd20c` (tree `05cae77cd08d56231f096c243686cdf824f76d84`) — `FROZEN / UNACCEPTED / FAILED SEMANTIC RE-REVIEW / HISTORICAL ONLY`
+
+**Assigned Builder:** `ENG-007 BUILDER REPAIR 4`
+
+**Planned branch:** `eng-007-builder-repair-4`
+
+**Planned worktree:** `/private/tmp/prj226-eng007-builder-repair-4`
 
 **Human Reserved decision authority:** ENG-007 HUMAN RESERVED — EXPORT / DELETION SEMANTICS DISPOSITION, approved by `github:hdangprod`, decision status APPROVED
 
 **Prepared:** 2026-08-25
 
 > [!IMPORTANT]
-> This is a **fresh** Planning Revision 3 repaired successor created from the current canonical authority (`37372d37f69ae9a9f72a180ad48384a83ae3c655`). Prior planning revisions and failed Implementation Candidate `e73bcd19d5ec9b4f2f939abcb8a4c807691198b7` are frozen historical evidence; they are not used as successor ancestry. This packet is a planning candidate for a narrow independent Formal Definition of Ready recheck following resolution of `ENG-007-DV-R001` and `ENG-007-DV-R002`. Dependency completion does not make the task Ready, no Builder is assigned, and no implementation authority is active.
+> This is the **repaired** Planning Revision 3 Task Packet (`c056ba1f01cf05dfc57800a58bd49bfe3c730403`), promoted to `READY` after independent Formal DoR recheck `PASS` and durably recorded under Delivery Contract revision 1. All prior planning revisions and failed implementation candidates 1 through 4 are frozen historical evidence; none may be used as successor ancestry. Builder Repair 4 is assigned and dispatched under durable authority for implementation repair of `ENG-007-SR-R002` and `ENG-007-SR-R003`. Implementation is not yet started and is blocked pending independent narrow durable-authority verification.
 
 ## Task ID
 
@@ -78,15 +92,7 @@ The task does not own conversational interpretation, target clarification, confi
 | `ENG-005` | Accepted Knowledge origin, standing, and supersession behavior | `DONE` |
 | `ENG-006` | Current-state and lineage retrieval contracts usable for applicable post-delete checks | `DONE / ACCEPTED` |
 
-Implementation predecessors are satisfied. Formal task-level DoR has not been run. Therefore:
-
-```text
-DEPENDENCIES SATISFIED
-!=
-READY
-!=
-BUILDER AUTHORIZED
-```
+Implementation predecessors are satisfied. Formal task-level DoR was independently verified (`PASS`). The task is promoted to `READY` and dispatched to Builder Repair 4 under durable Delivery Record authority.
 
 ## Relevant accepted implementation boundary
 
@@ -896,21 +902,57 @@ Stop and prepare a Human Reserved Decision Packet if implementation would requir
 
 ### ENG-007-DV-R001 — Human Control binding defect / Scope expansion
 
-**Status:** `ACCEPTED / BLOCKING / READY CONTRACT REPAIR APPLIED / AWAITING INDEPENDENT RECHECK`
+**Status:** `ACCEPTED / BLOCKING / READY CONTRACT REPAIR APPLIED / CLOSED BY REVISION 3 DoR RECHECK`
 
-The first implementation candidate revealed an internal contract defect in the READY Task Packet: Human Control authorization bound only `targetKind`, `targetId`, and `effect`, while exact lineage membership was supplied separately through `confirmedLineageMembers`. This allowed stale authorization for `K1 <- K2 <- K3` to be reused after the lineage expanded to `K1 <- K2 <- K3 <- K4` if the caller substituted the expanded list. Resolved in Revision 3 by making exact lineage membership structurally part of `DeletionScope.lineageMembers`, repairing `deletionScopeKey` to bind `lineageMembers`, establishing `MutationGate` pre-persistence validation, and enforcing two distinct defense layers.
+The first implementation candidate revealed an internal contract defect in the READY Task Packet: Human Control authorization bound only `targetKind`, `targetId`, and `effect`, while exact lineage membership was supplied separately through `confirmedLineageMembers`. This allowed stale authorization for `K1 <- K2 <- K3` to be reused after the lineage expanded to `K1 <- K2 <- K3 <- K4` if the caller substituted the expanded list. Resolved in Revision 3 by making exact lineage membership structurally part of `DeletionScope.lineageMembers`, repairing `deletionScopeKey` to bind `lineageMembers`, establishing `MutationGate` pre-persistence validation, and enforcing two distinct defense layers. Closed by independent Formal DoR recheck.
 
 ### ENG-007-DV-R002 — Builder delivery evidence aggregate defect
 
-**Status:** `ACCEPTED / NON-BLOCKING`
+**Status:** `ACCEPTED / NON-BLOCKING / DISPOSITIONED`
 
 The first Builder sorted manifest lines by digest rather than repository path, leading to an aggregate digest mismatch. Clarified in Revision 3: aggregate calculation must sort by repository path using `LC_ALL=C`.
+
+### ENG-007-SR-R001 — Authority / Delivery governance
+
+**Status:** `ACCEPTED / BLOCKING / DURABLE DELIVERY AUTHORITY REPAIR APPLIED`
+
+The repository tree previously recorded `PROPOSED / NOT DISPATCHED / READY: NO / Current Builder: NONE / Implementation: BLOCKED` while lifecycle progression existed only in conversational output. Repaired prospectively by recording the independent DoR recheck result, Controller adjudication, READY transition, Builder Repair 4 assignment, dispatch authority, and the durable Delivery Record at `docs/development/delivery/ENG-007-export-confirmed-deletion.md` in repository state.
+
+### ENG-007-SR-R002 — Malformed scope coercion via String(...)
+
+**Status:** `ACCEPTED / BLOCKING / IMPLEMENTATION REPAIR PENDING (ASSIGNED TO BUILDER REPAIR 4)`
+
+Malformed runtime destructive scope was coerced via `String(...)` into a valid different scope. Assigned to Builder Repair 4 for bounded implementation repair.
+
+### ENG-007-SR-R003 — Missing receipt re-resolution on late receipt appearance
+
+**Status:** `ACCEPTED / BLOCKING / IMPLEMENTATION REPAIR PENDING (ASSIGNED TO BUILDER REPAIR 4)`
+
+A receipt can appear after initial receipt miss but before target-presence read; missing-target branches returned not-found without receipt re-resolution. Assigned to Builder Repair 4 for bounded implementation repair.
 
 ### Implementation Candidate 1 (failed candidate)
 
 **Status:** `FROZEN / UNACCEPTED / FAILED DETERMINISTIC VERIFICATION / HISTORICAL ONLY`
 
 Commit `e73bcd19d5ec9b4f2f939abcb8a4c807691198b7`, tree `dd9c5db94e3899fec5469afad884b9d461150ada`, parent `37372d37f69ae9a9f72a180ad48384a83ae3c655`. Must not be amended, rebased, merged, or cherry-picked.
+
+### Implementation Candidate 2 (failed repair 1)
+
+**Status:** `FROZEN / UNACCEPTED / HISTORICAL ONLY`
+
+Commit `b55d29cb77ae6acd2a8da37406aa47993c0d01e2`. Must not be amended, rebased, merged, or cherry-picked.
+
+### Implementation Candidate 3 (failed repair 2)
+
+**Status:** `FROZEN / UNACCEPTED / HISTORICAL ONLY`
+
+Commit `514c68e5eaf4f140e1b978a7160c5c7a16343a9d`. Must not be amended, rebased, merged, or cherry-picked.
+
+### Implementation Candidate 4 (failed repair 3)
+
+**Status:** `FROZEN / UNACCEPTED / FAILED SEMANTIC RE-REVIEW / HISTORICAL ONLY`
+
+Commit `4bb8347bd92a1533770b4c04de8c2738f7fcd20c`, tree `05cae77cd08d56231f096c243686cdf824f76d84`. Must not be amended, rebased, merged, or cherry-picked.
 
 ### ENG-007-DOR-R001 — Export population
 
@@ -967,23 +1009,23 @@ Implementation must stop on:
 
 ```text
 ENG-007:
-READY CONTRACT REPAIR
+READY / DURABLY RECORDED
 
 TASK PACKET:
-REVISION 3 — PREPARED FOR NARROW INDEPENDENT DoR RECHECK (REPAIR 1)
+REVISION 3 — ACCEPTED
 
 FORMAL DoR:
-NOT YET RUN (RECHECK REQUIRED)
+PASS (INDEPENDENT RECHECK VERIFIED)
 
 READY:
-NO
+YES
 
 CURRENT BUILDER:
-NONE
+ENG-007 BUILDER REPAIR 4
 
 BUILDER DISPATCH:
-NOT PERFORMED
+AUTHORIZED / DURABLY RECORDED
 
 IMPLEMENTATION:
-BLOCKED PENDING REPAIRED READY AUTHORITY
+NOT YET STARTED (BLOCKED PENDING NARROW DURABLE-AUTHORITY VERIFICATION)
 ```
