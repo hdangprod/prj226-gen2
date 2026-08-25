@@ -8,19 +8,23 @@
 
 **Controller planning revision:** 1
 
-**Current task state:** `READY / DISPATCHED / NOT YET IMPLEMENTED`
+**Current task state:** `REPAIR 1 DISPATCHED / NOT YET IMPLEMENTED`
 
 **Formal DoR revision 1:** `PASS`
 
 **READY:** `YES`
 
-**Builder dispatch:** `AUTHORIZED / DURABLY RECORDED`
+**Candidate 1:** `100f730556af7cea0f0a623809627aa3cf49d5a9` — FROZEN / UNACCEPTED / HISTORICAL PROVENANCE ONLY
 
-**Current Builder:** `ENG-010 BUILDER`
+**Deterministic finding:** `ENG-010-DV-R001` — BLOCKING / ACCEPTED ([Finding Disposition](../analysis/ENG-010_DV_FINDING_DISPOSITION_2026-08-26.md))
 
-**Planned branch:** `eng-010-builder`
+**Builder dispatch:** `REPAIR 1 AUTHORIZED / DURABLY RECORDED`
 
-**Planned worktree:** `/private/tmp/prj226-eng010-builder`
+**Current Builder:** `ENG-010 REPAIR 1 BUILDER`
+
+**Planned branch:** `eng-010-builder-repair-1`
+
+**Planned worktree:** `/private/tmp/prj226-eng010-builder-repair-1`
 
 **Builder authority:** `ACTIVE / BOUNDED TO EXACT 11-PATH LOCK`
 
