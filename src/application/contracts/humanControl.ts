@@ -26,11 +26,23 @@ export type OrdinaryMutationScope =
   | { readonly operation: "capture-knowledge"; readonly knowledgeItemId: string; readonly originatingProjectId: string; readonly content: string }
   | { readonly operation: "correct-knowledge"; readonly priorKnowledgeItemId: string; readonly successorKnowledgeItemId: string; readonly originatingProjectId: string; readonly content: string };
 
-export interface DeletionScope {
-  readonly targetKind: "project" | "action" | "knowledge-item" | "accepted-project-context" | "accepted-progress";
-  readonly targetId: string;
-  readonly effect: "remove-retained-user-data";
-}
+export type DeletionScope =
+  | {
+      readonly targetKind: "knowledge-lineage";
+      readonly targetId: string;
+      readonly effect: "remove-retained-user-data";
+      readonly lineageMembers: readonly string[];
+    }
+  | {
+      readonly targetKind:
+        | "project"
+        | "action"
+        | "knowledge-item"
+        | "accepted-project-context"
+        | "accepted-progress";
+      readonly targetId: string;
+      readonly effect: "remove-retained-user-data";
+    };
 
 export interface TrustedInteractionEvidence {
   readonly kind: "trusted-interaction-evidence";
@@ -101,6 +113,102 @@ export interface HumanControlRuntime {
 interface InteractionRecord { readonly intent: NormalizedIntent; readonly identity: object }
 interface ClassificationRecord { readonly intent: NormalizedIntent; readonly identity: object; readonly scopeKey: string }
 
+export function validateAndSnapshotDeletionScope(
+  rawScope: unknown,
+): DeletionScope | undefined {
+  if (typeof rawScope !== "object" || rawScope === null) {
+    return undefined;
+  }
+
+  let rawTargetKind: unknown;
+  let rawTargetId: unknown;
+  let rawEffect: unknown;
+  let rawLineageMembers: unknown;
+
+  try {
+    const raw = rawScope as Record<string | symbol, unknown>;
+    rawTargetKind = raw.targetKind;
+    rawTargetId = raw.targetId;
+    rawEffect = raw.effect;
+    if ("lineageMembers" in raw) {
+      rawLineageMembers = raw.lineageMembers;
+    }
+  } catch {
+    return undefined;
+  }
+
+  if (typeof rawEffect !== "string" || rawEffect !== "remove-retained-user-data") {
+    return undefined;
+  }
+
+  if (typeof rawTargetId !== "string" || rawTargetId.trim().length === 0) {
+    return undefined;
+  }
+
+  if (
+    rawTargetKind !== "project" &&
+    rawTargetKind !== "action" &&
+    rawTargetKind !== "accepted-project-context" &&
+    rawTargetKind !== "accepted-progress" &&
+    rawTargetKind !== "knowledge-item" &&
+    rawTargetKind !== "knowledge-lineage"
+  ) {
+    return undefined;
+  }
+
+  if (rawTargetKind === "knowledge-lineage") {
+    try {
+      if (!Array.isArray(rawLineageMembers)) {
+        return undefined;
+      }
+
+      const memberCount = rawLineageMembers.length;
+      if (!Number.isSafeInteger(memberCount) || memberCount <= 0) {
+        return undefined;
+      }
+
+      const members: string[] = [];
+      const seen = new Set<string>();
+
+      for (let i = 0; i < memberCount; i++) {
+        const item: unknown = rawLineageMembers[i];
+        if (typeof item !== "string" || item.trim().length === 0) {
+          return undefined;
+        }
+        if (seen.has(item)) {
+          return undefined;
+        }
+        seen.add(item);
+        members.push(item);
+      }
+
+      if (members[0] !== rawTargetId) {
+        return undefined;
+      }
+
+      const frozenMembers = Object.freeze([...members]);
+      return Object.freeze({
+        targetKind: "knowledge-lineage",
+        targetId: rawTargetId,
+        effect: "remove-retained-user-data",
+        lineageMembers: frozenMembers,
+      });
+    } catch {
+      return undefined;
+    }
+  }
+
+  if (rawLineageMembers !== undefined) {
+    return undefined;
+  }
+
+  return Object.freeze({
+    targetKind: rawTargetKind,
+    targetId: rawTargetId,
+    effect: "remove-retained-user-data",
+  });
+}
+
 function ordinaryScopeKey(scope: OrdinaryMutationScope): string {
   switch (scope.operation) {
     case "create-project": return JSON.stringify([scope.operation, scope.projectId, scope.intendedOutcome]);
@@ -108,7 +216,7 @@ function ordinaryScopeKey(scope: OrdinaryMutationScope): string {
     case "create-action": return JSON.stringify([scope.operation, scope.actionId, scope.projectId, scope.description]);
     case "complete-action": case "reopen-action": return JSON.stringify([scope.operation, scope.actionId, scope.projectId]);
     case "select-current-context": return JSON.stringify([scope.operation, scope.projectId, scope.actionId ?? null]);
-    case "accept-context-facts": return JSON.stringify([scope.operation, scope.projectId, ...scope.facts]);
+    case "accept-context-facts": return JSON.stringify([scope.operation, scope.projectId, ...(Array.isArray(scope.facts) ? [...scope.facts] : [])]);
     case "accept-progress": return JSON.stringify([scope.operation, scope.progressId, scope.projectId, scope.actionId ?? null, scope.statement]);
     case "correct-progress": return JSON.stringify([scope.operation, scope.projectId, scope.priorProgressId, scope.successorProgressId, scope.statement]);
     case "capture-knowledge": return JSON.stringify([scope.operation, scope.knowledgeItemId, scope.originatingProjectId, scope.content]);
@@ -116,8 +224,20 @@ function ordinaryScopeKey(scope: OrdinaryMutationScope): string {
   }
 }
 
-function deletionScopeKey(scope: DeletionScope): string {
-  return JSON.stringify([scope.targetKind, scope.targetId, scope.effect]);
+export function deletionScopeKey(scope: DeletionScope): string | undefined {
+  const snapshot = validateAndSnapshotDeletionScope(scope);
+  if (snapshot === undefined) {
+    return undefined;
+  }
+  if (snapshot.targetKind === "knowledge-lineage") {
+    return JSON.stringify([
+      snapshot.targetKind,
+      snapshot.targetId,
+      snapshot.effect,
+      [...snapshot.lineageMembers],
+    ]);
+  }
+  return JSON.stringify([snapshot.targetKind, snapshot.targetId, snapshot.effect]);
 }
 
 function rejectByOptions(intent: NormalizedIntent, options: ClassificationOptions): ClarificationRequiredOutcome | ProhibitedOutcome | undefined {
@@ -145,7 +265,7 @@ export function createHumanControlRuntime(): HumanControlRuntime {
 
   function classify<Value extends object>(
     evidence: TrustedInteractionEvidence,
-    scopeKey: string,
+    scopeKey: string | undefined,
     options: ClassificationOptions,
     make: () => Value,
     records: WeakMap<object, ClassificationRecord>,
@@ -155,6 +275,7 @@ export function createHumanControlRuntime(): HumanControlRuntime {
     const rejected = rejectByOptions(intent, options);
     if (rejected !== undefined) return rejected;
     if (interaction === undefined) return { kind: "unresolved", intent, reason: "invalid-trusted-interaction-evidence" };
+    if (scopeKey === undefined) return { kind: "unresolved", intent, reason: "invalid-deletion-scope" };
     const result = make();
     records.set(result, { intent, identity: interaction.identity, scopeKey });
     return result;
@@ -177,7 +298,7 @@ export function createHumanControlRuntime(): HumanControlRuntime {
       const confirmationRecord = deletionConfirmations.get(confirmation);
       const intent = directionRecord?.intent ?? { summary: "Invalid deletion classification" };
       const key = deletionScopeKey(scope);
-      if (directionRecord === undefined || confirmationRecord === undefined || directionRecord.scopeKey !== key || confirmationRecord.scopeKey !== key || directionRecord.identity === confirmationRecord.identity) {
+      if (key === undefined || directionRecord === undefined || confirmationRecord === undefined || directionRecord.scopeKey !== key || confirmationRecord.scopeKey !== key || directionRecord.identity === confirmationRecord.identity) {
         return { kind: "unresolved", intent, reason: "invalid-mismatched-or-same-interaction-deletion-evidence" };
       }
       const authorization: ConfirmedDeletionAuthorization = { kind: "confirmed-deletion-authorization", operation: "destructive-deletion", additionalConfirmation: true, [deletionAuthorizationBrand]: true };
@@ -189,7 +310,12 @@ export function createHumanControlRuntime(): HumanControlRuntime {
 
   const mutationGate: MutationGate = {
     validateOrdinary: (authorization, scope): authorization is OrdinaryMutationAuthorization => typeof authorization === "object" && authorization !== null && ordinaryAuthorizations.get(authorization) === ordinaryScopeKey(scope),
-    validateDeletion: (authorization, scope): authorization is ConfirmedDeletionAuthorization => typeof authorization === "object" && authorization !== null && deletionAuthorizations.get(authorization) === deletionScopeKey(scope),
+    validateDeletion: (authorization, scope): authorization is ConfirmedDeletionAuthorization => {
+      if (typeof authorization !== "object" || authorization === null) return false;
+      const key = deletionScopeKey(scope);
+      if (key === undefined) return false;
+      return deletionAuthorizations.get(authorization) === key;
+    },
   };
   return { trustedInteractionIngress, humanControl, mutationGate };
 }
