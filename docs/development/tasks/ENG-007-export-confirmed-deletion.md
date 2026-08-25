@@ -2,7 +2,7 @@
 
 **Artifact class:** OPERATIONAL / TASK PACKET
 
-**Lifecycle status:** READY / DISPATCHED TO BUILDER REPAIR 4
+**Lifecycle status:** READY / DISPATCHED TO BUILDER REPAIR 5
 
 **Task Packet revision:** 3
 
@@ -14,11 +14,11 @@
 
 **Ready:** YES
 
-**Current Builder:** ENG-007 BUILDER REPAIR 4
+**Current Builder:** ENG-007 BUILDER REPAIR 5
 
 **Builder dispatch:** AUTHORIZED / DURABLY RECORDED
 
-**Implementation:** NOT YET STARTED (BLOCKED PENDING NARROW DURABLE-AUTHORITY VERIFICATION)
+**Implementation:** NOT YET STARTED
 
 **Authorization:** `GOV-018`
 
@@ -42,18 +42,20 @@
 
 **Implementation candidate 4 (failed repair 3):** `4bb8347bd92a1533770b4c04de8c2738f7fcd20c` (tree `05cae77cd08d56231f096c243686cdf824f76d84`) — `FROZEN / UNACCEPTED / FAILED SEMANTIC RE-REVIEW / HISTORICAL ONLY`
 
-**Assigned Builder:** `ENG-007 BUILDER REPAIR 4`
+**Implementation candidate 5 (failed repair 4):** `f12647374bef083b01b7289f823faa7d8625c733` (tree `907a934e9e5e5fb2727530ce6b07b83d8184a37e`) — `FROZEN / UNACCEPTED / FAILED SEMANTIC RE-REVIEW / HISTORICAL ONLY`
 
-**Planned branch:** `eng-007-builder-repair-4`
+**Assigned Builder:** `ENG-007 BUILDER REPAIR 5`
 
-**Planned worktree:** `/private/tmp/prj226-eng007-builder-repair-4`
+**Planned branch:** `eng-007-builder-repair-5`
+
+**Planned worktree:** `/private/tmp/prj226-eng007-builder-repair-5`
 
 **Human Reserved decision authority:** ENG-007 HUMAN RESERVED — EXPORT / DELETION SEMANTICS DISPOSITION, approved by `github:hdangprod`, decision status APPROVED
 
 **Prepared:** 2026-08-25
 
 > [!IMPORTANT]
-> This is the **repaired** Planning Revision 3 Task Packet (`c056ba1f01cf05dfc57800a58bd49bfe3c730403`), promoted to `READY` after independent Formal DoR recheck `PASS` and durably recorded under Delivery Contract revision 1. All prior planning revisions and failed implementation candidates 1 through 4 are frozen historical evidence; none may be used as successor ancestry. Builder Repair 4 is assigned and dispatched under durable authority for implementation repair of `ENG-007-SR-R002` and `ENG-007-SR-R003`. Implementation is not yet started and is blocked pending independent narrow durable-authority verification.
+> This is the **repaired** Planning Revision 3 Task Packet (`c056ba1f01cf05dfc57800a58bd49bfe3c730403`), promoted to `READY` after independent Formal DoR recheck `PASS` and durably recorded under Delivery Contract revision 1. All prior planning revisions and failed implementation candidates 1 through 5 are frozen historical evidence; none may be used as successor ancestry. Builder Repair 5 is assigned and dispatched under durable authority for implementation repair of `ENG-007-SR-R002-R1`. Implementation is not yet started.
 
 ## Task ID
 
@@ -914,21 +916,28 @@ The first Builder sorted manifest lines by digest rather than repository path, l
 
 ### ENG-007-SR-R001 — Authority / Delivery governance
 
-**Status:** `ACCEPTED / BLOCKING / DURABLE DELIVERY AUTHORITY REPAIR APPLIED`
+**Status:** `CLOSED`
 
-The repository tree previously recorded `PROPOSED / NOT DISPATCHED / READY: NO / Current Builder: NONE / Implementation: BLOCKED` while lifecycle progression existed only in conversational output. Repaired prospectively by recording the independent DoR recheck result, Controller adjudication, READY transition, Builder Repair 4 assignment, dispatch authority, and the durable Delivery Record at `docs/development/delivery/ENG-007-export-confirmed-deletion.md` in repository state.
+The durable delivery authority was recorded in repository state on commit `38befee569dcc91b6bd62226d4615336abccb602`. Closed for current lifecycle; must not regress.
 
-### ENG-007-SR-R002 — Malformed scope coercion via String(...)
+### ENG-007-SR-R002 — Malformed scope coercion / identity serialization
 
-**Status:** `ACCEPTED / BLOCKING / IMPLEMENTATION REPAIR PENDING (ASSIGNED TO BUILDER REPAIR 4)`
+**Status:** `OPEN (SUB-FINDING ENG-007-SR-R002-R1 ASSIGNED TO BUILDER REPAIR 5)`
 
-Malformed runtime destructive scope was coerced via `String(...)` into a valid different scope. Assigned to Builder Repair 4 for bounded implementation repair.
+### ENG-007-SR-R002-R1 — Human Control malformed identity key serialization
+
+**Status:** `ACCEPTED / BLOCKING / ASSIGNED TO BUILDER REPAIR 5`
+
+- **Severity:** `BLOCKING`
+- **Classification:** `WORK_PRODUCT_DEFECT / HUMAN-CONTROL DATA-BOUNDARY / MALFORMED IDENTITY SERIALIZATION`
+- **Root cause:** HumanControl deletion identity key generation uses `JSON.stringify` against raw caller-controlled scope values before strict primitive validation. Attacker-controlled `toJSON()` can therefore transform malformed `targetId` object or malformed `lineageMembers` member object into an apparently valid primitive identity during direction / confirmation / authorization key generation. Later replacing the raw object with the corresponding primitive lets the real MutationGate accept the previously minted authorization.
+- **Repair requirement:** Human Control must strictly validate and capture destructive scope identity BEFORE key serialization or evidence creation.
 
 ### ENG-007-SR-R003 — Missing receipt re-resolution on late receipt appearance
 
-**Status:** `ACCEPTED / BLOCKING / IMPLEMENTATION REPAIR PENDING (ASSIGNED TO BUILDER REPAIR 4)`
+**Status:** `CLOSED`
 
-A receipt can appear after initial receipt miss but before target-presence read; missing-target branches returned not-found without receipt re-resolution. Assigned to Builder Repair 4 for bounded implementation repair.
+Semantic re-review confirmed that receipt re-resolution across all 6 deletion scopes via `resolveAfterObservedAbsence` upon target pre-read absence is verified and without remaining blocker in receipt reconciliation, R003, D1 atomicity, lineage deletion, non-cascade, export, deterministic ordering, error normalization, DATA-001, or ENG-010/013. Closed for current lifecycle; must not regress.
 
 ### Implementation Candidate 1 (failed candidate)
 
@@ -953,6 +962,12 @@ Commit `514c68e5eaf4f140e1b978a7160c5c7a16343a9d`. Must not be amended, rebased,
 **Status:** `FROZEN / UNACCEPTED / FAILED SEMANTIC RE-REVIEW / HISTORICAL ONLY`
 
 Commit `4bb8347bd92a1533770b4c04de8c2738f7fcd20c`, tree `05cae77cd08d56231f096c243686cdf824f76d84`. Must not be amended, rebased, merged, or cherry-picked.
+
+### Implementation Candidate 5 (failed repair 4)
+
+**Status:** `FROZEN / UNACCEPTED / FAILED SEMANTIC RE-REVIEW / HISTORICAL ONLY`
+
+Commit `f12647374bef083b01b7289f823faa7d8625c733`, tree `907a934e9e5e5fb2727530ce6b07b83d8184a37e`, parent `38befee569dcc91b6bd62226d4615336abccb602`. Must not be amended, rebased, merged, or cherry-picked.
 
 ### ENG-007-DOR-R001 — Export population
 
@@ -1021,11 +1036,11 @@ READY:
 YES
 
 CURRENT BUILDER:
-ENG-007 BUILDER REPAIR 4
+ENG-007 BUILDER REPAIR 5
 
 BUILDER DISPATCH:
 AUTHORIZED / DURABLY RECORDED
 
 IMPLEMENTATION:
-NOT YET STARTED (BLOCKED PENDING NARROW DURABLE-AUTHORITY VERIFICATION)
+NOT YET STARTED
 ```
