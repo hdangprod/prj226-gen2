@@ -8,7 +8,7 @@
 
 **Controller planning revision:** 1
 
-**Current task state:** `REPAIR 3 DISPATCHED / NOT YET IMPLEMENTED`
+**Current task state:** `REPAIR 4 DISPATCHED / NOT YET IMPLEMENTED`
 
 **Formal DoR revision 1:** `PASS`
 
@@ -28,15 +28,21 @@
 
 **Repair 2 deterministic verification:** `PASS`
 
-**Repair 2 semantic review:** `FINDINGS` — `ENG-010-R2-SR-R001` and `ENG-010-R2-SR-R002` ACCEPTED / BLOCKING ([Semantic Finding Disposition](../analysis/ENG-010_R2_SEMANTIC_FINDING_DISPOSITION_2026-08-26.md))
+**Repair 2 semantic review:** `FINDINGS` — `ENG-010-R2-SR-R001` replaced by `ENG-010-R3-SR-R001`; `ENG-010-R2-SR-R002` CLOSED ([Repair 3 Semantic Finding Disposition](../analysis/ENG-010_R3_SEMANTIC_FINDING_DISPOSITION_2026-08-26.md))
 
-**Builder dispatch:** `REPAIR 3 AUTHORIZED / DURABLY RECORDED`
+**Repair 3 candidate:** `20f6a71cb9f2e6ef3897f01f26c8f14078dcccfb` — FROZEN / UNACCEPTED / HISTORICAL PROVENANCE ONLY
 
-**Current Builder:** `ENG-010 REPAIR 3 BUILDER`
+**Repair 3 deterministic verification:** `PASS`
 
-**Planned branch:** `eng-010-builder-repair-3`
+**Repair 3 semantic review:** `FINDINGS` — `ENG-010-R3-SR-R001` ACCEPTED / BLOCKING; `ENG-010-R2-SR-R002` CLOSED ([Semantic Finding Disposition](../analysis/ENG-010_R3_SEMANTIC_FINDING_DISPOSITION_2026-08-26.md))
 
-**Planned worktree:** `/private/tmp/prj226-eng010-builder-repair-3`
+**Builder dispatch:** `REPAIR 4 AUTHORIZED / DURABLY RECORDED`
+
+**Current Builder:** `ENG-010 REPAIR 4 BUILDER`
+
+**Planned branch:** `eng-010-builder-repair-4`
+
+**Planned worktree:** `/private/tmp/prj226-eng010-builder-repair-4`
 
 **Builder authority:** `ACTIVE / BOUNDED TO EXACT 11-PATH LOCK`
 
@@ -343,6 +349,20 @@ The ordinary local-context ranking heuristic and the cross-Project material-rele
 The additional deterministic evidence contract is `R3-TC-01` through `R3-TC-09` in the [Repair 2 Semantic Finding Disposition](../analysis/ENG-010_R2_SEMANTIC_FINDING_DISPOSITION_2026-08-26.md). Repair 3 must preserve the original `TC-01` through `TC-27`, Repair-1 payload regressions, `R2-TC-01` through `R2-TC-18`, `ENG-010-DV-R001` closure, all accepted upstream behavior, migration immutability, and the full regression command matrix.
 
 Repair 3 must be recreated directly from the Repair 3 governance dispatch commit. Candidate 1, Repair 1, and Repair 2 may not be parent, ancestor, merge, rebase, cherry-pick, or copied implementation ancestry. The fresh Builder identity is `eng-010-builder-repair-3` at `/private/tmp/prj226-eng010-builder-repair-3`.
+
+## Repair 4 dispatch supplement
+
+Task Packet Revision 1 remains operative. Repair 3 candidate `20f6a71cb9f2e6ef3897f01f26c8f14078dcccfb` passed independent deterministic verification but received accepted blocking semantic finding `ENG-010-R3-SR-R001` and is frozen, unaccepted historical provenance. The finding is an implementation defect against existing controlled cross-Project reuse authority: `PF-KNW-001`, the Domain Model cross-Project reuse rule and invariant 11, `SCN-009`, `MOD-004`, and the accepted ENG-006 candidate boundary. No Task Packet Revision 2 is required. The exact 11-path write lock remains sufficient and unchanged.
+
+Repair 4 is authorized with exactly this objective:
+
+1. `R4-O1` — close `ENG-010-R3-SR-R001` by implementing a bounded deterministic cross-Project material-relevance gate that does not promote arbitrary or generic single whole-token overlap to material relevance, fails closed on weak evidence, preserves valid materially relevant reuse and strong single-signal cases where existing authorized lexical/structural interaction evidence independently establishes applicability, and preserves origin, currentness, qualification, uncertainty, and accepted `referenceKnowledge()` semantics.
+
+The ordinary Project-local ranking heuristic remains unchanged. Repair 4 does not prescribe a global stopword policy, a universal two-token minimum, BM25, stemming, embeddings, semantic models, vector similarity, new persistent metadata, provider inference, or new infrastructure. It must not redesign the closed finite DATA-001 boundary.
+
+The additional deterministic evidence contract is `R4-TC-01` through `R4-TC-08` in the [Repair 3 Semantic Finding Disposition](../analysis/ENG-010_R3_SEMANTIC_FINDING_DISPOSITION_2026-08-26.md). Repair 4 must preserve the original `TC-01` through `TC-27`, Repair-1 regressions, `R2-TC-01` through `R2-TC-18`, `R3-TC-01` through `R3-TC-09`, `ENG-010-DV-R001` closure, closed `ENG-010-R2-SR-R002`, all accepted upstream behavior, migration immutability, and the full regression command matrix.
+
+Repair 4 must be recreated directly from the Repair 4 governance dispatch commit. Candidate 1, Repair 1, Repair 2, and Repair 3 may not be parent, ancestor, merge, rebase, cherry-pick, or copied implementation ancestry. The fresh Builder identity is `eng-010-builder-repair-4` at `/private/tmp/prj226-eng010-builder-repair-4`.
 
 ## Human Reserved authority disposition
 
