@@ -2,23 +2,23 @@
 
 **Artifact class:** OPERATIONAL
 
-**Lifecycle status:** ACTIVE / REPAIR 4 DISPATCHED
+**Lifecycle status:** ACTIVE / REPAIR 5 DISPATCHED
 
 **Task ID:** `ENG-010`
 
 **Task Packet:** [ENG-010 — Text Interaction and Human-Control Orchestration](../tasks/ENG-010-text-interaction-human-control-orchestration.md) (Revision 1)
 
-**Current lifecycle state:** `REPAIR 4 DISPATCHED / NOT YET IMPLEMENTED`
+**Current lifecycle state:** `REPAIR 5 DISPATCHED / NOT YET IMPLEMENTED`
 
 **Formal DoR result:** `PASS` (Revision 1)
 
-**Builder dispatch:** `REPAIR 4 AUTHORIZED / DURABLY RECORDED`
+**Builder dispatch:** `REPAIR 5 AUTHORIZED / DURABLY RECORDED`
 
-**Current Builder:** `ENG-010 REPAIR 4 BUILDER`
+**Current Builder:** `ENG-010 REPAIR 5 BUILDER`
 
-**Planned branch:** `eng-010-builder-repair-4`
+**Planned branch:** `eng-010-builder-repair-5`
 
-**Planned worktree:** `/private/tmp/prj226-eng010-builder-repair-4`
+**Planned worktree:** `/private/tmp/prj226-eng010-builder-repair-5`
 
 **Builder authority:** `ACTIVE / BOUNDED TO EXACT 11-PATH LOCK`
 
@@ -164,27 +164,43 @@ Prior Repair 1 semantic status after Repair 2 review: `R001` CLOSED; `R002` CLOS
 | Canonical integration | NOT AUTHORIZED |
 | Finding record | [Repair 3 Semantic Finding Disposition](../analysis/ENG-010_R3_SEMANTIC_FINDING_DISPOSITION_2026-08-26.md) |
 
-## Repair 4 Dispatch
+## Repair 4 — Deterministic Evidence Invalidated and Semantic Findings
 
 | Property | Value |
 |---|---|
-| Repair | REPAIR 4 AUTHORIZED / DURABLY DISPATCHED |
-| Objective | `R4-O1` |
-| Regression contract | `R4-TC-01` through `R4-TC-08` plus all existing ENG-010 evidence |
+| Candidate commit | `b2cabaf2f339d797d5504ca418eee8f232fa4bdb` |
+| Candidate tree | `800a03f2a15c1b44abbaaa2ce66179c6bf6bd456` |
+| Builder-reported aggregate | `f5ada2ec3f94629ad8c163fc2e771254a0555c51a8bd60f9152f816a9e4fa8db` |
+| Candidate sole parent | `a744056f9760a12c2fa5b2d0d3398fd8b5f415df` |
+| Prior deterministic report | PASS |
+| Reconciled deterministic gate | INVALIDATED / FINDINGS — `RG-21` exits 2 on committed trailing whitespace |
+| Semantic review | FINDINGS |
+| Accepted blocking findings | `ENG-010-R4-SR-R001`, `ENG-010-R4-SR-R002` |
+| Candidate disposition | FROZEN / UNACCEPTED / HISTORICAL PROVENANCE ONLY |
+| Canonical integration | NOT AUTHORIZED |
+| Finding record | [Repair 4 Finding Disposition](../analysis/ENG-010_R4_FINDING_DISPOSITION_2026-08-27.md) |
+
+## Repair 5 Dispatch
+
+| Property | Value |
+|---|---|
+| Repair | REPAIR 5 AUTHORIZED / DURABLY DISPATCHED |
+| Objectives | `R5-O1`, `R5-O2` |
+| Regression contract | `R5-TC-01` through `R5-TC-10` plus all existing ENG-010 evidence |
 | Task Packet | Revision 1 remains operative; no Revision 2 |
 | Write lock | Same exact 11 paths |
 | Human Reserved | NOT REQUIRED |
-| Ancestry rule | Candidate 1, Repair 1, Repair 2, and Repair 3 must NOT be Repair 4 parent or ancestor |
-| Builder branch | `eng-010-builder-repair-4` |
-| Builder worktree | `/private/tmp/prj226-eng010-builder-repair-4` |
-| Current Builder | ENG-010 REPAIR 4 BUILDER |
+| Ancestry rule | Candidate 1 and Repairs 1–4 must NOT be Repair 5 parent or ancestor |
+| Builder branch | `eng-010-builder-repair-5` |
+| Builder worktree | `/private/tmp/prj226-eng010-builder-repair-5` |
+| Current Builder | ENG-010 REPAIR 5 BUILDER |
 | Implementation | NOT YET STARTED |
 
 ## Execution status
 
 - **READY:** `YES`
 - **Formal DoR:** `PASS`
-- **Dispatch:** `REPAIR 4 AUTHORIZED / DURABLY RECORDED`
+- **Dispatch:** `REPAIR 5 AUTHORIZED / DURABLY RECORDED`
 - **Candidate 1:** `100f730556af7cea0f0a623809627aa3cf49d5a9` — FROZEN / UNACCEPTED / HISTORICAL
 - **ENG-010-DV-R001:** BLOCKING / ACCEPTED
 - **Repair 1:** `495f142fa28bebd3be47518fdd7a3b919ea0fcc1` — DETERMINISTIC PASS / SEMANTIC FINDINGS / FROZEN / UNACCEPTED / HISTORICAL
@@ -193,10 +209,12 @@ Prior Repair 1 semantic status after Repair 2 review: `R001` CLOSED; `R002` CLOS
 - **Repair 2 semantic findings:** `ENG-010-R2-SR-R001` — REPLACED BY `ENG-010-R3-SR-R001`; `ENG-010-R2-SR-R002` — CLOSED
 - **Repair 3:** `20f6a71cb9f2e6ef3897f01f26c8f14078dcccfb` — DETERMINISTIC PASS / SEMANTIC FINDINGS / FROZEN / UNACCEPTED / HISTORICAL
 - **Repair 3 semantic finding:** `ENG-010-R3-SR-R001` — ACCEPTED / BLOCKING; `ENG-010-R2-SR-R002` — CLOSED
-- **Current Builder:** `ENG-010 REPAIR 4 BUILDER`
-- **Builder branch:** `eng-010-builder-repair-4`
-- **Builder worktree:** `/private/tmp/prj226-eng010-builder-repair-4`
+- **Repair 4:** `b2cabaf2f339d797d5504ca418eee8f232fa4bdb` — DETERMINISTIC INVALIDATED / SEMANTIC FINDINGS / FROZEN / UNACCEPTED / HISTORICAL
+- **Repair 4 findings:** `ENG-010-R4-SR-R001`, `ENG-010-R4-SR-R002` — ACCEPTED / BLOCKING
+- **Current Builder:** `ENG-010 REPAIR 5 BUILDER`
+- **Builder branch:** `eng-010-builder-repair-5`
+- **Builder worktree:** `/private/tmp/prj226-eng010-builder-repair-5`
 - **Builder authority:** `ACTIVE / BOUNDED TO EXACT 11-PATH LOCK`
 - **Implementation:** `NOT YET STARTED`
 - **Human Reserved:** `NOT REQUIRED`
-- **Next required role:** `ENG-010 REPAIR 4 BUILDER`
+- **Next required role:** `ENG-010 REPAIR 5 BUILDER`

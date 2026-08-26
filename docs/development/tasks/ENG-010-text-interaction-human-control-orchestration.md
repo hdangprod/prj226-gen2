@@ -8,7 +8,7 @@
 
 **Controller planning revision:** 1
 
-**Current task state:** `REPAIR 4 DISPATCHED / NOT YET IMPLEMENTED`
+**Current task state:** `REPAIR 5 DISPATCHED / NOT YET IMPLEMENTED`
 
 **Formal DoR revision 1:** `PASS`
 
@@ -36,13 +36,19 @@
 
 **Repair 3 semantic review:** `FINDINGS` — `ENG-010-R3-SR-R001` ACCEPTED / BLOCKING; `ENG-010-R2-SR-R002` CLOSED ([Semantic Finding Disposition](../analysis/ENG-010_R3_SEMANTIC_FINDING_DISPOSITION_2026-08-26.md))
 
-**Builder dispatch:** `REPAIR 4 AUTHORIZED / DURABLY RECORDED`
+**Repair 4 candidate:** `b2cabaf2f339d797d5504ca418eee8f232fa4bdb` — FROZEN / UNACCEPTED / HISTORICAL PROVENANCE ONLY
 
-**Current Builder:** `ENG-010 REPAIR 4 BUILDER`
+**Repair 4 deterministic verification:** `INVALIDATED / FINDINGS` — mandatory `RG-21` committed-range check failed
 
-**Planned branch:** `eng-010-builder-repair-4`
+**Repair 4 semantic review:** `FINDINGS` — `ENG-010-R4-SR-R001` and `ENG-010-R4-SR-R002` ACCEPTED / BLOCKING ([Repair 4 Finding Disposition](../analysis/ENG-010_R4_FINDING_DISPOSITION_2026-08-27.md))
 
-**Planned worktree:** `/private/tmp/prj226-eng010-builder-repair-4`
+**Builder dispatch:** `REPAIR 5 AUTHORIZED / DURABLY RECORDED`
+
+**Current Builder:** `ENG-010 REPAIR 5 BUILDER`
+
+**Planned branch:** `eng-010-builder-repair-5`
+
+**Planned worktree:** `/private/tmp/prj226-eng010-builder-repair-5`
 
 **Builder authority:** `ACTIVE / BOUNDED TO EXACT 11-PATH LOCK`
 
@@ -363,6 +369,21 @@ The ordinary Project-local ranking heuristic remains unchanged. Repair 4 does no
 The additional deterministic evidence contract is `R4-TC-01` through `R4-TC-08` in the [Repair 3 Semantic Finding Disposition](../analysis/ENG-010_R3_SEMANTIC_FINDING_DISPOSITION_2026-08-26.md). Repair 4 must preserve the original `TC-01` through `TC-27`, Repair-1 regressions, `R2-TC-01` through `R2-TC-18`, `R3-TC-01` through `R3-TC-09`, `ENG-010-DV-R001` closure, closed `ENG-010-R2-SR-R002`, all accepted upstream behavior, migration immutability, and the full regression command matrix.
 
 Repair 4 must be recreated directly from the Repair 4 governance dispatch commit. Candidate 1, Repair 1, Repair 2, and Repair 3 may not be parent, ancestor, merge, rebase, cherry-pick, or copied implementation ancestry. The fresh Builder identity is `eng-010-builder-repair-4` at `/private/tmp/prj226-eng010-builder-repair-4`.
+
+## Repair 5 dispatch supplement
+
+Task Packet Revision 1 remains operative. Repair 4 candidate `b2cabaf2f339d797d5504ca418eee8f232fa4bdb` is frozen, unaccepted historical provenance after two accepted blocking findings. `ENG-010-R4-SR-R001` shows the single-token material-relevance branch counted the same interaction token again from Project metadata as supposedly independent corroboration. `ENG-010-R4-SR-R002` shows mandatory `RG-21` failed on committed trailing whitespace, invalidating the prior overall deterministic PASS. Neither finding changes Product, Domain, Architecture, or finite DATA-001 authority; the unchanged exact 11-path lock remains sufficient.
+
+Repair 5 is authorized with exactly these objectives:
+
+1. `R5-O1` — close `ENG-010-R4-SR-R001` by requiring truly independent corroboration for the single-interaction-token Project-scoped cross-Project material-relevance path. The sole interaction-match token cannot count again as corroboration; repeated weak/generic-token evidence fails closed.
+2. `R5-O2` — close `ENG-010-R4-SR-R002` by producing a fresh immutable candidate for which exact dispatch-to-candidate `git diff --check` exits zero with no output.
+
+Repair 5 preserves the Repair-4 multi-token and bounded exact-ID paths unless evidence requires otherwise, applies no independent-corroboration rule to ordinary Project-local ranking, and does not introduce a global stopword policy, two-token universal policy, stemming, embeddings, model inference, new metadata, infrastructure, or DATA-001 redesign.
+
+The additional deterministic evidence contract is `R5-TC-01` through `R5-TC-10` in the [Repair 4 Finding Disposition](../analysis/ENG-010_R4_FINDING_DISPOSITION_2026-08-27.md). Repair 5 must preserve all earlier ENG-010 evidence, closed findings, migration immutability, and the full regression command matrix.
+
+Repair 5 must be recreated directly from the Repair 5 governance dispatch commit. Candidate 1 and Repairs 1–4 may not be parent, ancestor, merge, rebase, cherry-pick, or copied implementation ancestry. The fresh Builder identity is `eng-010-builder-repair-5` at `/private/tmp/prj226-eng010-builder-repair-5`.
 
 ## Human Reserved authority disposition
 
