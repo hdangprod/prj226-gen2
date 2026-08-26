@@ -8,7 +8,7 @@
 
 **Controller planning revision:** 1
 
-**Current task state:** `REPAIR 2 DISPATCHED / NOT YET IMPLEMENTED`
+**Current task state:** `REPAIR 3 DISPATCHED / NOT YET IMPLEMENTED`
 
 **Formal DoR revision 1:** `PASS`
 
@@ -24,13 +24,19 @@
 
 **Repair 1 semantic review:** `FINDINGS` — `ENG-010-R1-SR-R001` through `ENG-010-R1-SR-R005` ACCEPTED / BLOCKING ([Semantic Finding Disposition](../analysis/ENG-010_R1_SEMANTIC_FINDING_DISPOSITION_2026-08-26.md))
 
-**Builder dispatch:** `REPAIR 2 AUTHORIZED / DURABLY RECORDED`
+**Repair 2 candidate:** `d7f4a1ad2c2ad8eb645f49955faaf4e5630c67c6` — FROZEN / UNACCEPTED / HISTORICAL PROVENANCE ONLY
 
-**Current Builder:** `ENG-010 REPAIR 2 BUILDER`
+**Repair 2 deterministic verification:** `PASS`
 
-**Planned branch:** `eng-010-builder-repair-2`
+**Repair 2 semantic review:** `FINDINGS` — `ENG-010-R2-SR-R001` and `ENG-010-R2-SR-R002` ACCEPTED / BLOCKING ([Semantic Finding Disposition](../analysis/ENG-010_R2_SEMANTIC_FINDING_DISPOSITION_2026-08-26.md))
 
-**Planned worktree:** `/private/tmp/prj226-eng010-builder-repair-2`
+**Builder dispatch:** `REPAIR 3 AUTHORIZED / DURABLY RECORDED`
+
+**Current Builder:** `ENG-010 REPAIR 3 BUILDER`
+
+**Planned branch:** `eng-010-builder-repair-3`
+
+**Planned worktree:** `/private/tmp/prj226-eng010-builder-repair-3`
 
 **Builder authority:** `ACTIVE / BOUNDED TO EXACT 11-PATH LOCK`
 
@@ -322,6 +328,21 @@ Repair 2 is authorized with exactly these objectives:
 The additional deterministic evidence contract is `R2-TC-01` through `R2-TC-18` in the [Repair 1 Semantic Finding Disposition](../analysis/ENG-010_R1_SEMANTIC_FINDING_DISPOSITION_2026-08-26.md). Repair 2 must preserve the original `TC-01` through `TC-27`, Repair-1 payload regressions, `ENG-010-DV-R001` closure, all accepted upstream behavior, migration immutability, and the full regression command matrix.
 
 Repair 2 must be recreated directly from the Repair 2 governance dispatch commit. Neither failed Candidate 1 nor Repair 1 may be parent, ancestor, merge, rebase, cherry-pick, or copied implementation ancestry. The fresh Builder identity is `eng-010-builder-repair-2` at `/private/tmp/prj226-eng010-builder-repair-2`.
+
+## Repair 3 dispatch supplement
+
+Task Packet Revision 1 remains operative. Repair 2 candidate `d7f4a1ad2c2ad8eb645f49955faaf4e5630c67c6` passed independent deterministic verification but received two accepted blocking semantic findings and is frozen, unaccepted historical provenance. No Task Packet Revision 2 is required because both findings are implementation defects against authority already bound by this packet and accepted ENG-005, ENG-006, and ENG-008 contracts. The exact 11-path write lock remains sufficient and unchanged.
+
+Repair 3 is authorized with exactly these objectives:
+
+1. `R3-O1` — close `ENG-010-R2-SR-R001` by strengthening only the bounded deterministic cross-Project material-relevance gate so incidental substring coincidence cannot establish material relevance while genuinely relevant Knowledge remains usable with origin, currentness, qualification, and accepted `referenceKnowledge()` semantics preserved; and
+2. `R3-O2` — close `ENG-010-R2-SR-R002` by making ENG-010 capture-side DATA-001 screening match the complete current accepted finite authentication-material behavior while preserving ordinary sensitive/private non-authentication content.
+
+The ordinary local-context ranking heuristic and the cross-Project material-relevance gate need not be identical. Repair 3 does not prescribe a new Product threshold, BM25, stemming, stopwords, edit distance, semantic models, a two-token threshold, or global exact-match-only behavior.
+
+The additional deterministic evidence contract is `R3-TC-01` through `R3-TC-09` in the [Repair 2 Semantic Finding Disposition](../analysis/ENG-010_R2_SEMANTIC_FINDING_DISPOSITION_2026-08-26.md). Repair 3 must preserve the original `TC-01` through `TC-27`, Repair-1 payload regressions, `R2-TC-01` through `R2-TC-18`, `ENG-010-DV-R001` closure, all accepted upstream behavior, migration immutability, and the full regression command matrix.
+
+Repair 3 must be recreated directly from the Repair 3 governance dispatch commit. Candidate 1, Repair 1, and Repair 2 may not be parent, ancestor, merge, rebase, cherry-pick, or copied implementation ancestry. The fresh Builder identity is `eng-010-builder-repair-3` at `/private/tmp/prj226-eng010-builder-repair-3`.
 
 ## Human Reserved authority disposition
 
