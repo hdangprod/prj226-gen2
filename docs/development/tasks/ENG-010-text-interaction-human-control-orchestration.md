@@ -8,53 +8,33 @@
 
 **Controller planning revision:** 1
 
-**Current task state:** `REPAIR 5 DISPATCHED / NOT YET IMPLEMENTED`
+**Current task state:** `ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFICATION PENDING`
 
 **Formal DoR revision 1:** `PASS`
 
 **READY:** `YES`
 
-**Candidate 1:** `100f730556af7cea0f0a623809627aa3cf49d5a9` — FROZEN / UNACCEPTED / HISTORICAL PROVENANCE ONLY
+**Accepted candidate:** `1650008aa01f152f6aff4bacd9c6d19ab4531545` — ACCEPTED / CANONICALIZED
 
-**Deterministic finding:** `ENG-010-DV-R001` — BLOCKING / ACCEPTED ([Finding Disposition](../analysis/ENG-010_DV_FINDING_DISPOSITION_2026-08-26.md))
+**Accepted tree:** `1ee87d345ee9ceed3bc301dbc9f42b3034655758`
 
-**Repair 1 candidate:** `495f142fa28bebd3be47518fdd7a3b919ea0fcc1` — FROZEN / UNACCEPTED / HISTORICAL PROVENANCE ONLY
+**Deterministic verification:** `PASS` (517 test executions across 16 Vitest configs; clean `git diff --check`)
 
-**Repair 1 deterministic verification:** `PASS`
+**Semantic review:** `GREEN` (0 blocking findings)
 
-**Repair 1 semantic review:** `FINDINGS` — `ENG-010-R1-SR-R001` through `ENG-010-R1-SR-R005` ACCEPTED / BLOCKING ([Semantic Finding Disposition](../analysis/ENG-010_R1_SEMANTIC_FINDING_DISPOSITION_2026-08-26.md))
+**Controller closure:** [ENG-010 Repair 5 Controller Closure](../analysis/ENG-010_REPAIR5_CONTROLLER_CLOSURE_2026-08-27.md)
 
-**Repair 2 candidate:** `d7f4a1ad2c2ad8eb645f49955faaf4e5630c67c6` — FROZEN / UNACCEPTED / HISTORICAL PROVENANCE ONLY
+**Current Builder:** `NONE`
 
-**Repair 2 deterministic verification:** `PASS`
+**Builder authority:** `CONSUMED / NON-OPERATIVE`
 
-**Repair 2 semantic review:** `FINDINGS` — `ENG-010-R2-SR-R001` replaced by `ENG-010-R3-SR-R001`; `ENG-010-R2-SR-R002` CLOSED ([Repair 3 Semantic Finding Disposition](../analysis/ENG-010_R3_SEMANTIC_FINDING_DISPOSITION_2026-08-26.md))
+**Canonical integration:** `CANONICALIZED / FF-ONLY INTEGRATED` into `foundation/product-foundation`
 
-**Repair 3 candidate:** `20f6a71cb9f2e6ef3897f01f26c8f14078dcccfb` — FROZEN / UNACCEPTED / HISTORICAL PROVENANCE ONLY
-
-**Repair 3 deterministic verification:** `PASS`
-
-**Repair 3 semantic review:** `FINDINGS` — `ENG-010-R3-SR-R001` ACCEPTED / BLOCKING; `ENG-010-R2-SR-R002` CLOSED ([Semantic Finding Disposition](../analysis/ENG-010_R3_SEMANTIC_FINDING_DISPOSITION_2026-08-26.md))
-
-**Repair 4 candidate:** `b2cabaf2f339d797d5504ca418eee8f232fa4bdb` — FROZEN / UNACCEPTED / HISTORICAL PROVENANCE ONLY
-
-**Repair 4 deterministic verification:** `INVALIDATED / FINDINGS` — mandatory `RG-21` committed-range check failed
-
-**Repair 4 semantic review:** `FINDINGS` — `ENG-010-R4-SR-R001` and `ENG-010-R4-SR-R002` ACCEPTED / BLOCKING ([Repair 4 Finding Disposition](../analysis/ENG-010_R4_FINDING_DISPOSITION_2026-08-27.md))
-
-**Builder dispatch:** `REPAIR 5 AUTHORIZED / DURABLY RECORDED`
-
-**Current Builder:** `ENG-010 REPAIR 5 BUILDER`
-
-**Planned branch:** `eng-010-builder-repair-5`
-
-**Planned worktree:** `/private/tmp/prj226-eng010-builder-repair-5`
-
-**Builder authority:** `ACTIVE / BOUNDED TO EXACT 11-PATH LOCK`
-
-**Implementation:** `NOT YET STARTED`
+**Post-integration verification:** `PENDING / REQUIRED BEFORE ENG-010 DONE`
 
 **Human Reserved:** `NOT REQUIRED`
+
+**Next required role:** `ENG-010 FRESH INDEPENDENT POST-INTEGRATION VERIFIER`
 
 **Formal DoR evidence:** [ENG-010 Formal Definition of Ready Evaluation — Revision 1](../analysis/ENG-010_FORMAL_DoR_REV1_2026-08-26.md)
 
@@ -384,6 +364,14 @@ Repair 5 preserves the Repair-4 multi-token and bounded exact-ID paths unless ev
 The additional deterministic evidence contract is `R5-TC-01` through `R5-TC-10` in the [Repair 4 Finding Disposition](../analysis/ENG-010_R4_FINDING_DISPOSITION_2026-08-27.md). Repair 5 must preserve all earlier ENG-010 evidence, closed findings, migration immutability, and the full regression command matrix.
 
 Repair 5 must be recreated directly from the Repair 5 governance dispatch commit. Candidate 1 and Repairs 1–4 may not be parent, ancestor, merge, rebase, cherry-pick, or copied implementation ancestry. The fresh Builder identity is `eng-010-builder-repair-5` at `/private/tmp/prj226-eng010-builder-repair-5`.
+
+## Repair 5 acceptance and canonical integration
+
+Repair 5 candidate `1650008aa01f152f6aff4bacd9c6d19ab4531545`, tree `1ee87d345ee9ceed3bc301dbc9f42b3034655758`, aggregate `1430879aba612de7787351a81bdc23c54e0215e848bb654bb65d0d005f0e678f` completed deterministic verification (`PASS`, 517 tests across all 16 Vitest configs; zero whitespace defects) and independent semantic review (`GREEN`, 0 blocking findings).
+
+The Controller formally accepted Repair 5 and canonically integrated it via fast-forward of `foundation/product-foundation`.
+
+Current Builder is `NONE`. Repair 5 implementation authority is consumed and non-operative. Post-integration verification is pending and required before marking `ENG-010` DONE.
 
 ## Human Reserved authority disposition
 

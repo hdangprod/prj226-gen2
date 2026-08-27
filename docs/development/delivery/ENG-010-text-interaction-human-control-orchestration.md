@@ -2,27 +2,27 @@
 
 **Artifact class:** OPERATIONAL
 
-**Lifecycle status:** ACTIVE / REPAIR 5 DISPATCHED
+**Lifecycle status:** ACTIVE / REPAIR 5 ACCEPTED / CANONICALIZED / POST-INTEGRATION PENDING
 
 **Task ID:** `ENG-010`
 
 **Task Packet:** [ENG-010 — Text Interaction and Human-Control Orchestration](../tasks/ENG-010-text-interaction-human-control-orchestration.md) (Revision 1)
 
-**Current lifecycle state:** `REPAIR 5 DISPATCHED / NOT YET IMPLEMENTED`
+**Current lifecycle state:** `ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFICATION PENDING`
 
 **Formal DoR result:** `PASS` (Revision 1)
 
-**Builder dispatch:** `REPAIR 5 AUTHORIZED / DURABLY RECORDED`
+**Builder dispatch:** `REPAIR 5 EXECUTED / ACCEPTED / CONSUMED`
 
-**Current Builder:** `ENG-010 REPAIR 5 BUILDER`
+**Current Builder:** `NONE`
 
-**Planned branch:** `eng-010-builder-repair-5`
+**Planned branch:** `eng-010-builder-repair-5` (historical)
 
-**Planned worktree:** `/private/tmp/prj226-eng010-builder-repair-5`
+**Planned worktree:** `/private/tmp/prj226-eng010-builder-repair-5` (historical)
 
-**Builder authority:** `ACTIVE / BOUNDED TO EXACT 11-PATH LOCK`
+**Builder authority:** `CONSUMED / NON-OPERATIVE`
 
-**Implementation state:** `NOT YET STARTED`
+**Implementation state:** `ACCEPTED IMPLEMENTATION CANONICALIZED`
 
 **Human Reserved:** `NOT REQUIRED`
 
@@ -180,41 +180,43 @@ Prior Repair 1 semantic status after Repair 2 review: `R001` CLOSED; `R002` CLOS
 | Canonical integration | NOT AUTHORIZED |
 | Finding record | [Repair 4 Finding Disposition](../analysis/ENG-010_R4_FINDING_DISPOSITION_2026-08-27.md) |
 
-## Repair 5 Dispatch
+## Repair 5 — Passed Deterministic Verification and Semantic Review (Accepted)
 
 | Property | Value |
 |---|---|
-| Repair | REPAIR 5 AUTHORIZED / DURABLY DISPATCHED |
-| Objectives | `R5-O1`, `R5-O2` |
-| Regression contract | `R5-TC-01` through `R5-TC-10` plus all existing ENG-010 evidence |
-| Task Packet | Revision 1 remains operative; no Revision 2 |
-| Write lock | Same exact 11 paths |
-| Human Reserved | NOT REQUIRED |
-| Ancestry rule | Candidate 1 and Repairs 1–4 must NOT be Repair 5 parent or ancestor |
-| Builder branch | `eng-010-builder-repair-5` |
-| Builder worktree | `/private/tmp/prj226-eng010-builder-repair-5` |
-| Current Builder | ENG-010 REPAIR 5 BUILDER |
-| Implementation | NOT YET STARTED |
+| Candidate commit | `1650008aa01f152f6aff4bacd9c6d19ab4531545` |
+| Candidate tree | `1ee87d345ee9ceed3bc301dbc9f42b3034655758` |
+| Candidate sole parent | `36eaf2f1d9678d80c282b413f02892765455eec4` |
+| Candidate distance from dispatch | 1 (direct descendant) |
+| Candidate aggregate | `1430879aba612de7787351a81bdc23c54e0215e848bb654bb65d0d005f0e678f` |
+| Migration Git blob | `5a50e2b216f824ff02ebf09e803a6c25a43bcfe0` |
+| Migration SHA-256 | `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99` |
+| Deterministic verification | `PASS` (517 test executions across 16 Vitest configs; clean `git diff --check`) |
+| Semantic review | `GREEN` (R5-O1 and R5-O2 resolved; independent corroboration verified; 0 blocking findings) |
+| Controller disposition | `ACCEPTED` |
+| Canonical integration | `CANONICALIZED / FF-ONLY INTEGRATED` into `foundation/product-foundation` |
+| Post-integration verification | `PENDING / REQUIRED BEFORE ENG-010 DONE` |
+| Finding record | [Repair 5 Controller Closure](../analysis/ENG-010_REPAIR5_CONTROLLER_CLOSURE_2026-08-27.md) |
 
 ## Execution status
 
 - **READY:** `YES`
 - **Formal DoR:** `PASS`
-- **Dispatch:** `REPAIR 5 AUTHORIZED / DURABLY RECORDED`
+- **Dispatch:** `REPAIR 5 EXECUTED / CONSUMED`
 - **Candidate 1:** `100f730556af7cea0f0a623809627aa3cf49d5a9` — FROZEN / UNACCEPTED / HISTORICAL
-- **ENG-010-DV-R001:** BLOCKING / ACCEPTED
-- **Repair 1:** `495f142fa28bebd3be47518fdd7a3b919ea0fcc1` — DETERMINISTIC PASS / SEMANTIC FINDINGS / FROZEN / UNACCEPTED / HISTORICAL
-- **Repair 1 semantic final status:** R001 CLOSED; R002 CLOSED; R003 REPLACED BY R2-SR-R001; R004 CLOSED; R005 REPLACED BY R2-SR-R002
-- **Repair 2:** `d7f4a1ad2c2ad8eb645f49955faaf4e5630c67c6` — DETERMINISTIC PASS / SEMANTIC FINDINGS / FROZEN / UNACCEPTED / HISTORICAL
-- **Repair 2 semantic findings:** `ENG-010-R2-SR-R001` — REPLACED BY `ENG-010-R3-SR-R001`; `ENG-010-R2-SR-R002` — CLOSED
-- **Repair 3:** `20f6a71cb9f2e6ef3897f01f26c8f14078dcccfb` — DETERMINISTIC PASS / SEMANTIC FINDINGS / FROZEN / UNACCEPTED / HISTORICAL
-- **Repair 3 semantic finding:** `ENG-010-R3-SR-R001` — ACCEPTED / BLOCKING; `ENG-010-R2-SR-R002` — CLOSED
-- **Repair 4:** `b2cabaf2f339d797d5504ca418eee8f232fa4bdb` — DETERMINISTIC INVALIDATED / SEMANTIC FINDINGS / FROZEN / UNACCEPTED / HISTORICAL
-- **Repair 4 findings:** `ENG-010-R4-SR-R001`, `ENG-010-R4-SR-R002` — ACCEPTED / BLOCKING
-- **Current Builder:** `ENG-010 REPAIR 5 BUILDER`
-- **Builder branch:** `eng-010-builder-repair-5`
-- **Builder worktree:** `/private/tmp/prj226-eng010-builder-repair-5`
-- **Builder authority:** `ACTIVE / BOUNDED TO EXACT 11-PATH LOCK`
-- **Implementation:** `NOT YET STARTED`
+- **ENG-010-DV-R001:** CLOSED
+- **Repair 1:** `495f142fa28bebd3be47518fdd7a3b919ea0fcc1` — FROZEN / UNACCEPTED / HISTORICAL
+- **Repair 2:** `d7f4a1ad2c2ad8eb645f49955faaf4e5630c67c6` — FROZEN / UNACCEPTED / HISTORICAL
+- **Repair 2 semantic findings:** `ENG-010-R2-SR-R001` CLOSED; `ENG-010-R2-SR-R002` CLOSED
+- **Repair 3:** `20f6a71cb9f2e6ef3897f01f26c8f14078dcccfb` — FROZEN / UNACCEPTED / HISTORICAL
+- **Repair 3 semantic finding:** `ENG-010-R3-SR-R001` CLOSED
+- **Repair 4:** `b2cabaf2f339d797d5504ca418eee8f232fa4bdb` — FROZEN / UNACCEPTED / HISTORICAL
+- **Repair 4 findings:** `ENG-010-R4-SR-R001` CLOSED; `ENG-010-R4-SR-R002` CLOSED
+- **Repair 5 candidate:** `1650008aa01f152f6aff4bacd9c6d19ab4531545` — DETERMINISTIC PASS / SEMANTIC REVIEW GREEN / ACCEPTED
+- **Current Builder:** `NONE`
+- **Builder authority:** `CONSUMED / NON-OPERATIVE`
+- **Canonical integration:** `CANONICALIZED / FF-ONLY INTEGRATED` into `foundation/product-foundation`
+- **Post-integration verification:** `PENDING / REQUIRED BEFORE ENG-010 DONE`
 - **Human Reserved:** `NOT REQUIRED`
-- **Next required role:** `ENG-010 REPAIR 5 BUILDER`
+- **Push:** `NOT PERFORMED`
+- **Next required role:** `ENG-010 FRESH INDEPENDENT POST-INTEGRATION VERIFIER`

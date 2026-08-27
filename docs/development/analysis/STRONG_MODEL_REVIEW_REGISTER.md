@@ -591,3 +591,14 @@ UNRESOLVED (Strong-model review confirms: LIVE CALLS PROHIBITED IN ENG-009; RESE
 - Controller Final Closure returned `APPROVE`; `ENG-007-SR-R001`, `ENG-007-SR-R002-R1`, `ENG-007-SR-R002-R2`, and `ENG-007-SR-R003` are closed; Repair 6 candidate is accepted; ENG-007 is `DONE`.
 - Canonical branch `foundation/product-foundation` fast-forwarded to accepted candidate `e6b5f271d308fbac7e48667943005758efaf6d8b`.
 - Current Builder is `NONE`; implementation authority is consumed and non-operative.
+
+## ENG-010 Repair 5 closure chronology — 2026-08-27
+
+- Historical failed candidates Candidate 1 (`100f7305...`), Repair 1 (`495f142f...`), Repair 2 (`d7f4a1ad...`), Repair 3 (`20f6a71c...`), and Repair 4 (`b2cabaf2...`) remain frozen, unaccepted historical evidence. None enters canonical ancestry.
+- Repair 5 Builder candidate `1650008aa01f152f6aff4bacd9c6d19ab4531545`, tree `1ee87d345ee9ceed3bc301dbc9f42b3034655758`, aggregate `1430879aba612de7787351a81bdc23c54e0215e848bb654bb65d0d005f0e678f` was produced directly from dispatch base commit `36eaf2f1d9678d80c282b413f02892765455eec4`.
+- Independent deterministic verification returned `ENG-010 REPAIR 5 DETERMINISTIC VERIFICATION: PASS` (517 test executions across all 16 Vitest configs; `git diff --check` exited 0 with empty output; RG-01 through RG-21 passed).
+- Independent semantic review returned `ENG-010 REPAIR 5 SEMANTIC REVIEW: GREEN`, confirming `ENG-010-R4-SR-R001` (independent corroboration without token self-corroboration) and `ENG-010-R4-SR-R002` (whitespace defect) are resolved.
+- Controller Final Closure returned `APPROVE`; all findings `ENG-010-DV-R001`, `ENG-010-R2-SR-R002`, `ENG-010-R4-SR-R001`, and `ENG-010-R4-SR-R002` are closed; Repair 5 candidate is accepted.
+- Canonical branch `foundation/product-foundation` fast-forwarded to accepted candidate `1650008aa01f152f6aff4bacd9c6d19ab4531545`.
+- Current Builder is `NONE`; implementation authority is consumed and non-operative.
+- Post-integration verification: `PENDING / REQUIRED BEFORE ENG-010 DONE`.
