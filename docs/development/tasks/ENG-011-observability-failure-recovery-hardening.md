@@ -8,23 +8,29 @@
 
 **Controller planning revision:** 1
 
-**Current task state:** `READY / NOT DISPATCHED / NOT IMPLEMENTED`
+**Current task state:** `READY / DISPATCHED / NOT YET IMPLEMENTED`
 
 **Formal DoR revision 1:** `PASS`
 
 **READY:** `YES`
 
-**Current Builder:** `NONE`
+**Current Builder:** `ENG-011 BUILDER`
 
-**Builder authority:** `NOT DISPATCHED / NON-OPERATIVE`
+**Builder authority:** `ACTIVE / BOUNDED TO THE EXACT 12-PATH WRITE LOCK`
 
-**Implementation:** `NOT STARTED`
+**Implementation:** `NOT YET STARTED`
 
 **Human Reserved:** `NOT REQUIRED`
 
 **Migration:** `NO MIGRATION`
 
-**Next required role:** `ENG-011 CONTROLLER — DURABLE READY / BUILDER DISPATCH`
+**Next required role:** `ENG-011 BUILDER`
+
+**Builder branch:** `eng-011-builder`
+
+**Builder worktree:** `/private/tmp/prj226-eng011-builder`
+
+**Durable dispatch:** `AUTHORIZED`; the governance commit containing this record is the sole dispatch authority
 
 **Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 1](../analysis/ENG-011_FORMAL_DoR_REV1_2026-08-27.md)
 
@@ -35,6 +41,14 @@
 **Planning authority base tree:** `f34715ee545fc1210caa54ed2f6681c067e2013a`
 
 **Governing contract:** [Delivery Contract revision 1](../../../development/DELIVERY_CONTRACT.md)
+
+## Durable Builder dispatch
+
+The Controller has authorized one Standard Delivery Builder from the governance commit containing this section. The dispatch consumes Task Packet revision 1 and Formal DoR revision 1 `PASS`; all findings `ENG-011-DOR-R001` through `R006` are `CLOSED`.
+
+The Builder receives exclusive write authority only for the exact 12 paths below. Recovery scope is classification and evidence only. Retry remains an explicit caller/user action; automatic authoritative mutation retry, rollback, compensation, fallback, queues, and recovery orchestration are prohibited. DATA-001 prohibits user content, Knowledge content, model output, raw errors, stacks, SQL, headers, credentials, and provider-private data in operational evidence. The implementation remains provider-neutral and Cloudflare-native inside the existing deployable; no Sentry, OpenTelemetry, external telemetry service, new service, Worker, queue, schema, persistence, SLO, deployment, or paid/production action is authorized.
+
+Migration remains `NO MIGRATION`; `migrations/0001_authoritative_state.sql` is locked to Git blob `5a50e2b216f824ff02ebf09e803a6c25a43bcfe0` and SHA-256 `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`. Worktree provisioning and a clean startup audit do not start implementation.
 
 ## Task ID and objective
 
@@ -318,7 +332,7 @@ Result is `REVIEW GREEN` or structured findings. Any security/authority boundary
 
 - **Risk:** HIGH — security/data minimization, operability semantics, truthfulness, and broad cross-layer observation.
 - **Planner / Controller:** owns authority, readiness, exact lock, finding routing, and candidate state.
-- **Builder:** one Standard Delivery writer with exclusive ownership of the 12 paths above after a separate durable dispatch.
+- **Builder:** one Standard Delivery writer, now durably dispatched with exclusive ownership of the 12 paths above.
 - **Deterministic Verifier:** read-only and exact-candidate bound.
 - **Independent Reviewer:** independent of Builder; Strong Semantic Reasoning for security, operability, Human Control, provider isolation, and accepted-state truthfulness.
 - **Concurrency:** one writer; no overlapping source/test writer. Read-only verification/review only under evidence and independence controls.
@@ -344,7 +358,7 @@ ENG-011 becomes `DONE` only when:
 9. Controller final closure accepts the candidate; and
 10. current Builder returns to `NONE` and execution authority is consumed.
 
-Task Packet `READY` does not dispatch a Builder and does not establish implementation or completion.
+Task Packet `READY` alone does not dispatch a Builder or establish implementation or completion. The separate durable Controller dispatch recorded above now authorizes the Builder; implementation remains not yet started.
 
 ## Prior planning findings
 

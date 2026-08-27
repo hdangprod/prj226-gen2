@@ -10,9 +10,14 @@
 - Task Packet: [ENG-011 Task Packet Revision 1](../tasks/ENG-011-observability-failure-recovery-hardening.md)
 - Formal DoR Result: `PASS` ([Formal DoR Revision 1](ENG-011_FORMAL_DoR_REV1_2026-08-27.md))
 - Finding Status: `ENG-011-DOR-R001` through `R006 CLOSED`
-- Task State: `READY / NOT DISPATCHED / NOT IMPLEMENTED`
-- Current Builder: `NONE`
-- Builder Authority: `NOT DISPATCHED / NON-OPERATIVE`
+- Task State: `READY / DISPATCHED / NOT YET IMPLEMENTED`
+- Dispatch Status: `AUTHORIZED / DURABLY RECORDED`
+- Delivery Record: [ENG-011 Delivery Record](../delivery/ENG-011-observability-failure-recovery-hardening.md)
+- Current Builder: `ENG-011 BUILDER`
+- Builder Authority: `ACTIVE / BOUNDED TO THE EXACT 12-PATH WRITE LOCK`
+- Builder Branch: `eng-011-builder`
+- Builder Worktree: `/private/tmp/prj226-eng011-builder`
+- Implementation State: `NOT YET STARTED`
 - Migration: `NO MIGRATION`
 - Human Reserved: `NOT REQUIRED`
 
