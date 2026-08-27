@@ -3,21 +3,29 @@
 **Artifact class:** OPERATIONAL / REGISTER
 **Authority:** NON-CANONICAL
 **Lifecycle:** ACTIVE
-**Last updated:** 2026-08-26
+**Last updated:** 2026-08-27
 **Purpose:** Comprehensive register of unresolved, inferred, or disputed engineering design issues requiring stronger-model adjudication before task dispatch.
+
+**ENG-011 Lifecycle Status:**
+- Task Packet: [ENG-011 Task Packet Revision 1](../tasks/ENG-011-observability-failure-recovery-hardening.md)
+- Formal DoR Result: `PASS` ([Formal DoR Revision 1](ENG-011_FORMAL_DoR_REV1_2026-08-27.md))
+- Finding Status: `ENG-011-DOR-R001` through `R006 CLOSED`
+- Task State: `READY / NOT DISPATCHED / NOT IMPLEMENTED`
+- Current Builder: `NONE`
+- Builder Authority: `NOT DISPATCHED / NON-OPERATIVE`
+- Migration: `NO MIGRATION`
+- Human Reserved: `NOT REQUIRED`
 
 **ENG-010 Lifecycle Status:**
 - Task Packet: [ENG-010 Task Packet Revision 1](../tasks/ENG-010-text-interaction-human-control-orchestration.md)
 - Formal DoR Result: `PASS` ([Formal DoR Revision 1](ENG-010_FORMAL_DoR_REV1_2026-08-26.md))
 - Finding Status: `ENG-010-DOR-R001 INVALID / RETRACTED`; `ENG-010-DOR-R002` through `R006 CLOSED`
-- Task State: `READY / DISPATCHED / NOT YET IMPLEMENTED`
+- Task State: `DONE / ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFIED / GOVERNANCE-CLOSED`
 - Delivery Record: [ENG-010 Delivery Record](../delivery/ENG-010-text-interaction-human-control-orchestration.md)
-- Dispatch Status: `AUTHORIZED / DURABLY RECORDED`
-- Current Builder: `ENG-010 BUILDER`
-- Planned Branch: `eng-010-builder`
-- Planned Worktree: `/private/tmp/prj226-eng010-builder`
-- Builder Authority: `ACTIVE / BOUNDED TO EXACT 11-PATH LOCK`
-- Implementation State: `NOT YET STARTED`
+- Dispatch Status: `CONSUMED / COMPLETE`
+- Current Builder: `NONE`
+- Builder Authority: `CONSUMED / NON-OPERATIVE`
+- Implementation State: `COMPLETE / ACCEPTED`
 - Human Reserved: `NOT REQUIRED`
 
 **ENG-009 Lifecycle Status:**
