@@ -2,13 +2,13 @@
 
 **Artifact class:** OPERATIONAL
 
-**Lifecycle status:** ACTIVE / REPAIR 5 ACCEPTED / CANONICALIZED / POST-INTEGRATION PENDING
+**Lifecycle status:** COMPLETE / DONE
 
 **Task ID:** `ENG-010`
 
 **Task Packet:** [ENG-010 — Text Interaction and Human-Control Orchestration](../tasks/ENG-010-text-interaction-human-control-orchestration.md) (Revision 1)
 
-**Current lifecycle state:** `ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFICATION PENDING`
+**Current lifecycle state:** `DONE / ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFIED / GOVERNANCE-CLOSED`
 
 **Formal DoR result:** `PASS` (Revision 1)
 
@@ -195,8 +195,8 @@ Prior Repair 1 semantic status after Repair 2 review: `R001` CLOSED; `R002` CLOS
 | Semantic review | `GREEN` (R5-O1 and R5-O2 resolved; independent corroboration verified; 0 blocking findings) |
 | Controller disposition | `ACCEPTED` |
 | Canonical integration | `CANONICALIZED / FF-ONLY INTEGRATED` into `foundation/product-foundation` |
-| Post-integration verification | `PENDING / REQUIRED BEFORE ENG-010 DONE` |
-| Finding record | [Repair 5 Controller Closure](../analysis/ENG-010_REPAIR5_CONTROLLER_CLOSURE_2026-08-27.md) |
+| Post-integration verification | `PASS` (517 test executions across 16 Vitest configs; zero whitespace defects; full toolchain and regression matrix passed) |
+| Controller final closure | `APPROVE / DONE` ([Post-Integration Controller Final Closure](../analysis/ENG-010_POST_INTEGRATION_CONTROLLER_FINAL_CLOSURE_2026-08-27.md)) |
 
 ## Execution status
 
@@ -216,7 +216,7 @@ Prior Repair 1 semantic status after Repair 2 review: `R001` CLOSED; `R002` CLOS
 - **Current Builder:** `NONE`
 - **Builder authority:** `CONSUMED / NON-OPERATIVE`
 - **Canonical integration:** `CANONICALIZED / FF-ONLY INTEGRATED` into `foundation/product-foundation`
-- **Post-integration verification:** `PENDING / REQUIRED BEFORE ENG-010 DONE`
+- **Post-integration verification:** `PASS`
 - **Human Reserved:** `NOT REQUIRED`
 - **Push:** `NOT PERFORMED`
-- **Next required role:** `ENG-010 FRESH INDEPENDENT POST-INTEGRATION VERIFIER`
+- **Next project step:** Prepare and evaluate `ENG-011` (Observability and failure/recovery hardening) Task Packet and Formal Definition of Ready (DoR)

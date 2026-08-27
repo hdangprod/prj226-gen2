@@ -2,7 +2,7 @@
 
 **Artifact class:** OPERATIONAL / CONTROLLER CLOSURE
 
-**Lifecycle status:** ACTIVE / CANONICALIZED / POST-INTEGRATION VERIFICATION PENDING
+**Lifecycle status:** HISTORICAL / SUPERSEDED BY FINAL DONE CLOSURE
 
 **Date:** 2026-08-27
 
@@ -18,7 +18,7 @@ The Controller formally approved and accepted the exact Repair 5 implementation 
 
 `ENG-010 REPAIR 5: ACCEPTED`
 
-`ENG-010: CANONICALIZED / POST-INTEGRATION VERIFICATION PENDING`
+`ENG-010: CANONICALIZED / POST-INTEGRATION VERIFICATION COMPLETE` (see [Final Done Closure](ENG-010_POST_INTEGRATION_CONTROLLER_FINAL_CLOSURE_2026-08-27.md))
 
 | Identity | Value |
 | --- | --- |
@@ -71,10 +71,10 @@ Current Builder is `NONE`. Repair 5 execution authority is `CONSUMED / NON-OPERA
 - Canonical integration: `CANONICALIZED / FF-ONLY INTEGRATED`.
 - Canonical branch: `foundation/product-foundation` fast-forwarded from `36eaf2f1d9678d80c282b413f02892765455eec4` directly to accepted candidate `1650008aa01f152f6aff4bacd9c6d19ab4531545`.
 - Governance closure commit: committed directly on top of `1650008aa01f152f6aff4bacd9c6d19ab4531545`.
-- Post-integration verification: `PENDING / REQUIRED BY DELIVERY CONTRACT BEFORE MARKING ENG-010 DONE`.
+- Post-integration verification: `COMPLETE / PASS` (see [Final Done Closure](ENG-010_POST_INTEGRATION_CONTROLLER_FINAL_CLOSURE_2026-08-27.md)).
 - Push: `NOT PERFORMED`.
 - Human Reserved: `NOT REQUIRED`.
 
 ## Next project step
 
-`NEXT REQUIRED ROLE: ENG-010 FRESH INDEPENDENT POST-INTEGRATION VERIFIER`
+`NEXT REQUIRED ROLE: NONE (ENG-010 final closure complete)`

@@ -2,13 +2,13 @@
 
 **Artifact class:** OPERATIONAL
 
-**Lifecycle status:** ACTIVE
+**Lifecycle status:** COMPLETE / DONE
 
 **Task Packet revision:** 1
 
 **Controller planning revision:** 1
 
-**Current task state:** `ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFICATION PENDING`
+**Current task state:** `DONE / ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFIED / GOVERNANCE-CLOSED`
 
 **Formal DoR revision 1:** `PASS`
 
@@ -30,11 +30,11 @@
 
 **Canonical integration:** `CANONICALIZED / FF-ONLY INTEGRATED` into `foundation/product-foundation`
 
-**Post-integration verification:** `PENDING / REQUIRED BEFORE ENG-010 DONE`
+**Post-integration verification:** `PASS` (517 test executions across 16 Vitest configs; zero whitespace defects; full toolchain and regression matrix passed)
 
 **Human Reserved:** `NOT REQUIRED`
 
-**Next required role:** `ENG-010 FRESH INDEPENDENT POST-INTEGRATION VERIFIER`
+**Next required role:** `NONE (ENG-010 is complete)`
 
 **Formal DoR evidence:** [ENG-010 Formal Definition of Ready Evaluation — Revision 1](../analysis/ENG-010_FORMAL_DoR_REV1_2026-08-26.md)
 
@@ -371,7 +371,7 @@ Repair 5 candidate `1650008aa01f152f6aff4bacd9c6d19ab4531545`, tree `1ee87d345ee
 
 The Controller formally accepted Repair 5 and canonically integrated it via fast-forward of `foundation/product-foundation`.
 
-Current Builder is `NONE`. Repair 5 implementation authority is consumed and non-operative. Post-integration verification is pending and required before marking `ENG-010` DONE.
+Current Builder is `NONE`. Repair 5 implementation authority is consumed and non-operative. Independent post-integration canonical verification passed on canonical closure commit `adb39f5936b264b14970df1a449741a82e3dcedb`. Controller completed final DONE closure ([Post-Integration Controller Final Closure](../analysis/ENG-010_POST_INTEGRATION_CONTROLLER_FINAL_CLOSURE_2026-08-27.md)). `ENG-010` is `DONE`.
 
 ## Human Reserved authority disposition
 
