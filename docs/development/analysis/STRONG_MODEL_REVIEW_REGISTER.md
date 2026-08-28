@@ -8,17 +8,17 @@
 
 **ENG-011 Lifecycle Status:**
 - Task Packet: [ENG-011 Task Packet Revision 2](../tasks/ENG-011-observability-failure-recovery-hardening.md)
-- Formal DoR Result: `RE-RUN REQUIRED FOR REVISION 2`; revision 1 `PASS` remains historical for its prior scope
+- Formal DoR Result: [Revision 2](ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS`; revision 1 `PASS` remains historical for its prior scope
 - Finding Status: `ENG-011-DOR-R001` through `R006 CLOSED` historically; `ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART`; `ENG-011-R2-SOR-R001` through `R009 ACCEPTED / BLOCKING / OPEN FOR FUTURE REPAIR 3` ([Controller Disposition](ENG-011_REPAIR2_SOR_FINDING_DISPOSITION_2026-08-28.md))
-- Task State: `PROPOSED / REVISED REPAIR-3 SCOPE / FORMAL DoR REQUIRED`
+- Task State: `READY FOR CONTROLLER DISPATCH / REPAIR 3 NOT YET DISPATCHED`
 - Original Builder: `ABORTED / STARTUP CONTAMINATED / NO CANDIDATE / NON-OPERATIVE` (`eng-011-builder`, `/private/tmp/prj226-eng011-builder` preserved)
-- Dispatch Status: `NONE / REPAIR 3 NOT YET AUTHORIZED`
+- Dispatch Status: `NONE / REPAIR 3 READY FOR CONTROLLER DISPATCH`
 - Delivery Record: [ENG-011 Delivery Record](../delivery/ENG-011-observability-failure-recovery-hardening.md)
 - Current Builder: `NONE`
 - Builder Authority: `NONE`
 - Builder Branch: `NONE`
 - Builder Worktree: `NONE`
-- Implementation State: `REPAIR-2 CANDIDATE FROZEN / REPAIR 3 NOT YET AUTHORIZED`
+- Implementation State: `REPAIR-2 CANDIDATE FROZEN / REPAIR 3 NOT STARTED`
 - Migration: `NO MIGRATION`
 - Human Reserved: `NOT REQUIRED`
 
@@ -625,5 +625,5 @@ UNRESOLVED (Strong-model review confirms: LIVE CALLS PROHIBITED IN ENG-009; RESE
 - Fresh independent security/operability/semantic review returned `FINDINGS` with nine blocking findings, `ENG-011-R2-SOR-R001` through `R009`.
 - Controller adjudication accepted all nine findings and froze Repair 2 as unaccepted historical evidence.
 - R006 established that the persistence port retains `committed` versus `already-committed`, but both accepted mutation services erase the distinction before orchestration. Truthful duplicate evidence requires the shared accepted-result contract, both service sources, and four focused unit/local-D1 regression paths.
-- The original twelve-path lock is insufficient. Task Packet revision 2 proposes an exact nineteen-path Repair-3 scope; Formal DoR must be re-run; READY is `NO`; Repair 3 is not authorized; Builder is `NONE`.
+- The original twelve-path lock was insufficient. Task Packet revision 2 has an exact nineteen-path Repair-3 scope; Formal DoR revision 2 is `PASS`; READY is `YES`; Repair 3 is ready for Controller dispatch but not yet dispatched; Builder is `NONE`.
 - Human Reserved remains `NOT REQUIRED`; migration remains unchanged; no push was performed.

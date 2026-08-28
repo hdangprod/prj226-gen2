@@ -2,17 +2,17 @@
 
 **Artifact class:** OPERATIONAL
 
-**Lifecycle status:** ACTIVE / REVISED SCOPE PENDING DoR
+**Lifecycle status:** ACTIVE / READY FOR CONTROLLER DISPATCH
 
 **Task ID:** `ENG-011`
 
 **Task Packet:** [ENG-011 — Observability and Failure/Recovery Hardening](../tasks/ENG-011-observability-failure-recovery-hardening.md) (Revision 2)
 
-**Formal DoR:** `RE-RUN REQUIRED FOR REVISION 2`; [Revision 1](../analysis/ENG-011_FORMAL_DoR_REV1_2026-08-27.md) `PASS` remains historical for its exact prior scope
+**Formal DoR:** [Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS`; revision 1 remains historical for its exact prior scope
 
-**Current lifecycle state:** `PROPOSED / REVISED REPAIR-3 SCOPE / FORMAL DoR REQUIRED`
+**Current lifecycle state:** `READY FOR CONTROLLER DISPATCH / REPAIR 3 NOT YET DISPATCHED`
 
-**Builder dispatch:** `NONE / REPAIR 3 NOT YET AUTHORIZED`
+**Builder dispatch:** `NONE / REPAIR 3 READY FOR CONTROLLER DISPATCH`
 
 **Current Builder:** `NONE`
 
@@ -22,7 +22,7 @@
 
 **Builder authority:** `NONE`
 
-**Implementation state:** `REPAIR-2 CANDIDATE FROZEN / REPAIR 3 NOT YET AUTHORIZED`
+**Implementation state:** `REPAIR-2 CANDIDATE FROZEN / REPAIR 3 NOT STARTED`
 
 **Human Reserved:** `NOT REQUIRED`
 
@@ -59,7 +59,7 @@
 | Repair 2 deterministic verification | `PASS` — historical exact-candidate fact |
 | Repair 2 independent S/O/S review | `FINDINGS` — nine blocking findings `ENG-011-R2-SOR-R001` through `R009` |
 | Repair 2 disposition | `FROZEN / UNACCEPTED / HISTORICAL EVIDENCE ONLY / NON-CANONICAL` ([Controller Disposition](../analysis/ENG-011_REPAIR2_SOR_FINDING_DISPOSITION_2026-08-28.md)) |
-| Repair 3 | `NOT YET AUTHORIZED / REVISED DoR REQUIRED` |
+| Repair 3 | `READY FOR CONTROLLER DISPATCH / NOT YET DISPATCHED` |
 | Push | Not authorized / not performed |
 
 ## Historical Repair-2 write lock
@@ -95,7 +95,7 @@ Task Packet revision 2 proposes the original twelve paths plus exactly seven ups
 6. `tests/integration/d1/projectActionContext/projectActionContextPersistence.test.ts`
 7. `tests/integration/d1/knowledgeProvenance/wranglerLocalD1.test.ts`
 
-This is a proposed nineteen-path lock, not active Builder authority. Revised Formal DoR must pass before READY or dispatch. The persistence port, D1 adapter, schema, migrations, Product/Domain semantics, Human Control, provider boundary, and architecture remain unchanged.
+This is an operative nineteen-path Ready lock, not active Builder authority. Formal DoR revision 2 passed; a separate Controller dispatch remains required. The persistence port, D1 adapter, schema, migrations, Product/Domain semantics, Human Control, provider boundary, and architecture remain unchanged.
 
 ## Bounded implementation authority
 
@@ -107,7 +107,7 @@ This is a proposed nineteen-path lock, not active Builder authority. Revised For
 
 ## Readiness disposition
 
-Current Builder is `NONE`. Repair 3 is `NOT YET AUTHORIZED`; no Repair-3 branch or worktree is provisioned. Formal DoR must evaluate Task Packet revision 2, the exact nineteen-path proposal, R001-R009 obligations, upstream regression scope, and strict failed-candidate non-ancestry/byte-isolation rules.
+Current Builder is `NONE`. Repair 3 is Ready for Controller dispatch but not yet dispatched; no Repair-3 branch or worktree is provisioned. Formal DoR revision 2 passed for the exact nineteen-path lock, R001-R009 obligations, upstream regression scope, and strict failed-candidate non-ancestry/byte-isolation rules.
 
 ## Future Repair-3 candidate evidence
 

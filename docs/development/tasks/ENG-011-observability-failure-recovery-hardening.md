@@ -8,23 +8,23 @@
 
 **Controller planning revision:** 2
 
-**Current task state:** `PROPOSED / REVISED REPAIR-3 SCOPE / FORMAL DoR REQUIRED`
+**Current task state:** `READY FOR CONTROLLER DISPATCH / REPAIR 3 NOT YET DISPATCHED`
 
-**Formal DoR:** `RE-RUN REQUIRED FOR REVISION 2`; revision 1 `PASS` remains historical for the superseded twelve-path execution scope
+**Formal DoR:** [Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS`; revision 1 `PASS` remains historical for the superseded twelve-path execution scope
 
-**READY:** `NO — PENDING REVISED DoR`
+**READY:** `YES — PENDING CONTROLLER DISPATCH ONLY`
 
 **Current Builder:** `NONE`
 
-**Builder authority:** `NONE / REPAIR 3 NOT YET AUTHORIZED`
+**Builder authority:** `NONE / REPAIR 3 NOT YET DISPATCHED`
 
-**Implementation:** `REPAIR-2 CANDIDATE FROZEN / REPAIR 3 NOT YET AUTHORIZED`
+**Implementation:** `REPAIR-2 CANDIDATE FROZEN / REPAIR 3 NOT STARTED`
 
 **Human Reserved:** `NOT REQUIRED`
 
 **Migration:** `NO MIGRATION`
 
-**Next required role:** `ENG-011 FORMAL DoR — REVISED REPAIR-3 SCOPE`
+**Next required role:** `ENG-011 CONTROLLER — REPAIR 3 BUILDER DISPATCH`
 
 **Builder branch:** `NONE`
 
@@ -32,7 +32,7 @@
 
 **Durable dispatch:** `NONE`; prior execution authorities are consumed or revoked and Repair 3 is not dispatched
 
-**Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 1](../analysis/ENG-011_FORMAL_DoR_REV1_2026-08-27.md)
+**Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md)
 
 **Repair-2 finding disposition:** [Controller S/O/S Finding Disposition](../analysis/ENG-011_REPAIR2_SOR_FINDING_DISPOSITION_2026-08-28.md)
 
@@ -50,7 +50,7 @@ Repair-2 candidate `49990f306ee67b62ae017f0d63fa556bde06d23a`, tree `b08c1f9d8ff
 
 Revision 2 makes the smallest planning change needed for a future Repair 3: it binds those nine repair obligations and expands the proposed write lock from twelve to nineteen exact paths because the accepted Project/Action/context/progress and Knowledge services currently erase persistence `committed` versus `already-committed` before the result reaches interaction orchestration. No truthful orchestrator-only reconstruction exists. The persistence port and D1 adapter already retain the distinction and remain protected.
 
-This revision changes execution scope and therefore invalidates revision-1 DoR as authority for a future repair. It does not dispatch a Builder. Formal DoR must independently verify the revised scope, tests, isolation, and provenance before READY may return to YES.
+This revision changed execution scope and invalidated revision-1 DoR as future-repair authority. Formal DoR revision 2 independently verified the revised scope, tests, isolation, and provenance and returned `PASS`. This packet is operative and Ready, but does not dispatch a Builder.
 
 The revision changes no Product, Domain, Human Control, Runtime Architecture, provider, deployment, recovery, retry, or persistence-schema semantics. Human Reserved remains `NOT REQUIRED`; migration remains `NO MIGRATION`.
 
@@ -403,8 +403,8 @@ ENG-011 becomes `DONE` only when:
 9. Controller final closure accepts the candidate; and
 10. current Builder returns to `NONE` and execution authority is consumed.
 
-Task Packet revision 2 is not Ready and dispatches no Builder. A future revised DoR `PASS`, READY `YES`, and separate durable Controller dispatch are all required before Repair-3 implementation may start.
+Task Packet revision 2 is operative and Ready but dispatches no Builder. A separate durable Controller dispatch remains required before Repair-3 implementation may start.
 
 ## Prior planning findings
 
-`ENG-011-DOR-R001` through `ENG-011-DOR-R006` remain closed historical findings for revision 1 in the [Formal DoR evidence](../analysis/ENG-011_FORMAL_DoR_REV1_2026-08-27.md). Revision 2 changes the exact write scope and adds accepted findings `ENG-011-R2-SOR-R001` through `R009`; a new Formal DoR evaluation is required before readiness or dispatch.
+`ENG-011-DOR-R001` through `ENG-011-DOR-R006` remain closed historical findings for revision 1. Revision 2 binds accepted findings `ENG-011-R2-SOR-R001` through `R009`; [Formal DoR revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) is `PASS`. The findings remain open for Repair-3 implementation and independent recheck; readiness does not close them or dispatch a Builder.
