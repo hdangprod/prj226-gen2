@@ -2,7 +2,7 @@
 
 **Artifact class:** OPERATIONAL
 
-**Lifecycle status:** ACTIVE / READY FOR CONTROLLER DISPATCH
+**Lifecycle status:** ACTIVE / REPAIR 3 DISPATCHED
 
 **Task ID:** `ENG-011`
 
@@ -10,17 +10,17 @@
 
 **Formal DoR:** [Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS`; revision 1 remains historical for its exact prior scope
 
-**Current lifecycle state:** `READY FOR CONTROLLER DISPATCH / REPAIR 3 NOT YET DISPATCHED`
+**Current lifecycle state:** `AUTHORIZED / REPAIR 3 DISPATCHED`
 
-**Builder dispatch:** `NONE / REPAIR 3 READY FOR CONTROLLER DISPATCH`
+**Builder dispatch:** `AUTHORIZED / REPAIR 3 DURABLY DISPATCHED`
 
-**Current Builder:** `NONE`
+**Current Builder:** `ENG-011 REPAIR 3 BUILDER`
 
-**Builder branch:** `NONE`
+**Builder branch:** `eng-011-builder-repair-3`
 
-**Builder worktree:** `NONE`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-3`
 
-**Builder authority:** `NONE`
+**Builder authority:** `ACTIVE / EXCLUSIVE WRITE AUTHORITY OVER THE EXACT 19-PATH WRITE LOCK`
 
 **Implementation state:** `REPAIR-2 CANDIDATE FROZEN / REPAIR 3 NOT STARTED`
 
@@ -38,8 +38,8 @@
 
 | Property | Value |
 | --- | --- |
-| Canonical READY commit | `f03f2cddcc34c69188d6656c497e76f0920ebe77` |
-| Canonical READY tree | `6f6135299c851337057f1d129598f4d5175d15b9` |
+| Canonical READY commit | `9c721aebbf87ee7cabac43c7501d2ea8d13b1a0b` |
+| Canonical READY tree | `6acb04e545dfbb5ff24dc70a555d2a2a01a5ac96` |
 | Original dispatch commit | `f1d7d308128b7dd2d2a25cf726cdc75a0743c39a` |
 | Original Builder status | `ABORTED / STARTUP CONTAMINATED / NO CANDIDATE / NON-OPERATIVE` (`eng-011-builder`, `/private/tmp/prj226-eng011-builder` preserved) |
 | Startup finding | `ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART` ([Controller Disposition](../analysis/ENG-011_BUILDER_STARTUP_CONTAMINATION_DISPOSITION_2026-08-28.md)) |
@@ -52,14 +52,15 @@
 | Repair 1 candidate commit | `dc558777b9efeb9e9e29ef0c42f2f448f308e1e2` (tree `a7d99a9bee493c7c279f7ca4e137a96bba0da6bc`) |
 | Repair 1 candidate disposition | `FROZEN / UNACCEPTED / HISTORICAL EVIDENCE ONLY / NON-CANONICAL` |
 | Repair 1 provenance finding | `ENG-011-R1-DV-R001` (`ACCEPTED / BLOCKING / OPEN FOR REPAIR 2`) ([Finding Disposition](../analysis/ENG-011_REPAIR1_PROVENANCE_FINDING_DISPOSITION_2026-08-28.md)) |
-| Repair 2 dispatch authority | The single governance-only commit containing this Delivery Record |
-| Fresh Builder branch | `eng-011-builder-repair-2` |
-| Fresh Builder worktree | `/private/tmp/prj226-eng011-builder-repair-2` |
+| Repair 2 dispatch authority | Commit `3ac5a39ffa6d891d252dff1ddd47bd0e380cad8b` |
 | Repair 2 candidate | `49990f306ee67b62ae017f0d63fa556bde06d23a` (tree `b08c1f9d8ffa579a6cda3ed695293658a3697a81`; aggregate `6452eec02ebdd5e32c8274da852e501d2d0c1826c485d558354c4ac07b2867f0`) |
 | Repair 2 deterministic verification | `PASS` — historical exact-candidate fact |
 | Repair 2 independent S/O/S review | `FINDINGS` — nine blocking findings `ENG-011-R2-SOR-R001` through `R009` |
 | Repair 2 disposition | `FROZEN / UNACCEPTED / HISTORICAL EVIDENCE ONLY / NON-CANONICAL` ([Controller Disposition](../analysis/ENG-011_REPAIR2_SOR_FINDING_DISPOSITION_2026-08-28.md)) |
-| Repair 3 | `READY FOR CONTROLLER DISPATCH / NOT YET DISPATCHED` |
+| Repair 3 dispatch authority | The single governance-only commit containing this Delivery Record |
+| Fresh Builder branch | `eng-011-builder-repair-3` |
+| Fresh Builder worktree | `/private/tmp/prj226-eng011-builder-repair-3` |
+| Repair 3 | `AUTHORIZED / DURABLY DISPATCHED` |
 | Push | Not authorized / not performed |
 
 ## Historical Repair-2 write lock
@@ -81,21 +82,33 @@ The Repair-2 Builder was authorized to write exactly these 12 paths and no other
 
 Every other path was read-only under that historical dispatch. The additional required writes stopped Repair-2 execution and require Controller packet amendment plus Formal DoR re-evaluation.
 
-## Proposed Repair-3 scope
+## Operative Repair-3 write lock
 
 The Controller accepted `ENG-011-R2-SOR-R001` through `R009`. R006 proves that `committed` versus `already-committed` survives in the persistence port but is erased by both accepted mutation services before reaching interaction orchestration. The original twelve-path lock is therefore insufficient.
 
-Task Packet revision 2 proposes the original twelve paths plus exactly seven upstream/result-regression paths:
+The Repair-3 Builder is authorized to write exactly these 19 paths and no others:
 
-1. `src/application/contracts/operations.ts`
-2. `src/application/services/projectActionContext/projectActionContextService.ts`
-3. `src/application/services/knowledgeProvenance/knowledgeProvenanceService.ts`
-4. `tests/application/services/projectActionContext/projectActionContextService.test.ts`
-5. `tests/application/services/knowledgeProvenance/knowledgeProvenanceService.test.ts`
-6. `tests/integration/d1/projectActionContext/projectActionContextPersistence.test.ts`
-7. `tests/integration/d1/knowledgeProvenance/wranglerLocalD1.test.ts`
+1. `src/application/ports/observability/operationalEvidence.ts`
+2. `src/application/ports/observability/index.ts`
+3. `src/application/services/interaction/interactionTypes.ts`
+4. `src/application/services/interaction/interactionOrchestrator.ts`
+5. `src/application/services/interaction/index.ts`
+6. `src/infrastructure/observability/cloudflareOperationalEvidence.ts`
+7. `src/infrastructure/observability/index.ts`
+8. `src/application/contracts/operations.ts`
+9. `src/application/services/projectActionContext/projectActionContextService.ts`
+10. `src/application/services/knowledgeProvenance/knowledgeProvenanceService.ts`
+11. `tests/application/ports/observability/operationalEvidence.test.ts`
+12. `tests/application/ports/observability/vitest.config.ts`
+13. `tests/application/services/interaction/interactionObservability.test.ts`
+14. `tests/infrastructure/observability/cloudflareOperationalEvidence.test.ts`
+15. `tests/infrastructure/observability/vitest.config.ts`
+16. `tests/application/services/projectActionContext/projectActionContextService.test.ts`
+17. `tests/application/services/knowledgeProvenance/knowledgeProvenanceService.test.ts`
+18. `tests/integration/d1/projectActionContext/projectActionContextPersistence.test.ts`
+19. `tests/integration/d1/knowledgeProvenance/wranglerLocalD1.test.ts`
 
-This is an operative nineteen-path Ready lock, not active Builder authority. Formal DoR revision 2 passed; a separate Controller dispatch remains required. The persistence port, D1 adapter, schema, migrations, Product/Domain semantics, Human Control, provider boundary, and architecture remain unchanged.
+Every other path is read-only under this durable Controller dispatch. The persistence port, D1 adapter, schema, migrations, Product/Domain semantics, Human Control, provider boundary, and architecture remain unchanged.
 
 ## Bounded implementation authority
 
@@ -105,9 +118,9 @@ This is an operative nineteen-path Ready lock, not active Builder authority. For
 - The seam remains provider-neutral and Cloudflare-native within the existing deployable. No Sentry, OpenTelemetry, external telemetry/analytics service, new service, Worker, queue, cache, persistence, schema, SLO, deployment, live call, or paid/production action is authorized.
 - Migration is `NO MIGRATION`. `migrations/0001_authoritative_state.sql` remains locked to Git blob `5a50e2b216f824ff02ebf09e803a6c25a43bcfe0` and SHA-256 `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`.
 
-## Readiness disposition
+## Readiness and dispatch disposition
 
-Current Builder is `NONE`. Repair 3 is Ready for Controller dispatch but not yet dispatched; no Repair-3 branch or worktree is provisioned. Formal DoR revision 2 passed for the exact nineteen-path lock, R001-R009 obligations, upstream regression scope, and strict failed-candidate non-ancestry/byte-isolation rules.
+Current Builder is `ENG-011 REPAIR 3 BUILDER`. Repair 3 is `AUTHORIZED / DURABLY DISPATCHED`; fresh worktree `/private/tmp/prj226-eng011-builder-repair-3` on branch `eng-011-builder-repair-3` is provisioned. Formal DoR revision 2 passed for the exact nineteen-path lock, R001-R009 obligations, upstream regression scope, and strict failed-candidate non-ancestry/byte-isolation rules. Implementation has NOT yet started.
 
 ## Future Repair-3 candidate evidence
 

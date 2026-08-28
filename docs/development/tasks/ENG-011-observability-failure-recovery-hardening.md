@@ -8,15 +8,15 @@
 
 **Controller planning revision:** 2
 
-**Current task state:** `READY FOR CONTROLLER DISPATCH / REPAIR 3 NOT YET DISPATCHED`
+**Current task state:** `AUTHORIZED / REPAIR 3 DISPATCHED`
 
 **Formal DoR:** [Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS`; revision 1 `PASS` remains historical for the superseded twelve-path execution scope
 
-**READY:** `YES — PENDING CONTROLLER DISPATCH ONLY`
+**READY:** `YES`
 
-**Current Builder:** `NONE`
+**Current Builder:** `ENG-011 REPAIR 3 BUILDER`
 
-**Builder authority:** `NONE / REPAIR 3 NOT YET DISPATCHED`
+**Builder authority:** `ACTIVE / EXCLUSIVE WRITE AUTHORITY OVER THE EXACT 19-PATH WRITE LOCK`
 
 **Implementation:** `REPAIR-2 CANDIDATE FROZEN / REPAIR 3 NOT STARTED`
 
@@ -24,13 +24,13 @@
 
 **Migration:** `NO MIGRATION`
 
-**Next required role:** `ENG-011 CONTROLLER — REPAIR 3 BUILDER DISPATCH`
+**Next required role:** `ENG-011 REPAIR 3 BUILDER`
 
-**Builder branch:** `NONE`
+**Builder branch:** `eng-011-builder-repair-3`
 
-**Builder worktree:** `NONE`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-3`
 
-**Durable dispatch:** `NONE`; prior execution authorities are consumed or revoked and Repair 3 is not dispatched
+**Durable dispatch:** `AUTHORIZED / REPAIR 3`; the governance commit containing this record is the sole dispatch authority for Repair 3
 
 **Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md)
 
@@ -215,9 +215,9 @@ Credential-like strings injected into every prohibited input surface must be abs
 - Observability is ephemeral/platform-native. It is not accepted memory and not a secondary Knowledge store.
 - **NO MIGRATION.** `migrations/0001_authoritative_state.sql` must remain Git blob `5a50e2b216f824ff02ebf09e803a6c25a43bcfe0` and SHA-256 `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`.
 
-## Proposed Repair-3 exact write lock
+## Operative Repair-3 exact write lock
 
-A future Repair-3 Builder may receive exclusive ownership of exactly these nineteen paths only after revised Formal DoR `PASS`, READY `YES`, and a separate durable Controller dispatch. This section does not itself authorize writing. No wildcard is authorized.
+The Repair-3 Builder receives exclusive ownership of exactly these nineteen paths under this durable Controller dispatch. No wildcard is authorized.
 
 ### Production paths
 
@@ -377,7 +377,7 @@ Result is `REVIEW GREEN` or structured findings. Any security/authority boundary
 
 - **Risk:** HIGH — security/data minimization, operability semantics, truthfulness, and broad cross-layer observation.
 - **Planner / Controller:** owns authority, readiness, exact lock, finding routing, and candidate state.
-- **Builder:** `NONE`. A future Standard Delivery Repair-3 writer may be dispatched only after revised Formal DoR `PASS` and READY `YES`, with exclusive ownership of the nineteen paths above.
+- **Builder:** `ENG-011 REPAIR 3 BUILDER`. Standard Delivery Repair-3 writer dispatched with exclusive ownership of the nineteen paths above.
 - **Deterministic Verifier:** read-only and exact-candidate bound.
 - **Independent Reviewer:** independent of Builder; Strong Semantic Reasoning for security, operability, Human Control, provider isolation, and accepted-state truthfulness.
 - **Concurrency:** one writer; no overlapping source/test writer. Read-only verification/review only under evidence and independence controls.
@@ -403,7 +403,7 @@ ENG-011 becomes `DONE` only when:
 9. Controller final closure accepts the candidate; and
 10. current Builder returns to `NONE` and execution authority is consumed.
 
-Task Packet revision 2 is operative and Ready but dispatches no Builder. A separate durable Controller dispatch remains required before Repair-3 implementation may start.
+Task Packet revision 2 is operative and Ready; Repair 3 is durably dispatched. Implementation has NOT yet started.
 
 ## Prior planning findings
 
