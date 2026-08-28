@@ -10,19 +10,19 @@
 
 **Formal DoR:** [Revision 1](../analysis/ENG-011_FORMAL_DoR_REV1_2026-08-27.md) — `PASS`; `ENG-011-DOR-R001` through `R006 CLOSED`
 
-**Current lifecycle state:** `READY / REPAIR 1 DISPATCHED / NOT YET IMPLEMENTED`
+**Current lifecycle state:** `READY / REPAIR 2 DISPATCHED / NOT YET IMPLEMENTED`
 
-**Builder dispatch:** `AUTHORIZED / REPAIR 1`; the governance commit containing this record is the sole dispatch authority
+**Builder dispatch:** `AUTHORIZED / REPAIR 2`; the governance commit containing this record is the sole dispatch authority
 
-**Current Builder:** `ENG-011 REPAIR 1 BUILDER`
+**Current Builder:** `ENG-011 REPAIR 2 BUILDER`
 
-**Builder branch:** `eng-011-builder-repair-1`
+**Builder branch:** `eng-011-builder-repair-2`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-1`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-2`
 
 **Builder authority:** `ACTIVE / BOUNDED TO THE EXACT 12-PATH WRITE LOCK`
 
-**Implementation state:** `NOT YET STARTED IN FRESH REPAIR 1 WORKTREE`
+**Implementation state:** `NOT YET STARTED IN FRESH REPAIR 2 WORKTREE`
 
 **Human Reserved:** `NOT REQUIRED`
 
@@ -46,12 +46,16 @@
 | Restart 1 dispatch commit | `685c2e836db8464261fe3a2c2c0b14990eda3871` |
 | Candidate 1 commit | `8baa7808fa3dcd6e0475d9176e124973959d52d7` (tree `c31614ff730ae95e20f684c24e9567541bd1ddca`) |
 | Candidate 1 disposition | `FROZEN / UNACCEPTED / HISTORICAL EVIDENCE ONLY / NON-CANONICAL` |
-| Candidate 1 typecheck finding | `ENG-011-C1-DV-R001` (`ACCEPTED / BLOCKING / OPEN FOR REPAIR 1`) ([Finding Disposition](../analysis/ENG-011_CANDIDATE1_TYPECHECK_FINDING_DISPOSITION_2026-08-28.md)) |
+| Candidate 1 typecheck finding | `ENG-011-C1-DV-R001` (`ACCEPTED / BLOCKING / OPEN FOR REPAIR 2; TECHNICALLY ADDRESSED IN R1 BUT UNACCEPTED`) ([Finding Disposition](../analysis/ENG-011_CANDIDATE1_TYPECHECK_FINDING_DISPOSITION_2026-08-28.md)) |
 | Prior aggregate mismatch | `BUILDER_REPORT_EVIDENCE_MISMATCH_ONLY / CLOSED` (canonical aggregate: `dd99fcdd6c70f9f60e7718afaef6a7d88968aee526639903330f61fa05324381`) |
-| Repair 1 dispatch authority | The single governance-only commit containing this Delivery Record |
-| Fresh Builder branch | `eng-011-builder-repair-1` |
-| Fresh Builder worktree | `/private/tmp/prj226-eng011-builder-repair-1` |
-| Candidate identity | NONE (Candidate 1 unaccepted; Repair 1 candidate not yet created) |
+| Repair 1 dispatch commit | `616fc2c1f9282ef5e1f620ef6156adf28453e4c4` |
+| Repair 1 candidate commit | `dc558777b9efeb9e9e29ef0c42f2f448f308e1e2` (tree `a7d99a9bee493c7c279f7ca4e137a96bba0da6bc`) |
+| Repair 1 candidate disposition | `FROZEN / UNACCEPTED / HISTORICAL EVIDENCE ONLY / NON-CANONICAL` |
+| Repair 1 provenance finding | `ENG-011-R1-DV-R001` (`ACCEPTED / BLOCKING / OPEN FOR REPAIR 2`) ([Finding Disposition](../analysis/ENG-011_REPAIR1_PROVENANCE_FINDING_DISPOSITION_2026-08-28.md)) |
+| Repair 2 dispatch authority | The single governance-only commit containing this Delivery Record |
+| Fresh Builder branch | `eng-011-builder-repair-2` |
+| Fresh Builder worktree | `/private/tmp/prj226-eng011-builder-repair-2` |
+| Candidate identity | NONE (Candidates 1 and Repair 1 unaccepted; Repair 2 candidate not yet created) |
 | Push | Not authorized / not performed |
 
 ## Authorized write lock
