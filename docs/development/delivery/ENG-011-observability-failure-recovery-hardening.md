@@ -2,27 +2,27 @@
 
 **Artifact class:** OPERATIONAL
 
-**Lifecycle status:** ACTIVE / DISPATCHED
+**Lifecycle status:** ACTIVE / REVISED SCOPE PENDING DoR
 
 **Task ID:** `ENG-011`
 
-**Task Packet:** [ENG-011 — Observability and Failure/Recovery Hardening](../tasks/ENG-011-observability-failure-recovery-hardening.md) (Revision 1)
+**Task Packet:** [ENG-011 — Observability and Failure/Recovery Hardening](../tasks/ENG-011-observability-failure-recovery-hardening.md) (Revision 2)
 
-**Formal DoR:** [Revision 1](../analysis/ENG-011_FORMAL_DoR_REV1_2026-08-27.md) — `PASS`; `ENG-011-DOR-R001` through `R006 CLOSED`
+**Formal DoR:** `RE-RUN REQUIRED FOR REVISION 2`; [Revision 1](../analysis/ENG-011_FORMAL_DoR_REV1_2026-08-27.md) `PASS` remains historical for its exact prior scope
 
-**Current lifecycle state:** `READY / REPAIR 2 DISPATCHED / NOT YET IMPLEMENTED`
+**Current lifecycle state:** `PROPOSED / REVISED REPAIR-3 SCOPE / FORMAL DoR REQUIRED`
 
-**Builder dispatch:** `AUTHORIZED / REPAIR 2`; the governance commit containing this record is the sole dispatch authority
+**Builder dispatch:** `NONE / REPAIR 3 NOT YET AUTHORIZED`
 
-**Current Builder:** `ENG-011 REPAIR 2 BUILDER`
+**Current Builder:** `NONE`
 
-**Builder branch:** `eng-011-builder-repair-2`
+**Builder branch:** `NONE`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-2`
+**Builder worktree:** `NONE`
 
-**Builder authority:** `ACTIVE / BOUNDED TO THE EXACT 12-PATH WRITE LOCK`
+**Builder authority:** `NONE`
 
-**Implementation state:** `NOT YET STARTED IN FRESH REPAIR 2 WORKTREE`
+**Implementation state:** `REPAIR-2 CANDIDATE FROZEN / REPAIR 3 NOT YET AUTHORIZED`
 
 **Human Reserved:** `NOT REQUIRED`
 
@@ -55,12 +55,16 @@
 | Repair 2 dispatch authority | The single governance-only commit containing this Delivery Record |
 | Fresh Builder branch | `eng-011-builder-repair-2` |
 | Fresh Builder worktree | `/private/tmp/prj226-eng011-builder-repair-2` |
-| Candidate identity | NONE (Candidates 1 and Repair 1 unaccepted; Repair 2 candidate not yet created) |
+| Repair 2 candidate | `49990f306ee67b62ae017f0d63fa556bde06d23a` (tree `b08c1f9d8ffa579a6cda3ed695293658a3697a81`; aggregate `6452eec02ebdd5e32c8274da852e501d2d0c1826c485d558354c4ac07b2867f0`) |
+| Repair 2 deterministic verification | `PASS` — historical exact-candidate fact |
+| Repair 2 independent S/O/S review | `FINDINGS` — nine blocking findings `ENG-011-R2-SOR-R001` through `R009` |
+| Repair 2 disposition | `FROZEN / UNACCEPTED / HISTORICAL EVIDENCE ONLY / NON-CANONICAL` ([Controller Disposition](../analysis/ENG-011_REPAIR2_SOR_FINDING_DISPOSITION_2026-08-28.md)) |
+| Repair 3 | `NOT YET AUTHORIZED / REVISED DoR REQUIRED` |
 | Push | Not authorized / not performed |
 
-## Authorized write lock
+## Historical Repair-2 write lock
 
-The Builder may write exactly these 12 paths and no others:
+The Repair-2 Builder was authorized to write exactly these 12 paths and no others:
 
 1. `src/application/ports/observability/operationalEvidence.ts`
 2. `src/application/ports/observability/index.ts`
@@ -75,7 +79,23 @@ The Builder may write exactly these 12 paths and no others:
 11. `tests/infrastructure/observability/cloudflareOperationalEvidence.test.ts`
 12. `tests/infrastructure/observability/vitest.config.ts`
 
-Every other path is read-only. Any additional required write stops the Builder for Controller packet amendment and Formal DoR re-evaluation.
+Every other path was read-only under that historical dispatch. The additional required writes stopped Repair-2 execution and require Controller packet amendment plus Formal DoR re-evaluation.
+
+## Proposed Repair-3 scope
+
+The Controller accepted `ENG-011-R2-SOR-R001` through `R009`. R006 proves that `committed` versus `already-committed` survives in the persistence port but is erased by both accepted mutation services before reaching interaction orchestration. The original twelve-path lock is therefore insufficient.
+
+Task Packet revision 2 proposes the original twelve paths plus exactly seven upstream/result-regression paths:
+
+1. `src/application/contracts/operations.ts`
+2. `src/application/services/projectActionContext/projectActionContextService.ts`
+3. `src/application/services/knowledgeProvenance/knowledgeProvenanceService.ts`
+4. `tests/application/services/projectActionContext/projectActionContextService.test.ts`
+5. `tests/application/services/knowledgeProvenance/knowledgeProvenanceService.test.ts`
+6. `tests/integration/d1/projectActionContext/projectActionContextPersistence.test.ts`
+7. `tests/integration/d1/knowledgeProvenance/wranglerLocalD1.test.ts`
+
+This is a proposed nineteen-path lock, not active Builder authority. Revised Formal DoR must pass before READY or dispatch. The persistence port, D1 adapter, schema, migrations, Product/Domain semantics, Human Control, provider boundary, and architecture remain unchanged.
 
 ## Bounded implementation authority
 
@@ -85,10 +105,10 @@ Every other path is read-only. Any additional required write stops the Builder f
 - The seam remains provider-neutral and Cloudflare-native within the existing deployable. No Sentry, OpenTelemetry, external telemetry/analytics service, new service, Worker, queue, cache, persistence, schema, SLO, deployment, live call, or paid/production action is authorized.
 - Migration is `NO MIGRATION`. `migrations/0001_authoritative_state.sql` remains locked to Git blob `5a50e2b216f824ff02ebf09e803a6c25a43bcfe0` and SHA-256 `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`.
 
-## Startup disposition
+## Readiness disposition
 
-The fresh Builder branch and worktree are provisioned directly from the durable governance dispatch commit. Provisioning and the Controller startup audit create no implementation candidate and perform no implementation, tests, migrations, network calls, deployment, or push. The Builder must first verify a clean worktree, the exact dispatch identity, the 12-path existence baseline, and the locked migration identity before writing.
+Current Builder is `NONE`. Repair 3 is `NOT YET AUTHORIZED`; no Repair-3 branch or worktree is provisioned. Formal DoR must evaluate Task Packet revision 2, the exact nineteen-path proposal, R001-R009 obligations, upstream regression scope, and strict failed-candidate non-ancestry/byte-isolation rules.
 
-## Future candidate evidence
+## Future Repair-3 candidate evidence
 
-Candidate commit/tree, exact changed-path manifest, deterministic results for `ENG-011-TC-01` through `TC-21`, upstream regression results, migration re-verification, independent security/operability review, findings, repairs, and Controller closure remain intentionally empty until produced by the authorized delivery sequence.
+Repair-3 candidate commit/tree, exact changed-path manifest, deterministic results for `ENG-011-TC-01` through `TC-21` and `R3-TC-01` through `R3-TC-18`, upstream regression results, migration re-verification, independent security/operability review, findings, repairs, and Controller closure remain intentionally empty until produced by a future authorized delivery sequence.

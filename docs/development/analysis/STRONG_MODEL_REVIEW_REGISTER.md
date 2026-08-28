@@ -7,18 +7,18 @@
 **Purpose:** Comprehensive register of unresolved, inferred, or disputed engineering design issues requiring stronger-model adjudication before task dispatch.
 
 **ENG-011 Lifecycle Status:**
-- Task Packet: [ENG-011 Task Packet Revision 1](../tasks/ENG-011-observability-failure-recovery-hardening.md)
-- Formal DoR Result: `PASS` ([Formal DoR Revision 1](ENG-011_FORMAL_DoR_REV1_2026-08-27.md))
-- Finding Status: `ENG-011-DOR-R001` through `R006 CLOSED`; `ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART` ([Controller Disposition](ENG-011_BUILDER_STARTUP_CONTAMINATION_DISPOSITION_2026-08-28.md))
-- Task State: `READY / BUILDER RESTART 1 DISPATCHED / NOT YET IMPLEMENTED`
+- Task Packet: [ENG-011 Task Packet Revision 2](../tasks/ENG-011-observability-failure-recovery-hardening.md)
+- Formal DoR Result: `RE-RUN REQUIRED FOR REVISION 2`; revision 1 `PASS` remains historical for its prior scope
+- Finding Status: `ENG-011-DOR-R001` through `R006 CLOSED` historically; `ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART`; `ENG-011-R2-SOR-R001` through `R009 ACCEPTED / BLOCKING / OPEN FOR FUTURE REPAIR 3` ([Controller Disposition](ENG-011_REPAIR2_SOR_FINDING_DISPOSITION_2026-08-28.md))
+- Task State: `PROPOSED / REVISED REPAIR-3 SCOPE / FORMAL DoR REQUIRED`
 - Original Builder: `ABORTED / STARTUP CONTAMINATED / NO CANDIDATE / NON-OPERATIVE` (`eng-011-builder`, `/private/tmp/prj226-eng011-builder` preserved)
-- Dispatch Status: `AUTHORIZED / DURABLY RECORDED / RESTART 1`
+- Dispatch Status: `NONE / REPAIR 3 NOT YET AUTHORIZED`
 - Delivery Record: [ENG-011 Delivery Record](../delivery/ENG-011-observability-failure-recovery-hardening.md)
-- Current Builder: `ENG-011 BUILDER RESTART 1`
-- Builder Authority: `ACTIVE / BOUNDED TO THE EXACT 12-PATH WRITE LOCK`
-- Builder Branch: `eng-011-builder-restart-1`
-- Builder Worktree: `/private/tmp/prj226-eng011-builder-restart-1`
-- Implementation State: `NOT YET STARTED IN FRESH RESTART WORKTREE`
+- Current Builder: `NONE`
+- Builder Authority: `NONE`
+- Builder Branch: `NONE`
+- Builder Worktree: `NONE`
+- Implementation State: `REPAIR-2 CANDIDATE FROZEN / REPAIR 3 NOT YET AUTHORIZED`
 - Migration: `NO MIGRATION`
 - Human Reserved: `NOT REQUIRED`
 
@@ -617,3 +617,13 @@ UNRESOLVED (Strong-model review confirms: LIVE CALLS PROHIBITED IN ENG-009; RESE
 - Current Builder is `NONE`; implementation authority is consumed and non-operative.
 - Independent post-integration canonical verification returned `ENG-010 POST-INTEGRATION CANONICAL VERIFICATION: PASS` (517 test executions across 16 Vitest configs; range diff checks clean; full toolchain clean).
 - Controller Final Closure returned `APPROVE / DONE`; `ENG-010` is `DONE / ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFIED / GOVERNANCE-CLOSED`. Zero open strong-review requirements remain for ENG-010.
+
+## ENG-011 Repair 2 finding chronology — 2026-08-28
+
+- Candidate 1 `8baa7808...` and Repair 1 `dc558777...` remain frozen, unaccepted, historical, and non-canonical.
+- Repair-2 candidate `49990f306ee67b62ae017f0d63fa556bde06d23a`, tree `b08c1f9d8ffa579a6cda3ed695293658a3697a81`, aggregate `6452eec02ebdd5e32c8274da852e501d2d0c1826c485d558354c4ac07b2867f0`, passed exact-candidate deterministic verification.
+- Fresh independent security/operability/semantic review returned `FINDINGS` with nine blocking findings, `ENG-011-R2-SOR-R001` through `R009`.
+- Controller adjudication accepted all nine findings and froze Repair 2 as unaccepted historical evidence.
+- R006 established that the persistence port retains `committed` versus `already-committed`, but both accepted mutation services erase the distinction before orchestration. Truthful duplicate evidence requires the shared accepted-result contract, both service sources, and four focused unit/local-D1 regression paths.
+- The original twelve-path lock is insufficient. Task Packet revision 2 proposes an exact nineteen-path Repair-3 scope; Formal DoR must be re-run; READY is `NO`; Repair 3 is not authorized; Builder is `NONE`.
+- Human Reserved remains `NOT REQUIRED`; migration remains unchanged; no push was performed.

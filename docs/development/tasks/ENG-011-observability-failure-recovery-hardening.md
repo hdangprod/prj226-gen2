@@ -4,35 +4,37 @@
 
 **Lifecycle status:** ACTIVE
 
-**Task Packet revision:** 1
+**Task Packet revision:** 2
 
-**Controller planning revision:** 1
+**Controller planning revision:** 2
 
-**Current task state:** `READY / BUILDER RESTART 1 DISPATCHED / NOT YET IMPLEMENTED`
+**Current task state:** `PROPOSED / REVISED REPAIR-3 SCOPE / FORMAL DoR REQUIRED`
 
-**Formal DoR revision 1:** `PASS`
+**Formal DoR:** `RE-RUN REQUIRED FOR REVISION 2`; revision 1 `PASS` remains historical for the superseded twelve-path execution scope
 
-**READY:** `YES`
+**READY:** `NO — PENDING REVISED DoR`
 
-**Current Builder:** `ENG-011 BUILDER RESTART 1`
+**Current Builder:** `NONE`
 
-**Builder authority:** `ACTIVE / BOUNDED TO THE EXACT 12-PATH WRITE LOCK`
+**Builder authority:** `NONE / REPAIR 3 NOT YET AUTHORIZED`
 
-**Implementation:** `NOT YET STARTED IN FRESH RESTART WORKTREE`
+**Implementation:** `REPAIR-2 CANDIDATE FROZEN / REPAIR 3 NOT YET AUTHORIZED`
 
 **Human Reserved:** `NOT REQUIRED`
 
 **Migration:** `NO MIGRATION`
 
-**Next required role:** `ENG-011 BUILDER RESTART 1`
+**Next required role:** `ENG-011 FORMAL DoR — REVISED REPAIR-3 SCOPE`
 
-**Builder branch:** `eng-011-builder-restart-1`
+**Builder branch:** `NONE`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-restart-1`
+**Builder worktree:** `NONE`
 
-**Durable dispatch:** `AUTHORIZED / RESTART 1`; the governance commit containing this record is the sole dispatch authority for Builder Restart 1
+**Durable dispatch:** `NONE`; prior execution authorities are consumed or revoked and Repair 3 is not dispatched
 
 **Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 1](../analysis/ENG-011_FORMAL_DoR_REV1_2026-08-27.md)
+
+**Repair-2 finding disposition:** [Controller S/O/S Finding Disposition](../analysis/ENG-011_REPAIR2_SOR_FINDING_DISPOSITION_2026-08-28.md)
 
 **Authorization:** `GOV-018`
 
@@ -42,11 +44,21 @@
 
 **Governing contract:** [Delivery Contract revision 1](../../../development/DELIVERY_CONTRACT.md)
 
-## Durable Builder dispatch
+## Revision-2 repair scope and readiness boundary
 
-The Controller has authorized one Standard Delivery Builder execution restart (`ENG-011 BUILDER RESTART 1`) from the governance commit containing this section. The original Builder on branch `eng-011-builder` in worktree `/private/tmp/prj226-eng011-builder` aborted prior to implementation due to pre-start worktree contamination (`ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART`; candidate `NONE`; uncommitted worktree preserved unchanged as forensic evidence).
+Repair-2 candidate `49990f306ee67b62ae017f0d63fa556bde06d23a`, tree `b08c1f9d8ffa579a6cda3ed695293658a3697a81`, passed deterministic verification but received nine accepted blocking security/operability/semantic findings, `ENG-011-R2-SOR-R001` through `R009`. It is frozen, unaccepted, historical evidence only, and non-canonical.
 
-This restart consumes Task Packet revision 1 and Formal DoR revision 1 `PASS`; all findings `ENG-011-DOR-R001` through `R006` remain `CLOSED`. The fresh Builder receives exclusive write authority only for the exact 12 paths below. Recovery scope is classification and evidence only. Retry remains an explicit caller/user action; automatic authoritative mutation retry, rollback, compensation, fallback, queues, and recovery orchestration are prohibited. DATA-001 prohibits user content, Knowledge content, model output, raw errors, stacks, SQL, headers, credentials, and provider-private data in operational evidence. The implementation remains provider-neutral and Cloudflare-native inside the existing deployable; no Sentry, OpenTelemetry, external telemetry service, new service, Worker, queue, schema, persistence, SLO, deployment, or paid/production action is authorized.
+Revision 2 makes the smallest planning change needed for a future Repair 3: it binds those nine repair obligations and expands the proposed write lock from twelve to nineteen exact paths because the accepted Project/Action/context/progress and Knowledge services currently erase persistence `committed` versus `already-committed` before the result reaches interaction orchestration. No truthful orchestrator-only reconstruction exists. The persistence port and D1 adapter already retain the distinction and remain protected.
+
+This revision changes execution scope and therefore invalidates revision-1 DoR as authority for a future repair. It does not dispatch a Builder. Formal DoR must independently verify the revised scope, tests, isolation, and provenance before READY may return to YES.
+
+The revision changes no Product, Domain, Human Control, Runtime Architecture, provider, deployment, recovery, retry, or persistence-schema semantics. Human Reserved remains `NOT REQUIRED`; migration remains `NO MIGRATION`.
+
+## Historical Builder dispatch
+
+The Controller previously authorized one Standard Delivery Builder execution restart (`ENG-011 BUILDER RESTART 1`) from the governance commit containing this section. The original Builder on branch `eng-011-builder` in worktree `/private/tmp/prj226-eng011-builder` aborted prior to implementation due to pre-start worktree contamination (`ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART`; candidate `NONE`; uncommitted worktree preserved unchanged as forensic evidence). Restart 1, Repair 1, and Repair 2 are now historical, consumed, or revoked execution authorities and cannot authorize further writing.
+
+Revision-1 execution consumed Formal DoR revision 1 `PASS`; findings `ENG-011-DOR-R001` through `R006` remain historically closed for that scope. Recovery remains classification and evidence only. Retry remains an explicit caller/user action; automatic authoritative mutation retry, rollback, compensation, fallback, queues, and recovery orchestration are prohibited. DATA-001 prohibits user content, Knowledge content, model output, raw errors, stacks, SQL, headers, credentials, and provider-private data in operational evidence. The implementation remains provider-neutral and Cloudflare-native inside the existing deployable; no Sentry, OpenTelemetry, external telemetry service, new service, Worker, queue, schema, persistence, SLO, deployment, or paid/production action is authorized.
 
 Migration remains `NO MIGRATION`; `migrations/0001_authoritative_state.sql` is locked to Git blob `5a50e2b216f824ff02ebf09e803a6c25a43bcfe0` and SHA-256 `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`. Worktree provisioning and a clean startup audit do not start implementation.
 
@@ -83,8 +95,8 @@ These sources authorize Cloudflare-native structured, data-minimized logs and tr
 | Dependency | Accepted authority / identity | Contract consumed by ENG-011 | May ENG-011 modify it? | Regression obligation |
 | --- | --- | --- | --- | --- |
 | `ENG-003` | Revision 3 accepted: commit `5276481824e43d23345799c39efaa72e51235877`, tree `0ea10d0400a5439af60c72ce943b7504e4173674`, aggregate `a5bb90a62af050b2cc7bcf1beecac072b3927b45d91178e65564935d7420c156` | `committed`, `already-committed`, constraint conflict, operation-ID conflict, and durability failure with retryability | No; persistence port, D1 adapter, schema, and receipts are read-only | Preserve atomicity, idempotency, expected-state authority, and false-success defenses |
-| `ENG-004` | DONE: aggregate `6be8bc2b4d58cd1a0e9be7ea6a3762dafee0aa5a26796bb8e97214e48c1725c2` | Project, Action, context, and progress accepted/failed outcomes | No; service semantics are read-only | Preserve lifecycle, ownership, concurrency, and accepted-state truthfulness |
-| `ENG-005` | DONE: commit `81b023deb2b1a61630a2c8cb3aaee22050182bb8`, tree `833a11f345dedd240c892d473dd99e701d34cf3e`, aggregate `333f27f33f5725751a3cb48bbd0009253faab26282e218883b6393c3d3ae90f0` | Intentional Knowledge capture/correction outcomes and authentication-material exclusion | No; Knowledge semantics and guards are read-only | Preserve origin, supersession, currentness, and capture-time DATA-001 defense |
+| `ENG-004` | DONE: aggregate `6be8bc2b4d58cd1a0e9be7ea6a3762dafee0aa5a26796bb8e97214e48c1725c2` | Project, Action, context, and progress accepted/failed outcomes | Revision 2 permits only propagation of existing persistence commit disposition through the exact service/result paths in the revised lock; all lifecycle and mutation semantics remain read-only | Preserve lifecycle, ownership, concurrency, accepted-state truthfulness, and fresh-versus-duplicate disposition |
+| `ENG-005` | DONE: commit `81b023deb2b1a61630a2c8cb3aaee22050182bb8`, tree `833a11f345dedd240c892d473dd99e701d34cf3e`, aggregate `333f27f33f5725751a3cb48bbd0009253faab26282e218883b6393c3d3ae90f0` | Intentional Knowledge capture/correction outcomes and authentication-material exclusion | Revision 2 permits only propagation of existing persistence commit disposition through the exact service/result paths in the revised lock; Knowledge semantics and guards otherwise remain read-only | Preserve origin, supersession, currentness, capture-time DATA-001 defense, and fresh-versus-duplicate disposition |
 | `ENG-006` | Repair Rev1 accepted: commit `a94d2cd2714849e7be59fd464f85330f98d127b4`, tree `6d4a20cb745b811724a8837e495ab3a19c32285b`, aggregate `5427769010520ef1c992d201e42b341204c621a3d4ed7f84ce60eae71adcccda` | `found`, `not-found`, and normalized `retrieval-failed` outcomes | No; direct-SQL retrieval contract is read-only | Preserve currentness, provenance, parent-existence handling, and no vector/search/cache scope |
 | `ENG-007` | Repair 6 accepted: commit `e6b5f271d308fbac7e48667943005758efaf6d8b`, tree `d8bd1c0c0a920e94ce929b40362d5f042939b101`, aggregate `773ac643145308ab285767ee77451f6512bfe26f5415eb7c05370e93a990a195` | Export failures; confirmed deletion success, rejection, not-found, failure, duplicate, and indeterminate outcomes | No; deletion/export semantics, D1 implementation, and Human Reserved decisions are read-only | Preserve separate confirmation, exact scope, no false deletion success, and post-delete truthfulness |
 | `ENG-008` | DONE: accepted manifest `5fb3343b2a531782ef83d7c874ec95ae221676a700f4c92b3d77591de39c1696` | Provider-neutral result/failure categories and bounded optional diagnostics | No; Model Capability Port is read-only | Preserve bounded context, provider neutrality, no-write proposals, and authentication-material exclusion |
@@ -103,6 +115,7 @@ All dependencies are `DONE`; their execution authority is consumed and non-opera
 6. Fail-open diagnostics: evidence-sink failure cannot alter, reject, duplicate, authorize, or falsely succeed the product operation.
 7. Classification of existing upstream outcomes and retry eligibility without modifying them.
 8. Deterministic failure-injection, correlation, truthfulness, redaction, and regression evidence.
+9. Narrow propagation of the already-existing persistence `committed` versus `already-committed` disposition through accepted Project/Action/context/progress and Knowledge service results solely so evidence can distinguish fresh acceptance from duplicate replay.
 
 `derived-state` remains a valid closed stage with `not-applicable` for the current direct-SQL design. ENG-011 must not invent a derived write or emit a false derived success merely to populate the stage.
 
@@ -202,9 +215,9 @@ Credential-like strings injected into every prohibited input surface must be abs
 - Observability is ephemeral/platform-native. It is not accepted memory and not a secondary Knowledge store.
 - **NO MIGRATION.** `migrations/0001_authoritative_state.sql` must remain Git blob `5a50e2b216f824ff02ebf09e803a6c25a43bcfe0` and SHA-256 `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`.
 
-## Exact Builder write lock
+## Proposed Repair-3 exact write lock
 
-One future Builder receives exclusive ownership of exactly these paths. No wildcard is authorized.
+A future Repair-3 Builder may receive exclusive ownership of exactly these nineteen paths only after revised Formal DoR `PASS`, READY `YES`, and a separate durable Controller dispatch. This section does not itself authorize writing. No wildcard is authorized.
 
 ### Production paths
 
@@ -215,25 +228,32 @@ One future Builder receives exclusive ownership of exactly these paths. No wildc
 5. `src/application/services/interaction/index.ts` — export only the accepted observability-aware interaction surface.
 6. `src/infrastructure/observability/cloudflareOperationalEvidence.ts` — new Cloudflare-native structured emitter using an injected console-compatible writer; no provider SDK or external network.
 7. `src/infrastructure/observability/index.ts` — new infrastructure export only.
+8. `src/application/contracts/operations.ts` — add only the closed accepted persistence-disposition contract needed to preserve `committed` versus `already-committed`; no Product outcome-kind change.
+9. `src/application/services/projectActionContext/projectActionContextService.ts` — propagate existing persistence commit disposition without changing mutation, lifecycle, authorization, or persistence behavior.
+10. `src/application/services/knowledgeProvenance/knowledgeProvenanceService.ts` — propagate existing persistence commit disposition without changing Knowledge eligibility, origin, supersession, authorization, or persistence behavior.
 
 ### Test/config paths
 
-8. `tests/application/ports/observability/operationalEvidence.test.ts`
-9. `tests/application/ports/observability/vitest.config.ts`
-10. `tests/application/services/interaction/interactionObservability.test.ts`
-11. `tests/infrastructure/observability/cloudflareOperationalEvidence.test.ts`
-12. `tests/infrastructure/observability/vitest.config.ts`
+11. `tests/application/ports/observability/operationalEvidence.test.ts`
+12. `tests/application/ports/observability/vitest.config.ts`
+13. `tests/application/services/interaction/interactionObservability.test.ts`
+14. `tests/infrastructure/observability/cloudflareOperationalEvidence.test.ts`
+15. `tests/infrastructure/observability/vitest.config.ts`
+16. `tests/application/services/projectActionContext/projectActionContextService.test.ts`
+17. `tests/application/services/knowledgeProvenance/knowledgeProvenanceService.test.ts`
+18. `tests/integration/d1/projectActionContext/projectActionContextPersistence.test.ts`
+19. `tests/integration/d1/knowledgeProvenance/wranglerLocalD1.test.ts`
 
 ### Protected/read-only paths
 
-Every path not listed above is protected, including `src/domain/**`, `src/application/contracts/**`, model/persistence ports, Project/Action/Knowledge/retrieval/export-deletion services, all D1 and model adapters, `src/index.ts`, existing tests, package files, root configs, `wrangler.toml`, migrations, and governance files. If implementation proves an additional write is necessary, stop for Controller packet amendment and Formal DoR re-evaluation; do not discover scope by editing.
+Every path not listed above is protected, including `src/domain/**`, every other `src/application/contracts/**` path, model/persistence ports, retrieval/export-deletion services, all D1 and model adapters, `src/index.ts`, every other existing test, package files, root configs, `wrangler.toml`, migrations, and governance files. If implementation proves an additional write is necessary, stop for Controller packet amendment and Formal DoR re-evaluation; do not discover scope by editing.
 
 ## Deliverables
 
 | Deliverable | Purpose and exact contract | Read/write effect | Dependencies / prohibitions | Required evidence |
 | --- | --- | --- | --- | --- |
 | D1. Operational-evidence port | Closed immutable event/sink contract and safe opaque-ID constructors | New application port only; no domain write | May import type-only application/domain identifiers where necessary; no provider/D1/Cloudflare type | `TC-01`–`TC-05` |
-| D2. Correlated orchestration observations | Emit applicable stage results for each accepted interaction path | Observations only; exact returned outcome and authoritative writes unchanged | Consume ENG-010 and upstream result unions; no raw reasons/content | `TC-06`–`TC-16` |
+| D2. Correlated orchestration observations | Emit applicable stage results for each accepted interaction path and preserve fresh-versus-duplicate commit disposition | Observations only; exact Product outcome kind/value and authoritative writes unchanged | Consume ENG-010 and upstream result unions; the narrow result-contract propagation authorized by revision 2 carries no content or new authority | `TC-06`–`TC-16`; `R3-TC-03`–`R3-TC-12` |
 | D3. Cloudflare-native emitter | Write one validated structured object to injected console-compatible writer | Ephemeral operational output only | No network, vendor SDK, external service, persistence, or config | `TC-17`–`TC-19` |
 | D4. Security/fail-open hardening | Exclude prohibited material and contain diagnostic failures | No product-semantic side effect | No generalized DLP and no swallowed product failure | `TC-04`, `TC-05`, `TC-18`–`TC-21` |
 | D5. Regression and evidence package | Exact candidate, full upstream regression, migration/path scans, independent review | Delivery Record after dispatch only | No implementation in governance commit | Verification and review contracts below |
@@ -265,6 +285,31 @@ Every path not listed above is protected, including `src/domain/**`, `src/applic
 | `ENG-011-TC-21` | Static scans prove no prohibited vendor, OpenTelemetry, Sentry, queue, cache, analytics, network, telemetry persistence, secret/content field, or new runtime service enters the write lock. |
 
 Exact user-facing Vietnamese/English wording is not asserted by ENG-011. Existing bilingual semantic regressions must remain green; operational categories are language-neutral.
+
+## Repair-3 test obligations
+
+These obligations bind a future Repair-3 candidate in addition to, not instead of, `ENG-011-TC-01` through `TC-21`:
+
+| Test | Required behavior |
+| --- | --- |
+| `R3-TC-01` | Only runtime-issued/provenance-valid observation contexts emit evidence; arbitrary structural forgeries fail closed. |
+| `R3-TC-02` | Content-like valid-syntax identifiers cannot become evidence; finite credential fixtures remain excluded without generalized DLP. |
+| `R3-TC-03` | Evidence operation identity equals the authoritative mutation operation ID; mismatch cannot misattribute an operation. |
+| `R3-TC-04` | Deletion direction and confirmation retain correlation but prove distinct request-attempt identities. |
+| `R3-TC-05` | Provider attempt/success/failure and safe diagnostics follow the normalized model result without private data. |
+| `R3-TC-06` | Retrieval found/not-found/failure are distinct across advisory/proposal and mutation families. |
+| `R3-TC-07` | Every upstream terminal result maps to its actual stage; pre-persistence rejection is never persistence failure and retry disposition remains exact. |
+| `R3-TC-08` | First-turn deletion direction emits no authorization success; confirmed second-turn authorization is distinct. |
+| `R3-TC-09` | Project/Action/context/progress fresh commit versus `already-committed` emit accepted versus duplicate with unchanged Product outcome value. |
+| `R3-TC-10` | Knowledge capture/correction fresh commit versus `already-committed` preserve disposition, origin, lineage, and no-content evidence. |
+| `R3-TC-11` | Mixed all-success, true-partial, all-failure, and heterogeneous non-success aggregates are truthful while portion outcomes remain unchanged. |
+| `R3-TC-12` | Trusted ingress user-visible success follows successful ingress return. |
+| `R3-TC-13` | TC-21 scanning is path-complete and robust for prohibited vendor/network/persistence/service/content/architecture tokens. |
+| `R3-TC-14` | Original `ENG-011-TC-01` through `TC-21` remain substantive and pass. |
+| `R3-TC-15` | No automatic provider/mutation/deletion retry, fallback, compensation, recovery engine, or persistent recovery state exists. |
+| `R3-TC-16` | Full toolchain, dynamic Vitest matrix, local D1, migration identity, exact lock, dependency/provider scans, and whitespace pass. |
+| `R3-TC-17` | Candidate 1, Repair 1, and Repair 2 are present but not ancestors of Repair 3. |
+| `R3-TC-18` | Repair 3 is independently produced from clean canonical governance authority without failed-candidate byte reuse. |
 
 ## Regression matrix
 
@@ -303,7 +348,7 @@ npm ls --all
 The verifier must:
 
 1. count test executions by summing the reported Vitest test counts across every sorted tracked `*vitest.config.ts`; do not hard-code a future total;
-2. prove changed paths are exactly a subset of the 12-path lock;
+2. prove changed paths are exactly a subset of the revision-2 nineteen-path lock;
 3. prove no migration/config/package/lockfile/Worker-entry change;
 4. prove migration blob/SHA-256 identity above;
 5. scan production imports and dependency output for Sentry, OpenTelemetry, external telemetry/analytics, queues, caches, extra services, and network clients;
@@ -332,7 +377,7 @@ Result is `REVIEW GREEN` or structured findings. Any security/authority boundary
 
 - **Risk:** HIGH — security/data minimization, operability semantics, truthfulness, and broad cross-layer observation.
 - **Planner / Controller:** owns authority, readiness, exact lock, finding routing, and candidate state.
-- **Builder:** one Standard Delivery writer, now durably dispatched with exclusive ownership of the 12 paths above.
+- **Builder:** `NONE`. A future Standard Delivery Repair-3 writer may be dispatched only after revised Formal DoR `PASS` and READY `YES`, with exclusive ownership of the nineteen paths above.
 - **Deterministic Verifier:** read-only and exact-candidate bound.
 - **Independent Reviewer:** independent of Builder; Strong Semantic Reasoning for security, operability, Human Control, provider isolation, and accepted-state truthfulness.
 - **Concurrency:** one writer; no overlapping source/test writer. Read-only verification/review only under evidence and independence controls.
@@ -348,8 +393,8 @@ Stop and request exact human disposition if implementation would choose or requi
 ENG-011 becomes `DONE` only when:
 
 1. all five deliverables satisfy the exact contracts above;
-2. the candidate changes only the 12 locked paths and contains no unauthorized scope;
-3. all `ENG-011-TC-01` through `TC-21` and the full upstream regression matrix pass;
+2. the candidate changes only the nineteen revision-2 locked paths and contains no unauthorized scope;
+3. all `ENG-011-TC-01` through `TC-21`, `R3-TC-01` through `R3-TC-18`, and the full upstream regression matrix pass;
 4. toolchain, build, smoke, local D1 migration, failure-injection, static security/provider/architecture scans, migration identity, and whitespace checks pass;
 5. evidence is bound durably to the exact candidate and records the dynamic test-execution count;
 6. fresh full independent security/operability/semantic review is `GREEN`;
@@ -358,8 +403,8 @@ ENG-011 becomes `DONE` only when:
 9. Controller final closure accepts the candidate; and
 10. current Builder returns to `NONE` and execution authority is consumed.
 
-Task Packet `READY` alone does not dispatch a Builder or establish implementation or completion. The separate durable Controller dispatch recorded above now authorizes the Builder; implementation remains not yet started.
+Task Packet revision 2 is not Ready and dispatches no Builder. A future revised DoR `PASS`, READY `YES`, and separate durable Controller dispatch are all required before Repair-3 implementation may start.
 
 ## Prior planning findings
 
-`ENG-011-DOR-R001` through `ENG-011-DOR-R006` are closed in the [Formal DoR evidence](../analysis/ENG-011_FORMAL_DoR_REV1_2026-08-27.md). No blocking planning finding remains.
+`ENG-011-DOR-R001` through `ENG-011-DOR-R006` remain closed historical findings for revision 1 in the [Formal DoR evidence](../analysis/ENG-011_FORMAL_DoR_REV1_2026-08-27.md). Revision 2 changes the exact write scope and adds accepted findings `ENG-011-R2-SOR-R001` through `R009`; a new Formal DoR evaluation is required before readiness or dispatch.
