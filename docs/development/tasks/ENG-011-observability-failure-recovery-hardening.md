@@ -8,33 +8,33 @@
 
 **Controller planning revision:** 2
 
-**Current task state:** `AUTHORIZED / REPAIR 3 DISPATCHED`
+**Current task state:** `AUTHORIZED / REPAIR 4 DISPATCHED`
 
 **Formal DoR:** [Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS`; revision 1 `PASS` remains historical for the superseded twelve-path execution scope
 
 **READY:** `YES`
 
-**Current Builder:** `ENG-011 REPAIR 3 BUILDER`
+**Current Builder:** `ENG-011 REPAIR 4 BUILDER`
 
 **Builder authority:** `ACTIVE / EXCLUSIVE WRITE AUTHORITY OVER THE EXACT 19-PATH WRITE LOCK`
 
-**Implementation:** `REPAIR-2 CANDIDATE FROZEN / REPAIR 3 NOT STARTED`
+**Implementation:** `REPAIR-3 CANDIDATE FROZEN / REPAIR 4 NOT STARTED`
 
 **Human Reserved:** `NOT REQUIRED`
 
 **Migration:** `NO MIGRATION`
 
-**Next required role:** `ENG-011 REPAIR 3 BUILDER`
+**Next required role:** `ENG-011 REPAIR 4 BUILDER`
 
-**Builder branch:** `eng-011-builder-repair-3`
+**Builder branch:** `eng-011-builder-repair-4`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-3`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-4`
 
-**Durable dispatch:** `AUTHORIZED / REPAIR 3`; the governance commit containing this record is the sole dispatch authority for Repair 3
+**Durable dispatch:** `AUTHORIZED / REPAIR 4`; the governance commit containing this record is the sole dispatch authority for Repair 4
 
 **Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md)
 
-**Repair-2 finding disposition:** [Controller S/O/S Finding Disposition](../analysis/ENG-011_REPAIR2_SOR_FINDING_DISPOSITION_2026-08-28.md)
+**Repair-3 finding disposition:** [Controller Deterministic Finding Disposition](../analysis/ENG-011_REPAIR3_DETERMINISTIC_FINDING_DISPOSITION_2026-08-28.md)
 
 **Authorization:** `GOV-018`
 
@@ -403,8 +403,8 @@ ENG-011 becomes `DONE` only when:
 9. Controller final closure accepts the candidate; and
 10. current Builder returns to `NONE` and execution authority is consumed.
 
-Task Packet revision 2 is operative and Ready; Repair 3 is durably dispatched. Implementation has NOT yet started.
+Task Packet revision 2 is operative and Ready; Repair 4 is durably dispatched. Implementation has NOT yet started.
 
 ## Prior planning findings
 
-`ENG-011-DOR-R001` through `ENG-011-DOR-R006` remain closed historical findings for revision 1. Revision 2 binds accepted findings `ENG-011-R2-SOR-R001` through `R009`; [Formal DoR revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) is `PASS`. The findings remain open for Repair-3 implementation and independent recheck; readiness does not close them or dispatch a Builder.
+`ENG-011-DOR-R001` through `ENG-011-DOR-R006` remain closed historical findings for revision 1. Revision 2 binds accepted findings `ENG-011-R2-SOR-R001` through `R009`; [Formal DoR revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) is `PASS`. Four blocking deterministic findings (`ENG-011-R3-DV-R001` through `R004`) were identified during Repair-3 verification, accepted, and bound to Repair 4 ([Controller Disposition](../analysis/ENG-011_REPAIR3_DETERMINISTIC_FINDING_DISPOSITION_2026-08-28.md)). The nineteen-path write lock remains unchanged.

@@ -2,7 +2,7 @@
 
 **Artifact class:** OPERATIONAL
 
-**Lifecycle status:** ACTIVE / REPAIR 3 DISPATCHED
+**Lifecycle status:** ACTIVE / REPAIR 4 DISPATCHED
 
 **Task ID:** `ENG-011`
 
@@ -10,19 +10,19 @@
 
 **Formal DoR:** [Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS`; revision 1 remains historical for its exact prior scope
 
-**Current lifecycle state:** `AUTHORIZED / REPAIR 3 DISPATCHED`
+**Current lifecycle state:** `AUTHORIZED / REPAIR 4 DISPATCHED`
 
-**Builder dispatch:** `AUTHORIZED / REPAIR 3 DURABLY DISPATCHED`
+**Builder dispatch:** `AUTHORIZED / REPAIR 4 DURABLY DISPATCHED`
 
-**Current Builder:** `ENG-011 REPAIR 3 BUILDER`
+**Current Builder:** `ENG-011 REPAIR 4 BUILDER`
 
-**Builder branch:** `eng-011-builder-repair-3`
+**Builder branch:** `eng-011-builder-repair-4`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-3`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-4`
 
 **Builder authority:** `ACTIVE / EXCLUSIVE WRITE AUTHORITY OVER THE EXACT 19-PATH WRITE LOCK`
 
-**Implementation state:** `REPAIR-2 CANDIDATE FROZEN / REPAIR 3 NOT STARTED`
+**Implementation state:** `REPAIR-3 CANDIDATE FROZEN / REPAIR 4 NOT STARTED`
 
 **Human Reserved:** `NOT REQUIRED`
 
@@ -57,10 +57,14 @@
 | Repair 2 deterministic verification | `PASS` — historical exact-candidate fact |
 | Repair 2 independent S/O/S review | `FINDINGS` — nine blocking findings `ENG-011-R2-SOR-R001` through `R009` |
 | Repair 2 disposition | `FROZEN / UNACCEPTED / HISTORICAL EVIDENCE ONLY / NON-CANONICAL` ([Controller Disposition](../analysis/ENG-011_REPAIR2_SOR_FINDING_DISPOSITION_2026-08-28.md)) |
-| Repair 3 dispatch authority | The single governance-only commit containing this Delivery Record |
-| Fresh Builder branch | `eng-011-builder-repair-3` |
-| Fresh Builder worktree | `/private/tmp/prj226-eng011-builder-repair-3` |
-| Repair 3 | `AUTHORIZED / DURABLY DISPATCHED` |
+| Repair 3 dispatch authority | Commit `b4d59fd6f4ef8393d83d57f78e36369405b8ddcb` |
+| Repair 3 candidate | `d949e713e2ba1fbbf526eafded0a40de6b7beb2c` (tree `9ef6b36dc635f3c121cafe1da4fdfde97e56bac5`; aggregate `d9a8dcf6ad96eec305656f7f9a3d79e94eaaaa356b769e015f4cccedeee24cba`) |
+| Repair 3 deterministic verification | `FINDINGS` — four blocking findings `ENG-011-R3-DV-R001` through `R004` |
+| Repair 3 disposition | `FROZEN / UNACCEPTED / HISTORICAL EVIDENCE ONLY / NON-CANONICAL` ([Controller Disposition](../analysis/ENG-011_REPAIR3_DETERMINISTIC_FINDING_DISPOSITION_2026-08-28.md)) |
+| Repair 4 dispatch authority | The single governance-only commit containing this Delivery Record |
+| Fresh Builder branch | `eng-011-builder-repair-4` |
+| Fresh Builder worktree | `/private/tmp/prj226-eng011-builder-repair-4` |
+| Repair 4 | `AUTHORIZED / DURABLY DISPATCHED` |
 | Push | Not authorized / not performed |
 
 ## Historical Repair-2 write lock
@@ -120,8 +124,8 @@ Every other path is read-only under this durable Controller dispatch. The persis
 
 ## Readiness and dispatch disposition
 
-Current Builder is `ENG-011 REPAIR 3 BUILDER`. Repair 3 is `AUTHORIZED / DURABLY DISPATCHED`; fresh worktree `/private/tmp/prj226-eng011-builder-repair-3` on branch `eng-011-builder-repair-3` is provisioned. Formal DoR revision 2 passed for the exact nineteen-path lock, R001-R009 obligations, upstream regression scope, and strict failed-candidate non-ancestry/byte-isolation rules. Implementation has NOT yet started.
+Current Builder is `ENG-011 REPAIR 4 BUILDER`. Repair 4 is `AUTHORIZED / DURABLY DISPATCHED`; fresh worktree `/private/tmp/prj226-eng011-builder-repair-4` on branch `eng-011-builder-repair-4` is provisioned. Formal DoR revision 2 remains passed for the exact nineteen-path lock; the four blocking deterministic findings (`ENG-011-R3-DV-R001` through `R004`) are accepted and bound to Repair 4 under unchanged scope. Implementation has NOT yet started.
 
-## Future Repair-3 candidate evidence
+## Future Repair-4 candidate evidence
 
-Repair-3 candidate commit/tree, exact changed-path manifest, deterministic results for `ENG-011-TC-01` through `TC-21` and `R3-TC-01` through `R3-TC-18`, upstream regression results, migration re-verification, independent security/operability review, findings, repairs, and Controller closure remain intentionally empty until produced by a future authorized delivery sequence.
+Repair-4 candidate commit/tree, exact changed-path manifest, deterministic results for `ENG-011-TC-01` through `TC-21` and `R3-TC-01` through `R3-TC-18`, upstream regression results, migration re-verification, independent security/operability review, findings, repairs, and Controller closure remain intentionally empty until produced by a future authorized delivery sequence.
