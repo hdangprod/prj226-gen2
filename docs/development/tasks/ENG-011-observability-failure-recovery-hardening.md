@@ -8,29 +8,29 @@
 
 **Controller planning revision:** 2
 
-**Current task state:** `AUTHORIZED / REPAIR 4 DISPATCHED`
+**Current task state:** `AUTHORIZED / REPAIR 5 DISPATCHED`
 
 **Formal DoR:** [Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS`; revision 1 `PASS` remains historical for the superseded twelve-path execution scope
 
 **READY:** `YES`
 
-**Current Builder:** `ENG-011 REPAIR 4 BUILDER`
+**Current Builder:** `ENG-011 REPAIR 5 BUILDER`
 
 **Builder authority:** `ACTIVE / EXCLUSIVE WRITE AUTHORITY OVER THE EXACT 19-PATH WRITE LOCK`
 
-**Implementation:** `REPAIR-3 CANDIDATE FROZEN / REPAIR 4 NOT STARTED`
+**Implementation:** `REPAIR-4 CANDIDATE FROZEN / REPAIR 5 NOT STARTED`
 
 **Human Reserved:** `NOT REQUIRED`
 
 **Migration:** `NO MIGRATION`
 
-**Next required role:** `ENG-011 REPAIR 4 BUILDER`
+**Next required role:** `ENG-011 REPAIR 5 BUILDER`
 
-**Builder branch:** `eng-011-builder-repair-4`
+**Builder branch:** `eng-011-builder-repair-5`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-4`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-5`
 
-**Durable dispatch:** `AUTHORIZED / REPAIR 4`; the governance commit containing this record is the sole dispatch authority for Repair 4
+**Durable dispatch:** `AUTHORIZED / REPAIR 5`; the governance commit containing this record is the sole dispatch authority for Repair 5
 
 **Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md)
 

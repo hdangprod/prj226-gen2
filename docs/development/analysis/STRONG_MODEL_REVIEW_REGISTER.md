@@ -9,16 +9,16 @@
 **ENG-011 Lifecycle Status:**
 - Task Packet: [ENG-011 Task Packet Revision 2](../tasks/ENG-011-observability-failure-recovery-hardening.md)
 - Formal DoR Result: [Revision 2](ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS`; revision 1 `PASS` remains historical for its prior scope
-- Finding Status: `ENG-011-DOR-R001` through `R006 CLOSED` historically; `ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART`; `ENG-011-R2-SOR-R001` through `R009 ACCEPTED / BOUND TO REPAIR 3`; `ENG-011-R3-DV-R001` through `R004 ACCEPTED / BLOCKING / BOUND TO REPAIR 4` ([Controller Disposition](ENG-011_REPAIR3_DETERMINISTIC_FINDING_DISPOSITION_2026-08-28.md))
-- Task State: `AUTHORIZED / REPAIR 4 DISPATCHED`
+- Finding Status: `ENG-011-DOR-R001` through `R006 CLOSED` historically; `ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART`; `ENG-011-R2-SOR-R001` through `R009 ACCEPTED / BOUND TO REPAIR 3`; `ENG-011-R3-DV-R001` through `R004 ACCEPTED / BLOCKING / BOUND TO REPAIR 4`; `R4-CONTROLLER-R001` through `R004 ACCEPTED / BLOCKING / BOUND TO REPAIR 5` ([Controller Disposition](ENG-011_REPAIR4_DETERMINISTIC_FINDING_DISPOSITION_2026-08-28.md))
+- Task State: `AUTHORIZED / REPAIR 5 DISPATCHED`
 - Original Builder: `ABORTED / STARTUP CONTAMINATED / NO CANDIDATE / NON-OPERATIVE` (`eng-011-builder`, `/private/tmp/prj226-eng011-builder` preserved)
-- Dispatch Status: `AUTHORIZED / REPAIR 4 DURABLY DISPATCHED`
+- Dispatch Status: `AUTHORIZED / REPAIR 5 DURABLY DISPATCHED`
 - Delivery Record: [ENG-011 Delivery Record](../delivery/ENG-011-observability-failure-recovery-hardening.md)
-- Current Builder: `ENG-011 REPAIR 4 BUILDER`
+- Current Builder: `ENG-011 REPAIR 5 BUILDER`
 - Builder Authority: `ACTIVE / EXCLUSIVE WRITE AUTHORITY OVER THE EXACT 19-PATH WRITE LOCK`
-- Builder Branch: `eng-011-builder-repair-4`
-- Builder Worktree: `/private/tmp/prj226-eng011-builder-repair-4`
-- Implementation State: `REPAIR-3 CANDIDATE FROZEN / REPAIR 4 NOT STARTED`
+- Builder Branch: `eng-011-builder-repair-5`
+- Builder Worktree: `/private/tmp/prj226-eng011-builder-repair-5`
+- Implementation State: `REPAIR-4 CANDIDATE FROZEN / REPAIR 5 NOT STARTED`
 - Migration: `NO MIGRATION`
 - Human Reserved: `NOT REQUIRED`
 
