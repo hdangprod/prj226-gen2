@@ -10,19 +10,19 @@
 
 **Formal DoR:** [Revision 1](../analysis/ENG-011_FORMAL_DoR_REV1_2026-08-27.md) — `PASS`; `ENG-011-DOR-R001` through `R006 CLOSED`
 
-**Current lifecycle state:** `READY / BUILDER RESTART 1 DISPATCHED / NOT YET IMPLEMENTED`
+**Current lifecycle state:** `READY / REPAIR 1 DISPATCHED / NOT YET IMPLEMENTED`
 
-**Builder dispatch:** `AUTHORIZED / RESTART 1`; the governance commit containing this record is the sole dispatch authority
+**Builder dispatch:** `AUTHORIZED / REPAIR 1`; the governance commit containing this record is the sole dispatch authority
 
-**Current Builder:** `ENG-011 BUILDER RESTART 1`
+**Current Builder:** `ENG-011 REPAIR 1 BUILDER`
 
-**Builder branch:** `eng-011-builder-restart-1`
+**Builder branch:** `eng-011-builder-repair-1`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-restart-1`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-1`
 
 **Builder authority:** `ACTIVE / BOUNDED TO THE EXACT 12-PATH WRITE LOCK`
 
-**Implementation state:** `NOT YET STARTED IN FRESH RESTART WORKTREE`
+**Implementation state:** `NOT YET STARTED IN FRESH REPAIR 1 WORKTREE`
 
 **Human Reserved:** `NOT REQUIRED`
 
@@ -43,10 +43,15 @@
 | Original dispatch commit | `f1d7d308128b7dd2d2a25cf726cdc75a0743c39a` |
 | Original Builder status | `ABORTED / STARTUP CONTAMINATED / NO CANDIDATE / NON-OPERATIVE` (`eng-011-builder`, `/private/tmp/prj226-eng011-builder` preserved) |
 | Startup finding | `ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART` ([Controller Disposition](../analysis/ENG-011_BUILDER_STARTUP_CONTAMINATION_DISPOSITION_2026-08-28.md)) |
-| Restart 1 dispatch authority | The single governance-only commit containing this Delivery Record |
-| Fresh Builder branch | `eng-011-builder-restart-1` |
-| Fresh Builder worktree | `/private/tmp/prj226-eng011-builder-restart-1` |
-| Candidate identity | NONE |
+| Restart 1 dispatch commit | `685c2e836db8464261fe3a2c2c0b14990eda3871` |
+| Candidate 1 commit | `8baa7808fa3dcd6e0475d9176e124973959d52d7` (tree `c31614ff730ae95e20f684c24e9567541bd1ddca`) |
+| Candidate 1 disposition | `FROZEN / UNACCEPTED / HISTORICAL EVIDENCE ONLY / NON-CANONICAL` |
+| Candidate 1 typecheck finding | `ENG-011-C1-DV-R001` (`ACCEPTED / BLOCKING / OPEN FOR REPAIR 1`) ([Finding Disposition](../analysis/ENG-011_CANDIDATE1_TYPECHECK_FINDING_DISPOSITION_2026-08-28.md)) |
+| Prior aggregate mismatch | `BUILDER_REPORT_EVIDENCE_MISMATCH_ONLY / CLOSED` (canonical aggregate: `dd99fcdd6c70f9f60e7718afaef6a7d88968aee526639903330f61fa05324381`) |
+| Repair 1 dispatch authority | The single governance-only commit containing this Delivery Record |
+| Fresh Builder branch | `eng-011-builder-repair-1` |
+| Fresh Builder worktree | `/private/tmp/prj226-eng011-builder-repair-1` |
+| Candidate identity | NONE (Candidate 1 unaccepted; Repair 1 candidate not yet created) |
 | Push | Not authorized / not performed |
 
 ## Authorized write lock
