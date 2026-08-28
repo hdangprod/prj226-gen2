@@ -8,29 +8,29 @@
 
 **Controller planning revision:** 1
 
-**Current task state:** `READY / DISPATCHED / NOT YET IMPLEMENTED`
+**Current task state:** `READY / BUILDER RESTART 1 DISPATCHED / NOT YET IMPLEMENTED`
 
 **Formal DoR revision 1:** `PASS`
 
 **READY:** `YES`
 
-**Current Builder:** `ENG-011 BUILDER`
+**Current Builder:** `ENG-011 BUILDER RESTART 1`
 
 **Builder authority:** `ACTIVE / BOUNDED TO THE EXACT 12-PATH WRITE LOCK`
 
-**Implementation:** `NOT YET STARTED`
+**Implementation:** `NOT YET STARTED IN FRESH RESTART WORKTREE`
 
 **Human Reserved:** `NOT REQUIRED`
 
 **Migration:** `NO MIGRATION`
 
-**Next required role:** `ENG-011 BUILDER`
+**Next required role:** `ENG-011 BUILDER RESTART 1`
 
-**Builder branch:** `eng-011-builder`
+**Builder branch:** `eng-011-builder-restart-1`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-restart-1`
 
-**Durable dispatch:** `AUTHORIZED`; the governance commit containing this record is the sole dispatch authority
+**Durable dispatch:** `AUTHORIZED / RESTART 1`; the governance commit containing this record is the sole dispatch authority for Builder Restart 1
 
 **Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 1](../analysis/ENG-011_FORMAL_DoR_REV1_2026-08-27.md)
 
@@ -44,9 +44,9 @@
 
 ## Durable Builder dispatch
 
-The Controller has authorized one Standard Delivery Builder from the governance commit containing this section. The dispatch consumes Task Packet revision 1 and Formal DoR revision 1 `PASS`; all findings `ENG-011-DOR-R001` through `R006` are `CLOSED`.
+The Controller has authorized one Standard Delivery Builder execution restart (`ENG-011 BUILDER RESTART 1`) from the governance commit containing this section. The original Builder on branch `eng-011-builder` in worktree `/private/tmp/prj226-eng011-builder` aborted prior to implementation due to pre-start worktree contamination (`ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART`; candidate `NONE`; uncommitted worktree preserved unchanged as forensic evidence).
 
-The Builder receives exclusive write authority only for the exact 12 paths below. Recovery scope is classification and evidence only. Retry remains an explicit caller/user action; automatic authoritative mutation retry, rollback, compensation, fallback, queues, and recovery orchestration are prohibited. DATA-001 prohibits user content, Knowledge content, model output, raw errors, stacks, SQL, headers, credentials, and provider-private data in operational evidence. The implementation remains provider-neutral and Cloudflare-native inside the existing deployable; no Sentry, OpenTelemetry, external telemetry service, new service, Worker, queue, schema, persistence, SLO, deployment, or paid/production action is authorized.
+This restart consumes Task Packet revision 1 and Formal DoR revision 1 `PASS`; all findings `ENG-011-DOR-R001` through `R006` remain `CLOSED`. The fresh Builder receives exclusive write authority only for the exact 12 paths below. Recovery scope is classification and evidence only. Retry remains an explicit caller/user action; automatic authoritative mutation retry, rollback, compensation, fallback, queues, and recovery orchestration are prohibited. DATA-001 prohibits user content, Knowledge content, model output, raw errors, stacks, SQL, headers, credentials, and provider-private data in operational evidence. The implementation remains provider-neutral and Cloudflare-native inside the existing deployable; no Sentry, OpenTelemetry, external telemetry service, new service, Worker, queue, schema, persistence, SLO, deployment, or paid/production action is authorized.
 
 Migration remains `NO MIGRATION`; `migrations/0001_authoritative_state.sql` is locked to Git blob `5a50e2b216f824ff02ebf09e803a6c25a43bcfe0` and SHA-256 `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`. Worktree provisioning and a clean startup audit do not start implementation.
 

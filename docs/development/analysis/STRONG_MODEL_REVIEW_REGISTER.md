@@ -3,21 +3,22 @@
 **Artifact class:** OPERATIONAL / REGISTER
 **Authority:** NON-CANONICAL
 **Lifecycle:** ACTIVE
-**Last updated:** 2026-08-27
+**Last updated:** 2026-08-28
 **Purpose:** Comprehensive register of unresolved, inferred, or disputed engineering design issues requiring stronger-model adjudication before task dispatch.
 
 **ENG-011 Lifecycle Status:**
 - Task Packet: [ENG-011 Task Packet Revision 1](../tasks/ENG-011-observability-failure-recovery-hardening.md)
 - Formal DoR Result: `PASS` ([Formal DoR Revision 1](ENG-011_FORMAL_DoR_REV1_2026-08-27.md))
-- Finding Status: `ENG-011-DOR-R001` through `R006 CLOSED`
-- Task State: `READY / DISPATCHED / NOT YET IMPLEMENTED`
-- Dispatch Status: `AUTHORIZED / DURABLY RECORDED`
+- Finding Status: `ENG-011-DOR-R001` through `R006 CLOSED`; `ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART` ([Controller Disposition](ENG-011_BUILDER_STARTUP_CONTAMINATION_DISPOSITION_2026-08-28.md))
+- Task State: `READY / BUILDER RESTART 1 DISPATCHED / NOT YET IMPLEMENTED`
+- Original Builder: `ABORTED / STARTUP CONTAMINATED / NO CANDIDATE / NON-OPERATIVE` (`eng-011-builder`, `/private/tmp/prj226-eng011-builder` preserved)
+- Dispatch Status: `AUTHORIZED / DURABLY RECORDED / RESTART 1`
 - Delivery Record: [ENG-011 Delivery Record](../delivery/ENG-011-observability-failure-recovery-hardening.md)
-- Current Builder: `ENG-011 BUILDER`
+- Current Builder: `ENG-011 BUILDER RESTART 1`
 - Builder Authority: `ACTIVE / BOUNDED TO THE EXACT 12-PATH WRITE LOCK`
-- Builder Branch: `eng-011-builder`
-- Builder Worktree: `/private/tmp/prj226-eng011-builder`
-- Implementation State: `NOT YET STARTED`
+- Builder Branch: `eng-011-builder-restart-1`
+- Builder Worktree: `/private/tmp/prj226-eng011-builder-restart-1`
+- Implementation State: `NOT YET STARTED IN FRESH RESTART WORKTREE`
 - Migration: `NO MIGRATION`
 - Human Reserved: `NOT REQUIRED`
 

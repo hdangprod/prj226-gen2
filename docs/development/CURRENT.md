@@ -4,7 +4,7 @@
 
 **Lifecycle status:** ACTIVE
 
-**Last updated:** 2026-08-27
+**Last updated:** 2026-08-28
 
 **Decision owner:** `hdangprod`
 
@@ -27,7 +27,7 @@
 - **C7 — Engineering-Entry Readiness:** COMPLETE
 - **G7 — Engineering-Entry Readiness:** APPROVED BY HUMAN
 - **Runtime Architecture Phase:** COMPLETE — Runtime Architecture revision 1 approved by human through `GOV-017`.
-- **Engineering Phase:** AUTHORIZED BY HUMAN through `GOV-018`; `ENG-001` through `ENG-010` are complete and retain their accepted canonical identities. `ENG-010` Repair 5 candidate `1650008aa01f152f6aff4bacd9c6d19ab4531545`, tree `1ee87d345ee9ceed3bc301dbc9f42b3034655758` is `DONE / ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFIED / GOVERNANCE-CLOSED` following deterministic `PASS` (517 test executions across all 16 Vitest configs), semantic review `GREEN` (0 blocking findings), canonical fast-forward integration, independent post-integration canonical verification `PASS`, and Controller final closure ([Post-Integration Controller Final Closure](analysis/ENG-010_POST_INTEGRATION_CONTROLLER_FINAL_CLOSURE_2026-08-27.md)). All prior failed candidates (Candidate 1, Repairs 1–4) remain frozen, unaccepted, and non-canonical. `ENG-011` Task Packet revision 1 and Formal DoR revision 1 are complete with `PASS`; ENG-011 is `READY / DISPATCHED / NOT YET IMPLEMENTED`, Human Reserved `NOT REQUIRED`, and `NO MIGRATION`. Current Builder is `ENG-011 BUILDER`, with authority bounded to the exact 12-path write lock ([Delivery Record](delivery/ENG-011-observability-failure-recovery-hardening.md)).
+- **Engineering Phase:** AUTHORIZED BY HUMAN through `GOV-018`; `ENG-001` through `ENG-010` are complete and retain their accepted canonical identities. `ENG-010` Repair 5 candidate `1650008aa01f152f6aff4bacd9c6d19ab4531545`, tree `1ee87d345ee9ceed3bc301dbc9f42b3034655758` is `DONE / ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFIED / GOVERNANCE-CLOSED` following deterministic `PASS` (517 test executions across all 16 Vitest configs), semantic review `GREEN` (0 blocking findings), canonical fast-forward integration, independent post-integration canonical verification `PASS`, and Controller final closure ([Post-Integration Controller Final Closure](analysis/ENG-010_POST_INTEGRATION_CONTROLLER_FINAL_CLOSURE_2026-08-27.md)). All prior failed candidates (Candidate 1, Repairs 1–4) remain frozen, unaccepted, and non-canonical. `ENG-011` Task Packet revision 1 and Formal DoR revision 1 are complete with `PASS`; original Builder on `eng-011-builder` aborted due to pre-start worktree contamination (`ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART`; candidate `NONE`; uncommitted worktree preserved unchanged as forensic evidence); ENG-011 is `READY / BUILDER RESTART 1 DISPATCHED / NOT YET IMPLEMENTED`, Human Reserved `NOT REQUIRED`, and `NO MIGRATION`. Current Builder is `ENG-011 BUILDER RESTART 1`, with authority bounded to the exact 12-path write lock ([Delivery Record](delivery/ENG-011-observability-failure-recovery-hardening.md)).
 - **Engineering work:** AUTHORIZED only within `GOV-018`, the approved Product Foundation and Runtime Architecture, the Delivery Contract, and a valid Ready Task Packet.
 - **Runtime implementation:** AUTHORIZED within that bounded Engineering scope; no implementation task is `RUNNING`.
 - **Production deployment and paid-service activation:** NOT AUTHORIZED (PROHIBITED)
@@ -73,7 +73,7 @@
 - **Runtime Architecture baseline:** [Liam v1 Runtime Architecture Baseline, revision 1](../architecture/RUNTIME_ARCHITECTURE.md) is `CANONICAL / APPROVED` through human disposition `GOV-017` by `github:hdangprod` on 2026-08-09. The original `ARCHITECTURE REVIEW: NEEDS FIX` findings `AR-F001` and `AR-F002` were repaired; `ARCHITECTURE TARGETED RECHECK: PASS` resolved both. Approval does not authorize engineering.
 - **Engineering Phase authorization:** `GOV-018` is APPROVED by `github:hdangprod` on 2026-08-09. It separately authorizes implementation of the approved Liam v1 Product Foundation and Runtime Architecture under Delivery Contract revision 1 while preserving product, architecture, production, paid-service, security, destructive-action, and control-plane Human Reserved boundaries.
 - **Engineering readiness and plan:** [Engineering Plan revision 1](ENGINEERING_PLAN.md) records `ENGINEERING DoR: PASS`, the implementation obligations and Task DAG, exact evidence rules, concurrency boundaries, and the first execution wave. It is `OPERATIONAL / ACTIVE` and cannot expand `GOV-018` or any approved product or architecture authority.
-- **Engineering task state:** `ENG-001` through `ENG-010` are `DONE`; their accepted identities and closure evidence remain unchanged. `ENG-010` Repair 5 candidate `1650008aa01f152f6aff4bacd9c6d19ab4531545`, tree `1ee87d345ee9ceed3bc301dbc9f42b3034655758` is `DONE / ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFIED / GOVERNANCE-CLOSED`. All ENG-010 findings are closed. `ENG-011` planning findings `ENG-011-DOR-R001` through `R006` are closed; Task Packet revision 1 is `READY / DISPATCHED / NOT YET IMPLEMENTED`. Current Builder is `ENG-011 BUILDER`; active authority is exclusive to the exact 12 locked paths.
+- **Engineering task state:** `ENG-001` through `ENG-010` are `DONE`; their accepted identities and closure evidence remain unchanged. `ENG-010` Repair 5 candidate `1650008aa01f152f6aff4bacd9c6d19ab4531545`, tree `1ee87d345ee9ceed3bc301dbc9f42b3034655758` is `DONE / ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFIED / GOVERNANCE-CLOSED`. All ENG-010 findings are closed. `ENG-011` planning findings `ENG-011-DOR-R001` through `R006` are closed; original Builder aborted due to pre-start worktree contamination (`ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART`; candidate `NONE`; uncommitted worktree preserved unchanged as forensic evidence); Task Packet revision 1 is `READY / BUILDER RESTART 1 DISPATCHED / NOT YET IMPLEMENTED`. Current Builder is `ENG-011 BUILDER RESTART 1`; active authority is exclusive to the exact 12 locked paths.
 
 ## Authorized work
 
@@ -81,7 +81,7 @@ The Generation 2 Foundation Program is complete through human G7 disposition `GO
 
 This snapshot reflects authorization recorded in approved governance artifacts; it does not create, extend, or approve authorization.
 
-**Current stage state:** Generation 2 Foundation Program — COMPLETE; Runtime Architecture Phase — COMPLETE; Engineering Phase — AUTHORIZED; Engineering planning — ACTIVE; `ENG-001` through `ENG-010` COMPLETE; ENG-011 Task Packet revision 1 and Formal DoR revision 1 `PASS`; ENG-011 `READY / DISPATCHED / NOT YET IMPLEMENTED`; Current Builder `ENG-011 BUILDER`; branch `eng-011-builder`; worktree `/private/tmp/prj226-eng011-builder`; Human Reserved `NOT REQUIRED`; migration `NO MIGRATION`; push `NOT PERFORMED`
+**Current stage state:** Generation 2 Foundation Program — COMPLETE; Runtime Architecture Phase — COMPLETE; Engineering Phase — AUTHORIZED; Engineering planning — ACTIVE; `ENG-001` through `ENG-010` COMPLETE; ENG-011 Task Packet revision 1 and Formal DoR revision 1 `PASS`; ENG-011 `READY / BUILDER RESTART 1 DISPATCHED / NOT YET IMPLEMENTED`; original Builder on `eng-011-builder` `ABORTED / NON-OPERATIVE`; Current Builder `ENG-011 BUILDER RESTART 1`; branch `eng-011-builder-restart-1`; worktree `/private/tmp/prj226-eng011-builder-restart-1`; Human Reserved `NOT REQUIRED`; migration `NO MIGRATION`; push `NOT PERFORMED`
 
 **Current Engineering authority:** `GOV-018` — APPROVED BY HUMAN on 2026-08-09.
 **Engineering gate:** None created or implied. Task readiness and completion are governed by Delivery Contract revision 1 and do not approve product, architecture, production release, or another gate.
@@ -97,7 +97,7 @@ This snapshot reflects authorization recorded in approved governance artifacts; 
 
 **Foundation gates:** C1–C7 are COMPLETE; G1–G7 are APPROVED BY HUMAN. No Foundation gate remains pending.
 
-**Next executable work:** `ENG-011 BUILDER` may begin only inside `/private/tmp/prj226-eng011-builder` on branch `eng-011-builder`, bounded to the exact 12-path write lock and all Task Packet revision 1 prohibitions.
+**Next executable work:** `ENG-011 BUILDER RESTART 1` may begin only inside `/private/tmp/prj226-eng011-builder-restart-1` on branch `eng-011-builder-restart-1`, bounded to the exact 12-path write lock and all Task Packet revision 1 prohibitions.
 
 ## Explicit prohibitions
 

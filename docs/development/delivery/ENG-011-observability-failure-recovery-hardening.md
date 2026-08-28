@@ -10,19 +10,19 @@
 
 **Formal DoR:** [Revision 1](../analysis/ENG-011_FORMAL_DoR_REV1_2026-08-27.md) — `PASS`; `ENG-011-DOR-R001` through `R006 CLOSED`
 
-**Current lifecycle state:** `READY / DISPATCHED / NOT YET IMPLEMENTED`
+**Current lifecycle state:** `READY / BUILDER RESTART 1 DISPATCHED / NOT YET IMPLEMENTED`
 
-**Builder dispatch:** `AUTHORIZED / DURABLY RECORDED`; the governance commit containing this record is the sole dispatch authority
+**Builder dispatch:** `AUTHORIZED / RESTART 1`; the governance commit containing this record is the sole dispatch authority
 
-**Current Builder:** `ENG-011 BUILDER`
+**Current Builder:** `ENG-011 BUILDER RESTART 1`
 
-**Builder branch:** `eng-011-builder`
+**Builder branch:** `eng-011-builder-restart-1`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-restart-1`
 
 **Builder authority:** `ACTIVE / BOUNDED TO THE EXACT 12-PATH WRITE LOCK`
 
-**Implementation state:** `NOT YET STARTED`
+**Implementation state:** `NOT YET STARTED IN FRESH RESTART WORKTREE`
 
 **Human Reserved:** `NOT REQUIRED`
 
@@ -32,7 +32,7 @@
 
 **Governing contract:** [PRJ226 Generation 2 Delivery Contract](../../../development/DELIVERY_CONTRACT.md) revision 1
 
-**Recorded:** 2026-08-27
+**Recorded:** 2026-08-28
 
 ## Dispatch identity and topology
 
@@ -40,11 +40,13 @@
 | --- | --- |
 | Canonical READY commit | `f03f2cddcc34c69188d6656c497e76f0920ebe77` |
 | Canonical READY tree | `6f6135299c851337057f1d129598f4d5175d15b9` |
-| READY commit sole parent | `3c19fe5b949c1a2aafd73e514543480781cb861a` |
-| Dispatch authority | The single governance-only commit containing this Delivery Record |
-| Builder branch | `eng-011-builder` |
-| Builder worktree | `/private/tmp/prj226-eng011-builder` |
-| Candidate identity | Not yet created |
+| Original dispatch commit | `f1d7d308128b7dd2d2a25cf726cdc75a0743c39a` |
+| Original Builder status | `ABORTED / STARTUP CONTAMINATED / NO CANDIDATE / NON-OPERATIVE` (`eng-011-builder`, `/private/tmp/prj226-eng011-builder` preserved) |
+| Startup finding | `ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART` ([Controller Disposition](../analysis/ENG-011_BUILDER_STARTUP_CONTAMINATION_DISPOSITION_2026-08-28.md)) |
+| Restart 1 dispatch authority | The single governance-only commit containing this Delivery Record |
+| Fresh Builder branch | `eng-011-builder-restart-1` |
+| Fresh Builder worktree | `/private/tmp/prj226-eng011-builder-restart-1` |
+| Candidate identity | NONE |
 | Push | Not authorized / not performed |
 
 ## Authorized write lock
