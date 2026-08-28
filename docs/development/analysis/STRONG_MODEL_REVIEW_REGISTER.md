@@ -10,15 +10,18 @@
 - Task Packet: [ENG-011 Task Packet Revision 2](../tasks/ENG-011-observability-failure-recovery-hardening.md)
 - Formal DoR Result: [Revision 2](ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS`; revision 1 `PASS` remains historical for its prior scope
 - Finding Status: `ENG-011-DOR-R001` through `R006 CLOSED` historically; `ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART`; `ENG-011-R2-SOR-R001` through `R009 ACCEPTED / BOUND TO REPAIR 3`; `ENG-011-R3-DV-R001` through `R004 ACCEPTED / BLOCKING / BOUND TO REPAIR 4`; `R4-CONTROLLER-R001` through `R004 ACCEPTED / BLOCKING / BOUND TO REPAIR 5` ([Controller Disposition](ENG-011_REPAIR4_DETERMINISTIC_FINDING_DISPOSITION_2026-08-28.md))
-- Task State: `AUTHORIZED / REPAIR 5 DISPATCHED`
+- Task State: `AUTHORIZED / REPAIR 5 DISPATCHED (RESTART-1)`
 - Original Builder: `ABORTED / STARTUP CONTAMINATED / NO CANDIDATE / NON-OPERATIVE` (`eng-011-builder`, `/private/tmp/prj226-eng011-builder` preserved)
-- Dispatch Status: `AUTHORIZED / REPAIR 5 DURABLY DISPATCHED`
+- Original Repair-5 Dispatch: `0af56e186b44396f524183125e5d053ea41e876e`
+- Original Repair-5 Builder: `SUPERSEDED / UNUSED / NO IMPLEMENTATION / NON-OPERATIVE` (`eng-011-builder-repair-5`, `/private/tmp/prj226-eng011-builder-repair-5` preserved clean)
+- Stale Repair-4 Verifier Worktree: `STALE / REGISTERED AT 5f3d0d2 / UNCLEANED DUE TO PRIOR SANDBOX PERMISSION FAILURE / PRESERVED AS NON-OPERATIVE` (`/private/tmp/prj226-eng011-repair4-dv`)
+- Dispatch Status: `AUTHORIZED / REPAIR 5 RESTART-1 DURABLY DISPATCHED`
 - Delivery Record: [ENG-011 Delivery Record](../delivery/ENG-011-observability-failure-recovery-hardening.md)
-- Current Builder: `ENG-011 REPAIR 5 BUILDER`
+- Current Builder: `ENG-011 REPAIR 5 BUILDER RESTART-1`
 - Builder Authority: `ACTIVE / EXCLUSIVE WRITE AUTHORITY OVER THE EXACT 19-PATH WRITE LOCK`
-- Builder Branch: `eng-011-builder-repair-5`
-- Builder Worktree: `/private/tmp/prj226-eng011-builder-repair-5`
-- Implementation State: `REPAIR-4 CANDIDATE FROZEN / REPAIR 5 NOT STARTED`
+- Builder Branch: `eng-011-builder-repair-5-restart-1`
+- Builder Worktree: `/private/tmp/prj226-eng011-builder-repair-5-restart-1`
+- Implementation State: `REPAIR-4 CANDIDATE FROZEN / REPAIR 5 RESTART-1 NOT STARTED`
 - Migration: `NO MIGRATION`
 - Human Reserved: `NOT REQUIRED`
 

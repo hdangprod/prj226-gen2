@@ -2,7 +2,7 @@
 
 **Artifact class:** OPERATIONAL
 
-**Lifecycle status:** ACTIVE / REPAIR 5 DISPATCHED
+**Lifecycle status:** ACTIVE / REPAIR 5 DISPATCHED (RESTART-1)
 
 **Task ID:** `ENG-011`
 
@@ -10,19 +10,21 @@
 
 **Formal DoR:** [Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS`; revision 1 remains historical for its exact prior scope
 
-**Current lifecycle state:** `AUTHORIZED / REPAIR 5 DISPATCHED`
+**Current lifecycle state:** `AUTHORIZED / REPAIR 5 DISPATCHED (RESTART-1)`
 
-**Builder dispatch:** `AUTHORIZED / REPAIR 5 DURABLY DISPATCHED`
+**Builder dispatch:** `AUTHORIZED / REPAIR 5 RESTART-1 DURABLY DISPATCHED`
 
-**Current Builder:** `ENG-011 REPAIR 5 BUILDER`
+**Current Builder:** `ENG-011 REPAIR 5 BUILDER RESTART-1`
 
-**Builder branch:** `eng-011-builder-repair-5`
+**Builder branch:** `eng-011-builder-repair-5-restart-1`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-5`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-5-restart-1`
+
+**Original Repair-5 Builder:** `SUPERSEDED / UNUSED / NO IMPLEMENTATION / NON-OPERATIVE` (`eng-011-builder-repair-5`, `/private/tmp/prj226-eng011-builder-repair-5` preserved clean)
 
 **Builder authority:** `ACTIVE / EXCLUSIVE WRITE AUTHORITY OVER THE EXACT 19-PATH WRITE LOCK`
 
-**Implementation state:** `REPAIR-4 CANDIDATE FROZEN / REPAIR 5 NOT STARTED`
+**Implementation state:** `REPAIR-4 CANDIDATE FROZEN / REPAIR 5 RESTART-1 NOT STARTED`
 
 **Human Reserved:** `NOT REQUIRED`
 
@@ -65,10 +67,13 @@
 | Repair 4 candidate | `5f3d0d22a2cb54850ef9c3fe99137237a4e905e3` (tree `6f2ec94731167460582a1f8c0d3c773364bf6726`; aggregate `ec56f47ddf158860ab06daff494552f08b8facfd643a06b97e9f82da6252c7b5`) |
 | Repair 4 formal verifier gate | `INVALID / VERIFIER STOP CONDITION VIOLATED` ([Finding Disposition](../analysis/ENG-011_REPAIR4_DETERMINISTIC_FINDING_DISPOSITION_2026-08-28.md)) |
 | Repair 4 disposition | `FROZEN / UNACCEPTED / HISTORICAL EVIDENCE ONLY / NON-CANONICAL` ([Controller Disposition](../analysis/ENG-011_REPAIR4_DETERMINISTIC_FINDING_DISPOSITION_2026-08-28.md)) |
-| Repair 5 dispatch authority | The single governance-only commit containing this Delivery Record |
-| Fresh Builder branch | `eng-011-builder-repair-5` |
-| Fresh Builder worktree | `/private/tmp/prj226-eng011-builder-repair-5` |
-| Repair 5 | `AUTHORIZED / DURABLY DISPATCHED` |
+| Repair 5 original dispatch commit | `0af56e186b44396f524183125e5d053ea41e876e` |
+| Original Repair-5 Builder status | `SUPERSEDED / UNUSED / NO IMPLEMENTATION / NON-OPERATIVE` (`eng-011-builder-repair-5`, `/private/tmp/prj226-eng011-builder-repair-5` preserved clean) |
+| Repair 5 Restart-1 dispatch authority | The single governance-only correction commit containing this Delivery Record |
+| Fresh Builder branch | `eng-011-builder-repair-5-restart-1` |
+| Fresh Builder worktree | `/private/tmp/prj226-eng011-builder-repair-5-restart-1` |
+| Repair 5 Restart-1 | `AUTHORIZED / DURABLY DISPATCHED` |
+| Stale Repair-4 verifier worktree | `STALE / REGISTERED AT 5f3d0d2 / UNCLEANED DUE TO PRIOR SANDBOX PERMISSION FAILURE / PRESERVED AS NON-OPERATIVE` (`/private/tmp/prj226-eng011-repair4-dv`) |
 | Push | Not authorized / not performed |
 
 ## Historical Repair-2 write lock
@@ -128,7 +133,7 @@ Every other path is read-only under this durable Controller dispatch. The persis
 
 ## Readiness and dispatch disposition
 
-Current Builder is `ENG-011 REPAIR 5 BUILDER`. Repair 5 is `AUTHORIZED / DURABLY DISPATCHED`; fresh worktree `/private/tmp/prj226-eng011-builder-repair-5` on branch `eng-011-builder-repair-5` is provisioned. Formal DoR revision 2 remains passed for the exact nineteen-path lock; the four blocking deterministic findings (`R4-CONTROLLER-R001` through `R004`) are accepted and bound to Repair 5 under unchanged scope. Implementation has NOT yet started.
+Current Builder is `ENG-011 REPAIR 5 BUILDER RESTART-1`. Repair 5 Restart-1 is `AUTHORIZED / DURABLY DISPATCHED`; fresh worktree `/private/tmp/prj226-eng011-builder-repair-5-restart-1` on branch `eng-011-builder-repair-5-restart-1` is provisioned. The original Repair-5 Builder provisioning (`eng-011-builder-repair-5`, `/private/tmp/prj226-eng011-builder-repair-5`) is preserved clean and marked `SUPERSEDED / UNUSED / NO IMPLEMENTATION / NON-OPERATIVE`. The stale Repair-4 verifier worktree (`/private/tmp/prj226-eng011-repair4-dv`) remains registered at candidate `5f3d0d2` following a failed prior sandboxed cleanup attempt, and is preserved as non-operative. Formal DoR revision 2 remains passed for the exact nineteen-path lock; the four blocking deterministic findings (`R4-CONTROLLER-R001` through `R004`) are accepted and bound to Repair 5 under unchanged scope. Implementation has NOT yet started.
 
 ## Future Repair-5 candidate evidence
 

@@ -32,11 +32,13 @@
 
 **READY:** `YES FOR REPAIR 5`
 
-**Current Builder:** `ENG-011 REPAIR 5 BUILDER`
+**Current Builder:** `ENG-011 REPAIR 5 BUILDER RESTART-1`
 
-**Builder branch:** `eng-011-builder-repair-5`
+**Builder branch:** `eng-011-builder-repair-5-restart-1`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-5`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-5-restart-1`
+
+**Original Repair-5 Builder:** `SUPERSEDED / UNUSED / NO IMPLEMENTATION / NON-OPERATIVE` (`eng-011-builder-repair-5`, `/private/tmp/prj226-eng011-builder-repair-5` preserved clean)
 
 **Human Reserved:** `NOT REQUIRED`
 
@@ -61,7 +63,19 @@ The attempted Repair-4 deterministic verifier observed:
 ### Controller Adjudication
 1. **Formal Gate Invalidation:** The formal verifier execution is ruled **INVALID / STOP CONDITION VIOLATED**. It does not constitute a valid formal deterministic gate pass or failure record.
 2. **Procedural Finding `ENG-011-R4-DV-F001` (`ENVIRONMENT / VERIFIER_ISOLATION_COLLISION`):** Confirmed as a procedural environment finding. It is **NOT** an implementation defect of Repair 4 and is **NOT** bound to Repair-5 Builder implementation scope.
-3. **Candidate Defect Evidence:** Controller independently inspected candidate commit `5f3d0d22a2cb54850ef9c3fe99137237a4e905e3` from immutable repository Git objects and dispositioned all findings below.
+3. **Stale Verifier Worktree Inspection and Factual Disposition:**
+   - Controller inspected the pre-existing `/private/tmp/prj226-eng011-repair4-dv` worktree.
+   - It was bound to Repair-4 candidate `5f3d0d22a2cb54850ef9c3fe99137237a4e905e3` (tree `6f2ec94731167460582a1f8c0d3c773364bf6726`).
+   - Its Git tracked and index state was completely clean.
+   - Remaining untracked files were temporary verifier execution artifacts (`dist`, `.wrangler`, `node_modules` symlink).
+   - During initial Repair-5 dispatch processing, the Controller attempted to clean up those temporary artifacts and remove the worktree registration via `rm` and `git worktree remove`.
+   - That removal attempt failed in the execution environment due to sandbox filesystem permission constraints (`Operation not permitted` on temporary files) and presence of untracked files (`fatal: ... contains modified or untracked files, use --force to delete it`).
+   - Consequently, `/private/tmp/prj226-eng011-repair4-dv` was not successfully removed; it remains present on the filesystem and registered in `git worktree list` at candidate `5f3d0d22a2cb54850ef9c3fe99137237a4e905e3`.
+   - The Controller neither succeeded in deleting it nor intentionally preserved it "untouched without action". Without explicit repository authorization to force-delete external worktrees, and to avoid inventing prior success, the exact observed state is durably recorded:
+     `STALE / REGISTERED AT 5f3d0d2 / UNCLEANED DUE TO PRIOR SANDBOX PERMISSION FAILURE / PRESERVED AS NON-OPERATIVE`.
+   - This uncleaned stale verifier worktree did not mutate candidate Git objects, does not constitute implementation, and has no effect on Repair 5, which operates in separate dedicated worktrees.
+   - The original Repair-4 formal verifier run remains **INVALID** because the verifier itself failed to stop upon encountering the pre-existing worktree collision.
+4. **Candidate Defect Evidence:** Controller independently inspected candidate commit `5f3d0d22a2cb54850ef9c3fe99137237a4e905e3` from immutable repository Git objects and dispositioned all findings below.
 
 ---
 
@@ -183,12 +197,15 @@ Repair 5 must be constructed solely from:
 
 ---
 
-## 8. Durable Repair-5 Dispatch Authorization
+## 8. Durable Repair-5 Dispatch Authorization and Restart-1
 
-The Controller durably authorizes:
-- **Task State:** `AUTHORIZED / REPAIR 5 DISPATCHED`
-- **Current Builder:** `ENG-011 REPAIR 5 BUILDER`
-- **Builder branch:** `eng-011-builder-repair-5`
-- **Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-5`
+The Controller durably records and authorizes:
+- **Original Repair-5 Dispatch:** `0af56e186b44396f524183125e5d053ea41e876e`
+- **Original Builder Provisioning:** `SUPERSEDED / UNUSED / NO IMPLEMENTATION / NON-OPERATIVE` (`eng-011-builder-repair-5` at `/private/tmp/prj226-eng011-builder-repair-5` preserved clean)
+- **Repair-5 Restart-1:** `AUTHORIZED / DURABLY DISPATCHED`
+- **Task State:** `AUTHORIZED / REPAIR 5 DISPATCHED (RESTART-1)`
+- **Current Builder:** `ENG-011 REPAIR 5 BUILDER RESTART-1`
+- **Builder branch:** `eng-011-builder-repair-5-restart-1`
+- **Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-5-restart-1`
 - **Write lock:** Exact nineteen paths (unchanged from Revision 2)
-- **Dispatch authority:** The single governance-only commit containing this record.
+- **Dispatch authority:** The single governance-only correction commit containing this record.
