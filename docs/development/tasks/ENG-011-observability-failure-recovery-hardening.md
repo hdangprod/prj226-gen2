@@ -8,31 +8,33 @@
 
 **Controller planning revision:** 2
 
-**Current task state:** `AUTHORIZED / REPAIR 5 DISPATCHED`
+**Current task state:** `AUTHORIZED / REPAIR 6 DISPATCHED`
 
 **Formal DoR:** [Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS`; revision 1 `PASS` remains historical for the superseded twelve-path execution scope
 
 **READY:** `YES`
 
-**Current Builder:** `ENG-011 REPAIR 5 BUILDER`
+**Current Builder:** `ENG-011 REPAIR 6 BUILDER`
 
 **Builder authority:** `ACTIVE / EXCLUSIVE WRITE AUTHORITY OVER THE EXACT 19-PATH WRITE LOCK`
 
-**Implementation:** `REPAIR-4 CANDIDATE FROZEN / REPAIR 5 NOT STARTED`
+**Implementation:** `REPAIR-5 RESTART-1 CANDIDATE FROZEN / REPAIR 6 NOT STARTED`
 
 **Human Reserved:** `NOT REQUIRED`
 
 **Migration:** `NO MIGRATION`
 
-**Next required role:** `ENG-011 REPAIR 5 BUILDER`
+**Next required role:** `ENG-011 REPAIR 6 BUILDER`
 
-**Builder branch:** `eng-011-builder-repair-5`
+**Builder branch:** `eng-011-builder-repair-6`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-5`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-6`
 
-**Durable dispatch:** `AUTHORIZED / REPAIR 5`; the governance commit containing this record is the sole dispatch authority for Repair 5
+**Durable dispatch:** `AUTHORIZED / REPAIR 6`; the governance commit containing this record is the sole dispatch authority for Repair 6
 
 **Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md)
+
+**Repair-5 Restart-1 finding disposition:** [Controller Deterministic Finding Disposition and Repair-6 Dispatch](../analysis/ENG-011_REPAIR5_RESTART1_DETERMINISTIC_FINDING_DISPOSITION_2026-08-29.md)
 
 **Repair-3 finding disposition:** [Controller Deterministic Finding Disposition](../analysis/ENG-011_REPAIR3_DETERMINISTIC_FINDING_DISPOSITION_2026-08-28.md)
 
@@ -215,9 +217,9 @@ Credential-like strings injected into every prohibited input surface must be abs
 - Observability is ephemeral/platform-native. It is not accepted memory and not a secondary Knowledge store.
 - **NO MIGRATION.** `migrations/0001_authoritative_state.sql` must remain Git blob `5a50e2b216f824ff02ebf09e803a6c25a43bcfe0` and SHA-256 `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`.
 
-## Operative Repair-3 exact write lock
+## Operative revision-2 exact write lock
 
-The Repair-3 Builder receives exclusive ownership of exactly these nineteen paths under this durable Controller dispatch. No wildcard is authorized.
+The Repair-6 Builder receives exclusive ownership of exactly these nineteen paths under this durable Controller dispatch. No wildcard is authorized.
 
 ### Production paths
 

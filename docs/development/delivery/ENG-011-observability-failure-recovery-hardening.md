@@ -2,7 +2,7 @@
 
 **Artifact class:** OPERATIONAL
 
-**Lifecycle status:** ACTIVE / REPAIR 5 DISPATCHED (RESTART-1)
+**Lifecycle status:** ACTIVE / REPAIR 6 DISPATCHED
 
 **Task ID:** `ENG-011`
 
@@ -10,21 +10,21 @@
 
 **Formal DoR:** [Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS`; revision 1 remains historical for its exact prior scope
 
-**Current lifecycle state:** `AUTHORIZED / REPAIR 5 DISPATCHED (RESTART-1)`
+**Current lifecycle state:** `AUTHORIZED / REPAIR 6 DISPATCHED`
 
-**Builder dispatch:** `AUTHORIZED / REPAIR 5 RESTART-1 DURABLY DISPATCHED`
+**Builder dispatch:** `AUTHORIZED / REPAIR 6 DURABLY DISPATCHED`
 
-**Current Builder:** `ENG-011 REPAIR 5 BUILDER RESTART-1`
+**Current Builder:** `ENG-011 REPAIR 6 BUILDER`
 
-**Builder branch:** `eng-011-builder-repair-5-restart-1`
+**Builder branch:** `eng-011-builder-repair-6`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-5-restart-1`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-6`
 
 **Original Repair-5 Builder:** `SUPERSEDED / UNUSED / NO IMPLEMENTATION / NON-OPERATIVE` (`eng-011-builder-repair-5`, `/private/tmp/prj226-eng011-builder-repair-5` preserved clean)
 
 **Builder authority:** `ACTIVE / EXCLUSIVE WRITE AUTHORITY OVER THE EXACT 19-PATH WRITE LOCK`
 
-**Implementation state:** `REPAIR-4 CANDIDATE FROZEN / REPAIR 5 RESTART-1 NOT STARTED`
+**Implementation state:** `REPAIR-5 RESTART-1 CANDIDATE FROZEN / REPAIR 6 NOT STARTED`
 
 **Human Reserved:** `NOT REQUIRED`
 
@@ -34,7 +34,7 @@
 
 **Governing contract:** [PRJ226 Generation 2 Delivery Contract](../../../development/DELIVERY_CONTRACT.md) revision 1
 
-**Recorded:** 2026-08-28
+**Recorded:** 2026-08-29
 
 ## Dispatch identity and topology
 
@@ -73,6 +73,13 @@
 | Fresh Builder branch | `eng-011-builder-repair-5-restart-1` |
 | Fresh Builder worktree | `/private/tmp/prj226-eng011-builder-repair-5-restart-1` |
 | Repair 5 Restart-1 | `AUTHORIZED / DURABLY DISPATCHED` |
+| Repair 5 Restart-1 candidate | `3adbe1ad5ef539b01f1af0c95603f02542000665` (tree `dd6cabe65a78a515340f0a1b8f42facc828c489e`; canonical 17-changed-path aggregate `32c693b1a42b1c149eb6b4c7286821f93fb79157f8ee468c97f71db24906ed00`) |
+| Repair 5 Restart-1 deterministic verification | `VALID / FINDINGS` — `ENG-011-R5R1-DV-R001` through `R003` accepted as blocking ([Controller Disposition](../analysis/ENG-011_REPAIR5_RESTART1_DETERMINISTIC_FINDING_DISPOSITION_2026-08-29.md)) |
+| Repair 5 Restart-1 disposition | `FROZEN / UNACCEPTED / HISTORICAL EVIDENCE ONLY / NON-CANONICAL` |
+| Repair 6 dispatch authority | The single governance-only commit containing this Delivery Record |
+| Repair 6 Builder branch | `eng-011-builder-repair-6` |
+| Repair 6 Builder worktree | `/private/tmp/prj226-eng011-builder-repair-6` |
+| Repair 6 | `AUTHORIZED / DURABLY DISPATCHED` |
 | Stale Repair-4 verifier worktree | `STALE / REGISTERED AT 5f3d0d2 / UNCLEANED DUE TO PRIOR SANDBOX PERMISSION FAILURE / PRESERVED AS NON-OPERATIVE` (`/private/tmp/prj226-eng011-repair4-dv`) |
 | Push | Not authorized / not performed |
 
@@ -95,11 +102,11 @@ The Repair-2 Builder was authorized to write exactly these 12 paths and no other
 
 Every other path was read-only under that historical dispatch. The additional required writes stopped Repair-2 execution and require Controller packet amendment plus Formal DoR re-evaluation.
 
-## Operative Repair-3 write lock
+## Operative revision-2 write lock
 
 The Controller accepted `ENG-011-R2-SOR-R001` through `R009`. R006 proves that `committed` versus `already-committed` survives in the persistence port but is erased by both accepted mutation services before reaching interaction orchestration. The original twelve-path lock is therefore insufficient.
 
-The Repair-3 Builder is authorized to write exactly these 19 paths and no others:
+The Repair-6 Builder is authorized to write exactly these 19 paths and no others:
 
 1. `src/application/ports/observability/operationalEvidence.ts`
 2. `src/application/ports/observability/index.ts`
@@ -133,8 +140,8 @@ Every other path is read-only under this durable Controller dispatch. The persis
 
 ## Readiness and dispatch disposition
 
-Current Builder is `ENG-011 REPAIR 5 BUILDER RESTART-1`. Repair 5 Restart-1 is `AUTHORIZED / DURABLY DISPATCHED`; fresh worktree `/private/tmp/prj226-eng011-builder-repair-5-restart-1` on branch `eng-011-builder-repair-5-restart-1` is provisioned. The original Repair-5 Builder provisioning (`eng-011-builder-repair-5`, `/private/tmp/prj226-eng011-builder-repair-5`) is preserved clean and marked `SUPERSEDED / UNUSED / NO IMPLEMENTATION / NON-OPERATIVE`. The stale Repair-4 verifier worktree (`/private/tmp/prj226-eng011-repair4-dv`) remains registered at candidate `5f3d0d2` following a failed prior sandboxed cleanup attempt, and is preserved as non-operative. Formal DoR revision 2 remains passed for the exact nineteen-path lock; the four blocking deterministic findings (`R4-CONTROLLER-R001` through `R004`) are accepted and bound to Repair 5 under unchanged scope. Implementation has NOT yet started.
+Current Builder is `ENG-011 REPAIR 6 BUILDER`. Repair 6 is `AUTHORIZED / DURABLY DISPATCHED`; fresh worktree `/private/tmp/prj226-eng011-builder-repair-6` on branch `eng-011-builder-repair-6` is provisioned from the governance-only Repair-6 dispatch. Repair-5 Restart-1 candidate `3adbe1ad5ef539b01f1af0c95603f02542000665` is frozen, unaccepted, historical, and non-canonical after valid deterministic verification returned three accepted blocking findings. Formal DoR revision 2 remains passed for the exact nineteen-path lock; the three findings are bound to Repair 6 under unchanged scope. Implementation has NOT yet started.
 
-## Future Repair-5 candidate evidence
+## Future Repair-6 candidate evidence
 
-Repair-5 candidate commit/tree, exact changed-path manifest, deterministic results for `ENG-011-TC-01` through `TC-21` and `R3-TC-01` through `R3-TC-18`, upstream regression results, migration re-verification, independent security/operability review, findings, repairs, and Controller closure remain intentionally empty until produced by a future authorized delivery sequence.
+Repair-6 candidate commit/tree, exact changed-path manifest, deterministic results for `ENG-011-TC-01` through `TC-21`, `R3-TC-01` through `R3-TC-18`, and `ENG-011-R5R1-DV-R001` through `R003`, upstream regression results, migration re-verification, independent security/operability review, findings, repairs, and Controller closure remain intentionally empty until produced by the authorized Repair-6 delivery sequence.
