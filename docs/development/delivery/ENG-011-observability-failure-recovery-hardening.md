@@ -2,7 +2,7 @@
 
 **Artifact class:** OPERATIONAL
 
-**Lifecycle status:** ACTIVE / REPAIR 6 VERIFICATION PENDING
+**Lifecycle status:** ACTIVE / REPAIR 7 DISPATCHED
 
 **Task ID:** `ENG-011`
 
@@ -10,21 +10,21 @@
 
 **Formal DoR:** [Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS`; revision 1 remains historical for its exact prior scope
 
-**Current lifecycle state:** `VERIFICATION PENDING / ATTEMPT 2 REDISPATCHED`
+**Current lifecycle state:** `AUTHORIZED / REPAIR 7 DURABLY DISPATCHED / IMPLEMENTATION NOT YET STARTED`
 
-**Builder dispatch:** `CONSUMED / REPAIR 6 BUILDER COMPLETE`
+**Builder dispatch:** `AUTHORIZED / REPAIR 7`
 
-**Current Builder:** `NONE`
+**Current Builder:** `ENG-011 REPAIR 7 BUILDER`
 
-**Builder branch:** `eng-011-builder-repair-6`
+**Builder branch:** `eng-011-builder-repair-7`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-6`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-7`
 
 **Original Repair-5 Builder:** `SUPERSEDED / UNUSED / NO IMPLEMENTATION / NON-OPERATIVE` (`eng-011-builder-repair-5`, `/private/tmp/prj226-eng011-builder-repair-5` preserved clean)
 
-**Builder authority:** `CONSUMED / NON-OPERATIVE`
+**Builder authority:** `ACTIVE / EXCLUSIVE 19-PATH WRITE AUTHORITY`
 
-**Implementation state:** `REPAIR 6 CANDIDATE IMMUTABLE / UNACCEPTED / NON-CANONICAL / AWAITING DETERMINISTIC VERIFICATION`
+**Implementation state:** `REPAIR 6 CANDIDATE FROZEN / UNACCEPTED / HISTORICAL / NON-CANONICAL; REPAIR 7 NOT YET STARTED`
 
 **Human Reserved:** `NOT REQUIRED`
 
@@ -81,9 +81,16 @@
 | Repair 6 Builder worktree | `/private/tmp/prj226-eng011-builder-repair-6` |
 | Repair 6 | `AUTHORIZED / DURABLY DISPATCHED` |
 | Repair 6 candidate | `dce0f5babc9156383620ba8511f074197995b6a6` (tree `6f13a3c8278b62184476c2cae73f7239c2a4ceff`; Builder-reported aggregate `88c8a46e4860d7646ed9c5a46a8f3ccce60bdbff871cf76ac834bcd85440a5c3`) |
-| Repair 6 candidate status | `IMMUTABLE / UNACCEPTED / NON-CANONICAL / AWAITING DETERMINISTIC VERIFICATION` |
+| Repair 6 candidate status | `FROZEN / UNACCEPTED / HISTORICAL EVIDENCE ONLY / NON-CANONICAL` |
 | Repair 6 verifier Attempt 1 | `BLOCKED BEFORE VERIFICATION / ENG-011-R6-DV-ENV-F001 / NO CANDIDATE DEFECT ESTABLISHED` ([Controller Disposition](../analysis/ENG-011_REPAIR6_VERIFIER_ISOLATION_COLLISION_DISPOSITION_2026-08-29.md)) |
 | Repair 6 verifier Attempt 2 | `AUTHORIZED / REDISPATCHED / PROVISIONED / STARTUP PASS` at `/private/tmp/prj226-eng011-repair6-dv-retry-1` |
+| Repair 6 deterministic verification | `VALID / FINDINGS` — five accepted blocking findings `ENG-011-R6-DV-R001` through `R005` ([Controller Disposition](../analysis/ENG-011_REPAIR6_DETERMINISTIC_FINDING_DISPOSITION_2026-08-29.md)) |
+| Repair 6 disposition | `FROZEN / UNACCEPTED / HISTORICAL EVIDENCE ONLY / NON-CANONICAL` |
+| npm verifier symlink anomaly | `NON-BLOCKING / ENVIRONMENT ONLY / NOT A CANDIDATE DEFECT` |
+| Repair 7 dispatch authority | The single governance-only commit containing this Delivery Record |
+| Repair 7 Builder branch | `eng-011-builder-repair-7` |
+| Repair 7 Builder worktree | `/private/tmp/prj226-eng011-builder-repair-7` |
+| Repair 7 | `AUTHORIZED / DURABLY DISPATCHED / IMPLEMENTATION NOT YET STARTED` |
 | Stale Repair-4 verifier worktree | `STALE / REGISTERED AT 5f3d0d2 / UNCLEANED DUE TO PRIOR SANDBOX PERMISSION FAILURE / PRESERVED AS NON-OPERATIVE` (`/private/tmp/prj226-eng011-repair4-dv`) |
 | Push | Not authorized / not performed |
 
@@ -110,7 +117,7 @@ Every other path was read-only under that historical dispatch. The additional re
 
 The Controller accepted `ENG-011-R2-SOR-R001` through `R009`. R006 proves that `committed` versus `already-committed` survives in the persistence port but is erased by both accepted mutation services before reaching interaction orchestration. The original twelve-path lock is therefore insufficient.
 
-The Repair-6 Builder is authorized to write exactly these 19 paths and no others:
+The Repair-7 Builder is authorized to write exactly these 19 paths and no others:
 
 1. `src/application/ports/observability/operationalEvidence.ts`
 2. `src/application/ports/observability/index.ts`
@@ -144,8 +151,8 @@ Every other path is read-only under this durable Controller dispatch. The persis
 
 ## Readiness and dispatch disposition
 
-Repair-6 Builder work is complete and its authority is consumed. Candidate `dce0f5babc9156383620ba8511f074197995b6a6`, tree `6f13a3c8278b62184476c2cae73f7239c2a4ceff`, remains immutable, unaccepted, non-canonical, and awaiting deterministic verification. Verifier Attempt 1 stopped before verification because of stale Git worktree registration `ENG-011-R6-DV-ENV-F001`; it established no candidate defect. Attempt 2 is provisioned at `/private/tmp/prj226-eng011-repair6-dv-retry-1` directly from the candidate and passed its detached clean startup audit. Formal DoR revision 2, the exact nineteen-path write lock, Human Reserved `NOT REQUIRED`, and `NO MIGRATION` remain unchanged.
+Repair-6 Builder work is complete and its authority is consumed. Candidate `dce0f5babc9156383620ba8511f074197995b6a6`, tree `6f13a3c8278b62184476c2cae73f7239c2a4ceff`, is frozen, unaccepted, historical, and non-canonical after valid Attempt-2 deterministic verification returned findings. The Controller accepted `ENG-011-R6-DV-R001` through `R005` as blocking and bound them to Repair 7. The verifier-only npm symlink accounting anomaly is non-blocking and not a candidate defect. Formal DoR revision 2, the exact nineteen-path write lock, Human Reserved `NOT REQUIRED`, and `NO MIGRATION` remain unchanged. Repair 7 is durably dispatched; implementation has not yet started.
 
-## Future Repair-6 candidate evidence
+## Future Repair-7 candidate evidence
 
-The candidate commit/tree and Builder-reported aggregate are recorded above. Independent aggregate verification, deterministic results for `ENG-011-TC-01` through `TC-21`, `R3-TC-01` through `R3-TC-18`, and `ENG-011-R5R1-DV-R001` through `R003`, upstream regression results, migration re-verification, independent security/operability review, findings, repairs, and Controller closure remain intentionally empty until produced by the authorized Repair-6 delivery sequence.
+Repair-7 candidate commit/tree/aggregate, deterministic results for `ENG-011-TC-01` through `TC-21`, `R3-TC-01` through `R3-TC-18`, `ENG-011-R5R1-DV-R001` through `R003`, and `ENG-011-R6-DV-R001` through `R005`, upstream regressions, migration re-verification, independent security/operability review, findings, repairs, and Controller closure remain intentionally empty until produced by the authorized Repair-7 delivery sequence.

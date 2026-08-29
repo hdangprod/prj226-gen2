@@ -8,35 +8,37 @@
 
 **Controller planning revision:** 2
 
-**Current task state:** `VERIFICATION PENDING / REPAIR 6 VERIFIER ATTEMPT 2 REDISPATCHED`
+**Current task state:** `AUTHORIZED / REPAIR 7 DURABLY DISPATCHED / BUILDER STARTUP PENDING`
 
 **Formal DoR:** [Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS`; revision 1 `PASS` remains historical for the superseded twelve-path execution scope
 
 **READY:** `YES`
 
-**Current Builder:** `NONE / REPAIR 6 BUILDER COMPLETE`
+**Current Builder:** `ENG-011 REPAIR 7 BUILDER`
 
-**Builder authority:** `CONSUMED / NON-OPERATIVE`
+**Builder authority:** `ACTIVE / EXCLUSIVE 19-PATH WRITE AUTHORITY / IMPLEMENTATION NOT YET STARTED`
 
-**Implementation:** `REPAIR 6 CANDIDATE dce0f5babc9156383620ba8511f074197995b6a6 / IMMUTABLE / UNACCEPTED / NON-CANONICAL`
+**Implementation:** `REPAIR 6 CANDIDATE dce0f5babc9156383620ba8511f074197995b6a6 / FROZEN / UNACCEPTED / HISTORICAL / NON-CANONICAL; REPAIR 7 NOT YET STARTED`
 
 **Human Reserved:** `NOT REQUIRED`
 
 **Migration:** `NO MIGRATION`
 
-**Next required role:** `ENG-011 REPAIR 6 — FRESH INDEPENDENT DETERMINISTIC VERIFIER`
+**Next required role:** `ENG-011 REPAIR 7 BUILDER`
 
-**Builder branch:** `eng-011-builder-repair-6`
+**Builder branch:** `eng-011-builder-repair-7`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-6`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-7`
 
-**Durable dispatch:** `AUTHORIZED / REPAIR 6`; the governance commit containing this record is the sole dispatch authority for Repair 6
+**Durable dispatch:** `AUTHORIZED / REPAIR 7`; the governance commit containing this record is the sole dispatch authority for Repair 7
 
 **Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md)
 
 **Repair-5 Restart-1 finding disposition:** [Controller Deterministic Finding Disposition and Repair-6 Dispatch](../analysis/ENG-011_REPAIR5_RESTART1_DETERMINISTIC_FINDING_DISPOSITION_2026-08-29.md)
 
 **Repair-6 verifier redispatch:** [Controller Isolation Collision Disposition](../analysis/ENG-011_REPAIR6_VERIFIER_ISOLATION_COLLISION_DISPOSITION_2026-08-29.md)
+
+**Repair-6 deterministic finding disposition:** [Controller Finding Disposition and Repair-7 Dispatch](../analysis/ENG-011_REPAIR6_DETERMINISTIC_FINDING_DISPOSITION_2026-08-29.md)
 
 **Repair-3 finding disposition:** [Controller Deterministic Finding Disposition](../analysis/ENG-011_REPAIR3_DETERMINISTIC_FINDING_DISPOSITION_2026-08-28.md)
 
@@ -221,7 +223,7 @@ Credential-like strings injected into every prohibited input surface must be abs
 
 ## Operative revision-2 exact write lock
 
-The Repair-6 Builder receives exclusive ownership of exactly these nineteen paths under this durable Controller dispatch. No wildcard is authorized.
+The Repair-7 Builder receives exclusive ownership of exactly these nineteen paths under this durable Controller dispatch. No wildcard is authorized.
 
 ### Production paths
 
@@ -381,8 +383,8 @@ Result is `REVIEW GREEN` or structured findings. Any security/authority boundary
 
 - **Risk:** HIGH — security/data minimization, operability semantics, truthfulness, and broad cross-layer observation.
 - **Planner / Controller:** owns authority, readiness, exact lock, finding routing, and candidate state.
-- **Builder:** `NONE`. Repair-6 Builder execution is complete and its write authority is consumed and non-operative.
-- **Deterministic Verifier:** `ENG-011 REPAIR 6 — FRESH INDEPENDENT DETERMINISTIC VERIFIER`, read-only and exact-candidate bound in the freshly provisioned Attempt-2 worktree.
+- **Builder:** `ENG-011 REPAIR 7 BUILDER`, with exclusive authority over the exact nineteen paths; implementation has not yet started.
+- **Deterministic Verifier:** `NONE` until the Repair-7 Builder produces and freezes a candidate.
 - **Independent Reviewer:** independent of Builder; Strong Semantic Reasoning for security, operability, Human Control, provider isolation, and accepted-state truthfulness.
 - **Concurrency:** one writer; no overlapping source/test writer. Read-only verification/review only under evidence and independence controls.
 
@@ -407,8 +409,8 @@ ENG-011 becomes `DONE` only when:
 9. Controller final closure accepts the candidate; and
 10. current Builder returns to `NONE` and execution authority is consumed.
 
-Task Packet revision 2 remains operative and Ready. Repair-6 candidate `dce0f5babc9156383620ba8511f074197995b6a6` is immutable, unaccepted, non-canonical, and awaiting deterministic verification. Attempt 1 stopped before verification on `ENG-011-R6-DV-ENV-F001`; Attempt 2 is freshly provisioned with startup `PASS`.
+Task Packet revision 2 remains operative and Ready. Repair-6 candidate `dce0f5babc9156383620ba8511f074197995b6a6` is frozen, unaccepted, historical, and non-canonical after valid deterministic verification returned five accepted blocking findings `ENG-011-R6-DV-R001` through `R005`. Repair 7 is durably dispatched under the unchanged nineteen-path lock; implementation has not yet started.
 
 ## Prior planning findings
 
-`ENG-011-DOR-R001` through `ENG-011-DOR-R006` remain closed historical findings for revision 1. Revision 2 binds accepted findings `ENG-011-R2-SOR-R001` through `R009`; [Formal DoR revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) is `PASS`. Four blocking deterministic findings (`ENG-011-R3-DV-R001` through `R004`) were identified during Repair-3 verification, accepted, and bound to Repair 4 ([Controller Disposition](../analysis/ENG-011_REPAIR3_DETERMINISTIC_FINDING_DISPOSITION_2026-08-28.md)). The nineteen-path write lock remains unchanged.
+`ENG-011-DOR-R001` through `ENG-011-DOR-R006` remain closed historical findings for revision 1. Revision 2 binds accepted findings `ENG-011-R2-SOR-R001` through `R009`; [Formal DoR revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) is `PASS`. Repair-6 deterministic findings `ENG-011-R6-DV-R001` through `R005` are accepted, blocking, and bound to Repair 7 ([Controller Disposition](../analysis/ENG-011_REPAIR6_DETERMINISTIC_FINDING_DISPOSITION_2026-08-29.md)). The nineteen-path write lock remains unchanged.

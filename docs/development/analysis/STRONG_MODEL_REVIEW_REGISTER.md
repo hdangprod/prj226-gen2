@@ -9,20 +9,22 @@
 **ENG-011 Lifecycle Status:**
 - Task Packet: [ENG-011 Task Packet Revision 2](../tasks/ENG-011-observability-failure-recovery-hardening.md)
 - Formal DoR Result: [Revision 2](ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS`; revision 1 `PASS` remains historical for its prior scope
-- Finding Status: `ENG-011-DOR-R001` through `R006 CLOSED` historically; `ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART`; `ENG-011-R2-SOR-R001` through `R009 ACCEPTED / BOUND TO REPAIR 3`; `ENG-011-R3-DV-R001` through `R004 ACCEPTED / BLOCKING / BOUND TO REPAIR 4`; `R4-CONTROLLER-R001` through `R004 ACCEPTED / BLOCKING / BOUND TO REPAIR 5`; `ENG-011-R5R1-DV-R001` through `R003 ACCEPTED / BLOCKING / BOUND TO REPAIR 6` ([Controller Disposition](ENG-011_REPAIR5_RESTART1_DETERMINISTIC_FINDING_DISPOSITION_2026-08-29.md))
-- Task State: `AUTHORIZED / REPAIR 6 DISPATCHED`
+- Finding Status: `ENG-011-DOR-R001` through `R006 CLOSED` historically; `ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART`; `ENG-011-R2-SOR-R001` through `R009 ACCEPTED / BOUND TO REPAIR 3`; `ENG-011-R3-DV-R001` through `R004 ACCEPTED / BLOCKING / BOUND TO REPAIR 4`; `R4-CONTROLLER-R001` through `R004 ACCEPTED / BLOCKING / BOUND TO REPAIR 5`; `ENG-011-R5R1-DV-R001` through `R003 ACCEPTED / BLOCKING / BOUND TO REPAIR 6`; `ENG-011-R6-DV-R001` through `R005 ACCEPTED / BLOCKING / BOUND TO REPAIR 7` ([Controller Disposition](ENG-011_REPAIR6_DETERMINISTIC_FINDING_DISPOSITION_2026-08-29.md))
+- Task State: `AUTHORIZED / REPAIR 7 DURABLY DISPATCHED / IMPLEMENTATION NOT YET STARTED`
 - Original Builder: `ABORTED / STARTUP CONTAMINATED / NO CANDIDATE / NON-OPERATIVE` (`eng-011-builder`, `/private/tmp/prj226-eng011-builder` preserved)
 - Original Repair-5 Dispatch: `0af56e186b44396f524183125e5d053ea41e876e`
 - Original Repair-5 Builder: `SUPERSEDED / UNUSED / NO IMPLEMENTATION / NON-OPERATIVE` (`eng-011-builder-repair-5`, `/private/tmp/prj226-eng011-builder-repair-5` preserved clean)
 - Stale Repair-4 Verifier Worktree: `STALE / REGISTERED AT 5f3d0d2 / UNCLEANED DUE TO PRIOR SANDBOX PERMISSION FAILURE / PRESERVED AS NON-OPERATIVE` (`/private/tmp/prj226-eng011-repair4-dv`)
 - Repair-5 Restart-1 Candidate: `3adbe1ad5ef539b01f1af0c95603f02542000665` / `FROZEN / UNACCEPTED / HISTORICAL / NON-CANONICAL`
-- Dispatch Status: `AUTHORIZED / REPAIR 6 DURABLY DISPATCHED`
+- Repair-6 Candidate: `dce0f5babc9156383620ba8511f074197995b6a6` / `FROZEN / UNACCEPTED / HISTORICAL / NON-CANONICAL`
+- Repair-6 Deterministic Verification: `VALID / FINDINGS`; npm symlink accounting anomaly `NON-BLOCKING / ENVIRONMENT ONLY`
+- Dispatch Status: `AUTHORIZED / REPAIR 7 DURABLY DISPATCHED`
 - Delivery Record: [ENG-011 Delivery Record](../delivery/ENG-011-observability-failure-recovery-hardening.md)
-- Current Builder: `ENG-011 REPAIR 6 BUILDER`
+- Current Builder: `ENG-011 REPAIR 7 BUILDER`
 - Builder Authority: `ACTIVE / EXCLUSIVE WRITE AUTHORITY OVER THE EXACT 19-PATH WRITE LOCK`
-- Builder Branch: `eng-011-builder-repair-6`
-- Builder Worktree: `/private/tmp/prj226-eng011-builder-repair-6`
-- Implementation State: `REPAIR-5 RESTART-1 CANDIDATE FROZEN / REPAIR 6 NOT STARTED`
+- Builder Branch: `eng-011-builder-repair-7`
+- Builder Worktree: `/private/tmp/prj226-eng011-builder-repair-7`
+- Implementation State: `REPAIR-6 CANDIDATE FROZEN / REPAIR 7 NOT STARTED`
 - Migration: `NO MIGRATION`
 - Human Reserved: `NOT REQUIRED`
 
