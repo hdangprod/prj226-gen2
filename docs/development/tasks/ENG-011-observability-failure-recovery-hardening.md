@@ -8,31 +8,33 @@
 
 **Controller planning revision:** 2
 
-**Current task state:** `AUTHORIZED / REPAIR 9 DURABLY DISPATCHED / BUILDER STARTUP PENDING`
+**Current task state:** `AUTHORIZED / REPAIR 10 DURABLY DISPATCHED / BUILDER STARTUP PENDING`
 
 **Formal DoR:** [Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS`; revision 1 `PASS` remains historical for the superseded twelve-path execution scope
 
 **READY:** `YES`
 
-**Current Builder:** `ENG-011 REPAIR 9 BUILDER`
+**Current Builder:** `ENG-011 REPAIR 10 BUILDER`
 
 **Builder authority:** `ACTIVE / EXCLUSIVE 19-PATH WRITE AUTHORITY / IMPLEMENTATION NOT YET STARTED`
 
-**Implementation:** `REPAIR 8 CANDIDATE e5acfcc54e35e2fcd6912aa9eb1a64ac6baf821a / FROZEN / UNACCEPTED / HISTORICAL / NON-CANONICAL AFTER VALID DETERMINISTIC FINDINGS; REPAIR 9 NOT YET STARTED`
+**Implementation:** `REPAIR 9 CANDIDATE 8f06d2833fcea3150bb4652fc8766c6ea7a8b37a / FROZEN / UNACCEPTED / HISTORICAL / NON-CANONICAL AFTER VALID DETERMINISTIC FINDINGS; REPAIR 10 NOT YET STARTED`
 
 **Human Reserved:** `NOT REQUIRED`
 
 **Migration:** `NO MIGRATION`
 
-**Next required role:** `ENG-011 REPAIR 9 BUILDER`
+**Next required role:** `ENG-011 REPAIR 10 BUILDER`
 
-**Builder branch:** `eng-011-builder-repair-9`
+**Builder branch:** `eng-011-builder-repair-10`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-9`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-10`
 
-**Durable dispatch:** `AUTHORIZED / REPAIR 9`; the governance commit containing this record is the sole dispatch authority for Repair 9
+**Durable dispatch:** `AUTHORIZED / REPAIR 10`; the governance commit containing this record is the sole dispatch authority for Repair 10
 
 **Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md)
+
+**Repair-9 deterministic finding disposition:** [Controller Deterministic Finding Disposition and Repair-10 Dispatch](../analysis/ENG-011_REPAIR9_DETERMINISTIC_FINDING_DISPOSITION_2026-08-31.md)
 
 **Repair-8 deterministic finding disposition:** [Controller Deterministic Finding Disposition and Repair-9 Dispatch](../analysis/ENG-011_REPAIR8_DETERMINISTIC_FINDING_DISPOSITION_2026-08-31.md)
 

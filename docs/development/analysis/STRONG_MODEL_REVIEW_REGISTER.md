@@ -3,14 +3,14 @@
 **Artifact class:** OPERATIONAL / REGISTER
 **Authority:** NON-CANONICAL
 **Lifecycle:** ACTIVE
-**Last updated:** 2026-08-30
+**Last updated:** 2026-08-31
 **Purpose:** Comprehensive register of unresolved, inferred, or disputed engineering design issues requiring stronger-model adjudication before task dispatch.
 
 **ENG-011 Lifecycle Status:**
 - Task Packet: [ENG-011 Task Packet Revision 2](../tasks/ENG-011-observability-failure-recovery-hardening.md)
 - Formal DoR Result: [Revision 2](ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS`; revision 1 `PASS` remains historical for its prior scope
-- Finding Status: `ENG-011-DOR-R001` through `R006 CLOSED` historically; `ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART`; prior accepted repair findings remain historical obligations; `ENG-011-R7-SOR-R001` through `R003` preserved; `ENG-011-R8-DV-R001` through `R010 ACCEPTED / BLOCKING / BOUND TO REPAIR 9` ([Controller Disposition](ENG-011_REPAIR8_DETERMINISTIC_FINDING_DISPOSITION_2026-08-31.md))
-- Task State: `AUTHORIZED / REPAIR 9 DURABLY DISPATCHED / BUILDER STARTUP PENDING`
+- Finding Status: `ENG-011-DOR-R001` through `R006 CLOSED` historically; `ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART`; prior accepted repair findings remain historical obligations; `ENG-011-R7-SOR-R001` through `R003` preserved; `ENG-011-R8-DV-R001` through `R010` preserved; `ENG-011-R9-DV-R001` through `R004 ACCEPTED / BLOCKING / BOUND TO REPAIR 10`; `ENG-011-R9-DV-R005 ACCEPTED / NON-BLOCKING / PROCEDURAL` ([Controller Disposition](ENG-011_REPAIR9_DETERMINISTIC_FINDING_DISPOSITION_2026-08-31.md))
+- Task State: `AUTHORIZED / REPAIR 10 DURABLY DISPATCHED / BUILDER STARTUP PENDING`
 - Original Builder: `ABORTED / STARTUP CONTAMINATED / NO CANDIDATE / NON-OPERATIVE` (`eng-011-builder`, `/private/tmp/prj226-eng011-builder` preserved)
 - Original Repair-5 Dispatch: `0af56e186b44396f524183125e5d053ea41e876e`
 - Original Repair-5 Builder: `SUPERSEDED / UNUSED / NO IMPLEMENTATION / NON-OPERATIVE` (`eng-011-builder-repair-5`, `/private/tmp/prj226-eng011-builder-repair-5` preserved clean)
@@ -23,13 +23,15 @@
 - Repair-7 S/O/S Review: `VALID / FINDINGS`; `ENG-011-R7-SOR-R001` through `R003` accepted as blocking
 - Repair-8 Candidate: `e5acfcc54e35e2fcd6912aa9eb1a64ac6baf821a` / `FROZEN / UNACCEPTED / HISTORICAL / NON-CANONICAL`
 - Repair-8 Deterministic Verification: `VALID / FINDINGS`; `ENG-011-R8-DV-R001` through `R010` accepted as blocking
-- Dispatch Status: `AUTHORIZED / REPAIR 9 DURABLY DISPATCHED`
+- Repair-9 Candidate: `8f06d2833fcea3150bb4652fc8766c6ea7a8b37a` / `FROZEN / UNACCEPTED / HISTORICAL / NON-CANONICAL`
+- Repair-9 Deterministic Verification: `VALID / FINDINGS`; `ENG-011-R9-DV-R001` through `R004` accepted as blocking; `ENG-011-R9-DV-R005` procedural
+- Dispatch Status: `AUTHORIZED / REPAIR 10 DURABLY DISPATCHED`
 - Delivery Record: [ENG-011 Delivery Record](../delivery/ENG-011-observability-failure-recovery-hardening.md)
-- Current Builder: `ENG-011 REPAIR 9 BUILDER`
+- Current Builder: `ENG-011 REPAIR 10 BUILDER`
 - Builder Authority: `ACTIVE / EXCLUSIVE WRITE AUTHORITY OVER THE EXACT 19-PATH WRITE LOCK`
-- Builder Branch: `eng-011-builder-repair-9`
-- Builder Worktree: `/private/tmp/prj226-eng011-builder-repair-9`
-- Implementation State: `REPAIR-8 CANDIDATE FROZEN / REPAIR 9 NOT STARTED`
+- Builder Branch: `eng-011-builder-repair-10`
+- Builder Worktree: `/private/tmp/prj226-eng011-builder-repair-10`
+- Implementation State: `REPAIR-9 CANDIDATE FROZEN / REPAIR 10 NOT STARTED`
 - Migration: `NO MIGRATION`
 - Human Reserved: `NOT REQUIRED`
 
