@@ -4,35 +4,35 @@
 
 **Lifecycle status:** ACTIVE
 
-**Task Packet revision:** 2
+**Task Packet revision:** 3
 
 **Controller planning revision:** 2
 
-**Current task state:** `AUTHORIZED / REPAIR 10 DURABLY DISPATCHED / BUILDER STARTUP PENDING`
+**Current task state:** `AUTHORIZED / REPAIR 11 RESTART 1 ELIGIBLE FOR DISPATCH`
 
-**Formal DoR:** [Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS`; revision 1 `PASS` remains historical for the superseded twelve-path execution scope
+**Formal DoR:** [Revision 3](../analysis/ENG-011_FORMAL_DoR_REV3_2026-08-31.md) `PASS`; revision 2 `PASS` remains historical for the superseded nineteen-path execution scope
 
 **READY:** `YES`
 
-**Current Builder:** `ENG-011 REPAIR 10 BUILDER`
+**Current Builder:** `NONE — REPAIR 11 RESTART 1 BUILDER PENDING FRESH DISPATCH`
 
-**Builder authority:** `ACTIVE / EXCLUSIVE 19-PATH WRITE AUTHORITY / IMPLEMENTATION NOT YET STARTED`
+**Builder authority:** `PENDING / EXCLUSIVE 20-PATH WRITE AUTHORITY / IMPLEMENTATION NOT STARTED`
 
-**Implementation:** `REPAIR 9 CANDIDATE 8f06d2833fcea3150bb4652fc8766c6ea7a8b37a / FROZEN / UNACCEPTED / HISTORICAL / NON-CANONICAL AFTER VALID DETERMINISTIC FINDINGS; REPAIR 10 NOT YET STARTED`
+**Implementation:** `REPAIR 11 ORIGINAL DISPATCH STOPPED BEFORE IMPLEMENTATION / NO CANDIDATE; REPAIR 11 RESTART 1 NOT YET STARTED`
 
 **Human Reserved:** `NOT REQUIRED`
 
 **Migration:** `NO MIGRATION`
 
-**Next required role:** `ENG-011 REPAIR 10 BUILDER`
+**Next required role:** `ENG-011 REPAIR 11 RESTART 1 BUILDER`
 
-**Builder branch:** `eng-011-builder-repair-10`
+**Builder branch:** `eng-011-builder-repair-11-restart-1` (to be provisioned only from the fresh restart dispatch)
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-10`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-11-restart-1` (to be provisioned only from the fresh restart dispatch)
 
-**Durable dispatch:** `AUTHORIZED / REPAIR 10`; the governance commit containing this record is the sole dispatch authority for Repair 10
+**Durable dispatch:** `REPAIR 11 ORIGINAL DISPATCH SUPERSEDED FOR EXECUTION / RESTART 1 ELIGIBLE`; the fresh governance-only restart dispatch is the sole future Builder authority
 
-**Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md)
+**Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 3](../analysis/ENG-011_FORMAL_DoR_REV3_2026-08-31.md)
 
 **Repair-9 deterministic finding disposition:** [Controller Deterministic Finding Disposition and Repair-10 Dispatch](../analysis/ENG-011_REPAIR9_DETERMINISTIC_FINDING_DISPOSITION_2026-08-31.md)
 
@@ -51,6 +51,14 @@
 **Governing contract:** [Delivery Contract revision 1](../../../development/DELIVERY_CONTRACT.md)
 
 ## Revision-2 repair scope and readiness boundary
+
+## Revision-3 write-lock amendment and restart boundary
+
+Revision 3 preserves every Revision-2 product, domain, Human Control, architecture, DATA-001, provider, recovery, and migration constraint. It changes only the operative implementation scope: the exact write lock expands from nineteen to twenty paths by adding `tests/application/services/interaction/interactionDeletion.test.ts`.
+
+The original Repair-11 dispatch `e66846a662cdd2513c8863b34c5b7de3ee270170` was stopped before implementation: its Builder startup and eleven historical-candidate non-ancestry checks passed, no source modification or candidate commit exists, and it is not a twelfth failed candidate. The added regression-test path is required because its accepted valid-confirmation test currently omits both the Turn-1 request identity and the distinct Turn-2 observation-context request identity. Under `ENG-011-TC-03`, `ENG-011-TC-12`, and `R3-TC-04`, a valid confirmation must prove distinct identifiable attempts; a missing Turn-1 or Turn-2 request identity therefore fails closed. This is an operationally explicit enforcement of existing Revision-2 authority, not a new Product or Human Control semantic.
+
+The production path set is unchanged. Revision 3 binds the Repair-10 findings unchanged: direction-carried Turn-1 identity is authoritative; any caller-controlled parallel override has no authority; same request replay and missing Turn-1 or Turn-2 request identity fail closed before authorization or deletion; event and ObservationContext provenance require exact constructor-issued object identity; and explicit staging remains mandatory. See [the write-lock insufficiency disposition](../analysis/ENG-011_REPAIR11_WRITE_LOCK_INSUFFICIENCY_DISPOSITION_2026-08-31.md) and [Formal DoR revision 3](../analysis/ENG-011_FORMAL_DoR_REV3_2026-08-31.md).
 
 Repair-2 candidate `49990f306ee67b62ae017f0d63fa556bde06d23a`, tree `b08c1f9d8ffa579a6cda3ed695293658a3697a81`, passed deterministic verification but received nine accepted blocking security/operability/semantic findings, `ENG-011-R2-SOR-R001` through `R009`. It is frozen, unaccepted, historical evidence only, and non-canonical.
 
@@ -221,9 +229,9 @@ Credential-like strings injected into every prohibited input surface must be abs
 - Observability is ephemeral/platform-native. It is not accepted memory and not a secondary Knowledge store.
 - **NO MIGRATION.** `migrations/0001_authoritative_state.sql` must remain Git blob `5a50e2b216f824ff02ebf09e803a6c25a43bcfe0` and SHA-256 `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`.
 
-## Operative revision-2 exact write lock
+## Operative revision-3 exact write lock
 
-The Repair-8 Builder receives exclusive ownership of exactly these nineteen paths under this durable Controller dispatch. No wildcard is authorized.
+The Repair-11 Restart-1 Builder receives exclusive ownership of exactly these twenty paths under the fresh durable Controller dispatch. No wildcard is authorized.
 
 ### Production paths
 
@@ -249,6 +257,9 @@ The Repair-8 Builder receives exclusive ownership of exactly these nineteen path
 17. `tests/application/services/knowledgeProvenance/knowledgeProvenanceService.test.ts`
 18. `tests/integration/d1/projectActionContext/projectActionContextPersistence.test.ts`
 19. `tests/integration/d1/knowledgeProvenance/wranglerLocalD1.test.ts`
+20. `tests/application/services/interaction/interactionDeletion.test.ts`
+
+The twentieth path is limited to updating accepted valid deletion-confirmation regression cases to provide a legitimate Turn-1 request identity and a distinct legitimate Turn-2 observation-context request identity, and to retain substantive negative coverage for same-request replay, missing Turn-1 ID, missing Turn-2 ID, and caller override. It does not authorize any other interaction-test path.
 
 ### Protected/read-only paths
 
@@ -259,7 +270,7 @@ Every path not listed above is protected, including `src/domain/**`, every other
 | Deliverable | Purpose and exact contract | Read/write effect | Dependencies / prohibitions | Required evidence |
 | --- | --- | --- | --- | --- |
 | D1. Operational-evidence port | Closed immutable event/sink contract and safe opaque-ID constructors | New application port only; no domain write | May import type-only application/domain identifiers where necessary; no provider/D1/Cloudflare type | `TC-01`–`TC-05` |
-| D2. Correlated orchestration observations | Emit applicable stage results for each accepted interaction path and preserve fresh-versus-duplicate commit disposition | Observations only; exact Product outcome kind/value and authoritative writes unchanged | Consume ENG-010 and upstream result unions; the narrow result-contract propagation authorized by revision 2 carries no content or new authority | `TC-06`–`TC-16`; `R3-TC-03`–`R3-TC-12` |
+| D2. Correlated orchestration observations | Emit applicable stage results for each accepted interaction path and preserve fresh-versus-duplicate commit disposition | Observations only; exact Product outcome kind/value and authoritative writes unchanged | Consume ENG-010 and upstream result unions; the narrow result-contract propagation authorized by revision 3 carries no content or new authority | `TC-06`–`TC-16`; `R3-TC-03`–`R3-TC-12` |
 | D3. Cloudflare-native emitter | Write one validated structured object to injected console-compatible writer | Ephemeral operational output only | No network, vendor SDK, external service, persistence, or config | `TC-17`–`TC-19` |
 | D4. Security/fail-open hardening | Exclude prohibited material and contain diagnostic failures | No product-semantic side effect | No generalized DLP and no swallowed product failure | `TC-04`, `TC-05`, `TC-18`–`TC-21` |
 | D5. Regression and evidence package | Exact candidate, full upstream regression, migration/path scans, independent review | Delivery Record after dispatch only | No implementation in governance commit | Verification and review contracts below |
@@ -354,7 +365,7 @@ npm ls --all
 The verifier must:
 
 1. count test executions by summing the reported Vitest test counts across every sorted tracked `*vitest.config.ts`; do not hard-code a future total;
-2. prove changed paths are exactly a subset of the revision-2 nineteen-path lock;
+2. prove changed paths are exactly a subset of the revision-3 twenty-path lock;
 3. prove no migration/config/package/lockfile/Worker-entry change;
 4. prove migration blob/SHA-256 identity above;
 5. scan production imports and dependency output for Sentry, OpenTelemetry, external telemetry/analytics, queues, caches, extra services, and network clients;
@@ -409,8 +420,8 @@ ENG-011 becomes `DONE` only when:
 9. Controller final closure accepts the candidate; and
 10. current Builder returns to `NONE` and execution authority is consumed.
 
-Task Packet revision 2 remains operative and Ready. Repair-8 candidate `e5acfcc54e35e2fcd6912aa9eb1a64ac6baf821a`, tree `4d1ce02a9c3c238c0a09e06852baabb5f32217d7`, is frozen, unaccepted, historical, and non-canonical after valid deterministic findings `ENG-011-R8-DV-R001` through `R010`. Repair 9 is durably dispatched under the unchanged nineteen-path lock; implementation has not yet started.
+Task Packet revision 3 is operative and Ready after Formal DoR revision 3 PASS. Repair-11 original dispatch was superseded for execution because its nineteen-path lock was insufficient; its Builder stopped correctly with no implementation and no candidate. Repair-11 Restart 1 remains the next implementation attempt under this exact twenty-path lock.
 
 ## Prior planning findings
 
-`ENG-011-DOR-R001` through `ENG-011-DOR-R006` remain closed historical findings for revision 1. Revision 2 binds accepted findings `ENG-011-R2-SOR-R001` through `R009`; [Formal DoR revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) is `PASS`. Repair-7 S/O/S findings `ENG-011-R7-SOR-R001` through `R003` are preserved. Repair-8 deterministic findings `ENG-011-R8-DV-R001` through `R010` are accepted, blocking, and bound to Repair 9 ([Controller Disposition](../analysis/ENG-011_REPAIR8_DETERMINISTIC_FINDING_DISPOSITION_2026-08-31.md)). The nineteen-path write lock remains unchanged.
+`ENG-011-DOR-R001` through `ENG-011-DOR-R006` remain closed historical findings for revision 1. Revision 2 binds accepted findings `ENG-011-R2-SOR-R001` through `R009`; Repair-7 S/O/S findings `ENG-011-R7-SOR-R001` through `R003`, Repair-8 findings `ENG-011-R8-DV-R001` through `R010`, Repair-9 findings, and Repair-10 findings `ENG-011-R10-DV-R001` through `R003` remain binding. [Formal DoR revision 3](../analysis/ENG-011_FORMAL_DoR_REV3_2026-08-31.md) is `PASS`. The operative lock is exactly twenty paths.
