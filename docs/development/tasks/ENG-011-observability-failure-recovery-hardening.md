@@ -8,15 +8,15 @@
 
 **Controller planning revision:** 2
 
-**Current task state:** `AUTHORIZED / REPAIR 11 RESTART 1 ELIGIBLE FOR DISPATCH`
+**Current task state:** `AUTHORIZED / REPAIR 11 RESTART 1 DURABLY DISPATCHED / BUILDER STARTUP PENDING`
 
 **Formal DoR:** [Revision 3](../analysis/ENG-011_FORMAL_DoR_REV3_2026-08-31.md) `PASS`; revision 2 `PASS` remains historical for the superseded nineteen-path execution scope
 
 **READY:** `YES`
 
-**Current Builder:** `NONE — REPAIR 11 RESTART 1 BUILDER PENDING FRESH DISPATCH`
+**Current Builder:** `ENG-011 REPAIR 11 RESTART 1 BUILDER`
 
-**Builder authority:** `PENDING / EXCLUSIVE 20-PATH WRITE AUTHORITY / IMPLEMENTATION NOT STARTED`
+**Builder authority:** `ACTIVE / EXCLUSIVE 20-PATH WRITE AUTHORITY / IMPLEMENTATION NOT STARTED`
 
 **Implementation:** `REPAIR 11 ORIGINAL DISPATCH STOPPED BEFORE IMPLEMENTATION / NO CANDIDATE; REPAIR 11 RESTART 1 NOT YET STARTED`
 
@@ -26,11 +26,11 @@
 
 **Next required role:** `ENG-011 REPAIR 11 RESTART 1 BUILDER`
 
-**Builder branch:** `eng-011-builder-repair-11-restart-1` (to be provisioned only from the fresh restart dispatch)
+**Builder branch:** `eng-011-builder-repair-11-restart-1`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-11-restart-1` (to be provisioned only from the fresh restart dispatch)
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-11-restart-1`
 
-**Durable dispatch:** `REPAIR 11 ORIGINAL DISPATCH SUPERSEDED FOR EXECUTION / RESTART 1 ELIGIBLE`; the fresh governance-only restart dispatch is the sole future Builder authority
+**Durable dispatch:** `AUTHORIZED / REPAIR 11 RESTART 1`; the governance-only commit containing this dispatch is the sole Builder authority
 
 **Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 3](../analysis/ENG-011_FORMAL_DoR_REV3_2026-08-31.md)
 

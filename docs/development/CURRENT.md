@@ -27,7 +27,7 @@
 - **C7 — Engineering-Entry Readiness:** COMPLETE
 - **G7 — Engineering-Entry Readiness:** APPROVED BY HUMAN
 - **Runtime Architecture Phase:** COMPLETE — Runtime Architecture revision 1 approved by human through `GOV-017`.
-- **Engineering Phase:** AUTHORIZED BY HUMAN through `GOV-018`; `ENG-001` through `ENG-010` are complete and retain their accepted canonical identities. ENG-011 Repair-11 original dispatch stopped correctly before implementation because its nineteen-path lock could not update the protected deletion regression test for the already-bound distinct request-attempt invariant. No Repair-11 candidate exists and the failed candidate set remains eleven. [Task Packet revision 3](tasks/ENG-011-observability-failure-recovery-hardening.md) is operative with an exact twenty-path lock, [Formal DoR revision 3](analysis/ENG-011_FORMAL_DoR_REV3_2026-08-31.md) is `PASS`, and [the Controller disposition](analysis/ENG-011_REPAIR11_WRITE_LOCK_INSUFFICIENCY_DISPOSITION_2026-08-31.md) makes Repair-11 Restart 1 eligible for fresh governance-only dispatch. Human Reserved is `NOT REQUIRED`; migration remains `NO MIGRATION`.
+- **Engineering Phase:** AUTHORIZED BY HUMAN through `GOV-018`; `ENG-001` through `ENG-010` are complete and retain their accepted canonical identities. ENG-011 Repair-11 original dispatch stopped correctly before implementation because its nineteen-path lock could not update the protected deletion regression test for the already-bound distinct request-attempt invariant. No Repair-11 candidate exists and the failed candidate set remains eleven. [Task Packet revision 3](tasks/ENG-011-observability-failure-recovery-hardening.md) is operative with an exact twenty-path lock, [Formal DoR revision 3](analysis/ENG-011_FORMAL_DoR_REV3_2026-08-31.md) is `PASS`, and Repair-11 Restart 1 is durably dispatched by this governance-only commit. Human Reserved is `NOT REQUIRED`; migration remains `NO MIGRATION`.
 - **Engineering work:** AUTHORIZED only within `GOV-018`, the approved Product Foundation and Runtime Architecture, the Delivery Contract, and a valid Ready Task Packet.
 - **Runtime implementation:** AUTHORIZED within that bounded Engineering scope; Repair-11 original dispatch stopped with no implementation candidate; Repair-11 Restart 1 is eligible for fresh governance-only dispatch under the operative Revision-3 twenty-path lock.
 - **Production deployment and paid-service activation:** NOT AUTHORIZED (PROHIBITED)
@@ -97,7 +97,7 @@ This snapshot reflects authorization recorded in approved governance artifacts; 
 
 **Foundation gates:** C1–C7 are COMPLETE; G1–G7 are APPROVED BY HUMAN. No Foundation gate remains pending.
 
-**Next executable work:** issue the governance-only `ENG-011 REPAIR 11 RESTART 1` dispatch, then provision its fresh Builder at `/private/tmp/prj226-eng011-builder-repair-11-restart-1`. Security/operability/semantic review remains unauthorized until a fresh Repair-11 deterministic `PASS`.
+**Next executable work:** `ENG-011 REPAIR 11 RESTART 1 BUILDER` in `/private/tmp/prj226-eng011-builder-repair-11-restart-1`, bound directly to this governance-only dispatch. Security/operability/semantic review remains unauthorized until a fresh Repair-11 deterministic `PASS`.
 
 ## Explicit prohibitions
 

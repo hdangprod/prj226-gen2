@@ -2,7 +2,7 @@
 
 **Artifact class:** OPERATIONAL
 
-**Lifecycle status:** ACTIVE / REPAIR 11 RESTART 1 ELIGIBLE FOR DISPATCH
+**Lifecycle status:** ACTIVE / REPAIR 11 RESTART 1 DISPATCHED
 
 **Task ID:** `ENG-011`
 
@@ -10,11 +10,11 @@
 
 **Formal DoR:** [Revision 3](../analysis/ENG-011_FORMAL_DoR_REV3_2026-08-31.md) `PASS`; revision 2 remains historical for its exact prior scope
 
-**Current lifecycle state:** `AUTHORIZED / REPAIR 11 RESTART 1 ELIGIBLE FOR FRESH DISPATCH`
+**Current lifecycle state:** `AUTHORIZED / REPAIR 11 RESTART 1 DURABLY DISPATCHED / BUILDER STARTUP PENDING`
 
-**Builder dispatch:** `REPAIR 11 ORIGINAL SUPERSEDED FOR EXECUTION / RESTART 1 ELIGIBLE`
+**Builder dispatch:** `AUTHORIZED / REPAIR 11 RESTART 1`
 
-**Current Builder:** `NONE — REPAIR 11 RESTART 1 BUILDER PENDING`
+**Current Builder:** `ENG-011 REPAIR 11 RESTART 1 BUILDER`
 
 **Builder branch:** `eng-011-builder-repair-11-restart-1` (pending fresh provisioning)
 
@@ -22,7 +22,7 @@
 
 **Original Repair-5 Builder:** `SUPERSEDED / UNUSED / NO IMPLEMENTATION / NON-OPERATIVE` (`eng-011-builder-repair-5`, `/private/tmp/prj226-eng011-builder-repair-5` preserved clean)
 
-**Builder authority:** `PENDING / EXCLUSIVE 20-PATH WRITE AUTHORITY`
+**Builder authority:** `ACTIVE / EXCLUSIVE 20-PATH WRITE AUTHORITY`
 
 **Implementation state:** `REPAIR 11 ORIGINAL STOPPED CORRECTLY / NO IMPLEMENTATION / NO CANDIDATE; RESTART 1 NOT YET STARTED`
 
@@ -116,7 +116,9 @@
 | Repair 11 original Builder branch | `eng-011-builder-repair-11` (preserved non-operative) |
 | Repair 11 original Builder worktree | `/private/tmp/prj226-eng011-builder-repair-11` (preserved non-operative) |
 | Repair 11 original dispatch | `SUPERSEDED FOR EXECUTION / WRITE-LOCK INSUFFICIENT / NO IMPLEMENTATION / NO CANDIDATE` ([Disposition](../analysis/ENG-011_REPAIR11_WRITE_LOCK_INSUFFICIENCY_DISPOSITION_2026-08-31.md)) |
-| Repair 11 Restart 1 | `ELIGIBLE FOR FRESH GOVERNANCE-ONLY DISPATCH` under Task Packet revision 3 and Formal DoR revision 3 PASS |
+| Repair 11 Restart 1 dispatch authority | The governance-only commit containing this Delivery Record, under Task Packet revision 3 and Formal DoR revision 3 PASS |
+| Repair 11 Restart 1 Builder branch | `eng-011-builder-repair-11-restart-1` |
+| Repair 11 Restart 1 Builder worktree | `/private/tmp/prj226-eng011-builder-repair-11-restart-1` |
 | Stale Repair-4 verifier worktree | `STALE / REGISTERED AT 5f3d0d2 / UNCLEANED DUE TO PRIOR SANDBOX PERMISSION FAILURE / PRESERVED AS NON-OPERATIVE` (`/private/tmp/prj226-eng011-repair4-dv`) |
 | Push | Not authorized / not performed |
 
