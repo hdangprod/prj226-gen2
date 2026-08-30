@@ -2,7 +2,7 @@
 
 **Artifact class:** OPERATIONAL
 
-**Lifecycle status:** ACTIVE / REPAIR 7 DISPATCHED
+**Lifecycle status:** ACTIVE / REPAIR 8 DISPATCHED
 
 **Task ID:** `ENG-011`
 
@@ -10,21 +10,21 @@
 
 **Formal DoR:** [Revision 2](../analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS`; revision 1 remains historical for its exact prior scope
 
-**Current lifecycle state:** `AUTHORIZED / REPAIR 7 DURABLY DISPATCHED / IMPLEMENTATION NOT YET STARTED`
+**Current lifecycle state:** `AUTHORIZED / REPAIR 8 DURABLY DISPATCHED / BUILDER STARTUP PENDING`
 
-**Builder dispatch:** `AUTHORIZED / REPAIR 7`
+**Builder dispatch:** `AUTHORIZED / REPAIR 8`
 
-**Current Builder:** `ENG-011 REPAIR 7 BUILDER`
+**Current Builder:** `ENG-011 REPAIR 8 BUILDER`
 
-**Builder branch:** `eng-011-builder-repair-7`
+**Builder branch:** `eng-011-builder-repair-8`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-7`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-8`
 
 **Original Repair-5 Builder:** `SUPERSEDED / UNUSED / NO IMPLEMENTATION / NON-OPERATIVE` (`eng-011-builder-repair-5`, `/private/tmp/prj226-eng011-builder-repair-5` preserved clean)
 
 **Builder authority:** `ACTIVE / EXCLUSIVE 19-PATH WRITE AUTHORITY`
 
-**Implementation state:** `REPAIR 6 CANDIDATE FROZEN / UNACCEPTED / HISTORICAL / NON-CANONICAL; REPAIR 7 NOT YET STARTED`
+**Implementation state:** `REPAIR 7 CANDIDATE FROZEN / UNACCEPTED / HISTORICAL / NON-CANONICAL; REPAIR 8 NOT YET STARTED`
 
 **Human Reserved:** `NOT REQUIRED`
 
@@ -34,7 +34,7 @@
 
 **Governing contract:** [PRJ226 Generation 2 Delivery Contract](../../../development/DELIVERY_CONTRACT.md) revision 1
 
-**Recorded:** 2026-08-29
+**Recorded:** 2026-08-30
 
 ## Dispatch identity and topology
 
@@ -90,7 +90,14 @@
 | Repair 7 dispatch authority | The single governance-only commit containing this Delivery Record |
 | Repair 7 Builder branch | `eng-011-builder-repair-7` |
 | Repair 7 Builder worktree | `/private/tmp/prj226-eng011-builder-repair-7` |
-| Repair 7 | `AUTHORIZED / DURABLY DISPATCHED / IMPLEMENTATION NOT YET STARTED` |
+| Repair 7 candidate | `dd1a16ee3a638c20bc7aff9019d052e50ae23000` (tree `b71baa5f084df27efc031b2a4891cf4cec8a4889`; canonical 18-changed-path aggregate `12f94bff7ffeb72daf41f34190b8cbcc7fe0df7d0b70a299f6c871dd8ab31940`) |
+| Repair 7 deterministic verification | `PASS` |
+| Repair 7 independent S/O/S review | `VALID / FINDINGS` — three blocking findings `ENG-011-R7-SOR-R001` through `R003` ([Controller Disposition](../analysis/ENG-011_REPAIR7_SOR_FINDING_DISPOSITION_2026-08-30.md)) |
+| Repair 7 disposition | `FROZEN / UNACCEPTED / HISTORICAL EVIDENCE ONLY / NON-CANONICAL` |
+| Repair 8 dispatch authority | The single governance-only commit containing this Delivery Record |
+| Repair 8 Builder branch | `eng-011-builder-repair-8` |
+| Repair 8 Builder worktree | `/private/tmp/prj226-eng011-builder-repair-8` |
+| Repair 8 | `AUTHORIZED / DURABLY DISPATCHED / BUILDER STARTUP PENDING` |
 | Stale Repair-4 verifier worktree | `STALE / REGISTERED AT 5f3d0d2 / UNCLEANED DUE TO PRIOR SANDBOX PERMISSION FAILURE / PRESERVED AS NON-OPERATIVE` (`/private/tmp/prj226-eng011-repair4-dv`) |
 | Push | Not authorized / not performed |
 
@@ -117,7 +124,7 @@ Every other path was read-only under that historical dispatch. The additional re
 
 The Controller accepted `ENG-011-R2-SOR-R001` through `R009`. R006 proves that `committed` versus `already-committed` survives in the persistence port but is erased by both accepted mutation services before reaching interaction orchestration. The original twelve-path lock is therefore insufficient.
 
-The Repair-7 Builder is authorized to write exactly these 19 paths and no others:
+The Repair-8 Builder is authorized to write exactly these 19 paths and no others:
 
 1. `src/application/ports/observability/operationalEvidence.ts`
 2. `src/application/ports/observability/index.ts`
@@ -151,8 +158,8 @@ Every other path is read-only under this durable Controller dispatch. The persis
 
 ## Readiness and dispatch disposition
 
-Repair-6 Builder work is complete and its authority is consumed. Candidate `dce0f5babc9156383620ba8511f074197995b6a6`, tree `6f13a3c8278b62184476c2cae73f7239c2a4ceff`, is frozen, unaccepted, historical, and non-canonical after valid Attempt-2 deterministic verification returned findings. The Controller accepted `ENG-011-R6-DV-R001` through `R005` as blocking and bound them to Repair 7. The verifier-only npm symlink accounting anomaly is non-blocking and not a candidate defect. Formal DoR revision 2, the exact nineteen-path write lock, Human Reserved `NOT REQUIRED`, and `NO MIGRATION` remain unchanged. Repair 7 is durably dispatched; implementation has not yet started.
+Repair-7 Builder work is complete and its authority is consumed. Candidate `dd1a16ee3a638c20bc7aff9019d052e50ae23000`, tree `b71baa5f084df27efc031b2a4891cf4cec8a4889`, is frozen, unaccepted, historical, and non-canonical after deterministic verification `PASS` and valid independent S/O/S `FINDINGS`. The Controller independently reproduced and accepted `ENG-011-R7-SOR-R001` through `R003` as blocking and bound them to Repair 8 in the [durable finding disposition](../analysis/ENG-011_REPAIR7_SOR_FINDING_DISPOSITION_2026-08-30.md). Formal DoR revision 2, the exact nineteen-path write lock, Human Reserved `NOT REQUIRED`, and `NO MIGRATION` remain unchanged. Repair 8 is durably dispatched; Builder startup is pending; implementation has not yet started.
 
-## Future Repair-7 candidate evidence
+## Future Repair-8 candidate evidence
 
-Repair-7 candidate commit/tree/aggregate, deterministic results for `ENG-011-TC-01` through `TC-21`, `R3-TC-01` through `R3-TC-18`, `ENG-011-R5R1-DV-R001` through `R003`, and `ENG-011-R6-DV-R001` through `R005`, upstream regressions, migration re-verification, independent security/operability review, findings, repairs, and Controller closure remain intentionally empty until produced by the authorized Repair-7 delivery sequence.
+Repair-8 candidate commit/tree/aggregate, deterministic results for `ENG-011-TC-01` through `TC-21`, `R3-TC-01` through `R3-TC-18`, preservation of prior accepted obligations, repair evidence for `ENG-011-R7-SOR-R001` through `R003`, upstream regressions, migration re-verification, independent security/operability review, findings, repairs, and Controller closure remain intentionally empty until produced by the authorized Repair-8 delivery sequence.

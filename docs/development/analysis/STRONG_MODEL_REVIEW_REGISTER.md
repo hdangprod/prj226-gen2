@@ -3,14 +3,14 @@
 **Artifact class:** OPERATIONAL / REGISTER
 **Authority:** NON-CANONICAL
 **Lifecycle:** ACTIVE
-**Last updated:** 2026-08-29
+**Last updated:** 2026-08-30
 **Purpose:** Comprehensive register of unresolved, inferred, or disputed engineering design issues requiring stronger-model adjudication before task dispatch.
 
 **ENG-011 Lifecycle Status:**
 - Task Packet: [ENG-011 Task Packet Revision 2](../tasks/ENG-011-observability-failure-recovery-hardening.md)
 - Formal DoR Result: [Revision 2](ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS`; revision 1 `PASS` remains historical for its prior scope
-- Finding Status: `ENG-011-DOR-R001` through `R006 CLOSED` historically; `ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART`; `ENG-011-R2-SOR-R001` through `R009 ACCEPTED / BOUND TO REPAIR 3`; `ENG-011-R3-DV-R001` through `R004 ACCEPTED / BLOCKING / BOUND TO REPAIR 4`; `R4-CONTROLLER-R001` through `R004 ACCEPTED / BLOCKING / BOUND TO REPAIR 5`; `ENG-011-R5R1-DV-R001` through `R003 ACCEPTED / BLOCKING / BOUND TO REPAIR 6`; `ENG-011-R6-DV-R001` through `R005 ACCEPTED / BLOCKING / BOUND TO REPAIR 7` ([Controller Disposition](ENG-011_REPAIR6_DETERMINISTIC_FINDING_DISPOSITION_2026-08-29.md))
-- Task State: `AUTHORIZED / REPAIR 7 DURABLY DISPATCHED / IMPLEMENTATION NOT YET STARTED`
+- Finding Status: `ENG-011-DOR-R001` through `R006 CLOSED` historically; `ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART`; prior accepted repair findings remain historical obligations; `ENG-011-R7-SOR-R001` through `R003 ACCEPTED / BLOCKING / BOUND TO REPAIR 8` ([Controller Disposition](ENG-011_REPAIR7_SOR_FINDING_DISPOSITION_2026-08-30.md))
+- Task State: `AUTHORIZED / REPAIR 8 DURABLY DISPATCHED / BUILDER STARTUP PENDING`
 - Original Builder: `ABORTED / STARTUP CONTAMINATED / NO CANDIDATE / NON-OPERATIVE` (`eng-011-builder`, `/private/tmp/prj226-eng011-builder` preserved)
 - Original Repair-5 Dispatch: `0af56e186b44396f524183125e5d053ea41e876e`
 - Original Repair-5 Builder: `SUPERSEDED / UNUSED / NO IMPLEMENTATION / NON-OPERATIVE` (`eng-011-builder-repair-5`, `/private/tmp/prj226-eng011-builder-repair-5` preserved clean)
@@ -18,13 +18,16 @@
 - Repair-5 Restart-1 Candidate: `3adbe1ad5ef539b01f1af0c95603f02542000665` / `FROZEN / UNACCEPTED / HISTORICAL / NON-CANONICAL`
 - Repair-6 Candidate: `dce0f5babc9156383620ba8511f074197995b6a6` / `FROZEN / UNACCEPTED / HISTORICAL / NON-CANONICAL`
 - Repair-6 Deterministic Verification: `VALID / FINDINGS`; npm symlink accounting anomaly `NON-BLOCKING / ENVIRONMENT ONLY`
-- Dispatch Status: `AUTHORIZED / REPAIR 7 DURABLY DISPATCHED`
+- Repair-7 Candidate: `dd1a16ee3a638c20bc7aff9019d052e50ae23000` / `FROZEN / UNACCEPTED / HISTORICAL / NON-CANONICAL`
+- Repair-7 Deterministic Verification: `PASS`
+- Repair-7 S/O/S Review: `VALID / FINDINGS`; `ENG-011-R7-SOR-R001` through `R003` accepted as blocking
+- Dispatch Status: `AUTHORIZED / REPAIR 8 DURABLY DISPATCHED`
 - Delivery Record: [ENG-011 Delivery Record](../delivery/ENG-011-observability-failure-recovery-hardening.md)
-- Current Builder: `ENG-011 REPAIR 7 BUILDER`
+- Current Builder: `ENG-011 REPAIR 8 BUILDER`
 - Builder Authority: `ACTIVE / EXCLUSIVE WRITE AUTHORITY OVER THE EXACT 19-PATH WRITE LOCK`
-- Builder Branch: `eng-011-builder-repair-7`
-- Builder Worktree: `/private/tmp/prj226-eng011-builder-repair-7`
-- Implementation State: `REPAIR-6 CANDIDATE FROZEN / REPAIR 7 NOT STARTED`
+- Builder Branch: `eng-011-builder-repair-8`
+- Builder Worktree: `/private/tmp/prj226-eng011-builder-repair-8`
+- Implementation State: `REPAIR-7 CANDIDATE FROZEN / REPAIR 8 NOT STARTED`
 - Migration: `NO MIGRATION`
 - Human Reserved: `NOT REQUIRED`
 
@@ -633,3 +636,12 @@ UNRESOLVED (Strong-model review confirms: LIVE CALLS PROHIBITED IN ENG-009; RESE
 - R006 established that the persistence port retains `committed` versus `already-committed`, but both accepted mutation services erase the distinction before orchestration. Truthful duplicate evidence requires the shared accepted-result contract, both service sources, and four focused unit/local-D1 regression paths.
 - The original twelve-path lock was insufficient. Task Packet revision 2 has an exact nineteen-path Repair-3 scope; Formal DoR revision 2 is `PASS`; READY is `YES`; Repair 3 is `AUTHORIZED / DURABLY DISPATCHED` to Current Builder `ENG-011 REPAIR 3 BUILDER` on branch `eng-011-builder-repair-3` in worktree `/private/tmp/prj226-eng011-builder-repair-3`.
 - Implementation is `NOT YET STARTED`; Human Reserved remains `NOT REQUIRED`; migration remains unchanged; no push was performed.
+
+## ENG-011 Repair 7 S/O/S finding chronology — 2026-08-30
+
+- Repair-7 candidate `dd1a16ee3a638c20bc7aff9019d052e50ae23000`, tree `b71baa5f084df27efc031b2a4891cf4cec8a4889`, aggregate `12f94bff7ffeb72daf41f34190b8cbcc7fe0df7d0b70a299f6c871dd8ab31940`, passed fresh deterministic verification.
+- Fresh independent security / operability / semantic review returned `VALID / FINDINGS` with blocking `ENG-011-R7-SOR-R001` through `R003` and no non-blocking findings.
+- The Controller independently reproduced the identifier content channel, structural adapter forgery reaching the writer, and contradictory sanctioned event.
+- The [durable Controller disposition](ENG-011_REPAIR7_SOR_FINDING_DISPOSITION_2026-08-30.md) accepts all three findings, freezes Repair 7, binds a narrow machine-ID grammar, a closed adapter trust boundary, and finite event cross-field invariants, and dispatches Repair 8.
+- Task Packet revision 2, Formal DoR revision 2 `PASS`, the exact nineteen-path lock, `NO MIGRATION`, Human Control, provider boundary, DATA-001 authority, and explicit-only retry/recovery authority remain unchanged.
+- Repair 8 is `AUTHORIZED / DURABLY DISPATCHED`; Current Builder is `ENG-011 REPAIR 8 BUILDER`; startup is pending; implementation is `NOT YET STARTED`; no push was performed.
