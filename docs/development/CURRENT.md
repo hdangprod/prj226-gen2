@@ -4,7 +4,7 @@
 
 **Lifecycle status:** ACTIVE
 
-**Last updated:** 2026-08-30
+**Last updated:** 2026-08-31
 
 **Decision owner:** `hdangprod`
 
@@ -27,9 +27,9 @@
 - **C7 — Engineering-Entry Readiness:** COMPLETE
 - **G7 — Engineering-Entry Readiness:** APPROVED BY HUMAN
 - **Runtime Architecture Phase:** COMPLETE — Runtime Architecture revision 1 approved by human through `GOV-017`.
-- **Engineering Phase:** AUTHORIZED BY HUMAN through `GOV-018`; `ENG-001` through `ENG-010` are complete and retain their accepted canonical identities. `ENG-010` remains `DONE / ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFIED / GOVERNANCE-CLOSED`. ENG-011 Repair-8 candidate `e5acfcc54e35e2fcd6912aa9eb1a64ac6baf821a`, tree `4d1ce02a9c3c238c0a09e06852baabb5f32217d7`, is frozen, unaccepted, historical, and non-canonical after valid deterministic `FINDINGS`. [Controller disposition](analysis/ENG-011_REPAIR8_DETERMINISTIC_FINDING_DISPOSITION_2026-08-31.md) accepts blocking findings `ENG-011-R8-DV-R001` through `R010` and durably dispatches Repair 9. [Task Packet revision 2](tasks/ENG-011-observability-failure-recovery-hardening.md), its unchanged nineteen-path write lock, and [Formal DoR revision 2](analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS` remain operative; Current Builder is `ENG-011 REPAIR 9 BUILDER`; Builder startup is pending; implementation has not yet started; Human Reserved is `NOT REQUIRED`; migration remains `NO MIGRATION`.
+- **Engineering Phase:** AUTHORIZED BY HUMAN through `GOV-018`; `ENG-001` through `ENG-010` are complete and retain their accepted canonical identities. `ENG-010` remains `DONE / ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFIED / GOVERNANCE-CLOSED`. ENG-011 Repair-10 candidate `c7d6b1cf239da0be8dc2a71a55d41e2eb896dc39`, tree `a45631654d10eacc8b60e7ed365f3dc3fb19e615`, is frozen, unaccepted, historical, and non-canonical after valid deterministic `FINDINGS`. [Controller disposition](analysis/ENG-011_REPAIR10_DETERMINISTIC_FINDING_DISPOSITION_2026-08-31.md) accepts blocking findings `ENG-011-R10-DV-R001` through `R003` and durably dispatches Repair 11. [Task Packet revision 2](tasks/ENG-011-observability-failure-recovery-hardening.md), its unchanged nineteen-path write lock, and [Formal DoR revision 2](analysis/ENG-011_FORMAL_DoR_REV2_2026-08-28.md) `PASS` remain operative; Current Builder is `ENG-011 REPAIR 11 BUILDER`; Builder startup is pending; implementation has not yet started; Human Reserved is `NOT REQUIRED`; migration remains `NO MIGRATION`.
 - **Engineering work:** AUTHORIZED only within `GOV-018`, the approved Product Foundation and Runtime Architecture, the Delivery Contract, and a valid Ready Task Packet.
-- **Runtime implementation:** AUTHORIZED within that bounded Engineering scope; Repair-8 candidate frozen after deterministic FINDINGS; Repair 9 durably dispatched with Builder startup pending and implementation not yet started.
+- **Runtime implementation:** AUTHORIZED within that bounded Engineering scope; Repair-10 candidate frozen after deterministic FINDINGS; Repair 11 durably dispatched with Builder startup pending and implementation not yet started.
 - **Production deployment and paid-service activation:** NOT AUTHORIZED (PROHIBITED)
 - **Control-plane implementation:** NOT AUTHORIZED (PROHIBITED)
 
@@ -73,7 +73,7 @@
 - **Runtime Architecture baseline:** [Liam v1 Runtime Architecture Baseline, revision 1](../architecture/RUNTIME_ARCHITECTURE.md) is `CANONICAL / APPROVED` through human disposition `GOV-017` by `github:hdangprod` on 2026-08-09. The original `ARCHITECTURE REVIEW: NEEDS FIX` findings `AR-F001` and `AR-F002` were repaired; `ARCHITECTURE TARGETED RECHECK: PASS` resolved both. Approval does not authorize engineering.
 - **Engineering Phase authorization:** `GOV-018` is APPROVED by `github:hdangprod` on 2026-08-09. It separately authorizes implementation of the approved Liam v1 Product Foundation and Runtime Architecture under Delivery Contract revision 1 while preserving product, architecture, production, paid-service, security, destructive-action, and control-plane Human Reserved boundaries.
 - **Engineering readiness and plan:** [Engineering Plan revision 1](ENGINEERING_PLAN.md) records `ENGINEERING DoR: PASS`, the implementation obligations and Task DAG, exact evidence rules, concurrency boundaries, and the first execution wave. It is `OPERATIONAL / ACTIVE` and cannot expand `GOV-018` or any approved product or architecture authority.
-- **Engineering task state:** `ENG-001` through `ENG-010` are `DONE`; their accepted identities and closure evidence remain unchanged. ENG-011 Task Packet revision 2 is `OPERATIVE`; Formal DoR revision 2 is `PASS`; READY is `YES`; Repair-7 candidate `dd1a16ee3a638c20bc7aff9019d052e50ae23000` is frozen, unaccepted, historical, and non-canonical after deterministic `PASS` and valid S/O/S `FINDINGS`; Repair 8 is durably dispatched under the unchanged nineteen-path lock; Current Builder is `ENG-011 REPAIR 8 BUILDER`; startup is pending; implementation has not yet started.
+- **Engineering task state:** `ENG-001` through `ENG-010` are `DONE`; their accepted identities and closure evidence remain unchanged. ENG-011 Task Packet revision 2 is `OPERATIVE`; Formal DoR revision 2 is `PASS`; READY is `YES`; Repair-10 candidate `c7d6b1cf239da0be8dc2a71a55d41e2eb896dc39` is frozen, unaccepted, historical, and non-canonical after valid deterministic `FINDINGS`; Repair 11 is durably dispatched under the unchanged nineteen-path lock; Current Builder is `ENG-011 REPAIR 11 BUILDER`; startup is pending; implementation has not yet started.
 
 ## Authorized work
 
@@ -81,11 +81,11 @@ The Generation 2 Foundation Program is complete through human G7 disposition `GO
 
 This snapshot reflects authorization recorded in approved governance artifacts; it does not create, extend, or approve authorization.
 
-**Current stage state:** Generation 2 Foundation Program — COMPLETE; Runtime Architecture Phase — COMPLETE; Engineering Phase — AUTHORIZED; Engineering planning — ACTIVE; `ENG-001` through `ENG-010` COMPLETE; ENG-011 Repair-7 candidate `dd1a16ee3a638c20bc7aff9019d052e50ae23000` frozen / unaccepted / historical / non-canonical after deterministic `PASS` and valid S/O/S `FINDINGS`; Repair 8 authorized / durably dispatched; Task Packet revision 2 `OPERATIVE`; Formal DoR revision 2 `PASS`; READY `YES`; Current Builder `ENG-011 REPAIR 8 BUILDER`; startup pending; implementation not yet started; Human Reserved `NOT REQUIRED`; migration `NO MIGRATION`; push `NOT PERFORMED`
+**Current stage state:** Generation 2 Foundation Program — COMPLETE; Runtime Architecture Phase — COMPLETE; Engineering Phase — AUTHORIZED; Engineering planning — ACTIVE; `ENG-001` through `ENG-010` COMPLETE; ENG-011 Repair-10 candidate `c7d6b1cf239da0be8dc2a71a55d41e2eb896dc39` frozen / unaccepted / historical / non-canonical after deterministic `FINDINGS`; Repair 11 authorized / durably dispatched; Task Packet revision 2 `OPERATIVE`; Formal DoR revision 2 `PASS`; READY `YES`; Current Builder `ENG-011 REPAIR 11 BUILDER`; startup pending; implementation not yet started; Human Reserved `NOT REQUIRED`; migration `NO MIGRATION`; push `NOT PERFORMED`
 
 **Current Engineering authority:** `GOV-018` — APPROVED BY HUMAN on 2026-08-09.
 **Engineering gate:** None created or implied. Task readiness and completion are governed by Delivery Contract revision 1 and do not approve product, architecture, production release, or another gate.
-**Engineering Definition of Ready:** The Engineering-phase baseline remains PASS and ENG-011 Formal DoR revision 2 is `PASS`. Task Packet revision 2 remains Ready with its exact nineteen-path lock. Repair-7 candidate `dd1a16ee3a638c20bc7aff9019d052e50ae23000` is frozen after deterministic `PASS` and valid S/O/S findings; Repair 8 is durably dispatched with no authority change. Accepted predecessor identities and closure evidence remain unchanged. No push exists.
+**Engineering Definition of Ready:** The Engineering-phase baseline remains PASS and ENG-011 Formal DoR revision 2 is `PASS`. Task Packet revision 2 remains Ready with its exact nineteen-path lock. Repair-10 candidate `c7d6b1cf239da0be8dc2a71a55d41e2eb896dc39` is frozen after valid deterministic findings `ENG-011-R10-DV-R001` through `R003`; Repair 11 is durably dispatched with no authority change. Accepted predecessor identities and closure evidence remain unchanged. No push exists.
 
 - Product Foundation revision 1 approved through `GOV-011` — satisfied.
 - Delivery Contract revision 1 approved through `GOV-013` — satisfied.
@@ -97,7 +97,7 @@ This snapshot reflects authorization recorded in approved governance artifacts; 
 
 **Foundation gates:** C1–C7 are COMPLETE; G1–G7 are APPROVED BY HUMAN. No Foundation gate remains pending.
 
-**Next executable work:** `ENG-011 REPAIR 8 BUILDER` in `/private/tmp/prj226-eng011-builder-repair-8`, bound directly to the governance-only Repair-8 dispatch. Security/operability/semantic review remains unauthorized until a fresh Repair-8 deterministic `PASS`.
+**Next executable work:** `ENG-011 REPAIR 11 BUILDER` in `/private/tmp/prj226-eng011-builder-repair-11`, bound directly to the governance-only Repair-11 dispatch. Security/operability/semantic review remains unauthorized until a fresh Repair-11 deterministic `PASS`.
 
 ## Explicit prohibitions
 
