@@ -2,15 +2,15 @@
 
 **Artifact class:** OPERATIONAL
 
-**Lifecycle status:** ACTIVE / REPAIR 12 RESTART 1 CORRECTED DISPATCHED
+**Lifecycle status:** ACTIVE / REPAIR 12 RESTART 1 CORRECTED / TC-13 REVISION 5 BOUND
 
 **Task ID:** `ENG-011`
 
-**Task Packet:** [ENG-011 — Observability and Failure/Recovery Hardening](../tasks/ENG-011-observability-failure-recovery-hardening.md) (Revision 4 / OPERATIVE)
+**Task Packet:** [ENG-011 — Observability and Failure/Recovery Hardening](../tasks/ENG-011-observability-failure-recovery-hardening.md) (Revision 5 / OPERATIVE)
 
-**Formal DoR:** [Revision 4](../analysis/ENG-011_FORMAL_DoR_REV4_2026-08-31.md) `PASS`; revisions 2 and 3 remain historical
+**Formal DoR:** [Revision 5](../analysis/ENG-011_FORMAL_DoR_REV5_2026-08-31.md) `PASS`; revisions 2 through 4 remain historical
 
-**Current lifecycle state:** `AUTHORIZED / REPAIR 12 RESTART 1 CORRECTED DISPATCHED / BUILDER STARTUP PENDING`
+**Current lifecycle state:** `AUTHORIZED / REPAIR 12 RESTART 1 CORRECTED / TC-13 REVISION 5 BOUND / BUILDER CONTINUATION AUTHORIZED`
 
 **Builder dispatch:** `AUTHORIZED / REPAIR 12 RESTART 1 CORRECTED`
 
@@ -22,9 +22,9 @@
 
 **Original Repair-5 Builder:** `SUPERSEDED / UNUSED / NO IMPLEMENTATION / NON-OPERATIVE` (`eng-011-builder-repair-5`, `/private/tmp/prj226-eng011-builder-repair-5` preserved clean)
 
-**Builder authority:** `ACTIVE / EXCLUSIVE 20-PATH WRITE AUTHORITY`
+**Builder authority:** `ACTIVE / EXCLUSIVE 20-PATH WRITE AUTHORITY / CONTINUATION AUTHORIZED`
 
-**Implementation state:** `REPAIR 11 ORIGINAL STOPPED CORRECTLY / NO IMPLEMENTATION / NO CANDIDATE; RESTART 1 CANDIDATE FROZEN / UNACCEPTED; REPAIR 12 STOPPED CORRECTLY / UNCOMMITTED PARTIAL IMPLEMENTATION / NO CANDIDATE; REPAIR 12 RESTART 1 STOPPED CORRECTLY / OPERATIVE AUTHORITY CONFLICT / NO IMPLEMENTATION INSPECTION / NO IMPLEMENTATION / NO CANDIDATE; CORRECTED RESTART 1 NOT YET STARTED`
+**Implementation state:** `REPAIR 11 ORIGINAL STOPPED CORRECTLY / NO IMPLEMENTATION / NO CANDIDATE; RESTART 1 CANDIDATE FROZEN / UNACCEPTED; REPAIR 12 STOPPED CORRECTLY / UNCOMMITTED PARTIAL IMPLEMENTATION / NO CANDIDATE; REPAIR 12 RESTART 1 STOPPED CORRECTLY / OPERATIVE AUTHORITY CONFLICT / NO IMPLEMENTATION INSPECTION / NO IMPLEMENTATION / NO CANDIDATE; CORRECTED RESTART 1 UNSTAGED IMPLEMENTATION PRESERVED / NO CANDIDATE`
 
 **Human Reserved:** `NOT REQUIRED`
 
@@ -127,7 +127,7 @@
 | Repair 12 Builder worktree | `/private/tmp/prj226-eng011-builder-repair-12` |
 | Repair 12 Restart-1 conflicted dispatch | `deaebad1f9e4cd87b2d77f85564cc6df051fc291` — `SUPERSEDED FOR EXECUTION / OPERATIVE AUTHORITY CONFLICT / NO IMPLEMENTATION / NO CANDIDATE / HISTORICAL GOVERNANCE EVIDENCE` ([Conflict Disposition](../analysis/ENG-011_REPAIR12_RESTART1_OPERATIVE_AUTHORITY_CONFLICT_DISPOSITION_2026-08-31.md)) |
 | Repair 12 Restart-1 conflicted Builder | `eng-011-builder-repair-12-restart-1` at `/private/tmp/prj226-eng011-builder-repair-12-restart-1` — `STOPPED CORRECTLY / AUTHORITY CONFLICT / NO IMPLEMENTATION INSPECTION / NO IMPLEMENTATION / NO CANDIDATE / NON-OPERATIVE AFTER RE-DISPATCH` |
-| Repair 12 Restart-1 corrected dispatch | The governance-only commit containing this reconciled Delivery Record, under Task Packet revision 4 and Formal DoR revision 4 PASS |
+| Repair 12 Restart-1 corrected dispatch | The governance-only commit containing this reconciled Delivery Record, now governed by Task Packet revision 5 and Formal DoR revision 5 PASS |
 | Repair 12 Restart-1 corrected Builder | `eng-011-builder-repair-12-restart-1-corrected` at `/private/tmp/prj226-eng011-builder-repair-12-restart-1-corrected` |
 | Stale Repair-4 verifier worktree | `STALE / REGISTERED AT 5f3d0d2 / UNCLEANED DUE TO PRIOR SANDBOX PERMISSION FAILURE / PRESERVED AS NON-OPERATIVE` (`/private/tmp/prj226-eng011-repair4-dv`) |
 | Push | Not authorized / not performed |
@@ -189,7 +189,7 @@ Every other path is read-only under this durable Controller dispatch. The persis
 
 ## Readiness and dispatch disposition
 
-Repair-11 Restart-1 candidate `ae3cb305d3635263aee52143b3903d140576e5dd`, tree `8487b3e27975ae4a6d488e3c046383a92644508c`, is frozen, unaccepted, historical, and non-canonical after valid blocking deterministic findings `ENG-011-R11R1-DV-R001` and `R002`. The Controller bound both to Repair 12. Task Packet revision 4 remains operative and Formal DoR revision 4 remains `PASS`: their unchanged exact twenty-path scope preserves real Human Control success and unresolved semantics; an actual discretionary Human Control denial is not authorized. Existing authorization rejection/non-acceptance remains separately observable as a truthful non-accepted terminal result. Human Reserved remains `NOT REQUIRED` and migration remains `NO MIGRATION`.
+Repair-11 Restart-1 candidate `ae3cb305d3635263aee52143b3903d140576e5dd`, tree `8487b3e27975ae4a6d488e3c046383a92644508c`, is frozen, unaccepted, historical, and non-canonical after valid blocking deterministic findings `ENG-011-R11R1-DV-R001` and `R002`. The Controller bound both to Repair 12. Task Packet revision 5 and Formal DoR revision 5 are operative: their unchanged exact twenty-path scope preserves real Human Control success and unresolved semantics; an actual discretionary Human Control denial is not authorized. Existing authorization rejection/non-acceptance remains separately observable as a truthful non-accepted terminal result. Revision 5 also corrects TC-13: no authorized provider→authoritative-mutation single flow exists, so real advisory provider success and real authoritative persistence durability failure must be independently observed without synthetic chaining. See [the TC-13 disposition](../analysis/ENG-011_REPAIR12_TC13_AUTHORITY_CONTRADICTION_DISPOSITION_2026-08-31.md). Human Reserved remains `NOT REQUIRED` and migration remains `NO MIGRATION`.
 
 ## Future Repair-12 candidate evidence
 
