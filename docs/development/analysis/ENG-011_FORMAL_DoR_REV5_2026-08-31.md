@@ -21,9 +21,9 @@
 | Exact write-lock sufficiency | PASS — the existing twenty paths include the interaction orchestration and observability test paths needed to exercise both real flows; no path is added. |
 | DATA-001 and truthfulness | PASS — the criterion requires emitted closed evidence only, prohibits synthetic chaining, and preserves non-accepted terminal truth after durability failure. |
 | Retry/fallback/recovery boundary | PASS — no automatic retry, fallback, rollback, compensation, queue, or persistent recovery state is added. |
-| Existing implementation preservation | PASS — no product-result, mutation, provider, or persistence contract changes; corrected-Restart-1 unstaged bytes remain in-scope. |
+| Full-reconstruction base feasibility | PASS — the authorized clean base contains the complete pre-ENG-011 canonical architecture and intentionally contains none of the ENG-011 observability implementation; all required production seams and proof surfaces are within the exact twenty-path lock. |
 | Migration and Human Reserved Authority | PASS — `NO MIGRATION`; no new Product, Domain, Human Control, or architecture decision is made. |
 
 ## Scope conclusion
 
-Revision 5 is required because it substantively corrects a test/acceptance criterion. The prior revision-4 DoR cannot remain operative by assertion; this revision reruns readiness against the corrected semantics. The current Builder may continue in its existing corrected-Restart-1 worktree with the same twenty-path lock and no candidate creation authority.
+Revision 5 is required because it substantively corrects a test/acceptance criterion. The prior revision-4 DoR cannot remain operative by assertion; this revision reruns readiness against the corrected semantics. Repair-13 is closed as incomplete topology evidence. The fresh Repair-14 Builder may begin only under the full clean-room reconstruction dispatch, from its stated clean base and with the same exact twenty-path lock; it must reconstruct the whole ENG-011 implementation rather than continue any prior worktree or bytes.

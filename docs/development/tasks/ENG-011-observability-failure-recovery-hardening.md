@@ -8,15 +8,15 @@
 
 **Controller planning revision:** 2
 
-**Current task state:** `AUTHORIZED / REPAIR 13 / TC-21 REAL-BYTE GUARD REPAIR BOUND / FRESH CLEAN-ROOM BUILDER AUTHORIZED`
+**Current task state:** `AUTHORIZED / REPAIR 14 / FULL CLEAN-ROOM ENG-011 RECONSTRUCTION DISPATCHED`
 
 **Formal DoR:** [Revision 5](../analysis/ENG-011_FORMAL_DoR_REV5_2026-08-31.md) `PASS`; revisions 2 through 4 remain historical
 
 **READY:** `YES`
 
-**Current Builder:** `ENG-011 REPAIR 13 BUILDER`
+**Current Builder:** `ENG-011 REPAIR 14 BUILDER`
 
-**Builder authority:** `ACTIVE / EXCLUSIVE 20-PATH WRITE AUTHORITY / FRESH CLEAN-ROOM EXECUTION AUTHORIZED`
+**Builder authority:** `ACTIVE / EXCLUSIVE 20-PATH WRITE AUTHORITY / FULL CLEAN-ROOM EXECUTION AUTHORIZED`
 
 **Implementation:** `REPAIR 11 ORIGINAL DISPATCH STOPPED BEFORE IMPLEMENTATION / NO CANDIDATE; REPAIR 11 RESTART 1 CANDIDATE FROZEN / UNACCEPTED; REPAIR 12 STOPPED CORRECTLY WITH UNCOMMITTED PARTIAL IMPLEMENTATION / NO CANDIDATE; REPAIR 12 RESTART 1 CORRECTED CANDIDATE REJECTED / MISSING TC-21 REAL-BYTE GUARD`
 
@@ -24,13 +24,13 @@
 
 **Migration:** `NO MIGRATION`
 
-**Next required role:** `ENG-011 REPAIR 13 BUILDER`
+**Next required role:** `ENG-011 REPAIR 14 BUILDER`
 
-**Builder branch:** `eng-011-builder-repair-13`
+**Builder branch:** `eng-011-builder-repair-14`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-13`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-14`
 
-**Durable dispatch:** `AUTHORIZED / REPAIR 13`; the governance-only commit containing the [TC-21 deterministic finding disposition](../analysis/ENG-011_REPAIR12_RESTART1_CORRECTED_DETERMINISTIC_FINDING_DISPOSITION_2026-08-31.md) is the sole Builder authority
+**Durable dispatch:** `AUTHORIZED / REPAIR 14`; the governance-only commit containing the [full clean-room reconstruction disposition](../analysis/ENG-011_FULL_CLEAN_ROOM_RECONSTRUCTION_DISPATCH_2026-08-31.md) is the sole Builder authority
 
 **Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 5](../analysis/ENG-011_FORMAL_DoR_REV5_2026-08-31.md)
 
@@ -46,19 +46,23 @@
 
 **Authorization:** `GOV-018`
 
-**Planning authority base commit:** `3c19fe5b949c1a2aafd73e514543480781cb861a`
+**Planning authority base commit:** `0056859b6d1c0fa2b90ec87f7f95c7a46887ae2d`
 
-**Planning authority base tree:** `f34715ee545fc1210caa54ed2f6681c067e2013a`
+**Planning authority base tree:** `7adf7735813c9ba7d609f951a2ac180734ce9efa`
 
 **Governing contract:** [Delivery Contract revision 1](../../../development/DELIVERY_CONTRACT.md)
 
 ## Revision-5 TC-13 authority-contradiction correction and continuation boundary
 
+## Repair-14 full clean-room reconstruction dispatch boundary
+
+The Repair-13 candidate is immutable, unaccepted, non-canonical incomplete topology evidence, not a failed implementation candidate. Its narrow TC-21 scope could not produce the complete ENG-011 implementation from its pre-ENG-011 parent. Repair-14 therefore reconstructs the **entire** operative ENG-011 contract—not merely TC-21—from the authorized clean base stated in the durable Controller disposition. Revision 5 and Formal DoR revision 5 remain operative; the disposition binds their complete contract, the exact twenty-path lock, all historical repair findings, clean-room provenance, and explicit candidate topology. No failed or incomplete candidate bytes are authorized reconstruction input.
+
 Revision 5 supersedes Revision 4 for execution. It preserves the exact twenty-path write lock and every existing Product, Domain, Human Control, provider, DATA-001, retry, recovery, migration, and Runtime Architecture constraint. It corrects `ENG-011-TC-13`, whose Revision-4 wording required a single real flow in which model success is followed by failed authoritative mutation. That flow does not exist in the approved runtime: model invocation is confined to advisory/proposal handling, and authoritative mutations begin with separate trusted interaction evidence and do not invoke the model capability.
 
 `ENG-011-TC-13` therefore requires two real, separately exercised production flows. First, a successful `handleAdvisory` or `handleProposal` invocation must emit truthful provider success and its advisory/proposed user-visible terminal result, while emitting no authorization, persistence, or accepted-state success. Second, a real authoritative mutation that reaches a durability failure must emit failed persistence and a non-accepted user-visible terminal result, while emitting no provider-success or accepted-state success. The test must use production orchestration paths and emitted evidence, must not manually emit or fabricate a provider-success event, must not splice evidence or correlation from separate requests into a synthetic chain, must preserve DATA-001, and must prove no automatic retry. The two flows are independent evidence, not one interaction attempt.
 
-This is an operational acceptance-criterion correction, not a Product or Runtime Architecture change: it follows `ARC-003`'s separation of advisory model results from application-owned accepted state and `ARC-004`'s requirement that provider invocation, persistence, and user-visible results remain distinguishable. A Task Packet revision is required because the prior test criterion had substantive, architecturally impossible semantics. Formal DoR revision 5 independently re-evaluates the corrected criterion and returns `PASS`. The corrected-Restart-1 candidate was subsequently rejected for a separate missing TC-21 guard; Repair 13 must reconstruct under this unchanged criterion and lock.
+This is an operational acceptance-criterion correction, not a Product or Runtime Architecture change: it follows `ARC-003`'s separation of advisory model results from application-owned accepted state and `ARC-004`'s requirement that provider invocation, persistence, and user-visible results remain distinguishable. A Task Packet revision is required because the prior test criterion had substantive, architecturally impossible semantics. Formal DoR revision 5 independently re-evaluates the corrected criterion and returns `PASS`. The corrected-Restart-1 candidate was subsequently rejected for a separate missing TC-21 guard; Repair-14 must reconstruct the full contract under this unchanged criterion and lock.
 
 See [the TC-13 Authority Contradiction Disposition](../analysis/ENG-011_REPAIR12_TC13_AUTHORITY_CONTRADICTION_DISPOSITION_2026-08-31.md).
 
@@ -251,7 +255,7 @@ Credential-like strings injected into every prohibited input surface must be abs
 
 ## Operative revision-5 exact write lock
 
-The Repair-13 Builder receives exclusive ownership of exactly these twenty paths under the fresh durable Controller dispatch. No wildcard is authorized. This is byte-for-byte the Revision-3 path set; Revision 5 adds no path.
+The Repair-14 Builder receives exclusive ownership of exactly these twenty paths under the fresh durable Controller dispatch. No wildcard is authorized. This is byte-for-byte the Revision-3 path set; Revision 5 adds no path.
 
 ### Production paths
 
@@ -414,7 +418,7 @@ Result is `REVIEW GREEN` or structured findings. Any security/authority boundary
 
 - **Risk:** HIGH — security/data minimization, operability semantics, truthfulness, and broad cross-layer observation.
 - **Planner / Controller:** owns authority, readiness, exact lock, finding routing, and candidate state.
-- **Builder:** `ENG-011 REPAIR 9 BUILDER`, with exclusive authority over the exact nineteen paths; implementation has not yet started.
+- **Builder:** `ENG-011 REPAIR 14 BUILDER`, with exclusive authority over the exact twenty paths; full clean-room reconstruction has not yet started.
 - **Deterministic Verifier:** `NONE` until the Repair-9 Builder produces and freezes a candidate.
 - **Independent Reviewer:** independent of Builder; Strong Semantic Reasoning for security, operability, Human Control, provider isolation, and accepted-state truthfulness.
 - **Concurrency:** one writer; no overlapping source/test writer. Read-only verification/review only under evidence and independence controls.
@@ -440,7 +444,7 @@ ENG-011 becomes `DONE` only when:
 9. Controller final closure accepts the candidate; and
 10. current Builder returns to `NONE` and execution authority is consumed.
 
-Task Packet revision 5 is operative and Ready after Formal DoR revision 5 PASS. Repair-11 original dispatch was superseded for execution because its nineteen-path lock was insufficient; its Builder stopped correctly with no implementation and no candidate. Repair-11 Restart 1 candidate is frozen after valid blocking deterministic findings; Repair-12 then stopped correctly with no candidate because the proposed actual Human Control denial exceeded approved authority. Repair-12 Restart-1 Corrected candidate is rejected for the separate missing TC-21 real-byte guard. Repair 13 may reconstruct only the required guard and positive controls under this unchanged exact twenty-path lock and corrected TC-13 criterion.
+Task Packet revision 5 is operative and Ready after Formal DoR revision 5 PASS. Repair-11 original dispatch was superseded for execution because its nineteen-path lock was insufficient; its Builder stopped correctly with no implementation and no candidate. Repair-11 Restart 1 candidate is frozen after valid blocking deterministic findings; Repair-12 then stopped correctly with no candidate because the proposed actual Human Control denial exceeded approved authority. Repair-12 Restart-1 Corrected candidate is rejected for the separate missing TC-21 real-byte guard. Repair-13 is immutable incomplete topology evidence, not a failed candidate. Repair-14 must reconstruct the full ENG-011 implementation and its TC-21 guard together under this unchanged exact twenty-path lock and corrected TC-13 criterion.
 
 ## Prior planning findings
 
