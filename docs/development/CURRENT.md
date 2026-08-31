@@ -27,9 +27,9 @@
 - **C7 — Engineering-Entry Readiness:** COMPLETE
 - **G7 — Engineering-Entry Readiness:** APPROVED BY HUMAN
 - **Runtime Architecture Phase:** COMPLETE — Runtime Architecture revision 1 approved by human through `GOV-017`.
-- **Engineering Phase:** AUTHORIZED BY HUMAN through `GOV-018`; `ENG-001` through `ENG-010` are complete and retain their accepted canonical identities. ENG-011 Repair-11 original dispatch stopped correctly before implementation because its nineteen-path lock could not update the protected deletion regression test for the already-bound distinct request-attempt invariant. No Repair-11 candidate exists and the failed candidate set remains eleven. [Task Packet revision 3](tasks/ENG-011-observability-failure-recovery-hardening.md) is operative with an exact twenty-path lock, [Formal DoR revision 3](analysis/ENG-011_FORMAL_DoR_REV3_2026-08-31.md) is `PASS`, and Repair-11 Restart 1 is durably dispatched by this governance-only commit. Human Reserved is `NOT REQUIRED`; migration remains `NO MIGRATION`.
+- **Engineering Phase:** AUTHORIZED BY HUMAN through `GOV-018`; `ENG-001` through `ENG-010` are complete and retain their accepted canonical identities. ENG-011 Repair-11 Restart-1 candidate `ae3cb305d3635263aee52143b3903d140576e5dd` is frozen after valid blocking deterministic findings; the failed implementation set is twelve. [Task Packet revision 3](tasks/ENG-011-observability-failure-recovery-hardening.md) remains operative with its exact twenty-path lock, [Formal DoR revision 3](analysis/ENG-011_FORMAL_DoR_REV3_2026-08-31.md) remains `PASS`, and Repair 12 is durably dispatched by this governance-only commit. Human Reserved is `NOT REQUIRED`; migration remains `NO MIGRATION`.
 - **Engineering work:** AUTHORIZED only within `GOV-018`, the approved Product Foundation and Runtime Architecture, the Delivery Contract, and a valid Ready Task Packet.
-- **Runtime implementation:** AUTHORIZED within that bounded Engineering scope; Repair-11 original dispatch stopped with no implementation candidate; Repair-11 Restart 1 is eligible for fresh governance-only dispatch under the operative Revision-3 twenty-path lock.
+- **Runtime implementation:** AUTHORIZED within that bounded Engineering scope; Repair-11 original dispatch stopped with no implementation candidate; Repair-11 Restart-1 candidate is frozen, and Repair 12 is the fresh clean-room Builder dispatch under the operative Revision-3 twenty-path lock.
 - **Production deployment and paid-service activation:** NOT AUTHORIZED (PROHIBITED)
 - **Control-plane implementation:** NOT AUTHORIZED (PROHIBITED)
 
@@ -73,7 +73,7 @@
 - **Runtime Architecture baseline:** [Liam v1 Runtime Architecture Baseline, revision 1](../architecture/RUNTIME_ARCHITECTURE.md) is `CANONICAL / APPROVED` through human disposition `GOV-017` by `github:hdangprod` on 2026-08-09. The original `ARCHITECTURE REVIEW: NEEDS FIX` findings `AR-F001` and `AR-F002` were repaired; `ARCHITECTURE TARGETED RECHECK: PASS` resolved both. Approval does not authorize engineering.
 - **Engineering Phase authorization:** `GOV-018` is APPROVED by `github:hdangprod` on 2026-08-09. It separately authorizes implementation of the approved Liam v1 Product Foundation and Runtime Architecture under Delivery Contract revision 1 while preserving product, architecture, production, paid-service, security, destructive-action, and control-plane Human Reserved boundaries.
 - **Engineering readiness and plan:** [Engineering Plan revision 1](ENGINEERING_PLAN.md) records `ENGINEERING DoR: PASS`, the implementation obligations and Task DAG, exact evidence rules, concurrency boundaries, and the first execution wave. It is `OPERATIONAL / ACTIVE` and cannot expand `GOV-018` or any approved product or architecture authority.
-- **Engineering task state:** `ENG-001` through `ENG-010` are `DONE`; their accepted identities and closure evidence remain unchanged. ENG-011 Task Packet revision 3 is `OPERATIVE`; Formal DoR revision 3 is `PASS`; READY is `YES`; original Repair-11 dispatch is superseded for execution after a valid pre-implementation write-lock insufficiency stop; no Repair-11 candidate exists; Repair-11 Restart 1 is eligible for fresh dispatch under the exact twenty-path lock.
+- **Engineering task state:** `ENG-001` through `ENG-010` are `DONE`; their accepted identities and closure evidence remain unchanged. ENG-011 Task Packet revision 3 is `OPERATIVE`; Formal DoR revision 3 is `PASS`; READY is `YES`; original Repair-11 dispatch remains superseded after its valid pre-implementation write-lock insufficiency stop; Restart-1 candidate is frozen and non-canonical; Repair 12 is dispatched under the unchanged exact twenty-path lock.
 
 ## Authorized work
 
@@ -81,11 +81,11 @@ The Generation 2 Foundation Program is complete through human G7 disposition `GO
 
 This snapshot reflects authorization recorded in approved governance artifacts; it does not create, extend, or approve authorization.
 
-**Current stage state:** Generation 2 Foundation Program — COMPLETE; Runtime Architecture Phase — COMPLETE; Engineering Phase — AUTHORIZED; Engineering planning — ACTIVE; `ENG-001` through `ENG-010` COMPLETE; ENG-011 original Repair-11 dispatch superseded for execution after valid scope-insufficiency stop / no implementation / no candidate; Task Packet revision 3 `OPERATIVE`; Formal DoR revision 3 `PASS`; READY `YES`; Repair-11 Restart 1 eligible for fresh dispatch; Human Reserved `NOT REQUIRED`; migration `NO MIGRATION`; push `NOT PERFORMED`
+**Current stage state:** Generation 2 Foundation Program — COMPLETE; Runtime Architecture Phase — COMPLETE; Engineering Phase — AUTHORIZED; Engineering planning — ACTIVE; `ENG-001` through `ENG-010` COMPLETE; ENG-011 Restart-1 candidate frozen / unaccepted / historical / non-canonical; Task Packet revision 3 `OPERATIVE`; Formal DoR revision 3 `PASS`; READY `YES`; Repair 12 dispatched; Human Reserved `NOT REQUIRED`; migration `NO MIGRATION`; push `NOT PERFORMED`
 
 **Current Engineering authority:** `GOV-018` — APPROVED BY HUMAN on 2026-08-09.
 **Engineering gate:** None created or implied. Task readiness and completion are governed by Delivery Contract revision 1 and do not approve product, architecture, production release, or another gate.
-**Engineering Definition of Ready:** The Engineering-phase baseline remains PASS and ENG-011 Formal DoR revision 3 is `PASS`. Task Packet revision 3 remains Ready with its exact twenty-path lock. Repair-11 original dispatch produced no implementation candidate and is superseded for execution only; Repair-11 Restart 1 is eligible for fresh dispatch with no product, architecture, Human Control, provider, migration, or recovery-authority change. Accepted predecessor identities and closure evidence remain unchanged. No push exists.
+**Engineering Definition of Ready:** The Engineering-phase baseline remains PASS and ENG-011 Formal DoR revision 3 is `PASS`. Task Packet revision 3 remains Ready with its exact twenty-path lock. Repair-11 Restart-1 established no scope or authority change; Repair 12 is dispatched with no product, architecture, Human Control, provider, migration, or recovery-authority change. Accepted predecessor identities and closure evidence remain unchanged. No push exists.
 
 - Product Foundation revision 1 approved through `GOV-011` — satisfied.
 - Delivery Contract revision 1 approved through `GOV-013` — satisfied.
@@ -97,7 +97,7 @@ This snapshot reflects authorization recorded in approved governance artifacts; 
 
 **Foundation gates:** C1–C7 are COMPLETE; G1–G7 are APPROVED BY HUMAN. No Foundation gate remains pending.
 
-**Next executable work:** `ENG-011 REPAIR 11 RESTART 1 BUILDER` in `/private/tmp/prj226-eng011-builder-repair-11-restart-1`, bound directly to this governance-only dispatch. Security/operability/semantic review remains unauthorized until a fresh Repair-11 deterministic `PASS`.
+**Next executable work:** `ENG-011 REPAIR 12 BUILDER` in `/private/tmp/prj226-eng011-builder-repair-12`, bound directly to this governance-only dispatch. Security/operability/semantic review remains unauthorized until a fresh Repair-12 deterministic `PASS`.
 
 ## Explicit prohibitions
 

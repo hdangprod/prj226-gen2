@@ -8,33 +8,35 @@
 
 **Controller planning revision:** 2
 
-**Current task state:** `AUTHORIZED / REPAIR 11 RESTART 1 DURABLY DISPATCHED / BUILDER STARTUP PENDING`
+**Current task state:** `AUTHORIZED / REPAIR 12 DURABLY DISPATCHED / BUILDER STARTUP PENDING`
 
 **Formal DoR:** [Revision 3](../analysis/ENG-011_FORMAL_DoR_REV3_2026-08-31.md) `PASS`; revision 2 `PASS` remains historical for the superseded nineteen-path execution scope
 
 **READY:** `YES`
 
-**Current Builder:** `ENG-011 REPAIR 11 RESTART 1 BUILDER`
+**Current Builder:** `ENG-011 REPAIR 12 BUILDER`
 
 **Builder authority:** `ACTIVE / EXCLUSIVE 20-PATH WRITE AUTHORITY / IMPLEMENTATION NOT STARTED`
 
-**Implementation:** `REPAIR 11 ORIGINAL DISPATCH STOPPED BEFORE IMPLEMENTATION / NO CANDIDATE; REPAIR 11 RESTART 1 NOT YET STARTED`
+**Implementation:** `REPAIR 11 ORIGINAL DISPATCH STOPPED BEFORE IMPLEMENTATION / NO CANDIDATE; REPAIR 11 RESTART 1 CANDIDATE FROZEN / UNACCEPTED; REPAIR 12 NOT YET STARTED`
 
 **Human Reserved:** `NOT REQUIRED`
 
 **Migration:** `NO MIGRATION`
 
-**Next required role:** `ENG-011 REPAIR 11 RESTART 1 BUILDER`
+**Next required role:** `ENG-011 REPAIR 12 BUILDER`
 
-**Builder branch:** `eng-011-builder-repair-11-restart-1`
+**Builder branch:** `eng-011-builder-repair-12`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-11-restart-1`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-12`
 
-**Durable dispatch:** `AUTHORIZED / REPAIR 11 RESTART 1`; the governance-only commit containing this dispatch is the sole Builder authority
+**Durable dispatch:** `AUTHORIZED / REPAIR 12`; the governance-only commit containing this dispatch is the sole Builder authority
 
 **Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 3](../analysis/ENG-011_FORMAL_DoR_REV3_2026-08-31.md)
 
 **Repair-9 deterministic finding disposition:** [Controller Deterministic Finding Disposition and Repair-10 Dispatch](../analysis/ENG-011_REPAIR9_DETERMINISTIC_FINDING_DISPOSITION_2026-08-31.md)
+
+**Repair-11 Restart-1 deterministic finding disposition:** [Controller Deterministic Finding Disposition and Repair-12 Dispatch](../analysis/ENG-011_REPAIR11_RESTART1_DETERMINISTIC_FINDING_DISPOSITION_2026-08-31.md)
 
 **Repair-8 deterministic finding disposition:** [Controller Deterministic Finding Disposition and Repair-9 Dispatch](../analysis/ENG-011_REPAIR8_DETERMINISTIC_FINDING_DISPOSITION_2026-08-31.md)
 
@@ -420,7 +422,7 @@ ENG-011 becomes `DONE` only when:
 9. Controller final closure accepts the candidate; and
 10. current Builder returns to `NONE` and execution authority is consumed.
 
-Task Packet revision 3 is operative and Ready after Formal DoR revision 3 PASS. Repair-11 original dispatch was superseded for execution because its nineteen-path lock was insufficient; its Builder stopped correctly with no implementation and no candidate. Repair-11 Restart 1 remains the next implementation attempt under this exact twenty-path lock.
+Task Packet revision 3 is operative and Ready after Formal DoR revision 3 PASS. Repair-11 original dispatch was superseded for execution because its nineteen-path lock was insufficient; its Builder stopped correctly with no implementation and no candidate. Repair-11 Restart 1 candidate is frozen after valid blocking deterministic findings; Repair 12 is the next implementation attempt under this exact twenty-path lock.
 
 ## Prior planning findings
 

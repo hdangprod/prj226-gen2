@@ -2,7 +2,7 @@
 
 **Artifact class:** OPERATIONAL
 
-**Lifecycle status:** ACTIVE / REPAIR 11 RESTART 1 DISPATCHED
+**Lifecycle status:** ACTIVE / REPAIR 12 DISPATCHED
 
 **Task ID:** `ENG-011`
 
@@ -10,21 +10,21 @@
 
 **Formal DoR:** [Revision 3](../analysis/ENG-011_FORMAL_DoR_REV3_2026-08-31.md) `PASS`; revision 2 remains historical for its exact prior scope
 
-**Current lifecycle state:** `AUTHORIZED / REPAIR 11 RESTART 1 DURABLY DISPATCHED / BUILDER STARTUP PENDING`
+**Current lifecycle state:** `AUTHORIZED / REPAIR 12 DURABLY DISPATCHED / BUILDER STARTUP PENDING`
 
-**Builder dispatch:** `AUTHORIZED / REPAIR 11 RESTART 1`
+**Builder dispatch:** `AUTHORIZED / REPAIR 12`
 
-**Current Builder:** `ENG-011 REPAIR 11 RESTART 1 BUILDER`
+**Current Builder:** `ENG-011 REPAIR 12 BUILDER`
 
-**Builder branch:** `eng-011-builder-repair-11-restart-1` (pending fresh provisioning)
+**Builder branch:** `eng-011-builder-repair-12` (pending fresh provisioning)
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-11-restart-1` (pending fresh provisioning)
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-12` (pending fresh provisioning)
 
 **Original Repair-5 Builder:** `SUPERSEDED / UNUSED / NO IMPLEMENTATION / NON-OPERATIVE` (`eng-011-builder-repair-5`, `/private/tmp/prj226-eng011-builder-repair-5` preserved clean)
 
 **Builder authority:** `ACTIVE / EXCLUSIVE 20-PATH WRITE AUTHORITY`
 
-**Implementation state:** `REPAIR 11 ORIGINAL STOPPED CORRECTLY / NO IMPLEMENTATION / NO CANDIDATE; RESTART 1 NOT YET STARTED`
+**Implementation state:** `REPAIR 11 ORIGINAL STOPPED CORRECTLY / NO IMPLEMENTATION / NO CANDIDATE; RESTART 1 CANDIDATE FROZEN / UNACCEPTED; REPAIR 12 NOT YET STARTED`
 
 **Human Reserved:** `NOT REQUIRED`
 
@@ -119,6 +119,12 @@
 | Repair 11 Restart 1 dispatch authority | The governance-only commit containing this Delivery Record, under Task Packet revision 3 and Formal DoR revision 3 PASS |
 | Repair 11 Restart 1 Builder branch | `eng-011-builder-repair-11-restart-1` |
 | Repair 11 Restart 1 Builder worktree | `/private/tmp/prj226-eng011-builder-repair-11-restart-1` |
+| Repair 11 Restart 1 candidate | `ae3cb305d3635263aee52143b3903d140576e5dd` (tree `8487b3e27975ae4a6d488e3c046383a92644508c`; canonical 11-path aggregate `94802e56a5f252311cd4fa2116eb05d454e2ce49add2d3a427de87022c5958a4`) |
+| Repair 11 Restart 1 deterministic verification | `VALID / FINDINGS` — two blocking findings `ENG-011-R11R1-DV-R001` and `R002` ([Controller Disposition](../analysis/ENG-011_REPAIR11_RESTART1_DETERMINISTIC_FINDING_DISPOSITION_2026-08-31.md)) |
+| Repair 11 Restart 1 disposition | `FROZEN / UNACCEPTED / HISTORICAL / NON-CANONICAL` |
+| Repair 12 dispatch authority | The governance-only commit containing this Delivery Record, under Task Packet revision 3 and Formal DoR revision 3 PASS |
+| Repair 12 Builder branch | `eng-011-builder-repair-12` |
+| Repair 12 Builder worktree | `/private/tmp/prj226-eng011-builder-repair-12` |
 | Stale Repair-4 verifier worktree | `STALE / REGISTERED AT 5f3d0d2 / UNCLEANED DUE TO PRIOR SANDBOX PERMISSION FAILURE / PRESERVED AS NON-OPERATIVE` (`/private/tmp/prj226-eng011-repair4-dv`) |
 | Push | Not authorized / not performed |
 
@@ -179,11 +185,11 @@ Every other path is read-only under this durable Controller dispatch. The persis
 
 ## Readiness and dispatch disposition
 
-Repair-10 Builder work is complete and its authority is consumed. Candidate `c7d6b1cf239da0be8dc2a71a55d41e2eb896dc39`, tree `a45631654d10eacc8b60e7ed365f3dc3fb19e615`, is frozen, unaccepted, historical, and non-canonical after valid deterministic findings `ENG-011-R10-DV-R001` through `R003`. The Controller bound those findings to Repair 11. The original Repair-11 dispatch was then superseded for execution only after its Builder correctly found the nineteen-path lock insufficient before implementation. Formal DoR revision 3 passes the exact twenty-path scope; Human Reserved remains `NOT REQUIRED` and migration remains `NO MIGRATION`.
+Repair-11 Restart-1 candidate `ae3cb305d3635263aee52143b3903d140576e5dd`, tree `8487b3e27975ae4a6d488e3c046383a92644508c`, is frozen, unaccepted, historical, and non-canonical after valid blocking deterministic findings `ENG-011-R11R1-DV-R001` and `R002`. The Controller bound both to Repair 12. Formal DoR revision 3 passes the unchanged exact twenty-path scope; Human Reserved remains `NOT REQUIRED` and migration remains `NO MIGRATION`.
 
-## Future Repair-11 candidate evidence
+## Future Repair-12 candidate evidence
 
-Repair-11 candidate commit/tree/aggregate, deterministic results for `ENG-011-TC-01` through `TC-21`, `R3-TC-01` through `R3-TC-18`, preservation of prior accepted obligations, repair evidence for `ENG-011-R10-DV-R001` through `R003`, upstream regressions, migration re-verification, independent security/operability review, findings, repairs, and Controller closure remain intentionally empty until produced by the authorized Repair-11 delivery sequence.
+Repair-12 candidate commit/tree/aggregate, deterministic results for `ENG-011-TC-01` through `TC-21`, `R3-TC-01` through `R3-TC-18`, full correlated stage coverage, closed runtime enum admission, preservation of all prior obligations, upstream regressions, migration re-verification, independent security/operability review, findings, repairs, and Controller closure remain intentionally empty until produced by the authorized Repair-12 delivery sequence.
 
 ## Revision-3 restart boundary
 
