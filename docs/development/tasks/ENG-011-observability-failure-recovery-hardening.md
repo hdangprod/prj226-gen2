@@ -4,35 +4,35 @@
 
 **Lifecycle status:** ACTIVE
 
-**Task Packet revision:** 5
+**Task Packet revision:** 6
 
 **Controller planning revision:** 2
 
-**Current task state:** `AUTHORIZED / REPAIR 14 / FULL CLEAN-ROOM ENG-011 RECONSTRUCTION DISPATCHED`
+**Current task state:** `AUTHORIZED / REPAIR 15 / FULL CLEAN-ROOM ENG-011 RECONSTRUCTION DISPATCHED`
 
-**Formal DoR:** [Revision 5](../analysis/ENG-011_FORMAL_DoR_REV5_2026-08-31.md) `PASS`; revisions 2 through 4 remain historical
+**Formal DoR:** [Revision 6](../analysis/ENG-011_FORMAL_DoR_REV6_2026-09-01.md) `PASS`; revisions 2 through 5 remain historical
 
 **READY:** `YES`
 
-**Current Builder:** `ENG-011 REPAIR 14 BUILDER`
+**Current Builder:** `ENG-011 REPAIR 15 BUILDER`
 
 **Builder authority:** `ACTIVE / EXCLUSIVE 20-PATH WRITE AUTHORITY / FULL CLEAN-ROOM EXECUTION AUTHORIZED`
 
-**Implementation:** `REPAIR 11 ORIGINAL DISPATCH STOPPED BEFORE IMPLEMENTATION / NO CANDIDATE; REPAIR 11 RESTART 1 CANDIDATE FROZEN / UNACCEPTED; REPAIR 12 STOPPED CORRECTLY WITH UNCOMMITTED PARTIAL IMPLEMENTATION / NO CANDIDATE; REPAIR 12 RESTART 1 CORRECTED CANDIDATE REJECTED / MISSING TC-21 REAL-BYTE GUARD`
+**Implementation:** `REPAIR 14 CANDIDATE REJECTED / MISSING NON-ACCEPTED TERMINAL EVIDENCE AND COMPLETE TC-21 PROHIBITED-FAMILY COVERAGE`
 
 **Human Reserved:** `NOT REQUIRED`
 
 **Migration:** `NO MIGRATION`
 
-**Next required role:** `ENG-011 REPAIR 14 BUILDER`
+**Next required role:** `ENG-011 REPAIR 15 BUILDER`
 
-**Builder branch:** `eng-011-builder-repair-14`
+**Builder branch:** `eng-011-builder-repair-15`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-14`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-15`
 
-**Durable dispatch:** `AUTHORIZED / REPAIR 14`; the governance-only commit containing the [full clean-room reconstruction disposition](../analysis/ENG-011_FULL_CLEAN_ROOM_RECONSTRUCTION_DISPATCH_2026-08-31.md) is the sole Builder authority
+**Durable dispatch:** `AUTHORIZED / REPAIR 15`; the governance-only commit containing the [Repair-14 candidate-evidence adjudication and Repair-15 dispatch](../analysis/ENG-011_REPAIR14_CANDIDATE_EVIDENCE_ADJUDICATION_2026-09-01.md) is the sole Builder authority
 
-**Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 5](../analysis/ENG-011_FORMAL_DoR_REV5_2026-08-31.md)
+**Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 6](../analysis/ENG-011_FORMAL_DoR_REV6_2026-09-01.md)
 
 **Repair-9 deterministic finding disposition:** [Controller Deterministic Finding Disposition and Repair-10 Dispatch](../analysis/ENG-011_REPAIR9_DETERMINISTIC_FINDING_DISPOSITION_2026-08-31.md)
 
@@ -51,6 +51,48 @@
 **Planning authority base tree:** `7adf7735813c9ba7d609f951a2ac180734ce9efa`
 
 **Governing contract:** [Delivery Contract revision 1](../../../development/DELIVERY_CONTRACT.md)
+
+## Revision-6 Repair-14 candidate-evidence correction and Repair-15 boundary
+
+Revision 6 supersedes Revision 5 for execution only. It preserves the exact twenty-path write lock, every Product, Domain, Human Control, provider, DATA-001, retry, recovery, migration, and Runtime Architecture boundary, and the complete full-clean-room reconstruction obligation. It adds no Product, Domain, Human Control, or architecture behavior.
+
+Repair-14 candidate `7cd33607acabe24fbf321d48ff53392c227f2b96`, tree `da55a351ca81920192556bd879e4b7f523ffa317`, is immutable, rejected, unaccepted, historical, and non-canonical. It is failed implementation candidate 14. Repair-15 must reconstruct the entire ENG-011 implementation from the governance-only clean base stated in its Controller record. Repair-14 implementation bytes, diffs, worktree, staging state, and candidate are prohibited reconstruction input; Repair-15 is not a narrow patch.
+
+### TC-08 and R3-TC-07 exact terminal-evidence correction
+
+Every applicable real interaction exit must emit bounded terminal operational evidence before it returns. A request-stage observation alone is insufficient. The terminal must preserve the actual Product outcome and applicable stage; it must never fabricate authorization success, persistence success, accepted state, retry, or a side effect.
+
+| Actual real exit | Required terminal evidence |
+| --- | --- |
+| Validation or invalid trusted-evidence failure | `user-visible` `failed`, `validation`, `non-retryable` |
+| Authentication-material or other Product prohibition | `user-visible` `denied`, `prohibited-input`, `non-retryable` |
+| Ambiguity or explicit clarification-required outcome | `user-visible` `clarification-required`, `clarification-required`, `non-retryable` |
+| Existing Human Control unresolved outcome | `user-visible` `unresolved`, `unresolved`, `non-retryable` |
+| Existing separately normalized authorization rejection | `authorization` and `user-visible` non-accepted `denied`, `authorization-denied`, `non-retryable`; this is observation of an existing rejection, not a new Human Control denial outcome |
+| Retrieval not-found | `retrieval` `failed`, `not-found`, `non-retryable`, followed by the actual non-accepted user-visible result |
+| Retrieval failure | `retrieval` `failed`, `retrieval-failed`, exact retry disposition, followed by the actual non-accepted user-visible result |
+| Provider clarification, unresolved, or normalized failure | `provider` and `user-visible` terminals with the matching closed status/failure category and exact retry disposition |
+| Operation-ID conflict | `persistence` and `user-visible` `failed`, `operation-id-conflict`, `non-retryable` |
+| Persistence durability failure | `persistence` and `user-visible` `failed`, `persistence-durability`, exact retry disposition |
+| Deletion identity/rejection, not-found, failure, or indeterminate outcome | Truthful deletion persistence/user-visible non-accepted terminal with the applicable closed category and retry disposition; no deletion success is fabricated |
+| Mixed or heterogeneous non-success aggregate | The actual closed mixed/partial or non-success user-visible terminal; no total success is fabricated |
+
+Evidence remains limited to the closed schema and safe identifiers. It must not include user prose, validation or Human Control reason text, model/provider details, raw errors, persistence details, payloads, metadata, or content.
+
+### TC-21 and R3-TC-13 exact prohibited-family correction
+
+The candidate-resident guard must enumerate the exact ten production paths, read their real candidate bytes, and apply one scanner to those bytes and every synthetic violation. It must reject each of these construct families without a broad English-word scan:
+
+1. external telemetry or analytics imports/SDK calls, including OpenTelemetry, Sentry, and telemetry/analytics reporters;
+2. queue, Durable Object, scheduled, cron, `waitUntil`, background-worker, or recovery-worker constructs;
+3. cache or persistent-platform-state constructs, including Cache API/default cache and new KV, R2, or cache bindings;
+4. outbound network constructs, including `fetch`, `WebSocket`, `XMLHttpRequest`, and `http`/`https` client imports;
+5. automatic mutation/deletion retry, fallback provider, compensation, rollback, replay, or recovery-engine constructs;
+6. telemetry persistence or new telemetry storage/table constructs;
+7. raw-error, stack, SQL, headers, credentials, provider-private detail, or content-bearing fields when constructing, admitting, projecting, or serializing operational evidence; and arbitrary evidence bags (`attributes`, `metadata`, `payload`, `details`);
+8. a new deployable/runtime service construct, including a new Worker, service binding, scheduled runtime, queue consumer, or Durable Object.
+
+For family 7, the scanner must target evidence admission/projection/emit construction rather than flag ordinary Product-domain variables that happen to be named `content` or `message`. Every family has at least one synthetic positive control that is passed to the same scanner and detected. The test reports the exact production-path and synthetic-control counts produced by the candidate; historical counts have no authority.
 
 ## Revision-5 TC-13 authority-contradiction correction and continuation boundary
 

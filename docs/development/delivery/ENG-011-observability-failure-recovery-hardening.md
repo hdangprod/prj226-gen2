@@ -2,29 +2,29 @@
 
 **Artifact class:** OPERATIONAL
 
-**Lifecycle status:** ACTIVE / REPAIR 13 / TC-21 REAL-BYTE GUARD REPAIR BOUND
+**Lifecycle status:** ACTIVE / REPAIR 15 / FULL CLEAN-ROOM RECONSTRUCTION DISPATCHED
 
 **Task ID:** `ENG-011`
 
-**Task Packet:** [ENG-011 — Observability and Failure/Recovery Hardening](../tasks/ENG-011-observability-failure-recovery-hardening.md) (Revision 5 / OPERATIVE)
+**Task Packet:** [ENG-011 — Observability and Failure/Recovery Hardening](../tasks/ENG-011-observability-failure-recovery-hardening.md) (Revision 6 / OPERATIVE)
 
-**Formal DoR:** [Revision 5](../analysis/ENG-011_FORMAL_DoR_REV5_2026-08-31.md) `PASS`; revisions 2 through 4 remain historical
+**Formal DoR:** [Revision 6](../analysis/ENG-011_FORMAL_DoR_REV6_2026-09-01.md) `PASS`; revisions 2 through 5 remain historical
 
-**Current lifecycle state:** `AUTHORIZED / REPAIR 13 / FRESH CLEAN-ROOM BUILDER AUTHORIZED`
+**Current lifecycle state:** `AUTHORIZED / REPAIR 15 / FULL CLEAN-ROOM BUILDER AUTHORIZED`
 
-**Builder dispatch:** `AUTHORIZED / REPAIR 13`
+**Builder dispatch:** `AUTHORIZED / REPAIR 15`
 
-**Current Builder:** `ENG-011 REPAIR 13 BUILDER`
+**Current Builder:** `ENG-011 REPAIR 15 BUILDER`
 
-**Builder branch:** `eng-011-builder-repair-13` (provisioning pending)
+**Builder branch:** `eng-011-builder-repair-15` (provisioning pending)
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-13` (provisioning pending)
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-15` (provisioning pending)
 
 **Original Repair-5 Builder:** `SUPERSEDED / UNUSED / NO IMPLEMENTATION / NON-OPERATIVE` (`eng-011-builder-repair-5`, `/private/tmp/prj226-eng011-builder-repair-5` preserved clean)
 
 **Builder authority:** `ACTIVE / EXCLUSIVE 20-PATH WRITE AUTHORITY / FRESH CLEAN-ROOM EXECUTION AUTHORIZED`
 
-**Implementation state:** `REPAIR 11 ORIGINAL STOPPED CORRECTLY / NO IMPLEMENTATION / NO CANDIDATE; RESTART 1 CANDIDATE FROZEN / UNACCEPTED; REPAIR 12 STOPPED CORRECTLY / UNCOMMITTED PARTIAL IMPLEMENTATION / NO CANDIDATE; REPAIR 12 RESTART 1 STOPPED CORRECTLY / OPERATIVE AUTHORITY CONFLICT / NO IMPLEMENTATION INSPECTION / NO IMPLEMENTATION / NO CANDIDATE; CORRECTED RESTART 1 CANDIDATE REJECTED / MISSING TC-21 REAL-BYTE GUARD`
+**Implementation state:** `REPAIR 14 CANDIDATE IMMUTABLE / REJECTED / FAILED IMPLEMENTATION CANDIDATE 14 / NON-CANONICAL; REPAIR 15 FULL CLEAN-ROOM RECONSTRUCTION AUTHORIZED`
 
 **Human Reserved:** `NOT REQUIRED`
 
