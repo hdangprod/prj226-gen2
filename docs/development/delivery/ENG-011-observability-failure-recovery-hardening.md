@@ -2,29 +2,29 @@
 
 **Artifact class:** OPERATIONAL
 
-**Lifecycle status:** ACTIVE / REPAIR 12 DISPATCHED
+**Lifecycle status:** ACTIVE / REPAIR 12 RESTART 1 CORRECTED DISPATCHED
 
 **Task ID:** `ENG-011`
 
-**Task Packet:** [ENG-011 — Observability and Failure/Recovery Hardening](../tasks/ENG-011-observability-failure-recovery-hardening.md) (Revision 3)
+**Task Packet:** [ENG-011 — Observability and Failure/Recovery Hardening](../tasks/ENG-011-observability-failure-recovery-hardening.md) (Revision 4 / OPERATIVE)
 
-**Formal DoR:** [Revision 3](../analysis/ENG-011_FORMAL_DoR_REV3_2026-08-31.md) `PASS`; revision 2 remains historical for its exact prior scope
+**Formal DoR:** [Revision 4](../analysis/ENG-011_FORMAL_DoR_REV4_2026-08-31.md) `PASS`; revisions 2 and 3 remain historical
 
-**Current lifecycle state:** `AUTHORIZED / REPAIR 12 DURABLY DISPATCHED / BUILDER STARTUP PENDING`
+**Current lifecycle state:** `AUTHORIZED / REPAIR 12 RESTART 1 CORRECTED DISPATCHED / BUILDER STARTUP PENDING`
 
-**Builder dispatch:** `AUTHORIZED / REPAIR 12`
+**Builder dispatch:** `AUTHORIZED / REPAIR 12 RESTART 1 CORRECTED`
 
-**Current Builder:** `ENG-011 REPAIR 12 BUILDER`
+**Current Builder:** `ENG-011 REPAIR 12 RESTART 1 CORRECTED BUILDER`
 
-**Builder branch:** `eng-011-builder-repair-12` (pending fresh provisioning)
+**Builder branch:** `eng-011-builder-repair-12-restart-1-corrected` (fresh provisioned / startup PASS)
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-12` (pending fresh provisioning)
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-12-restart-1-corrected` (fresh provisioned / startup PASS / clean)
 
 **Original Repair-5 Builder:** `SUPERSEDED / UNUSED / NO IMPLEMENTATION / NON-OPERATIVE` (`eng-011-builder-repair-5`, `/private/tmp/prj226-eng011-builder-repair-5` preserved clean)
 
 **Builder authority:** `ACTIVE / EXCLUSIVE 20-PATH WRITE AUTHORITY`
 
-**Implementation state:** `REPAIR 11 ORIGINAL STOPPED CORRECTLY / NO IMPLEMENTATION / NO CANDIDATE; RESTART 1 CANDIDATE FROZEN / UNACCEPTED; REPAIR 12 NOT YET STARTED`
+**Implementation state:** `REPAIR 11 ORIGINAL STOPPED CORRECTLY / NO IMPLEMENTATION / NO CANDIDATE; RESTART 1 CANDIDATE FROZEN / UNACCEPTED; REPAIR 12 STOPPED CORRECTLY / UNCOMMITTED PARTIAL IMPLEMENTATION / NO CANDIDATE; REPAIR 12 RESTART 1 STOPPED CORRECTLY / OPERATIVE AUTHORITY CONFLICT / NO IMPLEMENTATION INSPECTION / NO IMPLEMENTATION / NO CANDIDATE; CORRECTED RESTART 1 NOT YET STARTED`
 
 **Human Reserved:** `NOT REQUIRED`
 
@@ -125,6 +125,10 @@
 | Repair 12 dispatch authority | The governance-only commit containing this Delivery Record, under Task Packet revision 3 and Formal DoR revision 3 PASS |
 | Repair 12 Builder branch | `eng-011-builder-repair-12` |
 | Repair 12 Builder worktree | `/private/tmp/prj226-eng011-builder-repair-12` |
+| Repair 12 Restart-1 conflicted dispatch | `deaebad1f9e4cd87b2d77f85564cc6df051fc291` — `SUPERSEDED FOR EXECUTION / OPERATIVE AUTHORITY CONFLICT / NO IMPLEMENTATION / NO CANDIDATE / HISTORICAL GOVERNANCE EVIDENCE` ([Conflict Disposition](../analysis/ENG-011_REPAIR12_RESTART1_OPERATIVE_AUTHORITY_CONFLICT_DISPOSITION_2026-08-31.md)) |
+| Repair 12 Restart-1 conflicted Builder | `eng-011-builder-repair-12-restart-1` at `/private/tmp/prj226-eng011-builder-repair-12-restart-1` — `STOPPED CORRECTLY / AUTHORITY CONFLICT / NO IMPLEMENTATION INSPECTION / NO IMPLEMENTATION / NO CANDIDATE / NON-OPERATIVE AFTER RE-DISPATCH` |
+| Repair 12 Restart-1 corrected dispatch | The governance-only commit containing this reconciled Delivery Record, under Task Packet revision 4 and Formal DoR revision 4 PASS |
+| Repair 12 Restart-1 corrected Builder | `eng-011-builder-repair-12-restart-1-corrected` at `/private/tmp/prj226-eng011-builder-repair-12-restart-1-corrected` |
 | Stale Repair-4 verifier worktree | `STALE / REGISTERED AT 5f3d0d2 / UNCLEANED DUE TO PRIOR SANDBOX PERMISSION FAILURE / PRESERVED AS NON-OPERATIVE` (`/private/tmp/prj226-eng011-repair4-dv`) |
 | Push | Not authorized / not performed |
 
@@ -185,12 +189,12 @@ Every other path is read-only under this durable Controller dispatch. The persis
 
 ## Readiness and dispatch disposition
 
-Repair-11 Restart-1 candidate `ae3cb305d3635263aee52143b3903d140576e5dd`, tree `8487b3e27975ae4a6d488e3c046383a92644508c`, is frozen, unaccepted, historical, and non-canonical after valid blocking deterministic findings `ENG-011-R11R1-DV-R001` and `R002`. The Controller bound both to Repair 12. Formal DoR revision 3 passes the unchanged exact twenty-path scope; Human Reserved remains `NOT REQUIRED` and migration remains `NO MIGRATION`.
+Repair-11 Restart-1 candidate `ae3cb305d3635263aee52143b3903d140576e5dd`, tree `8487b3e27975ae4a6d488e3c046383a92644508c`, is frozen, unaccepted, historical, and non-canonical after valid blocking deterministic findings `ENG-011-R11R1-DV-R001` and `R002`. The Controller bound both to Repair 12. Task Packet revision 4 remains operative and Formal DoR revision 4 remains `PASS`: their unchanged exact twenty-path scope preserves real Human Control success and unresolved semantics; an actual discretionary Human Control denial is not authorized. Existing authorization rejection/non-acceptance remains separately observable as a truthful non-accepted terminal result. Human Reserved remains `NOT REQUIRED` and migration remains `NO MIGRATION`.
 
 ## Future Repair-12 candidate evidence
 
 Repair-12 candidate commit/tree/aggregate, deterministic results for `ENG-011-TC-01` through `TC-21`, `R3-TC-01` through `R3-TC-18`, full correlated stage coverage, closed runtime enum admission, preservation of all prior obligations, upstream regressions, migration re-verification, independent security/operability review, findings, repairs, and Controller closure remain intentionally empty until produced by the authorized Repair-12 delivery sequence.
 
-## Revision-3 restart boundary
+## Revision-4 operative restart boundary
 
-The operative lock is exactly twenty paths: the Revision-2 nineteen paths plus `tests/application/services/interaction/interactionDeletion.test.ts` only. The original Repair-11 Builder started clean and stopped before modifying source, so no candidate exists and the failed implementation set remains exactly eleven. Repair-11 Restart 1 must be provisioned in a fresh worktree; it may not reuse the stopped Builder worktree.
+The operative lock is exactly twenty paths: the Revision-2 nineteen paths plus `tests/application/services/interaction/interactionDeletion.test.ts` only. The historical failed implementation set is exactly twelve. Revision 4 changes no path and creates no actual Human Control denial outcome. The stale Revision-3 Delivery Record metadata caused the original Restart-1 Builder to stop correctly before implementation inspection; it is not a failed candidate. The corrected Restart-1 Builder must be provisioned in a fresh worktree and may not reuse either stopped Repair-12 worktree.

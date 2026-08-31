@@ -8,13 +8,13 @@
 
 **Controller planning revision:** 2
 
-**Current task state:** `AUTHORIZED / REPAIR 12 RESTART 1 DURABLY DISPATCHED / BUILDER STARTUP PENDING`
+**Current task state:** `AUTHORIZED / REPAIR 12 RESTART 1 CORRECTED DURABLY DISPATCHED / BUILDER STARTUP PENDING`
 
 **Formal DoR:** [Revision 4](../analysis/ENG-011_FORMAL_DoR_REV4_2026-08-31.md) `PASS`; revisions 2 and 3 remain historical
 
 **READY:** `YES`
 
-**Current Builder:** `ENG-011 REPAIR 12 RESTART 1 BUILDER`
+**Current Builder:** `ENG-011 REPAIR 12 RESTART 1 CORRECTED BUILDER`
 
 **Builder authority:** `ACTIVE / EXCLUSIVE 20-PATH WRITE AUTHORITY / IMPLEMENTATION NOT STARTED`
 
@@ -24,13 +24,13 @@
 
 **Migration:** `NO MIGRATION`
 
-**Next required role:** `ENG-011 REPAIR 12 RESTART 1 BUILDER`
+**Next required role:** `ENG-011 REPAIR 12 RESTART 1 CORRECTED BUILDER`
 
-**Builder branch:** `eng-011-builder-repair-12-restart-1`
+**Builder branch:** `eng-011-builder-repair-12-restart-1-corrected`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-12-restart-1`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-12-restart-1-corrected`
 
-**Durable dispatch:** `AUTHORIZED / REPAIR 12 RESTART 1`; the governance-only commit containing this dispatch is the sole Builder authority
+**Durable dispatch:** `AUTHORIZED / REPAIR 12 RESTART 1 CORRECTED`; the governance-only commit containing this dispatch is the sole Builder authority
 
 **Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 4](../analysis/ENG-011_FORMAL_DoR_REV4_2026-08-31.md)
 
