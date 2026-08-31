@@ -4,35 +4,35 @@
 
 **Lifecycle status:** ACTIVE
 
-**Task Packet revision:** 3
+**Task Packet revision:** 4
 
 **Controller planning revision:** 2
 
-**Current task state:** `AUTHORIZED / REPAIR 12 DURABLY DISPATCHED / BUILDER STARTUP PENDING`
+**Current task state:** `AUTHORIZED / REPAIR 12 RESTART 1 DURABLY DISPATCHED / BUILDER STARTUP PENDING`
 
-**Formal DoR:** [Revision 3](../analysis/ENG-011_FORMAL_DoR_REV3_2026-08-31.md) `PASS`; revision 2 `PASS` remains historical for the superseded nineteen-path execution scope
+**Formal DoR:** [Revision 4](../analysis/ENG-011_FORMAL_DoR_REV4_2026-08-31.md) `PASS`; revisions 2 and 3 remain historical
 
 **READY:** `YES`
 
-**Current Builder:** `ENG-011 REPAIR 12 BUILDER`
+**Current Builder:** `ENG-011 REPAIR 12 RESTART 1 BUILDER`
 
 **Builder authority:** `ACTIVE / EXCLUSIVE 20-PATH WRITE AUTHORITY / IMPLEMENTATION NOT STARTED`
 
-**Implementation:** `REPAIR 11 ORIGINAL DISPATCH STOPPED BEFORE IMPLEMENTATION / NO CANDIDATE; REPAIR 11 RESTART 1 CANDIDATE FROZEN / UNACCEPTED; REPAIR 12 NOT YET STARTED`
+**Implementation:** `REPAIR 11 ORIGINAL DISPATCH STOPPED BEFORE IMPLEMENTATION / NO CANDIDATE; REPAIR 11 RESTART 1 CANDIDATE FROZEN / UNACCEPTED; REPAIR 12 STOPPED CORRECTLY WITH UNCOMMITTED PARTIAL IMPLEMENTATION / NO CANDIDATE; REPAIR 12 RESTART 1 NOT YET STARTED`
 
 **Human Reserved:** `NOT REQUIRED`
 
 **Migration:** `NO MIGRATION`
 
-**Next required role:** `ENG-011 REPAIR 12 BUILDER`
+**Next required role:** `ENG-011 REPAIR 12 RESTART 1 BUILDER`
 
-**Builder branch:** `eng-011-builder-repair-12`
+**Builder branch:** `eng-011-builder-repair-12-restart-1`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-12`
+**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-12-restart-1`
 
-**Durable dispatch:** `AUTHORIZED / REPAIR 12`; the governance-only commit containing this dispatch is the sole Builder authority
+**Durable dispatch:** `AUTHORIZED / REPAIR 12 RESTART 1`; the governance-only commit containing this dispatch is the sole Builder authority
 
-**Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 3](../analysis/ENG-011_FORMAL_DoR_REV3_2026-08-31.md)
+**Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 4](../analysis/ENG-011_FORMAL_DoR_REV4_2026-08-31.md)
 
 **Repair-9 deterministic finding disposition:** [Controller Deterministic Finding Disposition and Repair-10 Dispatch](../analysis/ENG-011_REPAIR9_DETERMINISTIC_FINDING_DISPOSITION_2026-08-31.md)
 
@@ -53,6 +53,14 @@
 **Governing contract:** [Delivery Contract revision 1](../../../development/DELIVERY_CONTRACT.md)
 
 ## Revision-2 repair scope and readiness boundary
+
+## Revision-4 Human Control denial-interpretation correction and Restart-1 boundary
+
+Revision 4 supersedes Revision 3 **for execution only**. It preserves the exact twenty-path write lock and every existing ENG-011 observability, DATA-001, retry, fallback, migration, Product, Domain, and architecture obligation. It corrects an impermissible interpretation discovered by the stopped Repair-12 Builder: `ENG-011-TC-08` requires existing authorization rejection/denial evidence to remain distinct from unresolved, but does **not** authorize a new, actual Human Control authorization-denied outcome.
+
+The approved Human Control authority (`BEH-004`, `PF-CTL-001`, and Domain Model invariant 14) makes clear ordinary direction sufficient for an ordinary change and clear scope plus separate explicit confirmation sufficient for deletion. It defines clarification, prohibited, failed, and unresolved outcomes, but no discretionary Human Control denial after an otherwise sufficient direction or confirmation. A new `DeniedOutcome`, a deny option, or a new Human Control decision branch would be a Product/Domain contract expansion and is not authorized by `GOV-018` or this Task Packet. `authorization-denied` remains available only as a bounded observation failure category for existing authorization rejection; it must not be fabricated as an actual Human Control outcome.
+
+Accordingly, `ENG-011-TC-08` must prove existing authorization rejection/non-acceptance separately from unresolved without changing the Human Control contract. It does not require a new source path or a direct Human Control contract test. The stopped Repair-12 worktree is `STOPPED CORRECTLY / WRITE-LOCK INSUFFICIENT UNDER A PRIOR EXCESSIVE INTERPRETATION / PARTIAL UNCOMMITTED IMPLEMENTATION / NO CANDIDATE / NON-OPERATIVE`. Its bytes are not restart authority. The current Repair-12 dispatch is superseded for execution; Repair-12 Restart-1 is a fresh clean-room execution from this revision's governance dispatch. The failed-candidate set remains exactly twelve.
 
 ## Revision-3 write-lock amendment and restart boundary
 
@@ -231,9 +239,9 @@ Credential-like strings injected into every prohibited input surface must be abs
 - Observability is ephemeral/platform-native. It is not accepted memory and not a secondary Knowledge store.
 - **NO MIGRATION.** `migrations/0001_authoritative_state.sql` must remain Git blob `5a50e2b216f824ff02ebf09e803a6c25a43bcfe0` and SHA-256 `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`.
 
-## Operative revision-3 exact write lock
+## Operative revision-4 exact write lock
 
-The Repair-11 Restart-1 Builder receives exclusive ownership of exactly these twenty paths under the fresh durable Controller dispatch. No wildcard is authorized.
+The Repair-12 Restart-1 Builder receives exclusive ownership of exactly these twenty paths under the fresh durable Controller dispatch. No wildcard is authorized. This is byte-for-byte the Revision-3 path set; Revision 4 adds no path.
 
 ### Production paths
 
@@ -422,7 +430,7 @@ ENG-011 becomes `DONE` only when:
 9. Controller final closure accepts the candidate; and
 10. current Builder returns to `NONE` and execution authority is consumed.
 
-Task Packet revision 3 is operative and Ready after Formal DoR revision 3 PASS. Repair-11 original dispatch was superseded for execution because its nineteen-path lock was insufficient; its Builder stopped correctly with no implementation and no candidate. Repair-11 Restart 1 candidate is frozen after valid blocking deterministic findings; Repair 12 is the next implementation attempt under this exact twenty-path lock.
+Task Packet revision 4 is operative and Ready after Formal DoR revision 4 PASS. Repair-11 original dispatch was superseded for execution because its nineteen-path lock was insufficient; its Builder stopped correctly with no implementation and no candidate. Repair-11 Restart 1 candidate is frozen after valid blocking deterministic findings; Repair-12 then stopped correctly with no candidate because the proposed actual Human Control denial exceeded approved authority. Repair-12 Restart 1 is the next implementation attempt under this unchanged exact twenty-path lock.
 
 ## Prior planning findings
 
