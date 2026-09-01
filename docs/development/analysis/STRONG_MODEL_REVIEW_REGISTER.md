@@ -3,38 +3,24 @@
 **Artifact class:** OPERATIONAL / REGISTER
 **Authority:** NON-CANONICAL
 **Lifecycle:** ACTIVE
-**Last updated:** 2026-08-31
+**Last updated:** 2026-09-01
 **Purpose:** Comprehensive register of unresolved, inferred, or disputed engineering design issues requiring stronger-model adjudication before task dispatch.
 
 **ENG-011 Lifecycle Status:**
-- **Current update (2026-08-31):** Repair-11 Restart-1 candidate `ae3cb305d3635263aee52143b3903d140576e5dd` is frozen after valid blocking deterministic findings for incomplete full-stage observability coverage and missing closed runtime enum admission. The failed implementation set is twelve. Repair-12 then stopped with uncommitted partial implementation and no candidate after correctly refusing a prior excessive interpretation that required a new actual Human Control denial outcome. [Task Packet revision 4](../tasks/ENG-011-observability-failure-recovery-hardening.md) is operative, [Formal DoR revision 4](ENG-011_FORMAL_DoR_REV4_2026-08-31.md) is `PASS`, and Repair-12 Restart-1 is durably dispatched under the unchanged exact twenty-path lock. See [the write-lock insufficiency disposition](ENG-011_REPAIR12_WRITE_LOCK_INSUFFICIENCY_DISPOSITION_2026-08-31.md).
-- Task Packet: [ENG-011 Task Packet Revision 3](../tasks/ENG-011-observability-failure-recovery-hardening.md)
-- Formal DoR Result: [Revision 3](ENG-011_FORMAL_DoR_REV3_2026-08-31.md) `PASS`; earlier revisions remain historical for their prior scopes
-- Finding Status: `ENG-011-DOR-R001` through `R006 CLOSED` historically; `ENG-011-BSE-R001 CLOSED BY EXECUTION RESTART`; prior accepted repair findings remain binding reconstruction obligations; `ENG-011-R7-SOR-R001` through `R003` and `ENG-011-R8-DV-R001` through `R010` preserved; `ENG-011-R11R1-DV-R001` and `R002 ACCEPTED / BLOCKING / BOUND TO REPAIR 12` ([Controller Disposition](ENG-011_REPAIR11_RESTART1_DETERMINISTIC_FINDING_DISPOSITION_2026-08-31.md))
-- Task State: `AUTHORIZED / REPAIR 10 DURABLY DISPATCHED / BUILDER STARTUP PENDING`
-- Original Builder: `ABORTED / STARTUP CONTAMINATED / NO CANDIDATE / NON-OPERATIVE` (`eng-011-builder`, `/private/tmp/prj226-eng011-builder` preserved)
-- Original Repair-5 Dispatch: `0af56e186b44396f524183125e5d053ea41e876e`
-- Original Repair-5 Builder: `SUPERSEDED / UNUSED / NO IMPLEMENTATION / NON-OPERATIVE` (`eng-011-builder-repair-5`, `/private/tmp/prj226-eng011-builder-repair-5` preserved clean)
-- Stale Repair-4 Verifier Worktree: `STALE / REGISTERED AT 5f3d0d2 / UNCLEANED DUE TO PRIOR SANDBOX PERMISSION FAILURE / PRESERVED AS NON-OPERATIVE` (`/private/tmp/prj226-eng011-repair4-dv`)
-- Repair-5 Restart-1 Candidate: `3adbe1ad5ef539b01f1af0c95603f02542000665` / `FROZEN / UNACCEPTED / HISTORICAL / NON-CANONICAL`
-- Repair-6 Candidate: `dce0f5babc9156383620ba8511f074197995b6a6` / `FROZEN / UNACCEPTED / HISTORICAL / NON-CANONICAL`
-- Repair-6 Deterministic Verification: `VALID / FINDINGS`; npm symlink accounting anomaly `NON-BLOCKING / ENVIRONMENT ONLY`
-- Repair-7 Candidate: `dd1a16ee3a638c20bc7aff9019d052e50ae23000` / `FROZEN / UNACCEPTED / HISTORICAL / NON-CANONICAL`
-- Repair-7 Deterministic Verification: `PASS`
-- Repair-7 S/O/S Review: `VALID / FINDINGS`; `ENG-011-R7-SOR-R001` through `R003` accepted as blocking
-- Repair-8 Candidate: `e5acfcc54e35e2fcd6912aa9eb1a64ac6baf821a` / `FROZEN / UNACCEPTED / HISTORICAL / NON-CANONICAL`
-- Repair-8 Deterministic Verification: `VALID / FINDINGS`; `ENG-011-R8-DV-R001` through `R010` accepted as blocking
-- Repair-9 Candidate: `8f06d2833fcea3150bb4652fc8766c6ea7a8b37a` / `FROZEN / UNACCEPTED / HISTORICAL / NON-CANONICAL`
-- Repair-9 Deterministic Verification: `VALID / FINDINGS`; `ENG-011-R9-DV-R001` through `R004` accepted as blocking; `ENG-011-R9-DV-R005` procedural
-- Dispatch Status: `AUTHORIZED / REPAIR 10 DURABLY DISPATCHED`
+- **Current update (2026-09-01):** Repair-15 candidate `0a11f678a660525024c9c7edf6233593f0e589f6` (tree `2523a66327571d51947d7777f77a0f6d8bceb956`, aggregate `6f3f820b56a6e401a3193136970263916a3059d56aaeac3eabd7689bf10a0c35`) is formally `ACCEPTED` and canonically integrated on `foundation/product-foundation`. Independent Deterministic Verification returned `PASS` (all 21 TCs, 12 TC-08 cases, TC-21 10-path scan and 8 synthetic controls, 18 Vitest configs, local-D1, migration, and toolchain passed) and independent Security/Operability/Semantic Review returned `PASS` with zero blocking findings.
+- Task Packet: [ENG-011 Task Packet Revision 6](../tasks/ENG-011-observability-failure-recovery-hardening.md) (OPERATIVE)
+- Formal DoR Result: [Revision 6](ENG-011_FORMAL_DoR_REV6_2026-09-01.md) `PASS`
+- Controller Acceptance: [ENG-011 Repair-15 Controller Acceptance](ENG-011_REPAIR15_CONTROLLER_ACCEPTANCE_2026-09-01.md)
+- Task State: `ACCEPTED / INTEGRATED / POST-INTEGRATION VERIFICATION PENDING`
 - Delivery Record: [ENG-011 Delivery Record](../delivery/ENG-011-observability-failure-recovery-hardening.md)
-- Current Builder: `ENG-011 REPAIR 10 BUILDER`
-- Builder Authority: `ACTIVE / EXCLUSIVE WRITE AUTHORITY OVER THE EXACT 19-PATH WRITE LOCK`
-- Builder Branch: `eng-011-builder-repair-10`
-- Builder Worktree: `/private/tmp/prj226-eng011-builder-repair-10`
-- Implementation State: `REPAIR-9 CANDIDATE FROZEN / REPAIR 10 NOT STARTED`
-- Migration: `NO MIGRATION`
+- Current Builder: `NONE`
+- Builder Authority: `CONSUMED / NON-OPERATIVE`
+- Implementation State: `REPAIR 15 CANDIDATE ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFICATION PENDING`
+- Failed-Candidate Count: `14` (historical failed implementation candidates remain frozen/unaccepted; Repair-13 incomplete candidate excluded)
+- Migration: `NO MIGRATION` (`migrations/0001_authoritative_state.sql` blob `5a50e2b216f824ff02ebf09e803a6c25a43bcfe0`, SHA-256 `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`)
 - Human Reserved: `NOT REQUIRED`
+- Push: `NOT PERFORMED`
+- Next Required Role: `ENG-011 — FRESH POST-INTEGRATION DETERMINISTIC VERIFIER`
 
 **ENG-010 Lifecycle Status:**
 - Task Packet: [ENG-010 Task Packet Revision 1](../tasks/ENG-010-text-interaction-human-control-orchestration.md)

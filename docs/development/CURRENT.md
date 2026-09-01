@@ -4,7 +4,7 @@
 
 **Lifecycle status:** ACTIVE
 
-**Last updated:** 2026-08-31
+**Last updated:** 2026-09-01
 
 **Decision owner:** `hdangprod`
 
@@ -27,9 +27,9 @@
 - **C7 — Engineering-Entry Readiness:** COMPLETE
 - **G7 — Engineering-Entry Readiness:** APPROVED BY HUMAN
 - **Runtime Architecture Phase:** COMPLETE — Runtime Architecture revision 1 approved by human through `GOV-017`.
-- **Engineering Phase:** AUTHORIZED BY HUMAN through `GOV-018`; `ENG-001` through `ENG-010` are complete and retain their accepted canonical identities. ENG-011 Repair-14 candidate `7cd33607acabe24fbf321d48ff53392c227f2b96` is immutable, rejected, unaccepted, non-canonical, and failed implementation candidate 14 after confirmed TC-08/R3-TC-07 terminal-evidence and TC-21/R3-TC-13 prohibited-family coverage gaps. Repair-13 remains immutable incomplete topology evidence and is not a failed implementation candidate. The [Repair-14 candidate-evidence adjudication](analysis/ENG-011_REPAIR14_CANDIDATE_EVIDENCE_ADJUDICATION_2026-09-01.md) dispatches Repair-15 for a full clean-room reconstruction from the verified governance-only clean base under the unchanged exact twenty-path lock. Human Reserved is `NOT REQUIRED`; migration remains `NO MIGRATION`.
+- **Engineering Phase:** AUTHORIZED BY HUMAN through `GOV-018`; `ENG-001` through `ENG-010` are complete and retain their accepted canonical identities. ENG-011 Repair-15 candidate `0a11f678a660525024c9c7edf6233593f0e589f6` is `ACCEPTED` and canonically integrated under Task Packet Revision 6 and Formal DoR Revision 6 `PASS` following independent Deterministic Verification `PASS` and Security/Operability/Semantic Review `PASS` with zero blocking findings. Post-integration verification is `PENDING`. Historical failed implementation candidate count remains fourteen; Repair-13 incomplete topology candidate remains excluded from that set. Human Reserved is `NOT REQUIRED`; migration remains `NO MIGRATION`; push is `NOT PERFORMED`.
 - **Engineering work:** AUTHORIZED only within `GOV-018`, the approved Product Foundation and Runtime Architecture, the Delivery Contract, and a valid Ready Task Packet.
-- **Runtime implementation:** AUTHORIZED within that bounded Engineering scope; Repair-14 is rejected and no longer execution authority. Repair-15 is the sole active Builder authority for a complete clean-room reconstruction; it may not reuse Repair-14 or any other failed-candidate implementation bytes.
+- **Runtime implementation:** AUTHORIZED within that bounded Engineering scope; ENG-011 Repair-15 implementation candidate `0a11f678a660525024c9c7edf6233593f0e589f6` is `ACCEPTED` and integrated. Fresh Post-Integration Deterministic Verification is required before task done closure.
 - **Production deployment and paid-service activation:** NOT AUTHORIZED (PROHIBITED)
 - **Control-plane implementation:** NOT AUTHORIZED (PROHIBITED)
 
@@ -73,7 +73,7 @@
 - **Runtime Architecture baseline:** [Liam v1 Runtime Architecture Baseline, revision 1](../architecture/RUNTIME_ARCHITECTURE.md) is `CANONICAL / APPROVED` through human disposition `GOV-017` by `github:hdangprod` on 2026-08-09. The original `ARCHITECTURE REVIEW: NEEDS FIX` findings `AR-F001` and `AR-F002` were repaired; `ARCHITECTURE TARGETED RECHECK: PASS` resolved both. Approval does not authorize engineering.
 - **Engineering Phase authorization:** `GOV-018` is APPROVED by `github:hdangprod` on 2026-08-09. It separately authorizes implementation of the approved Liam v1 Product Foundation and Runtime Architecture under Delivery Contract revision 1 while preserving product, architecture, production, paid-service, security, destructive-action, and control-plane Human Reserved boundaries.
 - **Engineering readiness and plan:** [Engineering Plan revision 1](ENGINEERING_PLAN.md) records `ENGINEERING DoR: PASS`, the implementation obligations and Task DAG, exact evidence rules, concurrency boundaries, and the first execution wave. It is `OPERATIONAL / ACTIVE` and cannot expand `GOV-018` or any approved product or architecture authority.
-- **Engineering task state:** `ENG-001` through `ENG-010` are `DONE`; their accepted identities and closure evidence remain unchanged. ENG-011 Revision-6 task requirements and Formal DoR revision 6 are operative. Repair-15 is durably dispatched for a full clean-room reconstruction from the verified governance-only clean base; the failed implementation count is fourteen.
+- **Engineering task state:** `ENG-001` through `ENG-010` are `DONE`; their accepted identities and closure evidence remain unchanged. ENG-011 Repair-15 candidate `0a11f678a660525024c9c7edf6233593f0e589f6` is `ACCEPTED` and integrated on `foundation/product-foundation`; post-integration verification is `PENDING`; failed implementation count remains fourteen.
 
 ## Authorized work
 
@@ -81,7 +81,7 @@ The Generation 2 Foundation Program is complete through human G7 disposition `GO
 
 This snapshot reflects authorization recorded in approved governance artifacts; it does not create, extend, or approve authorization.
 
-**Current stage state:** Generation 2 Foundation Program — COMPLETE; Runtime Architecture Phase — COMPLETE; Engineering Phase — AUTHORIZED; Engineering planning — ACTIVE; `ENG-001` through `ENG-010` COMPLETE; ENG-011 Repair-14 immutable / rejected / unaccepted / historical / non-canonical / failed implementation candidate 14; Repair-13 incomplete topology evidence remains outside that set; failed-candidate set 14; Repair-15 full clean-room Builder dispatched; Human Reserved `NOT REQUIRED`; migration `NO MIGRATION`; push `NOT PERFORMED`
+**Current stage state:** Generation 2 Foundation Program — COMPLETE; Runtime Architecture Phase — COMPLETE; Engineering Phase — AUTHORIZED; Engineering planning — ACTIVE; `ENG-001` through `ENG-010` COMPLETE; `ENG-011` ACCEPTED / INTEGRATED / POST-INTEGRATION VERIFICATION PENDING; Repair-15 candidate `0a11f678a660525024c9c7edf6233593f0e589f6` accepted; failed-candidate set 14; Repair-13 incomplete topology candidate excluded; Human Reserved `NOT REQUIRED`; migration `NO MIGRATION`; push `NOT PERFORMED`
 
 **Current Engineering authority:** `GOV-018` — APPROVED BY HUMAN on 2026-08-09.
 **Engineering gate:** None created or implied. Task readiness and completion are governed by Delivery Contract revision 1 and do not approve product, architecture, production release, or another gate.
@@ -97,7 +97,7 @@ This snapshot reflects authorization recorded in approved governance artifacts; 
 
 **Foundation gates:** C1–C7 are COMPLETE; G1–G7 are APPROVED BY HUMAN. No Foundation gate remains pending.
 
-**Next executable work:** `ENG-011 REPAIR 15 BUILDER — FULL CLEAN-ROOM RECONSTRUCTION`, under the [Repair-14 candidate-evidence adjudication and Repair-15 dispatch](analysis/ENG-011_REPAIR14_CANDIDATE_EVIDENCE_ADJUDICATION_2026-09-01.md). Fresh Deterministic Verification and security/operability/semantic review remain unauthorized until that Builder freezes a complete candidate.
+**Next executable work:** `ENG-011 — FRESH POST-INTEGRATION DETERMINISTIC VERIFIER`, to independently evaluate canonical integrated HEAD on `foundation/product-foundation` against the Delivery Contract, accepted implementation blobs, migration invariant, and regression suite.
 
 ## Explicit prohibitions
 

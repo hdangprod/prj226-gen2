@@ -8,29 +8,27 @@
 
 **Controller planning revision:** 2
 
-**Current task state:** `AUTHORIZED / REPAIR 15 / FULL CLEAN-ROOM ENG-011 RECONSTRUCTION DISPATCHED`
+**Current task state:** `ACCEPTED / INTEGRATED / POST-INTEGRATION VERIFICATION PENDING`
 
 **Formal DoR:** [Revision 6](../analysis/ENG-011_FORMAL_DoR_REV6_2026-09-01.md) `PASS`; revisions 2 through 5 remain historical
 
 **READY:** `YES`
 
-**Current Builder:** `ENG-011 REPAIR 15 BUILDER`
+**Current Builder:** `NONE`
 
-**Builder authority:** `ACTIVE / EXCLUSIVE 20-PATH WRITE AUTHORITY / FULL CLEAN-ROOM EXECUTION AUTHORIZED`
+**Builder authority:** `CONSUMED / NON-OPERATIVE`
 
-**Implementation:** `REPAIR 14 CANDIDATE REJECTED / MISSING NON-ACCEPTED TERMINAL EVIDENCE AND COMPLETE TC-21 PROHIBITED-FAMILY COVERAGE`
+**Implementation:** `REPAIR 15 CANDIDATE 0a11f678a660525024c9c7edf6233593f0e589f6 ACCEPTED AND INTEGRATED`
 
 **Human Reserved:** `NOT REQUIRED`
 
 **Migration:** `NO MIGRATION`
 
-**Next required role:** `ENG-011 REPAIR 15 BUILDER`
+**Next required role:** `ENG-011 FRESH POST-INTEGRATION DETERMINISTIC VERIFIER`
 
-**Builder branch:** `eng-011-builder-repair-15`
+**Accepted candidate:** `0a11f678a660525024c9c7edf6233593f0e589f6` (tree `2523a66327571d51947d7777f77a0f6d8bceb956`; aggregate `6f3f820b56a6e401a3193136970263916a3059d56aaeac3eabd7689bf10a0c35`)
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-15`
-
-**Durable dispatch:** `AUTHORIZED / REPAIR 15`; the governance-only commit containing the [Repair-14 candidate-evidence adjudication and Repair-15 dispatch](../analysis/ENG-011_REPAIR14_CANDIDATE_EVIDENCE_ADJUDICATION_2026-09-01.md) is the sole Builder authority
+**Controller Acceptance:** [ENG-011 Repair-15 Controller Acceptance](../analysis/ENG-011_REPAIR15_CONTROLLER_ACCEPTANCE_2026-09-01.md)
 
 **Formal DoR evidence:** [ENG-011 Formal Definition of Ready — Revision 6](../analysis/ENG-011_FORMAL_DoR_REV6_2026-09-01.md)
 

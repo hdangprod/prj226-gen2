@@ -2,7 +2,7 @@
 
 **Artifact class:** OPERATIONAL
 
-**Lifecycle status:** ACTIVE / REPAIR 15 / FULL CLEAN-ROOM RECONSTRUCTION DISPATCHED
+**Lifecycle status:** ACCEPTED / INTEGRATED / POST-INTEGRATION VERIFICATION PENDING
 
 **Task ID:** `ENG-011`
 
@@ -10,21 +10,21 @@
 
 **Formal DoR:** [Revision 6](../analysis/ENG-011_FORMAL_DoR_REV6_2026-09-01.md) `PASS`; revisions 2 through 5 remain historical
 
-**Current lifecycle state:** `AUTHORIZED / REPAIR 15 / FULL CLEAN-ROOM BUILDER AUTHORIZED`
+**Current lifecycle state:** `ACCEPTED / INTEGRATED / POST-INTEGRATION VERIFICATION PENDING`
 
-**Builder dispatch:** `AUTHORIZED / REPAIR 15`
+**Current Builder:** `NONE`
 
-**Current Builder:** `ENG-011 REPAIR 15 BUILDER`
+**Builder authority:** `CONSUMED / NON-OPERATIVE`
 
-**Builder branch:** `eng-011-builder-repair-15` (provisioning pending)
+**Implementation state:** `REPAIR 15 CANDIDATE ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFICATION PENDING`
 
-**Builder worktree:** `/private/tmp/prj226-eng011-builder-repair-15` (provisioning pending)
+**Accepted candidate:** `0a11f678a660525024c9c7edf6233593f0e589f6` (tree `2523a66327571d51947d7777f77a0f6d8bceb956`; aggregate `6f3f820b56a6e401a3193136970263916a3059d56aaeac3eabd7689bf10a0c35`)
 
-**Original Repair-5 Builder:** `SUPERSEDED / UNUSED / NO IMPLEMENTATION / NON-OPERATIVE` (`eng-011-builder-repair-5`, `/private/tmp/prj226-eng011-builder-repair-5` preserved clean)
+**Deterministic verification:** `PASS`
 
-**Builder authority:** `ACTIVE / EXCLUSIVE 20-PATH WRITE AUTHORITY / FRESH CLEAN-ROOM EXECUTION AUTHORIZED`
+**Security / operability / semantic review:** `PASS`
 
-**Implementation state:** `REPAIR 14 CANDIDATE IMMUTABLE / REJECTED / FAILED IMPLEMENTATION CANDIDATE 14 / NON-CANONICAL; REPAIR 15 FULL CLEAN-ROOM RECONSTRUCTION AUTHORIZED`
+**Blocking findings:** `0`
 
 **Human Reserved:** `NOT REQUIRED`
 
@@ -34,7 +34,7 @@
 
 **Governing contract:** [PRJ226 Generation 2 Delivery Contract](../../../development/DELIVERY_CONTRACT.md) revision 1
 
-**Recorded:** 2026-08-31
+**Recorded:** 2026-09-01
 
 ## Dispatch identity and topology
 
@@ -133,34 +133,21 @@
 | Repair 12 Restart-1 corrected deterministic verification | `VALID / FAIL` — confirmed blocking `ENG-011-R12-R1C-DV-002`, missing candidate-resident TC-21 real-byte architecture guard |
 | Repair 12 Restart-1 corrected disposition | `IMMUTABLE / REJECTED / UNACCEPTED / HISTORICAL / NON-CANONICAL` ([Controller Disposition](../analysis/ENG-011_REPAIR12_RESTART1_CORRECTED_DETERMINISTIC_FINDING_DISPOSITION_2026-08-31.md)) |
 | Repair 13 dispatch authority | The governance-only commit containing the TC-21 deterministic finding disposition, under Task Packet revision 5 and Formal DoR revision 5 PASS |
-| Repair 13 Builder | `eng-011-builder-repair-13` at `/private/tmp/prj226-eng011-builder-repair-13` — provisioning pending |
-| Stale Repair-4 verifier worktree | `STALE / REGISTERED AT 5f3d0d2 / UNCLEANED DUE TO PRIOR SANDBOX PERMISSION FAILURE / PRESERVED AS NON-OPERATIVE` (`/private/tmp/prj226-eng011-repair4-dv`) |
-| Push | Not authorized / not performed |
+| Repair 13 candidate | `1d4674d3b8231539b30cabd2d31639c88b828ab5` — `IMMUTABLE / UNACCEPTED / NON-CANONICAL / INCOMPLETE TOPOLOGY EVIDENCE` ([Adjudication](../analysis/ENG-011_REPAIR13_INCOMPLETE_CANDIDATE_TOPOLOGY_ADJUDICATION_2026-08-31.md)) |
+| Repair 14 dispatch authority | Commit `3aed718d3688c8a4e771922c53933413a5f6e05e` |
+| Repair 14 candidate | `7cd33607acabe24fbf321d48ff53392c227f2b96` (tree `da55a351ca81920192556bd879e4b7f523ffa317`) — `IMMUTABLE / REJECTED / FAILED IMPLEMENTATION CANDIDATE 14 / NON-CANONICAL` ([Adjudication](../analysis/ENG-011_REPAIR14_CANDIDATE_EVIDENCE_ADJUDICATION_2026-09-01.md)) |
+| Repair 15 dispatch authority | Commit `419c9a49d258ad99e2d33b3f6caa8f00bdee4f61`, clean base `3aed718d3688c8a4e771922c53933413a5f6e05e` |
+| Repair 15 candidate | `0a11f678a660525024c9c7edf6233593f0e589f6` (tree `2523a66327571d51947d7777f77a0f6d8bceb956`; canonical 18-changed-path aggregate `6f3f820b56a6e401a3193136970263916a3059d56aaeac3eabd7689bf10a0c35`) |
+| Repair 15 deterministic verification | `PASS` — 21/21 TC passed; 12/12 TC-08 passed; 10/10 production paths clean, 8/8 families implemented, 8/8 synthetic controls detected for TC-21; 18/18 Vitest configs passed; local-D1 and migration passed; toolchain clean; 14 failed candidates not ancestors |
+| Repair 15 S/O/S review | `PASS` — 0 blocking findings, 0 non-blocking findings |
+| Repair 15 Controller acceptance | `ACCEPTED` ([Controller Acceptance Record](../analysis/ENG-011_REPAIR15_CONTROLLER_ACCEPTANCE_2026-09-01.md)) |
+| Canonical integration | `CANONICALIZED / ANCESTRY-PRESERVING INTEGRATED` into `foundation/product-foundation` |
+| Post-integration verification | `REQUIRED / PENDING` |
+| Push | `NOT PERFORMED` |
 
-## Historical Repair-2 write lock
+## Operative write lock and clean reconstruction
 
-The Repair-2 Builder was authorized to write exactly these 12 paths and no others:
-
-1. `src/application/ports/observability/operationalEvidence.ts`
-2. `src/application/ports/observability/index.ts`
-3. `src/application/services/interaction/interactionTypes.ts`
-4. `src/application/services/interaction/interactionOrchestrator.ts`
-5. `src/application/services/interaction/index.ts`
-6. `src/infrastructure/observability/cloudflareOperationalEvidence.ts`
-7. `src/infrastructure/observability/index.ts`
-8. `tests/application/ports/observability/operationalEvidence.test.ts`
-9. `tests/application/ports/observability/vitest.config.ts`
-10. `tests/application/services/interaction/interactionObservability.test.ts`
-11. `tests/infrastructure/observability/cloudflareOperationalEvidence.test.ts`
-12. `tests/infrastructure/observability/vitest.config.ts`
-
-Every other path was read-only under that historical dispatch. The additional required writes stopped Repair-2 execution and require Controller packet amendment plus Formal DoR re-evaluation.
-
-## Operative revision-2 write lock
-
-The Controller accepted `ENG-011-R2-SOR-R001` through `R009`. R006 proves that `committed` versus `already-committed` survives in the persistence port but is erased by both accepted mutation services before reaching interaction orchestration. The original twelve-path lock is therefore insufficient.
-
-The Repair-11 Builder is authorized to write exactly these 19 paths and no others:
+The Repair-15 full clean-room reconstruction operated under the exact twenty-path lock:
 
 1. `src/application/ports/observability/operationalEvidence.ts`
 2. `src/application/ports/observability/index.ts`
@@ -181,8 +168,9 @@ The Repair-11 Builder is authorized to write exactly these 19 paths and no other
 17. `tests/application/services/knowledgeProvenance/knowledgeProvenanceService.test.ts`
 18. `tests/integration/d1/projectActionContext/projectActionContextPersistence.test.ts`
 19. `tests/integration/d1/knowledgeProvenance/wranglerLocalD1.test.ts`
+20. `tests/application/services/interaction/interactionDeletion.test.ts`
 
-Every other path is read-only under this durable Controller dispatch. The persistence port, D1 adapter, schema, migrations, Product/Domain semantics, Human Control, provider boundary, and architecture remain unchanged.
+Every other path remained read-only. The persistence port, D1 adapter, schema, migrations, Product/Domain semantics, Human Control, provider boundary, and architecture remain unchanged.
 
 ## Bounded implementation authority
 
@@ -192,14 +180,10 @@ Every other path is read-only under this durable Controller dispatch. The persis
 - The seam remains provider-neutral and Cloudflare-native within the existing deployable. No Sentry, OpenTelemetry, external telemetry/analytics service, new service, Worker, queue, cache, persistence, schema, SLO, deployment, live call, or paid/production action is authorized.
 - Migration is `NO MIGRATION`. `migrations/0001_authoritative_state.sql` remains locked to Git blob `5a50e2b216f824ff02ebf09e803a6c25a43bcfe0` and SHA-256 `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`.
 
-## Readiness and dispatch disposition
+## Acceptance and canonical integration disposition
 
-Repair-11 Restart-1 candidate `ae3cb305d3635263aee52143b3903d140576e5dd`, tree `8487b3e27975ae4a6d488e3c046383a92644508c`, is frozen, unaccepted, historical, and non-canonical after valid blocking deterministic findings `ENG-011-R11R1-DV-R001` and `R002`. The Controller bound both to Repair 12. Task Packet revision 5 and Formal DoR revision 5 are operative: their unchanged exact twenty-path scope preserves real Human Control success and unresolved semantics; an actual discretionary Human Control denial is not authorized. Existing authorization rejection/non-acceptance remains separately observable as a truthful non-accepted terminal result. Revision 5 also corrects TC-13: no authorized provider→authoritative-mutation single flow exists, so real advisory provider success and real authoritative persistence durability failure must be independently observed without synthetic chaining. See [the TC-13 disposition](../analysis/ENG-011_REPAIR12_TC13_AUTHORITY_CONTRADICTION_DISPOSITION_2026-08-31.md). Human Reserved remains `NOT REQUIRED` and migration remains `NO MIGRATION`.
+Repair-15 candidate `0a11f678a660525024c9c7edf6233593f0e589f6` (tree `2523a66327571d51947d7777f77a0f6d8bceb956`, aggregate `6f3f820b56a6e401a3193136970263916a3059d56aaeac3eabd7689bf10a0c35`) is formally `ACCEPTED` under Task Packet Revision 6 and Formal DoR Revision 6 `PASS`. Independent Deterministic Verification returned `PASS` (all 21 TCs, 12 TC-08 cases, TC-21 10-path scan and 8 synthetic controls, 18 Vitest configs, local-D1, migration, and toolchain passed) and independent Security/Operability/Semantic Review returned `PASS` with zero blocking findings.
 
-## Future Repair-13 candidate evidence
+Canonical integration on branch `foundation/product-foundation` preserves exact candidate implementation blobs (18/18 identical) and candidate ancestry as first parent. Post-integration verification is `PENDING`. Push is `NOT PERFORMED`. Human Reserved is `NOT REQUIRED`.
 
-Repair-13 candidate commit/tree/aggregate, deterministic results for `ENG-011-TC-01` through `TC-21`, `R3-TC-01` through `R3-TC-18`, the required real-byte TC-21 ten-path scan and positive controls, preservation of all prior obligations, upstream regressions, migration re-verification, independent security/operability review, findings, repairs, and Controller closure remain intentionally empty until produced by the authorized Repair-13 delivery sequence.
-
-## Revision-4 operative restart boundary
-
-The operative lock is exactly twenty paths: the Revision-2 nineteen paths plus `tests/application/services/interaction/interactionDeletion.test.ts` only. The historical failed implementation set is exactly thirteen. Revision 4 changes no path and creates no actual Human Control denial outcome. The stale Revision-3 Delivery Record metadata caused the original Restart-1 Builder to stop correctly before implementation inspection; it is not a failed candidate. Repair 13 must be provisioned in a fresh worktree and may not reuse a failed-candidate worktree.
+`NEXT REQUIRED ROLE: ENG-011 — FRESH POST-INTEGRATION DETERMINISTIC VERIFIER`
