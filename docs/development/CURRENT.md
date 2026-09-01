@@ -27,9 +27,9 @@
 - **C7 — Engineering-Entry Readiness:** COMPLETE
 - **G7 — Engineering-Entry Readiness:** APPROVED BY HUMAN
 - **Runtime Architecture Phase:** COMPLETE — Runtime Architecture revision 1 approved by human through `GOV-017`.
-- **Engineering Phase:** AUTHORIZED BY HUMAN through `GOV-018`; `ENG-001` through `ENG-010` are complete and retain their accepted canonical identities. ENG-011 Repair-15 candidate `0a11f678a660525024c9c7edf6233593f0e589f6` is `ACCEPTED` and canonically integrated under Task Packet Revision 6 and Formal DoR Revision 6 `PASS` following independent Deterministic Verification `PASS` and Security/Operability/Semantic Review `PASS` with zero blocking findings. Post-integration verification is `PENDING`. Historical failed implementation candidate count remains fourteen; Repair-13 incomplete topology candidate remains excluded from that set. Human Reserved is `NOT REQUIRED`; migration remains `NO MIGRATION`; push is `NOT PERFORMED`.
+- **Engineering Phase:** AUTHORIZED BY HUMAN through `GOV-018`; `ENG-001` through `ENG-011` are complete and retain their accepted canonical identities. ENG-011 Repair-15 candidate `0a11f678a660525024c9c7edf6233593f0e589f6` is `DONE / ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFIED / GOVERNANCE-CLOSED` under Task Packet Revision 6 and Formal DoR Revision 6 `PASS` following independent Deterministic Verification `PASS`, Security/Operability/Semantic Review `PASS` with zero blocking findings, and Post-Integration Deterministic Verification `PASS`. Historical failed implementation candidate count remains fourteen; Repair-13 incomplete topology candidate remains excluded from that set. Human Reserved is `NOT REQUIRED`; migration remains `NO MIGRATION`; push is `NOT PERFORMED`.
 - **Engineering work:** AUTHORIZED only within `GOV-018`, the approved Product Foundation and Runtime Architecture, the Delivery Contract, and a valid Ready Task Packet.
-- **Runtime implementation:** AUTHORIZED within that bounded Engineering scope; ENG-011 Repair-15 implementation candidate `0a11f678a660525024c9c7edf6233593f0e589f6` is `ACCEPTED` and integrated. Fresh Post-Integration Deterministic Verification is required before task done closure.
+- **Runtime implementation:** AUTHORIZED within that bounded Engineering scope; `ENG-001` through `ENG-011` are complete and governance-closed under their accepted canonical identities. Future implementation requires human authorization and an operative Ready Task Packet.
 - **Production deployment and paid-service activation:** NOT AUTHORIZED (PROHIBITED)
 - **Control-plane implementation:** NOT AUTHORIZED (PROHIBITED)
 
@@ -73,7 +73,7 @@
 - **Runtime Architecture baseline:** [Liam v1 Runtime Architecture Baseline, revision 1](../architecture/RUNTIME_ARCHITECTURE.md) is `CANONICAL / APPROVED` through human disposition `GOV-017` by `github:hdangprod` on 2026-08-09. The original `ARCHITECTURE REVIEW: NEEDS FIX` findings `AR-F001` and `AR-F002` were repaired; `ARCHITECTURE TARGETED RECHECK: PASS` resolved both. Approval does not authorize engineering.
 - **Engineering Phase authorization:** `GOV-018` is APPROVED by `github:hdangprod` on 2026-08-09. It separately authorizes implementation of the approved Liam v1 Product Foundation and Runtime Architecture under Delivery Contract revision 1 while preserving product, architecture, production, paid-service, security, destructive-action, and control-plane Human Reserved boundaries.
 - **Engineering readiness and plan:** [Engineering Plan revision 1](ENGINEERING_PLAN.md) records `ENGINEERING DoR: PASS`, the implementation obligations and Task DAG, exact evidence rules, concurrency boundaries, and the first execution wave. It is `OPERATIONAL / ACTIVE` and cannot expand `GOV-018` or any approved product or architecture authority.
-- **Engineering task state:** `ENG-001` through `ENG-010` are `DONE`; their accepted identities and closure evidence remain unchanged. ENG-011 Repair-15 candidate `0a11f678a660525024c9c7edf6233593f0e589f6` is `ACCEPTED` and integrated on `foundation/product-foundation`; post-integration verification is `PENDING`; failed implementation count remains fourteen.
+- **Engineering task state:** `ENG-001` through `ENG-011` are `DONE`; their accepted identities and closure evidence remain unchanged. ENG-011 Repair-15 candidate `0a11f678a660525024c9c7edf6233593f0e589f6` is `DONE / ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFIED / GOVERNANCE-CLOSED` on `foundation/product-foundation`; failed implementation count remains fourteen.
 
 ## Authorized work
 
@@ -81,11 +81,11 @@ The Generation 2 Foundation Program is complete through human G7 disposition `GO
 
 This snapshot reflects authorization recorded in approved governance artifacts; it does not create, extend, or approve authorization.
 
-**Current stage state:** Generation 2 Foundation Program — COMPLETE; Runtime Architecture Phase — COMPLETE; Engineering Phase — AUTHORIZED; Engineering planning — ACTIVE; `ENG-001` through `ENG-010` COMPLETE; `ENG-011` ACCEPTED / INTEGRATED / POST-INTEGRATION VERIFICATION PENDING; Repair-15 candidate `0a11f678a660525024c9c7edf6233593f0e589f6` accepted; failed-candidate set 14; Repair-13 incomplete topology candidate excluded; Human Reserved `NOT REQUIRED`; migration `NO MIGRATION`; push `NOT PERFORMED`
+**Current stage state:** Generation 2 Foundation Program — COMPLETE; Runtime Architecture Phase — COMPLETE; Engineering Phase — AUTHORIZED; Engineering planning — ACTIVE; `ENG-001` through `ENG-011` COMPLETE; `ENG-011` DONE / ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFIED / GOVERNANCE-CLOSED; Repair-15 candidate `0a11f678a660525024c9c7edf6233593f0e589f6` accepted; failed-candidate set 14; Repair-13 incomplete topology candidate excluded; Human Reserved `NOT REQUIRED`; migration `NO MIGRATION`; push `NOT PERFORMED`
 
 **Current Engineering authority:** `GOV-018` — APPROVED BY HUMAN on 2026-08-09.
 **Engineering gate:** None created or implied. Task readiness and completion are governed by Delivery Contract revision 1 and do not approve product, architecture, production release, or another gate.
-**Engineering Definition of Ready:** The Engineering-phase baseline remains PASS and ENG-011 Formal DoR revision 6 is `PASS`. Task Packet revision 6 remains Ready with its exact twenty-path lock. It retains the Revision-5 two-flow TC-13 correction and binds all actual non-accepted early-exit terminals plus the complete TC-21 prohibited-family guard. No Product, architecture, Human Control, provider, migration, or recovery authority changes. Accepted predecessor identities and closure evidence remain unchanged. No push exists.
+**Engineering Definition of Ready:** The Engineering-phase baseline remains PASS. `ENG-001` through `ENG-011` are complete and governance-closed. Accepted predecessor identities and closure evidence remain unchanged. No push exists.
 
 - Product Foundation revision 1 approved through `GOV-011` — satisfied.
 - Delivery Contract revision 1 approved through `GOV-013` — satisfied.
@@ -97,7 +97,7 @@ This snapshot reflects authorization recorded in approved governance artifacts; 
 
 **Foundation gates:** C1–C7 are COMPLETE; G1–G7 are APPROVED BY HUMAN. No Foundation gate remains pending.
 
-**Next executable work:** `ENG-011 — FRESH POST-INTEGRATION DETERMINISTIC VERIFIER`, to independently evaluate canonical integrated HEAD on `foundation/product-foundation` against the Delivery Contract, accepted implementation blobs, migration invariant, and regression suite.
+**Next executable work:** Follow current Engineering Plan; prepare and evaluate `ENG-012 — Deterministic Integrated Semantic Acceptance` Task Packet and Definition of Ready when authorized.
 
 ## Explicit prohibitions
 

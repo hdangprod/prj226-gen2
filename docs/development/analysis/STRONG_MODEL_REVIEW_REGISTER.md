@@ -7,20 +7,20 @@
 **Purpose:** Comprehensive register of unresolved, inferred, or disputed engineering design issues requiring stronger-model adjudication before task dispatch.
 
 **ENG-011 Lifecycle Status:**
-- **Current update (2026-09-01):** Repair-15 candidate `0a11f678a660525024c9c7edf6233593f0e589f6` (tree `2523a66327571d51947d7777f77a0f6d8bceb956`, aggregate `6f3f820b56a6e401a3193136970263916a3059d56aaeac3eabd7689bf10a0c35`) is formally `ACCEPTED` and canonically integrated on `foundation/product-foundation`. Independent Deterministic Verification returned `PASS` (all 21 TCs, 12 TC-08 cases, TC-21 10-path scan and 8 synthetic controls, 18 Vitest configs, local-D1, migration, and toolchain passed) and independent Security/Operability/Semantic Review returned `PASS` with zero blocking findings.
-- Task Packet: [ENG-011 Task Packet Revision 6](../tasks/ENG-011-observability-failure-recovery-hardening.md) (OPERATIVE)
+- **Current update (2026-09-01):** Repair-15 candidate `0a11f678a660525024c9c7edf6233593f0e589f6` (tree `2523a66327571d51947d7777f77a0f6d8bceb956`, aggregate `6f3f820b56a6e401a3193136970263916a3059d56aaeac3eabd7689bf10a0c35`) is formally `ACCEPTED`, canonically integrated, post-integration verified, and governance-closed on `foundation/product-foundation`. Pre-integration Deterministic Verification returned `PASS` (all 21 TCs, 12 TC-08 cases, TC-21 10-path scan and 8 synthetic controls, 18 Vitest configs, local-D1, migration, and toolchain passed), independent Security/Operability/Semantic Review returned `PASS` with zero blocking findings, and fresh Post-Integration Deterministic Verification returned `PASS` (18/18 Vitest configs, 561 tests passed, genuine local-D1, migration, and toolchain clean).
+- Task Packet: [ENG-011 Task Packet Revision 6](../tasks/ENG-011-observability-failure-recovery-hardening.md) (FINAL)
 - Formal DoR Result: [Revision 6](ENG-011_FORMAL_DoR_REV6_2026-09-01.md) `PASS`
-- Controller Acceptance: [ENG-011 Repair-15 Controller Acceptance](ENG-011_REPAIR15_CONTROLLER_ACCEPTANCE_2026-09-01.md)
-- Task State: `ACCEPTED / INTEGRATED / POST-INTEGRATION VERIFICATION PENDING`
+- Controller Final Closure: [ENG-011 Post-Integration Controller Final Closure](ENG-011_POST_INTEGRATION_CONTROLLER_FINAL_CLOSURE_2026-09-01.md) (`APPROVE / DONE`)
+- Task State: `DONE / ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFIED / GOVERNANCE-CLOSED`
 - Delivery Record: [ENG-011 Delivery Record](../delivery/ENG-011-observability-failure-recovery-hardening.md)
 - Current Builder: `NONE`
 - Builder Authority: `CONSUMED / NON-OPERATIVE`
-- Implementation State: `REPAIR 15 CANDIDATE ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFICATION PENDING`
+- Implementation State: `COMPLETE / ACCEPTED / CANONICALIZED`
 - Failed-Candidate Count: `14` (historical failed implementation candidates remain frozen/unaccepted; Repair-13 incomplete candidate excluded)
 - Migration: `NO MIGRATION` (`migrations/0001_authoritative_state.sql` blob `5a50e2b216f824ff02ebf09e803a6c25a43bcfe0`, SHA-256 `adfeee87fcc5d56d70bb000c4e1c81f4a49fa1f1b73c7313a117f1bedee33a99`)
 - Human Reserved: `NOT REQUIRED`
 - Push: `NOT PERFORMED`
-- Next Required Role: `ENG-011 — FRESH POST-INTEGRATION DETERMINISTIC VERIFIER`
+- Next Project Action: `FOLLOW CURRENT ENGINEERING PLAN / PREPARE ENG-012 TASK PACKET`
 
 **ENG-010 Lifecycle Status:**
 - Task Packet: [ENG-010 Task Packet Revision 1](../tasks/ENG-010-text-interaction-human-control-orchestration.md)

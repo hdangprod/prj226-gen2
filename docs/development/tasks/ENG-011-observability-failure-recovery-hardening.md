@@ -8,7 +8,7 @@
 
 **Controller planning revision:** 2
 
-**Current task state:** `ACCEPTED / INTEGRATED / POST-INTEGRATION VERIFICATION PENDING`
+**Current task state:** `DONE / ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFIED / GOVERNANCE-CLOSED`
 
 **Formal DoR:** [Revision 6](../analysis/ENG-011_FORMAL_DoR_REV6_2026-09-01.md) `PASS`; revisions 2 through 5 remain historical
 
@@ -18,15 +18,17 @@
 
 **Builder authority:** `CONSUMED / NON-OPERATIVE`
 
-**Implementation:** `REPAIR 15 CANDIDATE 0a11f678a660525024c9c7edf6233593f0e589f6 ACCEPTED AND INTEGRATED`
+**Implementation:** `REPAIR 15 CANDIDATE 0a11f678a660525024c9c7edf6233593f0e589f6 ACCEPTED, INTEGRATED, AND GOVERNANCE-CLOSED`
 
 **Human Reserved:** `NOT REQUIRED`
 
 **Migration:** `NO MIGRATION`
 
-**Next required role:** `ENG-011 FRESH POST-INTEGRATION DETERMINISTIC VERIFIER`
+**Next required role:** `NONE — ENG-011 COMPLETE / GOVERNANCE-CLOSED`
 
 **Accepted candidate:** `0a11f678a660525024c9c7edf6233593f0e589f6` (tree `2523a66327571d51947d7777f77a0f6d8bceb956`; aggregate `6f3f820b56a6e401a3193136970263916a3059d56aaeac3eabd7689bf10a0c35`)
+
+**Controller Final Closure:** [ENG-011 Post-Integration Controller Final Closure](../analysis/ENG-011_POST_INTEGRATION_CONTROLLER_FINAL_CLOSURE_2026-09-01.md) (`APPROVE / DONE`)
 
 **Controller Acceptance:** [ENG-011 Repair-15 Controller Acceptance](../analysis/ENG-011_REPAIR15_CONTROLLER_ACCEPTANCE_2026-09-01.md)
 

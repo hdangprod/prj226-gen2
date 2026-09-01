@@ -2,21 +2,21 @@
 
 **Artifact class:** OPERATIONAL
 
-**Lifecycle status:** ACCEPTED / INTEGRATED / POST-INTEGRATION VERIFICATION PENDING
+**Lifecycle status:** DONE / ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFIED / GOVERNANCE-CLOSED
 
 **Task ID:** `ENG-011`
 
-**Task Packet:** [ENG-011 — Observability and Failure/Recovery Hardening](../tasks/ENG-011-observability-failure-recovery-hardening.md) (Revision 6 / OPERATIVE)
+**Task Packet:** [ENG-011 — Observability and Failure/Recovery Hardening](../tasks/ENG-011-observability-failure-recovery-hardening.md) (Revision 6 / FINAL)
 
 **Formal DoR:** [Revision 6](../analysis/ENG-011_FORMAL_DoR_REV6_2026-09-01.md) `PASS`; revisions 2 through 5 remain historical
 
-**Current lifecycle state:** `ACCEPTED / INTEGRATED / POST-INTEGRATION VERIFICATION PENDING`
+**Current lifecycle state:** `DONE / ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFIED / GOVERNANCE-CLOSED`
 
 **Current Builder:** `NONE`
 
 **Builder authority:** `CONSUMED / NON-OPERATIVE`
 
-**Implementation state:** `REPAIR 15 CANDIDATE ACCEPTED / CANONICALIZED / POST-INTEGRATION VERIFICATION PENDING`
+**Implementation state:** `COMPLETE / ACCEPTED / CANONICALIZED`
 
 **Accepted candidate:** `0a11f678a660525024c9c7edf6233593f0e589f6` (tree `2523a66327571d51947d7777f77a0f6d8bceb956`; aggregate `6f3f820b56a6e401a3193136970263916a3059d56aaeac3eabd7689bf10a0c35`)
 
@@ -142,7 +142,7 @@
 | Repair 15 S/O/S review | `PASS` — 0 blocking findings, 0 non-blocking findings |
 | Repair 15 Controller acceptance | `ACCEPTED` ([Controller Acceptance Record](../analysis/ENG-011_REPAIR15_CONTROLLER_ACCEPTANCE_2026-09-01.md)) |
 | Canonical integration | `CANONICALIZED / ANCESTRY-PRESERVING INTEGRATED` into `foundation/product-foundation` |
-| Post-integration verification | `REQUIRED / PENDING` |
+| Post-integration verification | `PASS` (18/18 Vitest configs, 561 tests passed, local D1 passed, migration passed, toolchain clean) |
 | Push | `NOT PERFORMED` |
 
 ## Operative write lock and clean reconstruction
@@ -184,6 +184,6 @@ Every other path remained read-only. The persistence port, D1 adapter, schema, m
 
 Repair-15 candidate `0a11f678a660525024c9c7edf6233593f0e589f6` (tree `2523a66327571d51947d7777f77a0f6d8bceb956`, aggregate `6f3f820b56a6e401a3193136970263916a3059d56aaeac3eabd7689bf10a0c35`) is formally `ACCEPTED` under Task Packet Revision 6 and Formal DoR Revision 6 `PASS`. Independent Deterministic Verification returned `PASS` (all 21 TCs, 12 TC-08 cases, TC-21 10-path scan and 8 synthetic controls, 18 Vitest configs, local-D1, migration, and toolchain passed) and independent Security/Operability/Semantic Review returned `PASS` with zero blocking findings.
 
-Canonical integration on branch `foundation/product-foundation` preserves exact candidate implementation blobs (18/18 identical) and candidate ancestry as first parent. Post-integration verification is `PENDING`. Push is `NOT PERFORMED`. Human Reserved is `NOT REQUIRED`.
+Canonical integration on branch `foundation/product-foundation` preserves exact candidate implementation blobs (18/18 identical) and candidate ancestry as first parent. Post-integration deterministic verification returned `PASS`. Push is `NOT PERFORMED`. Human Reserved is `NOT REQUIRED`. Controller Final Closure is `APPROVE / DONE` ([Post-Integration Controller Final Closure](../analysis/ENG-011_POST_INTEGRATION_CONTROLLER_FINAL_CLOSURE_2026-09-01.md)).
 
-`NEXT REQUIRED ROLE: ENG-011 — FRESH POST-INTEGRATION DETERMINISTIC VERIFIER`
+`NEXT REQUIRED ROLE: NONE — ENG-011 COMPLETE / GOVERNANCE-CLOSED`
