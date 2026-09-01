@@ -13,6 +13,7 @@ import type {
   PersistenceOperationId,
   AcceptedStatePersistence,
 } from "../../../../src/application/ports/persistence";
+import { createObservationContext } from "../../../../src/application/ports/observability/operationalEvidence";
 import { DeterministicModelCapability } from "../../../../src/testing/model/deterministicModelCapability";
 import { ProjectActionContextService } from "../../../../src/application/services/projectActionContext/projectActionContextService";
 import { KnowledgeProvenanceService } from "../../../../src/application/services/knowledgeProvenance/knowledgeProvenanceService";
@@ -92,7 +93,7 @@ function createHarness() {
   return { orchestrator, committedDeletions, humanControlRuntime, dependencies };
 }
 
-describe("interactionDeletion (ENG-010 Repair 5)", () => {
+describe("interactionDeletion (ENG-010 Repair 5 & ENG-011 Repair 15)", () => {
   const projectScope: DeletionScope = {
     targetKind: "project",
     targetId: "proj-delete-1",
@@ -104,10 +105,15 @@ describe("interactionDeletion (ENG-010 Repair 5)", () => {
     const ev1 = humanControlRuntime.trustedInteractionIngress.observeInteraction({
       summary: "User requested deletion of project proj-delete-1",
     });
+    const ctx1 = createObservationContext({
+      correlationId: "corr-session-1",
+      requestId: "req-turn-1",
+    });
 
     const turn1Result = await orchestrator.initiateDeletion({
       evidence: ev1,
       scope: projectScope,
+      observationContext: ctx1,
     });
 
     expect(turn1Result.kind).toBe("deletion-direction-recorded");
@@ -123,6 +129,15 @@ describe("interactionDeletion (ENG-010 Repair 5)", () => {
   it("TC-20 & TC-22 & R2-TC-04: Turn 2 with separate genuine interaction evidence completes valid confirmed deletion", async () => {
     const { orchestrator, humanControlRuntime, committedDeletions } = createHarness();
     const opId = "op-del-1" as PersistenceOperationId;
+    const ctx1 = createObservationContext({
+      correlationId: "corr-session-1",
+      requestId: "req-turn-1",
+    });
+    const ctx2 = createObservationContext({
+      correlationId: "corr-session-1",
+      requestId: "req-turn-2",
+      operationId: opId,
+    });
 
     // Turn 1: Direction
     const ev1 = humanControlRuntime.trustedInteractionIngress.observeInteraction({
@@ -131,6 +146,7 @@ describe("interactionDeletion (ENG-010 Repair 5)", () => {
     const turn1 = await orchestrator.initiateDeletion({
       evidence: ev1,
       scope: projectScope,
+      observationContext: ctx1,
     });
     expect(turn1.kind).toBe("deletion-direction-recorded");
     if (turn1.kind !== "deletion-direction-recorded") return;
@@ -144,6 +160,7 @@ describe("interactionDeletion (ENG-010 Repair 5)", () => {
       operationId: opId,
       direction: turn1.direction,
       scope: projectScope,
+      observationContext: ctx2,
     });
 
     expect(turn2.kind).toBe("accepted");
@@ -163,6 +180,10 @@ describe("interactionDeletion (ENG-010 Repair 5)", () => {
   it("TC-21: single-turn deletion or same interaction evidence fails authorization with zero persistence calls", async () => {
     const { orchestrator, humanControlRuntime, committedDeletions } = createHarness();
     const opId = "op-del-same" as PersistenceOperationId;
+    const ctx1 = createObservationContext({
+      correlationId: "corr-session-1",
+      requestId: "req-turn-1",
+    });
 
     const ev = humanControlRuntime.trustedInteractionIngress.observeInteraction({
       summary: "Single interaction trying to do both",
@@ -171,16 +192,18 @@ describe("interactionDeletion (ENG-010 Repair 5)", () => {
     const turn1 = await orchestrator.initiateDeletion({
       evidence: ev,
       scope: projectScope,
+      observationContext: ctx1,
     });
     expect(turn1.kind).toBe("deletion-direction-recorded");
     if (turn1.kind !== "deletion-direction-recorded") return;
 
-    // Try to confirm using the exact SAME interaction evidence instance
+    // Try to confirm using the exact SAME interaction evidence instance and same request ID
     const turn2 = await orchestrator.confirmDeletion({
       evidence: ev,
       operationId: opId,
       direction: turn1.direction,
       scope: projectScope,
+      observationContext: ctx1,
     });
 
     expect(turn2.kind).toBe("unresolved");
@@ -194,6 +217,15 @@ describe("interactionDeletion (ENG-010 Repair 5)", () => {
   it("TC-21: mismatched scope between direction and confirmation fails with zero persistence calls", async () => {
     const { orchestrator, humanControlRuntime, committedDeletions } = createHarness();
     const opId = "op-del-mismatch" as PersistenceOperationId;
+    const ctx1 = createObservationContext({
+      correlationId: "corr-session-1",
+      requestId: "req-turn-1",
+    });
+    const ctx2 = createObservationContext({
+      correlationId: "corr-session-1",
+      requestId: "req-turn-2",
+      operationId: opId,
+    });
 
     const ev1 = humanControlRuntime.trustedInteractionIngress.observeInteraction({
       summary: "Delete project A",
@@ -201,6 +233,7 @@ describe("interactionDeletion (ENG-010 Repair 5)", () => {
     const turn1 = await orchestrator.initiateDeletion({
       evidence: ev1,
       scope: projectScope,
+      observationContext: ctx1,
     });
     expect(turn1.kind).toBe("deletion-direction-recorded");
     if (turn1.kind !== "deletion-direction-recorded") return;
@@ -219,6 +252,7 @@ describe("interactionDeletion (ENG-010 Repair 5)", () => {
       operationId: opId,
       direction: turn1.direction,
       scope: differentScope,
+      observationContext: ctx2,
     });
 
     expect(turn2.kind).toBe("unresolved");

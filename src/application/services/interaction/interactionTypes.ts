@@ -31,6 +31,10 @@ import type {
   ModelCapabilityPort,
   ProposedOperation,
 } from "../../ports/model/modelCapability";
+import type {
+  ObservationContext,
+  OperationalEvidenceSink,
+} from "../../ports/observability/operationalEvidence";
 import type { PersistenceOperationId } from "../../ports/persistence";
 import type { ExportDeletionService } from "../exportDeletion/exportDeletionTypes";
 import type { KnowledgeProvenanceService } from "../knowledgeProvenance/knowledgeProvenanceService";
@@ -44,6 +48,7 @@ export interface InteractionOrchestratorDependencies {
   readonly projectActionContextService: ProjectActionContextService;
   readonly knowledgeProvenanceService: KnowledgeProvenanceService;
   readonly exportDeletionService: ExportDeletionService;
+  readonly evidenceSink?: OperationalEvidenceSink;
 }
 
 export interface ContextSelectionInput {
@@ -53,6 +58,7 @@ export interface ContextSelectionInput {
   readonly itemLimit?: number;
   readonly selectionReason?: NonEmptyText | string;
   readonly includeCrossProjectKnowledge?: boolean;
+  readonly observationContext?: ObservationContext;
 }
 
 export type ContextSelectionOutcome =
@@ -68,6 +74,7 @@ export interface AdvisoryInteractionInput {
   readonly actionId?: ActionId;
   readonly itemLimit?: number;
   readonly selectionReason?: NonEmptyText | string;
+  readonly observationContext?: ObservationContext;
 }
 
 export interface ProposalInteractionInput {
@@ -77,6 +84,7 @@ export interface ProposalInteractionInput {
   readonly actionId?: ActionId;
   readonly itemLimit?: number;
   readonly selectionReason?: NonEmptyText | string;
+  readonly observationContext?: ObservationContext;
 }
 
 export type ModelInteractionOutcome =
@@ -93,6 +101,7 @@ export interface EstablishProjectInput {
   readonly id: ProjectId;
   readonly intendedOutcome: NonEmptyText;
   readonly options?: ClassificationOptions;
+  readonly observationContext?: ObservationContext;
 }
 
 export interface CompleteProjectInput {
@@ -100,6 +109,7 @@ export interface CompleteProjectInput {
   readonly operationId: PersistenceOperationId;
   readonly projectId: ProjectId;
   readonly options?: ClassificationOptions;
+  readonly observationContext?: ObservationContext;
 }
 
 export interface ReopenProjectInput {
@@ -107,6 +117,7 @@ export interface ReopenProjectInput {
   readonly operationId: PersistenceOperationId;
   readonly projectId: ProjectId;
   readonly options?: ClassificationOptions;
+  readonly observationContext?: ObservationContext;
 }
 
 export interface CreateActionInput {
@@ -116,6 +127,7 @@ export interface CreateActionInput {
   readonly projectId: ProjectId;
   readonly description: NonEmptyText;
   readonly options?: ClassificationOptions;
+  readonly observationContext?: ObservationContext;
 }
 
 export interface CompleteActionInput {
@@ -124,6 +136,7 @@ export interface CompleteActionInput {
   readonly actionId: ActionId;
   readonly projectId: ProjectId;
   readonly options?: ClassificationOptions;
+  readonly observationContext?: ObservationContext;
 }
 
 export interface ReopenActionInput {
@@ -132,6 +145,7 @@ export interface ReopenActionInput {
   readonly actionId: ActionId;
   readonly projectId: ProjectId;
   readonly options?: ClassificationOptions;
+  readonly observationContext?: ObservationContext;
 }
 
 export interface AcceptContextFactsInput {
@@ -140,6 +154,7 @@ export interface AcceptContextFactsInput {
   readonly projectId: ProjectId;
   readonly facts: readonly NonEmptyText[];
   readonly options?: ClassificationOptions;
+  readonly observationContext?: ObservationContext;
 }
 
 export interface AcceptProgressInput {
@@ -150,6 +165,7 @@ export interface AcceptProgressInput {
   readonly statement: NonEmptyText;
   readonly actionId?: ActionId;
   readonly options?: ClassificationOptions;
+  readonly observationContext?: ObservationContext;
 }
 
 export interface CorrectProgressInput {
@@ -160,6 +176,7 @@ export interface CorrectProgressInput {
   readonly successorId: ProgressId;
   readonly statement: NonEmptyText;
   readonly options?: ClassificationOptions;
+  readonly observationContext?: ObservationContext;
 }
 
 export interface CaptureKnowledgeInput {
@@ -170,6 +187,7 @@ export interface CaptureKnowledgeInput {
   readonly content: NonEmptyText;
   readonly intentional?: boolean;
   readonly options?: ClassificationOptions;
+  readonly observationContext?: ObservationContext;
 }
 
 export interface CorrectKnowledgeInput {
@@ -180,6 +198,7 @@ export interface CorrectKnowledgeInput {
   readonly originatingProjectId: ProjectId;
   readonly content: NonEmptyText;
   readonly options?: ClassificationOptions;
+  readonly observationContext?: ObservationContext;
 }
 
 export type DeletionDirectionOutcome =
@@ -187,7 +206,7 @@ export type DeletionDirectionOutcome =
       readonly kind: "deletion-direction-recorded";
       readonly intent: NormalizedIntent;
       readonly scope: DeletionScope;
-      readonly direction: ClassifiedDeletionDirection;
+      readonly direction: ClassifiedDeletionDirection & { readonly initialRequestId?: string };
       readonly prompt: NonEmptyText;
     }
   | ClarificationRequiredOutcome
@@ -199,14 +218,16 @@ export interface InitiateDeletionInput {
   readonly evidence: TrustedInteractionEvidence;
   readonly scope: DeletionScope;
   readonly options?: ClassificationOptions;
+  readonly observationContext?: ObservationContext;
 }
 
 export interface DeletionConfirmationInput {
   readonly evidence: TrustedInteractionEvidence;
   readonly operationId: PersistenceOperationId;
-  readonly direction: ClassifiedDeletionDirection;
+  readonly direction: ClassifiedDeletionDirection & { readonly initialRequestId?: string };
   readonly scope: DeletionScope;
   readonly options?: ClassificationOptions;
+  readonly observationContext?: ObservationContext;
 }
 
 export function normalizeUserIntent(text: string): NormalizedIntent {

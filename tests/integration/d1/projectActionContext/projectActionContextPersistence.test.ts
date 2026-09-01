@@ -136,8 +136,8 @@ describe("Project/Action/context against a fresh migration-backed local D1 datab
         projectId: projectId("p1"),
         project: { id: projectId("p1"), intendedOutcome: text("Fabricated"), state: "Completed" as const },
       };
-      await expect(service.completeProject(completeProject)).resolves.toEqual({ kind: "accepted", value: { id: projectId("p1"), state: "Completed" } });
-      await expect(service.completeProject(completeProject)).resolves.toEqual({ kind: "accepted", value: { id: projectId("p1"), state: "Completed" } });
+      await expect(service.completeProject(completeProject)).resolves.toEqual({ kind: "accepted", value: { id: projectId("p1"), state: "Completed" }, disposition: "committed" });
+      await expect(service.completeProject(completeProject)).resolves.toEqual({ kind: "accepted", value: { id: projectId("p1"), state: "Completed" }, disposition: "already-committed" });
       expect(await local.read<{ intended_outcome: string; state: string }>("SELECT intended_outcome, state FROM projects WHERE id = ?", "p1")).toEqual([{ intended_outcome: "Canonical", state: "Completed" }]);
       expect(await local.read<{ count: number }>("SELECT COUNT(*) AS count FROM persistence_operations WHERE operation_id = ?", "project-complete")).toEqual([{ count: 1 }]);
       await expect(service.reopenProject({ intent, operationId: persistenceOperationId("project-complete"), authorization: authorize(runtime, { operation: "reopen-project", projectId: "p1" }), projectId: projectId("p1") })).resolves.toEqual({ kind: "failed", intent, reason: "operation-id-conflict", retryable: false });
@@ -149,7 +149,7 @@ describe("Project/Action/context against a fresh migration-backed local D1 datab
         projectId: projectId("p1"),
         project: { id: projectId("p1"), intendedOutcome: text("Fabricated"), state: "Active" as const },
       };
-      await expect(service.reopenProject(reopenProject)).resolves.toEqual({ kind: "accepted", value: { id: projectId("p1"), state: "Active" } });
+      await expect(service.reopenProject(reopenProject)).resolves.toEqual({ kind: "accepted", value: { id: projectId("p1"), state: "Active" }, disposition: "committed" });
 
       await service.createAction({ intent, operationId: persistenceOperationId("action-create"), authorization: authorize(runtime, { operation: "create-action", actionId: "a1", projectId: "p1", description: "Canonical" }), id: actionId("a1"), projectId: projectId("p1"), description: text("Canonical") });
       const completeAction = {
@@ -160,8 +160,8 @@ describe("Project/Action/context against a fresh migration-backed local D1 datab
         projectId: projectId("p1"),
         action: { id: actionId("a1"), projectId: projectId("p1"), description: text("Fabricated"), state: "Completed" as const },
       };
-      await expect(service.completeAction(completeAction)).resolves.toEqual({ kind: "accepted", value: { id: actionId("a1"), state: "Completed" } });
-      await expect(service.completeAction(completeAction)).resolves.toEqual({ kind: "accepted", value: { id: actionId("a1"), state: "Completed" } });
+      await expect(service.completeAction(completeAction)).resolves.toEqual({ kind: "accepted", value: { id: actionId("a1"), state: "Completed" }, disposition: "committed" });
+      await expect(service.completeAction(completeAction)).resolves.toEqual({ kind: "accepted", value: { id: actionId("a1"), state: "Completed" }, disposition: "already-committed" });
       expect(await local.read<{ project_id: string; description: string; state: string }>("SELECT project_id, description, state FROM actions WHERE id = ?", "a1")).toEqual([{ project_id: "p1", description: "Canonical", state: "Completed" }]);
       expect(await local.read<{ count: number }>("SELECT COUNT(*) AS count FROM persistence_operations WHERE operation_id = ?", "action-complete")).toEqual([{ count: 1 }]);
       await expect(service.reopenAction({ intent, operationId: persistenceOperationId("action-complete"), authorization: authorize(runtime, { operation: "reopen-action", actionId: "a1", projectId: "p1" }), actionId: actionId("a1"), projectId: projectId("p1") })).resolves.toEqual({ kind: "failed", intent, reason: "operation-id-conflict", retryable: false });
@@ -174,7 +174,7 @@ describe("Project/Action/context against a fresh migration-backed local D1 datab
         projectId: projectId("p1"),
         action: { id: actionId("a1"), projectId: projectId("p1"), description: text("Fabricated"), state: "Open" as const },
       };
-      await expect(service.reopenAction(reopenAction)).resolves.toEqual({ kind: "accepted", value: { id: actionId("a1"), state: "Open" } });
+      await expect(service.reopenAction(reopenAction)).resolves.toEqual({ kind: "accepted", value: { id: actionId("a1"), state: "Open" }, disposition: "committed" });
       expect(await local.read<{ description: string; state: string }>("SELECT description, state FROM actions WHERE id = ?", "a1")).toEqual([{ description: "Canonical", state: "Open" }]);
     } finally {
       await local.dispose();

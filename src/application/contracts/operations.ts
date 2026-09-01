@@ -2,6 +2,8 @@ export interface NormalizedIntent {
   readonly summary: string;
 }
 
+export type PersistenceCommitDisposition = "committed" | "already-committed";
+
 export interface AdvisoryOutcome<Value> {
   readonly kind: "advisory";
   readonly value: Value;
@@ -21,6 +23,7 @@ export interface ClarificationRequiredOutcome {
 export interface AcceptedOutcome<Value> {
   readonly kind: "accepted";
   readonly value: Value;
+  readonly disposition?: PersistenceCommitDisposition;
 }
 
 export interface FailedOutcome {

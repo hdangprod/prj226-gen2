@@ -39,7 +39,7 @@ describe("ProjectActionContextService", () => {
     const projectScope = { operation: "create-project", projectId: "p1", intendedOutcome: "Ship" } as const;
     const established = serviceFor(projectScope);
     const projectResult = await established.service.establishProject({ intent, operationId: persistenceOperationId("project-create"), authorization: established.authorization, id: projectId("p1"), intendedOutcome: text("Ship") });
-    expect(projectResult).toEqual({ kind: "accepted", value: { id: "p1", intendedOutcome: "Ship", state: "Active" } });
+    expect(projectResult).toEqual({ kind: "accepted", value: { id: "p1", intendedOutcome: "Ship", state: "Active" }, disposition: "committed" });
     expect(established.persistence.commits[0]?.writes[0]).toMatchObject({ kind: "create-project", project: { state: "Active" } });
 
     const actionScope = { operation: "create-action", actionId: "a1", projectId: "p1", description: "Draft" } as const;
@@ -131,21 +131,21 @@ describe("ProjectActionContextService", () => {
       projectId: projectId("p1"),
       project: { id: projectId("p1"), intendedOutcome: text("Fabricated"), state: "Completed" as const },
     };
-    await expect(projectComplete.service.completeProject(projectCompleteCommand)).resolves.toEqual({ kind: "accepted", value: { id: projectId("p1"), state: "Completed" } });
+    await expect(projectComplete.service.completeProject(projectCompleteCommand)).resolves.toEqual({ kind: "accepted", value: { id: projectId("p1"), state: "Completed" }, disposition: "committed" });
     expect(projectComplete.persistence.commits[0]?.writes).toEqual([{ kind: "transition-project", projectId: projectId("p1"), expectedState: "Active", nextState: "Completed" }]);
 
     const projectReopen = serviceFor({ operation: "reopen-project", projectId: "p1" });
     const projectReopenCommand = { intent, operationId: persistenceOperationId("project-reopen"), authorization: projectReopen.authorization, projectId: projectId("p1"), project: { id: projectId("p1"), intendedOutcome: text("Fabricated"), state: "Active" as const } };
-    await expect(projectReopen.service.reopenProject(projectReopenCommand)).resolves.toEqual({ kind: "accepted", value: { id: projectId("p1"), state: "Active" } });
+    await expect(projectReopen.service.reopenProject(projectReopenCommand)).resolves.toEqual({ kind: "accepted", value: { id: projectId("p1"), state: "Active" }, disposition: "committed" });
 
     const actionComplete = serviceFor({ operation: "complete-action", actionId: "a1", projectId: "p1" });
     const actionCompleteCommand = { intent, operationId: persistenceOperationId("action-complete"), authorization: actionComplete.authorization, actionId: actionId("a1"), projectId: projectId("p1"), action: { id: actionId("a1"), projectId: projectId("p1"), description: text("Fabricated"), state: "Completed" as const } };
-    await expect(actionComplete.service.completeAction(actionCompleteCommand)).resolves.toEqual({ kind: "accepted", value: { id: actionId("a1"), state: "Completed" } });
+    await expect(actionComplete.service.completeAction(actionCompleteCommand)).resolves.toEqual({ kind: "accepted", value: { id: actionId("a1"), state: "Completed" }, disposition: "committed" });
     expect(actionComplete.persistence.commits[0]?.writes).toEqual([{ kind: "transition-action", actionId: actionId("a1"), projectId: projectId("p1"), expectedState: "Open", nextState: "Completed" }]);
 
     const actionReopen = serviceFor({ operation: "reopen-action", actionId: "a1", projectId: "p1" });
     const actionReopenCommand = { intent, operationId: persistenceOperationId("action-reopen"), authorization: actionReopen.authorization, actionId: actionId("a1"), projectId: projectId("p1"), action: { id: actionId("a1"), projectId: projectId("p1"), description: text("Fabricated"), state: "Open" as const } };
-    await expect(actionReopen.service.reopenAction(actionReopenCommand)).resolves.toEqual({ kind: "accepted", value: { id: actionId("a1"), state: "Open" } });
+    await expect(actionReopen.service.reopenAction(actionReopenCommand)).resolves.toEqual({ kind: "accepted", value: { id: actionId("a1"), state: "Open" }, disposition: "committed" });
   });
 
   it("keeps lifecycle Human Control bound to the operation and authoritative target", async () => {
@@ -157,7 +157,7 @@ describe("ProjectActionContextService", () => {
     const actionAuthorization = authorizeWith(runtime, { operation: "complete-action", actionId: "a1", projectId: "p1" });
     await expect(service.reopenAction({ intent, operationId: persistenceOperationId("wrong-operation"), authorization: actionAuthorization, actionId: actionId("a1"), projectId: projectId("p1") })).resolves.toEqual({ kind: "failed", intent, reason: "missing-malformed-or-mismatched-authorization", retryable: false });
     const retryCommand = { intent, operationId: persistenceOperationId("retry"), authorization: actionAuthorization, actionId: actionId("a1"), projectId: projectId("p1"), action: { id: actionId("a1"), projectId: projectId("p1"), description: text("Fabricated"), state: "Completed" as const } };
-    await expect(service.completeAction(retryCommand)).resolves.toEqual({ kind: "accepted", value: { id: actionId("a1"), state: "Completed" } });
+    await expect(service.completeAction(retryCommand)).resolves.toEqual({ kind: "accepted", value: { id: actionId("a1"), state: "Completed" }, disposition: "already-committed" });
     expect(persistence.commits).toHaveLength(1);
   });
 

@@ -87,7 +87,7 @@ export class ProjectActionContextService {
   ): Promise<ProjectActionMutationOutcome<Value>> {
     const result = await this.dependencies.persistence.commitAcceptedState({ operationId, writes: [write] });
     if (result.kind === "committed" || result.kind === "already-committed") {
-      return { kind: "accepted", value };
+      return { kind: "accepted", value, disposition: result.kind };
     }
     return failedOutcome(intent, result.reason, result.retryable);
   }

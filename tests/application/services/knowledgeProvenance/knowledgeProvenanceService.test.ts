@@ -103,7 +103,7 @@ describe("KnowledgeProvenanceService", () => {
     const runtime = createHumanControlRuntime();
     const persistence = new RecordingPersistence();
     const service = new KnowledgeProvenanceService({ mutationGate: runtime.mutationGate, persistence });
-    await expect(service.capture({ intent, operationId: persistenceOperationId("capture"), authorization: authorize(runtime, captureScope()), id: knowledgeItemId("k1"), originatingProjectId: projectId("p1"), content: text("Ordinary note"), intentional: true })).resolves.toEqual({ kind: "accepted", value: { id: "k1", originatingProjectId: "p1", content: "Ordinary note", standing: "current", supersessionChain: [] } });
+    await expect(service.capture({ intent, operationId: persistenceOperationId("capture"), authorization: authorize(runtime, captureScope()), id: knowledgeItemId("k1"), originatingProjectId: projectId("p1"), content: text("Ordinary note"), intentional: true })).resolves.toEqual({ kind: "accepted", value: { id: "k1", originatingProjectId: "p1", content: "Ordinary note", standing: "current", supersessionChain: [] }, disposition: "committed" });
     expect(persistence.commits[0]?.writes).toEqual([{ kind: "put-knowledge", item: { id: "k1", originatingProjectId: "p1", content: "Ordinary note", standing: "current", supersessionChain: [] } }]);
     const casual = await service.capture({ intent, operationId: persistenceOperationId("casual"), authorization: authorize(runtime, captureScope("k2")), id: knowledgeItemId("k2"), originatingProjectId: projectId("p1"), content: text("Ordinary note"), intentional: false });
     expect(casual).toMatchObject({ kind: "failed", reason: "capture-not-intentional" });
