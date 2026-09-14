@@ -23,6 +23,14 @@ export type ContextSelectionResult =
       readonly unchanged: CurrentContext;
     };
 
+function authorizationRejected(current: CurrentContext): ContextSelectionResult {
+  return {
+    kind: "authorization-rejected",
+    reason: "missing-malformed-or-mismatched-authorization",
+    unchanged: current,
+  };
+}
+
 export function applyExplicitContextSelection(
   current: CurrentContext,
   selection: {
@@ -39,11 +47,7 @@ export function applyExplicitContextSelection(
     actionId: selection.actionId,
   };
   if (!gate.validateOrdinary(authorization, scope)) {
-    return {
-      kind: "authorization-rejected",
-      reason: "missing-malformed-or-mismatched-authorization",
-      unchanged: current,
-    };
+    return authorizationRejected(current);
   }
   if (
     selection.actionId !== undefined &&

@@ -37,6 +37,37 @@ describe("accepted and provisional context", () => {
     expect(result).toEqual({ kind: "invalid-context-selection", reason: "action-project-mismatch", unchanged: current });
   });
 
+  it.each([
+    ["missing", undefined],
+    ["malformed", {}],
+  ])("rejects %s authorization without changing Current Context", (_label, authorization) => {
+    const current: CurrentContext = { basis: "explicit-user-selection", projectId: projectId("p1") };
+    const result = applyExplicitContextSelection(
+      current,
+      { projectId: projectId("p1") },
+      authorization as never,
+    );
+    expect(result).toEqual({
+      kind: "authorization-rejected",
+      reason: "missing-malformed-or-mismatched-authorization",
+      unchanged: current,
+    });
+  });
+
+  it("rejects authorization for a different Project without changing Current Context", () => {
+    const current: CurrentContext = { basis: "explicit-user-selection", projectId: projectId("p1") };
+    const result = applyExplicitContextSelection(
+      current,
+      { projectId: projectId("p1") },
+      ordinaryAuthorization({ operation: "select-current-context", projectId: "p2" }),
+    );
+    expect(result).toEqual({
+      kind: "authorization-rejected",
+      reason: "missing-malformed-or-mismatched-authorization",
+      unchanged: current,
+    });
+  });
+
   it("accepts explicit Project-only selection", () => {
     const current: CurrentContext = { basis: "ambiguous", candidateProjectIds: [projectId("p1")] };
     expect(applyExplicitContextSelection(current, { projectId: projectId("p1") }, ordinaryAuthorization({ operation: "select-current-context", projectId: "p1" }))).toMatchObject({ kind: "valid-context-selection", value: { projectId: "p1" } });
