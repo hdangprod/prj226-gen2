@@ -195,6 +195,63 @@ describe("interactionOrchestrator (ENG-010 Repair 5)", () => {
     }
   });
 
+  it("TC-04: exposes explicit project and action context selection", async () => {
+    const { orchestrator, projectsStore, actionsStore, modelCapabilityPort } = createHarness();
+    projectsStore.set("p1", {
+      id: "p1" as ProjectId,
+      intendedOutcome: nonEmptyText("Project 1")!,
+      state: "Active",
+    });
+    actionsStore.set("p1", [
+      {
+        id: "a1" as ActionId,
+        projectId: "p1" as ProjectId,
+        description: nonEmptyText("Document the explicit context")!,
+        state: "Open",
+      },
+    ]);
+
+    const result = await orchestrator.selectContext({
+      interactionText: "Document the explicit context",
+      projectId: "p1" as ProjectId,
+      actionId: "a1" as ActionId,
+      selectionReason: "caller-selected project and action",
+      itemLimit: 1,
+    });
+
+    expect(result.kind).toBe("context-selected");
+    if (result.kind === "context-selected") {
+      expect(result.context.selectionReason).toBe("caller-selected project and action");
+      expect(result.context.items).toHaveLength(1);
+      expect(result.context.items[0]).toMatchObject({
+        kind: "action-summary",
+        projectId: "p1",
+        actionId: "a1",
+      });
+    }
+    expect(modelCapabilityPort.invocations).toHaveLength(0);
+  });
+
+  it("TC-05: does not infer a project context when projectId is omitted", async () => {
+    const { orchestrator, projectsStore, modelCapabilityPort } = createHarness();
+    projectsStore.set("p1", {
+      id: "p1" as ProjectId,
+      intendedOutcome: nonEmptyText("Project 1")!,
+      state: "Active",
+    });
+
+    const result = await orchestrator.selectContext({
+      interactionText: "Project 1",
+      selectionReason: "general context",
+    });
+
+    expect(result.kind).toBe("context-selected");
+    if (result.kind === "context-selected") {
+      expect(result.context.items).toEqual([]);
+    }
+    expect(modelCapabilityPort.invocations).toHaveLength(0);
+  });
+
   it("TC-06: returns ProhibitedOutcome on credential-shaped text during observeUserInteraction", () => {
     const { orchestrator } = createHarness();
     const result = orchestrator.observeUserInteraction("My api_key=supersecret123456");

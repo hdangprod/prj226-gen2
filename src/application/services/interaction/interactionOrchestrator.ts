@@ -53,6 +53,8 @@ import {
   type CorrectKnowledgeInput,
   type CorrectProgressInput,
   type CreateActionInput,
+  type ContextSelectionInput,
+  type ContextSelectionOutcome,
   type DeletionConfirmationInput,
   type DeletionDirectionOutcome,
   type EstablishProjectInput,
@@ -133,6 +135,10 @@ const DELETION_INITIAL_REQUEST_IDS = new WeakMap<object, string>();
 
 export class InteractionOrchestrator {
   constructor(private readonly dependencies: InteractionOrchestratorDependencies) {}
+
+  async selectContext(input: ContextSelectionInput): Promise<ContextSelectionOutcome> {
+    return selectBoundedContextForTurn(this.dependencies.retrievalService, input);
+  }
 
   private emit(
     context: ObservationContext | undefined,
@@ -268,17 +274,14 @@ export class InteractionOrchestrator {
       retryDisposition: "not-applicable",
     });
 
-    const contextResult = await selectBoundedContextForTurn(
-      this.dependencies.retrievalService,
-      {
-        interactionText: validatedText,
-        projectId: input.projectId,
-        actionId: input.actionId,
-        itemLimit: input.itemLimit,
-        selectionReason: input.selectionReason,
-        includeCrossProjectKnowledge: true,
-      },
-    );
+    const contextResult = await this.selectContext({
+      interactionText: validatedText,
+      projectId: input.projectId,
+      actionId: input.actionId,
+      itemLimit: input.itemLimit,
+      selectionReason: input.selectionReason,
+      includeCrossProjectKnowledge: true,
+    });
 
     if (contextResult.kind === "project-not-found") {
       this.emit(ctx, {
@@ -640,17 +643,14 @@ export class InteractionOrchestrator {
       retryDisposition: "not-applicable",
     });
 
-    const contextResult = await selectBoundedContextForTurn(
-      this.dependencies.retrievalService,
-      {
-        interactionText: validatedText,
-        projectId: input.projectId,
-        actionId: input.actionId,
-        itemLimit: input.itemLimit,
-        selectionReason: input.selectionReason,
-        includeCrossProjectKnowledge: true,
-      },
-    );
+    const contextResult = await this.selectContext({
+      interactionText: validatedText,
+      projectId: input.projectId,
+      actionId: input.actionId,
+      itemLimit: input.itemLimit,
+      selectionReason: input.selectionReason,
+      includeCrossProjectKnowledge: true,
+    });
 
     if (contextResult.kind === "project-not-found") {
       this.emit(ctx, {
